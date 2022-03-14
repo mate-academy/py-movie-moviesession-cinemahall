@@ -8,8 +8,8 @@ def create_movie_session(
 ):
     return MovieSession.objects.create(
         show_time=movie_show_time,
-        cinema_hall=CinemaHall.objects.get(id=cinema_hall_id),
-        movie=Movie.objects.get(id=movie_id)
+        cinema_hall_id=cinema_hall_id,
+        movie_id=movie_id
     )
 
 
@@ -42,8 +42,6 @@ def update_movie_session(
 
     if cinema_hall_id:
         session.update(cinema_hall_id=cinema_hall_id)
-
-    return session
 
 
 def delete_movie_session_by_id(session_id: int):
