@@ -8,7 +8,7 @@ you have to create tables:
     - char field `title`, the title of the movie with
 the maximum length of 255 characters.
     - text field `description`
-    - many to many field `actors`, which is related to 
+    - many to many field `actoactorsrs`, which is related to 
 the table `Actor`
     - many to many field `genres`, which is related to 
 the table `Genre`
