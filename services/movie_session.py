@@ -6,8 +6,8 @@ from db.models import MovieSession, Movie, CinemaHall
 def create_movie_session(movie_show_time, movie_id, cinema_hall_id):
     return MovieSession.objects.create(
         show_time=movie_show_time,
-        cinema_hall=CinemaHall.objects.get(id=cinema_hall_id),
-        movie=Movie.objects.get(id=movie_id)
+        cinema_hall_id=cinema_hall_id,
+        movie_id=movie_id
     )
 
 
