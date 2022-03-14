@@ -1,7 +1,5 @@
-from db.models import MovieSession, Movie, CinemaHall
+from db.models import MovieSession
 
-
-# import init_django_orm  # noqa: F401
 
 def create_movie_session(movie_show_time, movie_id, cinema_hall_id):
     return MovieSession.objects.create(
