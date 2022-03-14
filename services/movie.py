@@ -1,7 +1,9 @@
+from typing import List
+
 from db.models import Movie
 
 
-def get_movies(genres_ids: list[int] = None, actors_ids: list[int] = None):
+def get_movies(genres_ids: List[int] = None, actors_ids: List[int] = None):
     queueset = Movie.objects.all()
 
     if genres_ids is not None:
