@@ -28,45 +28,20 @@ def update_movie_session(
         show_time=None,
         movie_id: int = None,
         cinema_hall_id: int = None):
-    queryset = MovieSession.objects.all()
+    queryset = MovieSession.objects.all().filter(id=session_id)
 
-    if show_time and movie_id and cinema_hall_id:
-        queryset.filter(id=session_id).update(
-            show_time=show_time,
-            movie=movie_id,
-            cinema_hall=cinema_hall_id
-        )
-
-    if show_time and movie_id and not cinema_hall_id:
-        queryset.filter(id=session_id).update(
-            show_time=show_time,
-            movie=movie_id
-        )
-
-    if show_time and not movie_id and cinema_hall_id:
-        queryset.filter(id=session_id).update(
-            show_time=show_time,
-            cinema_hall=cinema_hall_id
-        )
-
-    if not show_time and movie_id and cinema_hall_id:
-        queryset.filter(id=session_id).update(
-            movie=movie_id,
-            cinema_hall=cinema_hall_id
-        )
-
-    if show_time and not movie_id and not cinema_hall_id:
-        queryset.filter(id=session_id).update(
+    if show_time:
+        queryset.update(
             show_time=show_time
         )
 
-    if not show_time and movie_id and not cinema_hall_id:
-        queryset.filter(id=session_id).update(
+    if movie_id:
+        queryset.update(
             movie=movie_id
         )
 
-    if not show_time and not movie_id and cinema_hall_id:
-        queryset.filter(id=session_id).update(
+    if cinema_hall_id:
+        queryset.update(
             cinema_hall=cinema_hall_id
         )
 
