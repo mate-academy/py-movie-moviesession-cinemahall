@@ -10,10 +10,10 @@ def get_movies(
 ) -> List:
     queryset = Movie.objects.all()
 
-    if genres_ids is not None:
+    if genres_ids:
         queryset = queryset.filter(genres__id__in=genres_ids)
 
-    if actors_ids is not None:
+    if actors_ids:
         queryset = queryset.filter(authors__id__in=actors_ids)
 
     return queryset
@@ -38,7 +38,7 @@ def create_movie(
     )
 
     if genres_ids:
-        new_movie.movie.set(genres_ids)
+        new_movie.genres.set(genres_ids)
 
     if actors_ids:
-        new_movie.movie.set(actors_ids)
+        new_movie.actors.set(actors_ids)
