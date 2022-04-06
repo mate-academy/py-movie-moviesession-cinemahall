@@ -1,6 +1,6 @@
 from typing import List
 
-from db.models import Genre, Movie
+from db.models import Movie
 
 
 # Retrieve List
@@ -8,7 +8,7 @@ def get_movies(
         genres_ids: List[int] = None,
         actors_ids: List[int] = None
 ) -> List:
-    queryset = Genre.objects.all()
+    queryset = Movie.objects.all()
 
     if genres_ids is not None:
         queryset = queryset.filter(genres__id__in=genres_ids)
@@ -21,7 +21,7 @@ def get_movies(
 
 # Retrieve movie
 def get_movie_by_id(movie_id: int):
-    return Movie.objects.get(movie_id)
+    return Movie.objects.get(id=movie_id)
 
 
 # Create
@@ -30,11 +30,11 @@ def create_movie(
         movie_description: str,
         genres_ids: List[int] = None,
         actors_ids: List[int] = None
-) -> Movie:
+):
 
     new_movie = Movie.objects.create(
-        movie_title=movie_title,
-        movie_description=movie_description
+        title=movie_title,
+        description=movie_description
     )
 
     if genres_ids:
@@ -42,5 +42,3 @@ def create_movie(
 
     if actors_ids:
         new_movie.movie.set(actors_ids)
-
-    return new_movie
