@@ -29,7 +29,7 @@ def get_movies_sessions(session_date: str = None) -> List[object]:
 # Retrieve Movie Session by id
 def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
     return MovieSession.objects.get(
-        movie_id=movie_session_id
+        id=movie_session_id
     )
 
 
