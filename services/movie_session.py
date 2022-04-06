@@ -5,7 +5,7 @@ from db.models import MovieSession
 
 
 # Create Movies Sessions
-def create_movies_session(
+def create_movie_session(
         movie_show_time: datetime,
         movie_id: int,
         cinema_hall_id: int
