@@ -1,4 +1,5 @@
 from db.models import Movie
+from typing import List
 
 
 def get_movies(genres_ids: int = None, actors_ids: int = None):
@@ -20,8 +21,8 @@ def get_movie_by_id(movie_id: int):
 def create_movie(
         movie_title: str,
         movie_description: str,
-        genres_ids: list[int] = None,
-        actors_ids: list[int] = None
+        genres_ids: List[int] = None,
+        actors_ids: List[int] = None
 ):
     new_movie = Movie.objects.create(
         title=movie_title,
