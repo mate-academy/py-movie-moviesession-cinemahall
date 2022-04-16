@@ -37,8 +37,6 @@ def update_movie_session(session_id: int,
     if cinema_hall_id:
         movie_session.update(cinema_hall_id=cinema_hall_id)
 
-    return movie_session
-
 
 def delete_movie_session_by_id(session_id: int):
-    return MovieSession.objects.filter(id=session_id).delete()
+    MovieSession.objects.filter(id=session_id).delete()
