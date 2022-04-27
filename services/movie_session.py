@@ -30,7 +30,8 @@ def update_movie_session(
         session_id,
         show_time,
         movie_id=None,
-        cinema_hall_id=None):
+        cinema_hall_id=None
+):
     upd_session = MovieSession.objects.all(id=session_id)
 
     if show_time:
