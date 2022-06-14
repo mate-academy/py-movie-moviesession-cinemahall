@@ -1,7 +1,10 @@
 from db.models import MovieSession
 
 
-def create_movie_session(movie_show_time: str, movie_id: int, cinema_hall_id: int):
+def create_movie_session(movie_show_time: str,
+                         movie_id: int,
+                         cinema_hall_id: int
+                         ):
     return MovieSession.objects.create(
         show_time=movie_show_time,
         cinema_hall=cinema_hall_id,
