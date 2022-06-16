@@ -29,13 +29,13 @@ class Movie(models.Model):
 class CinemaHall(models.Model):
     name = models.CharField(max_length=255)
     rows = models.IntegerField()
-    seat_in_row = models.IntegerField()
+    seats_in_row = models.IntegerField()
 
     def __str__(self):
         return self.name
 
     def capacity(self):
-        return self.rows * self.seat_in_row
+        return self.rows * self.seats_in_row
 
 
 class MovieSession(models.Model):
@@ -44,4 +44,4 @@ class MovieSession(models.Model):
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.cinema_hall.name} {self.show_time}"
+        return f"{self.movie.title} {self.show_time}"
