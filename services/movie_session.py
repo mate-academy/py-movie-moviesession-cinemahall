@@ -24,16 +24,16 @@ def get_movie_session_by_id(movie_session_id):
 
 def update_movie_session(session_id, show_time=None, movie_id=None,
                          cinema_hall_id=None):
-    queryset = MovieSession.objects.filter(id=session_id)
+    session = MovieSession.objects.filter(id=session_id)
 
     if show_time:
-        queryset.update(show_time=show_time)
+        session.update(show_time=show_time)
 
     if movie_id:
-        queryset.update(movie_id=movie_id)
+        session.update(movie_id=movie_id)
 
     if cinema_hall_id:
-        queryset.update(cinema_hall_id=cinema_hall_id)
+        session.update(cinema_hall_id=cinema_hall_id)
 
 
 def delete_movie_session_by_id(session_id):
