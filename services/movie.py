@@ -2,8 +2,8 @@ import init_django_orm  # noqa: F401
 from db.models import Movie
 
 
-def get_movie(genres_ids: list[int] = None,
-              actors_ids: list[int] = None):
+def get_movies(genres_ids: list[int] = None,
+               actors_ids: list[int] = None):
     movies = Movie.objects.all()
 
     if genres_ids:
@@ -15,7 +15,7 @@ def get_movie(genres_ids: list[int] = None,
 
 
 def get_movie_by_id(movie_id: int):
-    return Movie.objects.filter(id=movie_id)
+    return Movie.objects.get(id=movie_id)
 
 
 def create_movie(movie_title: str,
