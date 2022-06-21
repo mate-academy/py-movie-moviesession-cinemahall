@@ -50,4 +50,3 @@ class MovieSession(models.Model):
         name = self.movie.title
         time = self.show_time.strftime("%Y-%m-%d %H:%M:%S")
         return f"{name} {time}"
-

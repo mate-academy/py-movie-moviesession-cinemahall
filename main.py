@@ -1,8 +1,6 @@
 from db.models import Genre, Actor, Movie, MovieSession, CinemaHall
 
 
-
-
 def create():
     CinemaHall.objects.create(name="Blue", rows=10, seats_in_row=12)
     CinemaHall.objects.create(name="VIP", rows=3, seats_in_row=5)
