@@ -28,8 +28,8 @@ class Movie(models.Model):
 
 class CinemaHall(models.Model):
     name = models.CharField(max_length=255)
-    rows = models.IntegerField(default=1)
-    seats_in_row = models.IntegerField(default=1)
+    rows = models.IntegerField()
+    seats_in_row = models.IntegerField()
 
     def capacity(self):
         return self.rows * self.seats_in_row
