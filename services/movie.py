@@ -29,9 +29,9 @@ def create_movie(
     )
 
     if genres_ids is not None:
-        movie.genres.set(genres_ids)
+        movie.genres.add(*genres_ids)
 
     if actors_ids is not None:
-        movie.actors.set(actors_ids)
+        movie.actors.add(*actors_ids)
 
     return movie
