@@ -5,10 +5,10 @@ def get_movies(
         genres_ids: list[int] = None,
         actors_ids: list[int] = None
 ):
-    if genres_ids is None and actors_ids is None:
+    if not genres_ids and not actors_ids:
         return Movie.objects.all()
 
-    elif genres_ids is not None and actors_ids is not None:
+    elif genres_ids and actors_ids:
         return Movie.objects.filter(
             genres__id__in=genres_ids,
             actors__id__in=actors_ids
