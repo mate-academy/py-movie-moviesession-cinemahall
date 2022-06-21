@@ -345,9 +345,9 @@ def test_cinema_hall_service_get_cinema_halls(database_data):
 
 @pytest.mark.django_db
 def test_cinema_hall_service_create_cinema_hall():
-    create_cinema_hall(hall_name="Blue", hall_rows=10, hall_seats_in_row=12)
-    create_cinema_hall(hall_name="VIP", hall_rows=3, hall_seats_in_row=5)
-    create_cinema_hall(hall_name="Cheap", hall_rows=18, hall_seats_in_row=11)
+    create_cinema_hall(name="Blue", hall_rows=10, hall_seats_in_row=12)
+    create_cinema_hall(name="VIP", hall_rows=3, hall_seats_in_row=5)
+    create_cinema_hall(name="Cheap", hall_rows=18, hall_seats_in_row=11)
     assert list(
         CinemaHall.objects.all().values_list("name", "rows", "seats_in_row")
     ) == [("Blue", 10, 12), ("VIP", 3, 5), ("Cheap", 18, 11)]
