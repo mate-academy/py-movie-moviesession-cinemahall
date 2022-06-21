@@ -31,7 +31,7 @@ class CinemaHall(models.Model):
 
     name = models.CharField(max_length=255)
     rows = models.IntegerField()
-    seats_in_row = models.IntegerField(default=1)
+    seats_in_row = models.IntegerField()
 
     def __str__(self):
         return self.name
