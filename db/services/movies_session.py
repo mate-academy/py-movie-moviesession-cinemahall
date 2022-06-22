@@ -15,7 +15,7 @@ def get_movies_sessions(session_date=None):
 
 
 def get_movie_session_by_id(movie_session_id):
-    movie = MovieSession.objects.filter(id=movie_session_id).all()
+    movie = MovieSession.objects.get(id=movie_session_id).all()
     return movie
 
 
