@@ -19,8 +19,10 @@ LANGUAGE_CODE = "en-us"
 
 TIME_ZONE = "Europe/Kiev"
 
+DATETIME_FORMAT = '%Y-%m-%d %H:%M:%S'
+
 USE_I18N = True
 
-USE_TZ = True
+USE_TZ = False
 
 INSTALLED_APPS = ("db",)
