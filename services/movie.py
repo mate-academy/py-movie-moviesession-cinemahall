@@ -22,8 +22,7 @@ def get_movies(
             actors__id__in=actors_ids
         )
 
-    else:
-        return Movie.objects.all()
+    return Movie.objects.all()
 
 
 def get_movie_by_id(movie_id: int):
@@ -42,9 +41,7 @@ def create_movie(
     )
 
     if genres_ids:
-        for i in genres_ids:
-            movie.genres.add(i)
+        movie.genres.set(genres_ids)
 
     if actors_ids:
-        for i in actors_ids:
-            movie.actors.add(i)
+        movie.actors.set(actors_ids)

@@ -1,6 +1,6 @@
 import datetime
 
-from db.models import MovieSession, Movie, CinemaHall
+from db.models import MovieSession
 
 
 def create_movie_session(
@@ -10,8 +10,8 @@ def create_movie_session(
 ):
     MovieSession.objects.create(
         show_time=movie_show_time,
-        movie=Movie.objects.get(id=movie_id),
-        cinema_hall=CinemaHall.objects.get(id=cinema_hall_id)
+        movie_id=movie_id,
+        cinema_hall_id=cinema_hall_id
     )
 
 
@@ -20,8 +20,7 @@ def get_movies_sessions(session_date: str = None):
         date = datetime.datetime.strptime(session_date, "%Y-%m-%d")
         return MovieSession.objects.filter(show_time__date=date)
 
-    else:
-        return MovieSession.objects.all()
+    return MovieSession.objects.all()
 
 
 def get_movie_session_by_id(movie_session_id: int):
