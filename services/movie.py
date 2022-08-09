@@ -29,13 +29,12 @@ def get_movie_by_id(movie_id):
 
 def create_movie(movie_title, movie_description,
                  genres_ids=None, actors_ids=None):
-    new_movie = Movie.objects.create(
+    movie = Movie.objects.create(
         title=movie_title,
         description=movie_description,
     )
+
     if genres_ids is not None:
-        genre = Genre.objects.all().get(id=genres_ids[0])
-        new_movie.genres.add(genre)
+        movie.genres.set(genres_ids)
     if actors_ids is not None:
-        actors = Actor.objects.all().get(id=actors_ids[0])
-        new_movie.actors.add(actors)
+        movie.actors.set(actors_ids)
