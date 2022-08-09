@@ -16,24 +16,21 @@ def get_movies_sessions(session_date=None):
 
 
 def get_movie_session_by_id(movie_session_id):
-    if MovieSession.objects.all().filter(id=movie_session_id).exists():
-        return MovieSession.objects.all().get(id=movie_session_id)
+    return MovieSession.objects.all().get(id=movie_session_id)
 
 
 def update_movie_session(session_id,
                          show_time=None,
                          movie_id=None,
                          cinema_hall_id=None):
-    updating = MovieSession.objects.all().filter(id=session_id)
+    updating = get_movie_session_by_id(session_id)
     if show_time is not None:
-        updating.update(
-            show_time=show_time)
-
+        updating.show_time = show_time
     if movie_id is not None:
-        updating.update(movie_id=movie_id)
+        updating.movie_id = movie_id
     if cinema_hall_id is not None:
-        updating.update(
-            cinema_hall_id=cinema_hall_id)
+        updating.cinema_hall_id = cinema_hall_id
+    updating.save()
 
 
 def delete_movie_session_by_id(session_id):
