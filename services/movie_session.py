@@ -8,12 +8,11 @@ def create_movie_session(
         movie_id: int,
         cinema_hall_id: int
 ):
-    new_movie_session = MovieSession.objects.create(
+    MovieSession.objects.create(
         show_time=movie_show_time,
         movie_id=movie_id,
         cinema_hall_id=cinema_hall_id
     )
-    return new_movie_session
 
 
 def get_movies_sessions(session_date: str = None):
@@ -32,7 +31,7 @@ def update_movie_session(
         movie_id: int = None,
         cinema_hall_id: int = None,
 ):
-    updated_session = MovieSession.objects.get(id=session_id)
+    updated_session = get_movie_session_by_id(session_id)
 
     if show_time is not None:
         updated_session.show_time = show_time
