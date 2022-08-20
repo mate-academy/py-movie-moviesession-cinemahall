@@ -13,7 +13,7 @@ def get_movies(
     if genres_ids is not None and actors_ids is None:
         query_set = query_set.filter(genres__id__in=genres_ids)
 
-    if genres_ids is None and actors_ids is  not None:
+    if genres_ids is None and actors_ids is not None:
         query_set = query_set.filter(actors__id__in=actors_ids)
 
     if genres_ids is not None and actors_ids is not None:
