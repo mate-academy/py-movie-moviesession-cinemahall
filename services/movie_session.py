@@ -31,7 +31,7 @@ def update_movie_session(
         movie_id: int = None,
         cinema_hall_id: int = None
 ) -> None:
-    session = MovieSession.objects.get(id=session_id)
+    session = get_movie_session_by_id(session_id)
     if show_time is not None:
         session.show_time = show_time
     if movie_id is not None:
