@@ -4,14 +4,14 @@ from db.models import Movie
 
 def get_movies(genres_ids: list[int] = None, actors_ids: list[int] = None):
     queryset = Movie.objects.all()
-    if genres_ids is not None and actors_ids is not None:
+    if genres_ids and actors_ids:
         queryset = queryset.filter(genres__id__in=genres_ids,
                                    actors__id__in=actors_ids)
         return queryset
-    if genres_ids is not None:
+    if genres_ids:
         queryset = queryset.filter(genres__id__in=genres_ids)
         return queryset
-    if actors_ids is not None:
+    if actors_ids:
         queryset = queryset.filter(actors__id__in=actors_ids)
         return queryset
     return queryset
