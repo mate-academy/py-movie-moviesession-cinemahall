@@ -1,16 +1,15 @@
 import datetime
 import init_django_orm  # noqa: F401
 from db.models import MovieSession
-from db.models import CinemaHall
-from db.models import Movie
 
 
 def create_movie_session(movie_show_time, movie_id, cinema_hall_id):
-    cinema_hall_id_ = CinemaHall.objects.filter(id=cinema_hall_id).get()
-    movie_id_ = Movie.objects.filter(id=movie_id).get()
-    MovieSession.objects.create(show_time=movie_show_time,
-                                cinema_hall=cinema_hall_id_,
-                                movie=movie_id_)
+
+    MovieSession.objects.create(
+        show_time=movie_show_time,
+        movie_id=movie_id,
+        cinema_hall_id=cinema_hall_id
+    )
 
 
 def get_movies_sessions(session_date=None):
