@@ -16,7 +16,7 @@ from services.movie_session import (
 )
 
 
-@pytest.mark.django_dbS
+@pytest.mark.django_db
 @pytest.mark.parametrize(
     "title,description,out",
     [
