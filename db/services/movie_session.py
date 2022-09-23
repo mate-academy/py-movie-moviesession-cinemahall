@@ -1,15 +1,17 @@
 import django.db.models.query
-import init_django_orm  #noqa:F401
+import init_django_orm  # noqa:F401
 
 import datetime
 from db.models import MovieSession
 
 
-def create_movie_session(movie_show_time, movie_id, cinema_hall_id):
+def create_movie_session(movie_show_time,
+                         movie_id,
+                         cinema_hall_id):
     return MovieSession.objects.create(
-       movie=movie_id,
-       cinema_hall=cinema_hall_id,
-       show_time=movie_show_time,
+        movie=movie_id,
+        cinema_hall=cinema_hall_id,
+        show_time=movie_show_time,
     )
 
 

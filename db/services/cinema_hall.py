@@ -1,6 +1,6 @@
 import django.db.models.query
 
-import init_django_orm  #noqa:F401
+import init_django_orm  # noqa:F401
 
 from db.models import CinemaHall
 
