@@ -27,17 +27,15 @@ def get_movie_session_by_id(movie_session_id=None):
         )
 
 
-def update_movie_session(
-    session_id, show_time=None, movie_id=None, cinema_hall_id=None):
+def update_movie_session(session_id,
+                         show_time=None, movie_id=None, cinema_hall_id=None):
+    queryset = MovieSession.objects.filter(id=session_id)
     if show_time is not None:
-        MovieSession.objects.filter(
-            id=session_id).update(show_time=show_time)
+        queryset.update(show_time=show_time)
     if cinema_hall_id is not None:
-        MovieSession.objects.filter(id=session_id).update(
-            cinema_hall=CinemaHall.objects.get(id=cinema_hall_id))
+        queryset.update(cinema_hall=CinemaHall.objects.get(id=cinema_hall_id))
     if movie_id is not None:
-        MovieSession.objects.filter(
-            id=session_id).update(movie=Movie.objects.get(id=movie_id))
+        queryset.update(movie=Movie.objects.get(id=movie_id))
     return MovieSession.objects.filter(id=session_id)
 
 

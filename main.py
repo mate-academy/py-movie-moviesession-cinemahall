@@ -7,7 +7,6 @@ import json
 from services import movie, cinema_hall, movie_session
 
 
-
 def main():
     with open("cinema_db_data.json", "r") as file_json:
         data_json = json.load(file_json)
@@ -35,13 +34,13 @@ def main():
                 )
         elif data["model"] == "db.movie":
             if not Movie.objects.filter(pk=data["pk"]).exists():
-                movie = Movie.objects.create(
+                movie_ = Movie.objects.create(
                     pk=data["pk"],
                     title=data["fields"]["title"],
                     description=data["fields"]["description"]
                 )
-                movie.genres.set(data["fields"]["genres"])
-                movie.actors.set(data["fields"]["actors"])
+                movie_.genres.set(data["fields"]["genres"])
+                movie_.actors.set(data["fields"]["actors"])
         elif data["model"] == "db.moviesession":
             if not MovieSession.objects.filter(pk=data["pk"]).exists():
                 MovieSession.objects.create(
@@ -71,9 +70,11 @@ if __name__ == "__main__":
     #     hall_seats_in_row=24
     # ))
     # print(movie_session.get_movie_session_by_id(movie_session_id=1))
-    # print(movie_session.get_movies_sessions(session_date="2024-10-09"))
+    print(movie_session.get_movies_sessions(session_date="2024-10-09"))
     # print(movie_session.get_movies_sessions())
-    # print(movie_session.create_movie_session(datetime.datetime(2023, 11, 2, 20, 30), 1, 2))
-    # print(movie_session.update_movie_session(7, datetime.datetime(2023, 11, 2, 19, 20), 1, 2))
+    # print(movie_session.create_movie_session(
+    # datetime.datetime(2023, 11, 2, 20, 30), 1, 2))
+    # print(movie_session.update_movie_session(
+    # 7, datetime.datetime(2023, 11, 2, 19, 20), 1, 2))
     # print(movie_session.delete_movie_session_by_id(session_id=6))
     # print()
