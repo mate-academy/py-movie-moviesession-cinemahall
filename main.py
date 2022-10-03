@@ -7,7 +7,7 @@ import json
 from services import movie, cinema_hall, movie_session
 
 
-def main():
+def main() -> None:
     with open("cinema_db_data.json", "r") as file_json:
         data_json = json.load(file_json)
     for data in data_json:
@@ -70,7 +70,7 @@ if __name__ == "__main__":
     #     hall_seats_in_row=24
     # ))
     # print(movie_session.get_movie_session_by_id(movie_session_id=1))
-    print(movie_session.get_movies_sessions(session_date="2024-10-09"))
+    # print(movie_session.get_movies_sessions(session_date="2024-10-09"))
     # print(movie_session.get_movies_sessions())
     # print(movie_session.create_movie_session(
     # datetime.datetime(2023, 11, 2, 20, 30), 1, 2))
