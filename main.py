@@ -54,27 +54,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-    # print(movie.get_movies(actors_ids=[1, 2]))
-    # print(movie.get_movie_by_id(movie_id=2))
-    # print(movie.create_movie(
-    #     movie_title="New_movie",
-    #     movie_description="New_description",
-    #     genres_ids=[1],
-    #     actors_ids=[2, 4]
-    # ))
-    # print(CinemaHall.objects.get(id=1).capacity())
-    # print(cinema_hall.get_cinema_halls())
-    # print(cinema_hall.create_cinema_hall(
-    #     hall_name="My Hall",
-    #     hall_rows=16,
-    #     hall_seats_in_row=24
-    # ))
-    # print(movie_session.get_movie_session_by_id(movie_session_id=1))
-    # print(movie_session.get_movies_sessions(session_date="2024-10-09"))
-    # print(movie_session.get_movies_sessions())
-    # print(movie_session.create_movie_session(
-    # datetime.datetime(2023, 11, 2, 20, 30), 1, 2))
-    # print(movie_session.update_movie_session(
-    # 7, datetime.datetime(2023, 11, 2, 19, 20), 1, 2))
-    # print(movie_session.delete_movie_session_by_id(session_id=6))
-    # print()
