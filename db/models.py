@@ -31,7 +31,7 @@ class CinemaHall(models.Model):
     rows = models.IntegerField()
     seats_in_row = models.IntegerField()
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.name}"
 
     def capacity(self) -> int:
