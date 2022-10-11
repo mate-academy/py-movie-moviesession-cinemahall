@@ -1,9 +1,9 @@
-from django.db.models import QuerySet, DateField
+from django.db.models import QuerySet, DateTimeField
 from db.models import MovieSession
 
 
 def create_movie_session(
-        movie_show_time: DateField,
+        movie_show_time: DateTimeField,
         movie_id: int,
         cinema_hall_id: int
 ) -> None:
@@ -14,7 +14,7 @@ def create_movie_session(
     )
 
 
-def get_movies_sessions(session_date: DateField = None) -> QuerySet:
+def get_movies_sessions(session_date: DateTimeField = None) -> QuerySet:
     queryset = MovieSession.objects.all()
 
     if session_date:
@@ -29,7 +29,7 @@ def get_movie_session_by_id(movie_session_id: int) -> QuerySet:
 
 def update_movie_session(
         session_id: int,
-        show_time: DateField = None,
+        show_time: DateTimeField = None,
         movie_id: int = None,
         cinema_hall_id: int = None
 ) -> None:
