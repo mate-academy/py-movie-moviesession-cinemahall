@@ -24,4 +24,4 @@ USE_I18N = True
 # Tests seem to use naive datetime.
 USE_TZ = False
 
-INSTALLED_APPS = ("db", "services", )
+INSTALLED_APPS = ("db", "services",)
