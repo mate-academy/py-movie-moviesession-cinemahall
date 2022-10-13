@@ -48,4 +48,4 @@ def update_movie_session(session_id: int,
 
 def delete_movie_session_by_id(session_id: int) \
         -> MovieSession.objects:
-    return MovieSession.objects.filter(id=session_id).delete()
+    return MovieSession.objects.get(id=session_id).delete()
