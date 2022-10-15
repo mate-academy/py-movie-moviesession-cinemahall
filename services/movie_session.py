@@ -3,7 +3,10 @@ from db.models import CinemaHall
 from db.models import MovieSession
 
 
-def create_movie_session(movie_show_time, movie_id: int, cinema_hall_id: int) -> None:
+def create_movie_session(movie_show_time: int,
+                         movie_id: int,
+                         cinema_hall_id: int
+                         ) -> None:
     get_cinema_hall_id = CinemaHall.objects.get(
         id=cinema_hall_id
     )
@@ -19,7 +22,7 @@ def create_movie_session(movie_show_time, movie_id: int, cinema_hall_id: int) ->
     return create_session
 
 
-def get_movies_sessions(session_date=None) -> None:
+def get_movies_sessions(session_date: int = None) -> None:
     right_session_date = MovieSession.objects.all()
     if session_date is not None:
         return right_session_date.filter(show_time__date=session_date)
@@ -33,9 +36,9 @@ def get_movie_session_by_id(movie_session_id: int) -> int:
 
 
 def update_movie_session(session_id: int,
-                         show_time=None,
-                         movie_id=None,
-                         cinema_hall_id=None
+                         show_time: int = None,
+                         movie_id: int = None,
+                         cinema_hall_id: int = None
                          ) -> None:
     if show_time:
         MovieSession.objects.all().update(show_time=show_time)
