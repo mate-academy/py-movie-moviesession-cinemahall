@@ -6,12 +6,11 @@ def get_movies(
         actors_ids: list[int] = None
 ) -> Movie:
     movies = Movie.objects.all()
-    print(movies)
 
-    if genres_ids is not None:
+    if genres_ids:
         movies = movies.filter(genres__id__in=genres_ids)
 
-    if actors_ids is not None:
+    if actors_ids:
         movies = movies.filter(actors__id__in=actors_ids)
 
     return movies
@@ -32,10 +31,10 @@ def create_movie(
         description=movie_description
     )
 
-    if genres_ids is not None:
+    if genres_ids:
         movie.genres.set(genres_ids)
 
-    if actors_ids is not None:
+    if actors_ids:
         movie.actors.set(actors_ids)
 
     return movie
