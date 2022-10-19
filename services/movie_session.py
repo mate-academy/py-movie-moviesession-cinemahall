@@ -6,8 +6,8 @@ def create_movie_session(
         movie_show_time: DateTimeField,
         movie_id: int,
         cinema_hall_id: int
-) -> None:
-    MovieSession.objects.create(
+) -> QuerySet:
+    return MovieSession.objects.create(
         show_time=movie_show_time,
         cinema_hall_id=cinema_hall_id,
         movie_id=movie_id
@@ -32,7 +32,7 @@ def update_movie_session(
         show_time: DateTimeField = None,
         movie_id: int = None,
         cinema_hall_id: int = None
-) -> None:
+) -> QuerySet:
 
     movie_session_for_update = MovieSession.objects.get(id=session_id)
 
@@ -44,6 +44,8 @@ def update_movie_session(
         movie_session_for_update.cinema_hall_id = cinema_hall_id
 
     movie_session_for_update.save()
+
+    return movie_session_for_update
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
