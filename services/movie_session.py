@@ -6,7 +6,7 @@ def create_movie_session(
         movie_show_time: DateTimeField,
         movie_id: int,
         cinema_hall_id: int
-) -> QuerySet:
+) -> MovieSession:
     return MovieSession.objects.create(
         show_time=movie_show_time,
         cinema_hall_id=cinema_hall_id,
