@@ -50,6 +50,6 @@ def update_movie_session(
     return new_session
 
 
-def delete_movie_session_by_id(session_id: int) -> MovieSession.objects:
+def delete_movie_session_by_id(session_id: int) -> tuple[int, dict]:
     movie_session = MovieSession.objects.get(id=session_id)
     return movie_session.delete()
