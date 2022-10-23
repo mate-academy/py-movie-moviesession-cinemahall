@@ -1,5 +1,4 @@
 from django.db import models
-from datetime import datetime
 
 
 class Genre(models.Model):
@@ -57,8 +56,4 @@ class MovieSession(models.Model):
     )
 
     def __str__(self) -> str:
-        date = datetime.strftime(
-            self.show_time,
-            "%Y-%m-%d %H:%M:%S"
-        )
-        return f"{self.movie.title} {date}"
+        return f"{self.movie.title} {self.show_time}"
