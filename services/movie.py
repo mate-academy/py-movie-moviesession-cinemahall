@@ -24,20 +24,14 @@ def create_movie(movie_title: str,
                  movie_description: str,
                  genres_ids: list = None,
                  actors_ids: list = None) -> None:
-    if not Movie.objects.filter(title=movie_title).exists():
-        new_movie = Movie.objects.create(
-            title=movie_title,
-            description=movie_description
-        )
 
-        if genres_ids:
-            new_movie.genres.set(genres_ids)
+    new_movie = Movie.objects.create(
+        title=movie_title,
+        description=movie_description
+    )
 
-        if actors_ids:
-            new_movie.actors.set(actors_ids)
+    if genres_ids:
+        new_movie.genres.set(genres_ids)
 
-
-def del_movie_by_title(movie_title: str) -> None:
-    Movie.objects.filter(
-        title=movie_title
-    ).delete()
+    if actors_ids:
+        new_movie.actors.set(actors_ids)
