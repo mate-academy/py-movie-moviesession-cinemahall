@@ -1,23 +1,22 @@
 import init_django_orm  # noqa: F401
+from django.db.models import QuerySet
 
 from db.models import MovieSession
 
 
 def create_movie_session(
         movie_show_time: object, movie_id: int = None,
-        cinema_hall_id: int = None) -> object:
+        cinema_hall_id: int = None) -> MovieSession:
     """
     Create new movie session
     """
-    new_movie_session = MovieSession.objects.create(
+    return MovieSession.objects.create(
         show_time=movie_show_time,
         cinema_hall_id=cinema_hall_id, movie_id=movie_id
     )
 
-    return new_movie_session
 
-
-def get_movies_sessions(session_date: str = None) -> object:
+def get_movies_sessions(session_date: str = None) -> QuerySet:
     """
     Retrieve list movie sessions by filter date ("year-month-day")
     """
@@ -29,18 +28,16 @@ def get_movies_sessions(session_date: str = None) -> object:
     return queryset
 
 
-def get_movie_session_by_id(movie_session_id : int) -> object:
+def get_movie_session_by_id(movie_session_id : int) -> MovieSession:
     """
     Retrieve movie session by movie_session_id
     """
-    movie_session = MovieSession.objects.get(id=movie_session_id)
-
-    return movie_session
+    return MovieSession.objects.get(id=movie_session_id)
 
 
 def update_movie_session(
         session_id: int, show_time: object = None,
-        movie_id: int = None, cinema_hall_id: int = None) -> object:
+        movie_id: int = None, cinema_hall_id: int = None) -> None:
     update_param = {}
 
     if show_time is not None:

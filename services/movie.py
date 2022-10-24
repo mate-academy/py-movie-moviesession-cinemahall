@@ -1,11 +1,12 @@
 import init_django_orm  # noqa: F401
+from django.db.models import QuerySet
 
 from db.models import Movie
 
 
 def create_movie(
         movie_title: str, movie_description: str,
-        genres_ids: object = None, actors_ids: object = None) -> object:
+        genres_ids: object = None, actors_ids: object = None) -> Movie:
     """
     Create new movie
     """
@@ -22,7 +23,8 @@ def create_movie(
     return new_movie
 
 
-def get_movies(genres_ids: object = None, actors_ids: object = None) -> object:
+def get_movies(genres_ids: object = None,
+               actors_ids: object = None) -> QuerySet:
     """
     Retrieve list movies by filter genres and(or) actors
     """
@@ -37,10 +39,8 @@ def get_movies(genres_ids: object = None, actors_ids: object = None) -> object:
     return queryset
 
 
-def get_movie_by_id(movie_id: int) -> object:
+def get_movie_by_id(movie_id: int) -> Movie:
     """
     Retrieve movie by movie_id
     """
-    movie = Movie.objects.get(id=movie_id)
-
-    return movie
+    return Movie.objects.get(id=movie_id)
