@@ -24,7 +24,7 @@ def get_movie_by_id(movie_id: int = None) -> Movie.objects:
 def create_movie(movie_title: str,
                  movie_description: str,
                  genres_ids: list[int] = None,
-                 actors_ids: list[int] = None) -> Movie.objects:
+                 actors_ids: list[int] = None) -> Movie:
     new_movie = Movie.objects.create(
         title=movie_title,
         description=movie_description,
