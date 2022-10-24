@@ -52,6 +52,3 @@ def create_movie_session(
 
 def delete_movie_session_by_id(session_id: int) -> tuple[int, dict]:
     return MovieSession.objects.get(id=session_id).delete()
-
-
-print(delete_movie_session_by_id(1))
