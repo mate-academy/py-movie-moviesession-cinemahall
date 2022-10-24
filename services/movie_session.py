@@ -1,5 +1,4 @@
 from datetime import datetime
-from typing import Any
 from django.db.models import QuerySet
 from db.models import MovieSession
 
@@ -13,7 +12,7 @@ def get_movies_sessions(session_date: str = None) -> QuerySet:
     return queryset
 
 
-def get_movie_session_by_id(movie_session_id: int) -> Any:
+def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
     return MovieSession.objects.get(id=movie_session_id)
 
 
