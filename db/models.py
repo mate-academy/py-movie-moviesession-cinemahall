@@ -5,7 +5,6 @@ class Genre(models.Model):
     name = models.CharField(max_length=255, unique=True)
 
     def __str__(self) -> str:
-
         return f"{self.name}"
 
 
@@ -14,7 +13,6 @@ class Actor(models.Model):
     last_name = models.CharField(max_length=255)
 
     def __str__(self) -> str:
-
         return f"{self.first_name} {self.last_name}"
 
 
@@ -25,7 +23,6 @@ class Movie(models.Model):
     genres = models.ManyToManyField(Genre)
 
     def __str__(self) -> str:
-
         return f"{self.title}"
 
 
@@ -35,11 +32,9 @@ class CinemaHall(models.Model):
     seats_in_row = models.IntegerField()
 
     def __str__(self) -> str:
-
         return f"{self.name}"
 
     def capacity(self) -> int:
-
         return self.rows * self.seats_in_row
 
 
@@ -49,5 +44,4 @@ class MovieSession(models.Model):
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
-
         return f"{self.movie} {self.show_time}"
