@@ -8,14 +8,14 @@ def get_movies(genres_ids: list[int] = None,
     if not genres_ids and not actors_ids:
         return Movie.objects.all()
 
-    if not genres_ids:
-        return Movie.objects.filter(genre__id__in=genres_ids)
-
     if not actors_ids:
-        return Movie.objects.filter(actors__id__in=actors_ids)
+        return Movie.objects.filter(genres__in=genres_ids)
+
+    if not genres_ids:
+        return Movie.objects.filter(actors__in=actors_ids)
 
     return Movie.objects.filter(
-        Q(genre__in=genres_ids) & Q(actors__in=actors_ids)
+        Q(genres__in=genres_ids) & Q(actors__in=actors_ids)
     )
 
 
@@ -31,13 +31,11 @@ def create_movie(movie_title: str,
         title=movie_title,
         description=movie_description
     )
-
+    new_movie.save()
     if genres_ids:
-        new_movie.genres.add(genres_ids)
+        new_movie.genres.add(*genres_ids)
 
     if actors_ids:
-        new_movie.actors.add(actors_ids)
-
+        new_movie.actors.add(*actors_ids)
     new_movie.save()
-
     return new_movie

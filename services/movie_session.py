@@ -23,7 +23,7 @@ def get_movies_sessions(session_date: str = None) -> QuerySet:
     if not session_date:
         return MovieSession.objects.all()
 
-    desired_date = datetime.strptime(session_date, '%m-%d-%Y').date()
+    desired_date = datetime.strptime(session_date, "%Y-%m-%d").date()
 
     return MovieSession.objects.filter(show_time__date=desired_date)
 
@@ -44,6 +44,8 @@ def update_movie_session(session_id: int,
         session_to_update.movie_id = movie_id
     if cinema_hall_id:
         session_to_update.cinema_hall_id = cinema_hall_id
+
+    session_to_update.save()
 
     return session_to_update
 
