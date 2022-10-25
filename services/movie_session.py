@@ -5,15 +5,15 @@ from datetime import datetime
 
 
 def create_movie_session(
-        movie_show_time: datetime,
+        movie_show_time: str,
         movie_id: int,
         cinema_hall_id: int
 ) -> MovieSession:
 
     return MovieSession.objects.create(
         show_time=movie_show_time,
-        cinema_hall=CinemaHall.objects.get(id=cinema_hall_id),
-        movie=Movie.objects.get(id=movie_id)
+        cinema_hall_id=cinema_hall_id,
+        movie_id=movie_id
     )
 
 
@@ -34,6 +34,7 @@ def update_movie_session(
         cinema_hall_id: int = None
 ) -> None:
     session = MovieSession.objects.filter(id=session_id)
+
     if show_time:
         session.update(show_time=show_time)
 
