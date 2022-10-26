@@ -19,4 +19,5 @@ LANGUAGE_CODE = "en-us"
 
 USE_TZ = False
 
-INSTALLED_APPS = ("db",)
+INSTALLED_APPS = ("db",
+                  "django_extensions")
