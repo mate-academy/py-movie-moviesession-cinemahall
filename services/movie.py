@@ -10,10 +10,6 @@ def get_movies(genres_ids: list[int] = None,
         queryset = queryset.filter(genres__id__in=genres_ids)
     if actors_ids:
         queryset = queryset.filter(actors__id__in=actors_ids)
-    if actors_ids and genres_ids:
-        queryset = queryset.filter(
-            genres__id__in=genres_ids).filter(
-            actors__id__in=actors_ids)
     return queryset
 
 
