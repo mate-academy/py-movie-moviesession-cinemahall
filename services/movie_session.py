@@ -1,15 +1,15 @@
 from django.db.models import QuerySet
 
 
-from db.models import MovieSession, Movie, CinemaHall
+from db.models import MovieSession
 
 
 def create_movie_session(movie_show_time: str, movie_id: int,
                          cinema_hall_id: int) -> None:
     MovieSession.objects.create(
         show_time=movie_show_time,
-        movie=Movie.objects.get(id=movie_id),
-        cinema_hall=CinemaHall.objects.get(id=cinema_hall_id)
+        movie_id=movie_id,
+        cinema_hall_id=cinema_hall_id
     )
 
 
