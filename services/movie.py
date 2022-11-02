@@ -1,5 +1,3 @@
-from typing import List
-
 from django.db.models import QuerySet
 
 from db.models import Movie
@@ -9,7 +7,6 @@ def get_movies(
         genres_ids: list = None,
         actors_ids: list = None
 ) -> QuerySet:
-
     movies = Movie.objects.all()
     if genres_ids:
         movies = movies.filter(genres__id__in=genres_ids)
