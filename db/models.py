@@ -31,6 +31,7 @@ class CinemaHall(models.Model):
     rows = models.IntegerField()
     seats_in_row = models.IntegerField()
 
+    @property
     def capacity(self) -> int:
         return self.rows * self.seats_in_row
 
