@@ -12,7 +12,7 @@ def create_movie_session(movie_show_time: str,
 
 
 def get_movies_sessions(session_date: str = None) -> MovieSession:
-    if session_date is not None:
+    if session_date:
         return MovieSession.objects.filter(show_time__date=session_date)
     return MovieSession.objects.all()
 
@@ -28,11 +28,11 @@ def update_movie_session(
         cinema_hall_id: int = None) -> None:
 
     upd_session = MovieSession.objects.get(id=session_id)
-    if show_time is not None:
+    if show_time:
         upd_session.show_time = show_time
-    if movie_id is not None:
+    if movie_id:
         upd_session.movie_id = movie_id
-    if cinema_hall_id is not None:
+    if cinema_hall_id:
         upd_session.cinema_hall_id = cinema_hall_id
     upd_session.save()
 
