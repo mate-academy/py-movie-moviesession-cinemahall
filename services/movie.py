@@ -2,7 +2,7 @@ from db.models import Movie
 
 
 def get_movies(genres_ids: list[int] = None,
-               actors_ids: list[int] = None) -> None:
+               actors_ids: list[int] = None) -> Movie:
     all_movie = Movie.objects.all()
     if genres_ids is not None and actors_ids is not None:
         all_movie = all_movie.filter(genres__id__in=genres_ids,
@@ -14,11 +14,12 @@ def get_movies(genres_ids: list[int] = None,
     return all_movie
 
 
-def get_movie_by_id(movie_id: int) -> None:
+def get_movie_by_id(movie_id: int) -> Movie:
     return Movie.objects.get(id=movie_id)
 
 
-def create_movie(movie_title: str, movie_description: str,
+def create_movie(movie_title: str,
+                 movie_description: str,
                  genres_ids: list[int] = None,
                  actors_ids: list[int] = None) -> None:
     movie = Movie.objects.create(title=movie_title,
