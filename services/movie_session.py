@@ -39,7 +39,9 @@ def update_movie_session(
         "movie_id": movie_id,
         "cinema_hall_id": cinema_hall_id,
     }
-    current_func_params = {k: v for k, v in current_func_params.items() if v is not None}
+    current_func_params = {
+        k: v for k, v in current_func_params.items() if v is not None
+    }
     MovieSession.objects.filter(id=session_id).update(**current_func_params)
 
 
