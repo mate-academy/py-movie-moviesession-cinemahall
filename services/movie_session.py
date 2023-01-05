@@ -4,9 +4,6 @@ from db.models import MovieSession
 from django.db.models.query import QuerySet
 
 
-# from datetime import time, date
-
-
 def create_movie_session(
     movie_show_time: datetime.time, movie_id: int, cinema_hall_id: int
 ) -> None:
@@ -37,13 +34,13 @@ def update_movie_session(
     movie_id: int = None,
     cinema_hall_id: int = None,
 ) -> None:
-    params = {
+    current_func_params = {
         "show_time": show_time,
         "movie_id": movie_id,
         "cinema_hall_id": cinema_hall_id,
     }
-    not_none_params = {k: v for k, v in params.items() if v is not None}
-    MovieSession.objects.filter(id=session_id).update(**not_none_params)
+    current_func_params = {k: v for k, v in current_func_params.items() if v is not None}
+    MovieSession.objects.filter(id=session_id).update(**current_func_params)
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
