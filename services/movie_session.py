@@ -37,7 +37,6 @@ def update_movie_session(
         cinema_hall_id: int = None
 ) -> None:
     movie_update = MovieSession.objects.filter(id=session_id)
-    movie_update.update()
 
     if show_time:
         movie_update.update(show_time=show_time)
