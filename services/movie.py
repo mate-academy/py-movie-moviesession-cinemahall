@@ -1,9 +1,11 @@
+from typing import List
+
 from db.models import Movie
 
 
 def get_movies(
-        genres_ids: list = None,
-        actors_ids: list = None
+        genres_ids: List[int] = None,
+        actors_ids: List[int] = None
 ) -> Movie:
     result = Movie.objects.all()
     if genres_ids:
@@ -22,8 +24,8 @@ def get_movie_by_id(movie_id: int) -> Movie:
 def create_movie(
         movie_title: str,
         movie_description: str,
-        genres_ids: list = None,
-        actors_ids: list = None
+        genres_ids: List[int] = None,
+        actors_ids: List[int] = None
 ) -> None:
     movie = Movie.objects.create(
         title=movie_title,
