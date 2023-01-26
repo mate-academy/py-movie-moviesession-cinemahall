@@ -6,7 +6,8 @@ from typing import List
 
 def get_movies(
         genres_ids: List[Genre] = None,
-        actors_ids: List[Actor] = None) -> QuerySet:
+        actors_ids: List[Actor] = None
+) -> QuerySet:
 
     queryset = Movie.objects.all()
     if genres_ids:
