@@ -1,5 +1,5 @@
 from django.db.models import QuerySet
-from db.models import Movie, Actor, Genre
+from db.models import Movie
 
 from typing import List
 
