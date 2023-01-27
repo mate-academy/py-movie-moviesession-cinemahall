@@ -5,8 +5,8 @@ from typing import List
 
 
 def get_movies(
-        genres_ids: List[int] = None,
-        actors_ids: List[int] = None
+        genres_ids: (List[int], None) = None,
+        actors_ids: (List[int], None) = None
 ) -> QuerySet:
 
     queryset = Movie.objects.all()
@@ -24,8 +24,8 @@ def get_movie_by_id(movie_id: Movie) -> QuerySet:
 def create_movie(
         movie_title: str,
         movie_description: str,
-        genres_ids: List[int] = None,
-        actors_ids: List[int] = None
+        genres_ids: (List[int], None) = None,
+        actors_ids: (List[int], None) = None
 ) -> None:
     queryset = Movie.objects.create(
         title=movie_title,
