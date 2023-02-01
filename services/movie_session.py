@@ -42,15 +42,14 @@ def update_movie_session(
 
     if show_time:
         movie_session_to_update.show_time = show_time
-        movie_session_to_update.save()
 
     if movie_id:
         movie_session_to_update.movie_id = movie_id
-        movie_session_to_update.save()
 
     if cinema_hall_id:
         movie_session_to_update.cinema_hall_id = cinema_hall_id
-        movie_session_to_update.save()
+
+    movie_session_to_update.save()
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
