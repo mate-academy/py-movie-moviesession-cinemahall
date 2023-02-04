@@ -4,7 +4,7 @@ from db.models import Movie
 def get_movies(
         genres_ids: list[int] = None,
         actors_ids: list[int] = None
-) -> None:
+) -> Movie:
 
     movies = Movie.objects.all()
     if genres_ids:
@@ -15,8 +15,8 @@ def get_movies(
     return movies
 
 
-def get_movie_by_id(movie_id: int) -> None:
-    return Movie.objects.filter(id=movie_id).get()
+def get_movie_by_id(movie_id: int) -> Movie:
+    return Movie.objects.get(id=movie_id)
 
 
 def create_movie(
@@ -34,5 +34,3 @@ def create_movie(
         movie.actors.set(actors_ids)
     if genres_ids:
         movie.genres.set(genres_ids)
-
-    return movie
