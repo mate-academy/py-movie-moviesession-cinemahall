@@ -16,3 +16,7 @@ def create_cinema_hall(
         rows=hall_rows,
         seats_in_row=hall_seats_in_row
     )
+
+
+def get_cinema_halls_by_id(cinema_hall_id: int) -> CinemaHall:
+    return CinemaHall.objects.get(id=cinema_hall_id)

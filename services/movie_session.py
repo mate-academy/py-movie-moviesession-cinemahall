@@ -1,5 +1,7 @@
 from db.models import MovieSession, CinemaHall, Movie
 from datetime import datetime as dt
+from services.movie import get_movie_by_id
+from services.cinema_hall import get_cinema_halls_by_id
 
 
 def create_movie_session(
@@ -18,9 +20,10 @@ def create_movie_session(
 
 
 def get_movies_sessions(session_date: str = None) -> list[MovieSession]:
-    date = dt.strptime(session_date, "%Y-%m-%d") if session_date else None
-    if date:
-        return MovieSession.objects.filter(show_time__date=date).all()
+    session_date = dt.strptime(
+        session_date, "%Y-%m-%d") if session_date else None
+    if session_date:
+        return MovieSession.objects.filter(show_time__date=session_date).all()
     return MovieSession.objects.all()
 
 
@@ -35,24 +38,19 @@ def update_movie_session(
         cinema_hall_id: int = None
 ) -> None:
 
-    if MovieSession.objects.filter(id=session_id).exists():
-        if show_time:
-            MovieSession.objects.filter(id=session_id).update(
-                show_time=show_time
-            )
-        if movie_id:
-            movie_id = Movie.objects.get(id=movie_id)
-            MovieSession.objects.filter(id=session_id).update(
-                movie=movie_id
-            )
+    session = get_movie_session_by_id(session_id)
+    if show_time:
+        session.show_time = show_time
 
-        if cinema_hall_id:
-            cinema_hall_id = CinemaHall.objects.get(id=cinema_hall_id)
-            MovieSession.objects.filter(id=session_id).update(
-                cinema_hall=cinema_hall_id
-            )
+    if movie_id:
+        movie_id = get_movie_by_id(movie_id)
+        session.movie = movie_id
+
+    if cinema_hall_id:
+        cinema_hall_id = get_cinema_halls_by_id(cinema_hall_id)
+        session.cinema_hall = cinema_hall_id
+    session.save()
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
-    if MovieSession.objects.filter(id=session_id).exists():
-        MovieSession.objects.get(id=session_id).delete()
+    get_movie_session_by_id(session_id).delete()
