@@ -1,4 +1,4 @@
-from db.models import MovieSession, CinemaHall, Movie
+from db.models import MovieSession
 from datetime import datetime as dt
 from services.movie import get_movie_by_id
 from services.cinema_hall import get_cinema_halls_by_id
