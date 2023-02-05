@@ -20,8 +20,6 @@ def create_movie_session(
 
 
 def get_movies_sessions(session_date: str = None) -> list[MovieSession]:
-    session_date = dt.strptime(
-        session_date, "%Y-%m-%d") if session_date else None
     if session_date:
         return MovieSession.objects.filter(show_time__date=session_date).all()
     return MovieSession.objects.all()
