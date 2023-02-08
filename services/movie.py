@@ -1,11 +1,12 @@
 from db.models import Movie
 from django.db.models import QuerySet
 from django.shortcuts import get_object_or_404
+from typing import Optional
 
 
 def get_movies(
-        genres_ids: list[int] = None,
-        actors_ids: list[int] = None
+        genres_ids: Optional[list[int]] = None,
+        actors_ids: Optional[list[int]] = None
 ) -> QuerySet:
     queryset = Movie.objects.all()
     if genres_ids and actors_ids:
@@ -23,15 +24,15 @@ def get_movies(
     return queryset
 
 
-def get_movie_by_id(movie_id: int) -> object:
+def get_movie_by_id(movie_id: int) -> Movie:
     return get_object_or_404(Movie, id=movie_id)
 
 
 def create_movie(
         movie_title: str,
         movie_description: str,
-        genres_ids: list[int] = None,
-        actors_ids: list[int] = None
+        genres_ids: Optional[list[int]] = None,
+        actors_ids: Optional[list[int]] = None
 ) -> None:
     new_film = Movie.objects.create(
         title=movie_title,
