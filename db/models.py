@@ -1,5 +1,4 @@
 from django.db import models
-from django.db.models import CharField
 
 
 class Genre(models.Model):
@@ -36,7 +35,7 @@ class CinemaHall(models.Model):
     def capacity(self) -> int:
         return self.rows * self.seats_in_row
 
-    def __str__(self) -> CharField:
+    def __str__(self) -> str:
         return self.name
 
 
