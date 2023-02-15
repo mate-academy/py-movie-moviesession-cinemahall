@@ -1,5 +1,7 @@
 from typing import Optional
 from django.db.models import QuerySet
+from django.shortcuts import get_object_or_404
+
 from db.models import Movie
 
 
@@ -14,7 +16,8 @@ def get_movies(genres_ids: Optional[list[int]] = None,
 
 
 def get_movie_by_id(movie_id: int) -> Movie:
-    return Movie.objects.get(id=movie_id)
+    movie = Movie.objects.filter(id=movie_id)
+    return get_object_or_404(movie)
 
 
 def create_movie(movie_title: str,
