@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.db import models
 
 
@@ -60,11 +62,7 @@ class MovieSession(models.Model):
     )
 
     def __str__(self) -> str:
-        year = self.show_time.year
-        month = self.show_time.month
-        day = self.show_time.day
-        hour = self.show_time.hour
-        minute = self.show_time.minute
-        return f"{self.movie.title} " \
-               f"{year}-{month:02}-{day:02} " \
-               f"{hour:02}:{minute:02}:00"
+        show_time = datetime.strftime(
+            self.show_time, "%Y-%m-%d %H:%M:%S"
+        )
+        return f"{self.movie.title} {show_time}"
