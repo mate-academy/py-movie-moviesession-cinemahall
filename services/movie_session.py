@@ -1,5 +1,6 @@
 from datetime import datetime
 from db.models import MovieSession
+from django.db.models import QuerySet
 
 
 def create_movie_session(
@@ -16,7 +17,7 @@ def create_movie_session(
 
 def get_movies_sessions(
         session_date: str = None
-) -> MovieSession:
+) -> QuerySet:
 
     if session_date is not None:
         return MovieSession.objects.filter(show_time__date=session_date)
