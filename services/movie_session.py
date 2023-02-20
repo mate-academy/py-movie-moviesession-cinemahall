@@ -51,5 +51,5 @@ def update_movie_session(
     update_session.save()
 
 
-def delete_movie_session_by_id(session_id):
+def delete_movie_session_by_id(session_id: int) -> None:
     MovieSession.objects.filter(id=session_id).delete()
