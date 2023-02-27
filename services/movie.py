@@ -2,6 +2,7 @@ from typing import List, Optional
 
 from db.models import Movie
 from django.db.models import QuerySet
+from django.shortcuts import get_object_or_404
 
 
 def get_movies(
@@ -19,7 +20,7 @@ def get_movies(
 
 
 def get_movie_by_id(movie_id: int) -> Movie:
-    return Movie.objects.get(id=movie_id)
+    return get_object_or_404(Movie, id=movie_id)
 
 
 def create_movie(
