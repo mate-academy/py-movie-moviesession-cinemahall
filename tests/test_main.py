@@ -29,7 +29,7 @@ def test_movie_str(title, description, out):
     movie = Movie.objects.create(title=title, description=description)
 
     f = StringIO()
-
+    print(f)
     with redirect_stdout(f):
         print(movie)
 
