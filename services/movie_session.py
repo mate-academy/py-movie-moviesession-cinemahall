@@ -1,7 +1,7 @@
 from db.models import MovieSession
-import datetime
 from django.db.models import QuerySet
 from typing import Optional
+import datetime
 
 
 def create_movie_session(
@@ -29,21 +29,24 @@ def get_movie_session_by_id(movie_session_by_id: int) -> QuerySet:
 
 def update_movie_session(
         session_id: int,
-        show_time: datetime = None,
+        show_time: Optional[datetime.datetime] = None,
         movie_id: Optional[int] = None,
         cinema_hall_id: Optional[int] = None,
 ) -> QuerySet:
     queryset = MovieSession.objects.all()
+
     if show_time is not None:
-        queryset = MovieSession.objects.filter(
+        queryset.filter(
             id=session_id,
         ).update(show_time=show_time)
+
     if movie_id is not None:
-        queryset = MovieSession.objects.filter(
+        queryset.filter(
             id=session_id,
         ).update(movie_id=movie_id)
+
     if cinema_hall_id is not None:
-        queryset = MovieSession.objects.filter(
+        queryset.filter(
             id=session_id,
         ).update(cinema_hall_id=cinema_hall_id)
     return queryset
