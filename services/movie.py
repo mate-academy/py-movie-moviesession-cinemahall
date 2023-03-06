@@ -1,10 +1,13 @@
-from db.models import Movie
+from django.db.models import QuerySet
 from django.shortcuts import get_object_or_404
+
+from db.models import Movie
 
 
 def get_movies(
         genres_ids: list[int] = None,
-        actors_ids: list[int] = None) -> list[Movie]:
+        actors_ids: list[int] = None
+) -> QuerySet[Movie]:
     queryset = Movie.objects.all()
     if genres_ids:
         queryset = queryset.filter(genres__id__in=genres_ids)
