@@ -1,3 +1,5 @@
+from typing import Optional
+
 from django.db.models import QuerySet
 
 from db.models import MovieSession
@@ -18,11 +20,11 @@ def create_movie_session(
 
 
 def get_movies_sessions(
-        session_date: dt.datetime = None
+        session_date: Optional[dt.datetime] = None
 ) -> QuerySet:
     movie_session = MovieSession.objects.all()
     if session_date:
-        movie_session = MovieSession.objects.filter(
+        movie_session = movie_session.filter(
             show_time__date=session_date
         )
     return movie_session
@@ -34,25 +36,30 @@ def get_movie_session_by_id(session_id: int) -> QuerySet:
 
 def update_movie_session(
         session_id: int,
-        show_time: dt.datetime = None,
-        movie_id: int = None,
-        cinema_hall_id: int = None,
-) -> QuerySet:
+        show_time: Optional[dt.datetime] = None,
+        movie_id: Optional[int] = None,
+        cinema_hall_id: Optional[int] = None,
+) -> MovieSession:
     if not any([cinema_hall_id, show_time, movie_id]):
         raise ValueError(
             "You won't be able to update without"
             " providing at least one argument"
         )
 
-    session = MovieSession.objects.filter(
-        id=session_id,
-    )
-    if cinema_hall_id:
-        session.update(cinema_hall_id=cinema_hall_id)
-    if movie_id:
-        session.update(movie_id=movie_id)
-    if show_time:
-        session.update(show_time=show_time)
+    session = MovieSession.objects.get(id=session_id)
+
+    if cinema_hall_id is not None:
+        session.cinema_hall_id = cinema_hall_id
+    if movie_id is not None:
+        session.movie_id = movie_id
+    if show_time is not None:
+        session.show_time = show_time
+
+    session.save(update_fields=[
+        "cinema_hall_id",
+        "movie_id",
+        "show_time"
+    ])
 
     return session
 
