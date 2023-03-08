@@ -38,4 +38,4 @@ def create_movie(
         new_movie.genres.set(genres_ids)
     if actors_ids:
         new_movie.actors.set(actors_ids)
-    print(f"Movie: '{get_movie_by_id(new_movie.id)}' was created!")
+    print(f"Movie: '{new_movie.title}' was created!")
