@@ -6,7 +6,7 @@ from db.models import MovieSession
 
 
 def create_movie_session(
-        movie_show_time: datetime,
+        movie_show_time: str,
         movie_id: int,
         cinema_hall_id: int
 ) -> None:
@@ -17,15 +17,11 @@ def create_movie_session(
     )
 
 
-def get_movies_sessions(session_date: str = None) -> QuerySet | MovieSession:
+def get_movies_sessions(session_date: str = None) -> QuerySet:
+    query_set = MovieSession.objects.all()
     if session_date:
-        datetime_obj = datetime.strptime(session_date, "%Y-%m-%d")
-        return MovieSession.objects.filter(
-            show_time__day=datetime_obj.day,
-            show_time__month=datetime_obj.month,
-            show_time__year=datetime_obj.year
-        )
-    return MovieSession.objects.all()
+        return query_set.filter(show_time__date=session_date)
+    return query_set
 
 
 def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
