@@ -1,3 +1,5 @@
+import datetime
+
 from django.db.models import QuerySet
 
 import init_django_orm  # noqa: F401
@@ -21,11 +23,8 @@ def get_movies_sessions(session_date: str = None) -> QuerySet:
     sessions = MovieSession.objects.all()
 
     if session_date:
-        year, month, day = session_date.split("-")
         sessions = MovieSession.objects.filter(
-            show_time__year=year,
-            show_time__month=month,
-            show_time__day=day
+            show_time__date=session_date
         )
 
     return sessions
