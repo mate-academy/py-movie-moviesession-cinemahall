@@ -35,4 +35,4 @@ def create_movie(
         movie.actors.set(actors_ids)
     if genres_ids:
         movie.genres.set(genres_ids)
-    movie.save()
+    return movie
