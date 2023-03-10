@@ -6,7 +6,7 @@ def create_movie_session(
         cinema_hall_id: int,
         movie_id: int
 
-):
+) -> MovieSession:
     return MovieSession.objects.create(
         show_time=movie_show_time,
         cinema_hall=cinema_hall_id,
@@ -33,7 +33,7 @@ def update_movie_session(
         movie_id: int = None,
         cinema_hall_id: int = None,
 
-):
+) -> MovieSession:
     movie_session = MovieSession.objects.get(id=sessions_id)
 
     if show_time:
