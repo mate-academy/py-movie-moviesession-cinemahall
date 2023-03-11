@@ -42,4 +42,3 @@ def create_movie(
     if actors_ids:
         actors = Actor.objects.all().filter(id__in=actors_ids)
         movie.actors.set(actors)
-
