@@ -19,12 +19,7 @@ def get_movies_sessions(session_date: str = None) -> QuerySet:
     queryset = MovieSession.objects.all()
 
     if session_date:
-        year = session_date.split("-")[0]
-        month = session_date.split("-")[1]
-        day = session_date.split("-")[2]
-        queryset = queryset.filter(show_time__year=year,
-                                   show_time__month=month,
-                                   show_time__day=day,)
+        queryset = queryset.filter(show_time__date=session_date,)
 
     return queryset
 
@@ -37,22 +32,21 @@ def update_movie_session(session_id: int,
                          show_time: datetime = None,
                          movie_id: int = None,
                          cinema_hall_id: int = None) -> None:
-    queryset = MovieSession.objects.filter(id=session_id)
 
     if show_time:
-        queryset.update(
-            show_time=show_time
-        )
+        movie_session = MovieSession.objects.get(id=session_id)
+        movie_session.show_time = show_time
+        movie_session.save()
 
     if movie_id:
-        queryset.update(
-            movie_id=movie_id
-        )
+        movie_session = MovieSession.objects.get(id=session_id)
+        movie_session.movie_id = movie_id
+        movie_session.save()
 
     if cinema_hall_id:
-        queryset.update(
-            cinema_hall_id=cinema_hall_id
-        )
+        movie_session = MovieSession.objects.get(id=session_id)
+        movie_session.cinema_hall_id = cinema_hall_id
+        movie_session.save()
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
