@@ -39,5 +39,3 @@ def create_movie(
 
     if actors_ids:
         movie.actors.set(actors_ids)
-
-    movie.save()
