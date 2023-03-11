@@ -2,6 +2,7 @@ from datetime import datetime
 from typing import Union
 
 from django.db.models import QuerySet
+
 from db.models import CinemaHall, Movie, MovieSession
 
 
