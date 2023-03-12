@@ -1,5 +1,3 @@
-import datetime
-
 from django.db.models import QuerySet
 
 import init_django_orm  # noqa: F401
