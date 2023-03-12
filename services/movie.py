@@ -26,11 +26,11 @@ def create_movie(
         movie_description: str,
         genres_ids: list = None,
         actors_ids: list = None
-) -> QuerySet:
+) -> None:
     movie = Movie.objects.create(title=movie_title,
                                  description=movie_description)
     if genres_ids:
         movie.genres.set(genres_ids)
     if actors_ids:
         movie.actors.set(actors_ids)
-    return movie
+    movie.save()
