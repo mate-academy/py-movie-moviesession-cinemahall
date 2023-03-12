@@ -6,26 +6,18 @@ from db.models import MovieSession
 def create_movie_session(movie_show_time: datetime,
                          movie_id: int,
                          cinema_hall_id: int) -> MovieSession:
-    movie_session = MovieSession.objects.create(
+    return MovieSession.objects.create(
         show_time=movie_show_time,
         movie_id=movie_id,
         cinema_hall_id=cinema_hall_id
     )
-
-    return movie_session
 
 
 def get_movies_sessions(session_date: str = None) -> QuerySet:
     query_set = MovieSession.objects.all()
 
     if session_date:
-        year = session_date.split("-")[0]
-        month = session_date.split("-")[1]
-        day = session_date.split("-")[2]
-        query_set = query_set.filter(show_time__year=year,
-                                     show_time__month=month,
-                                     show_time__day=day,
-                                     )
+        return query_set.filter(show_time__date=session_date)
 
     return query_set
 
