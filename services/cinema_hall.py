@@ -7,7 +7,7 @@ def get_cinema_halls() -> QuerySet:
     return CinemaHall.objects.all()
 
 
-def get_cinema_hall_by_id(hall_id: int) -> QuerySet:
+def get_cinema_hall_by_id(hall_id: int) -> CinemaHall:
     return CinemaHall.objects.get(hall_id)
 
 
