@@ -252,8 +252,16 @@ def test_movie_service_create_movie():
 def test_movie_service_create_movie_with_genres():
     Genre.objects.create(name="Action")
     Genre.objects.create(name="Drama")
-    create_movie(movie_title="Matrix", movie_description="Matrix description", genres_ids=[1])
-    create_movie(movie_title="Batman", movie_description="Batman description", genres_ids=[2])
+    create_movie(
+        movie_title="Matrix",
+        movie_description="Matrix description",
+        genres_ids=[1]
+    )
+    create_movie(
+        movie_title="Batman",
+        movie_description="Batman description",
+        genres_ids=[2]
+    )
 
     assert list(
         Movie.objects.filter(
@@ -270,8 +278,16 @@ def test_movie_service_create_movie_with_genres():
 def test_movie_service_create_movie_with_actors():
     Actor.objects.create(first_name="Keanu", last_name="Reeves")
     Actor.objects.create(first_name="George", last_name="Clooney")
-    create_movie(movie_title="Matrix", movie_description="Matrix description", actors_ids=[2])
-    create_movie(movie_title="Batman", movie_description="Batman description", actors_ids=[1])
+    create_movie(
+        movie_title="Matrix",
+        movie_description="Matrix description",
+        actors_ids=[2]
+    )
+    create_movie(
+        movie_title="Batman",
+        movie_description="Batman description",
+        actors_ids=[1]
+    )
 
     assert list(
         Movie.objects.filter(
@@ -290,8 +306,18 @@ def test_movie_service_create_movie_with_genres_and_actors():
     Genre.objects.create(name="Drama")
     Actor.objects.create(first_name="Keanu", last_name="Reeves")
     Actor.objects.create(first_name="George", last_name="Clooney")
-    create_movie(movie_title="Matrix", movie_description="Matrix description", genres_ids=[1], actors_ids=[2])
-    create_movie(movie_title="Batman", movie_description="Batman description", genres_ids=[2], actors_ids=[1])
+    create_movie(
+        movie_title="Matrix",
+        movie_description="Matrix description",
+        genres_ids=[1],
+        actors_ids=[2],
+    )
+    create_movie(
+        movie_title="Batman",
+        movie_description="Batman description",
+        genres_ids=[2],
+        actors_ids=[1],
+    )
 
     assert list(
         Movie.objects.filter(
