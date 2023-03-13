@@ -2,7 +2,7 @@ import init_django_orm  # noqa: F401
 
 from datetime import datetime
 from django.db.models import QuerySet
-from db.models import MovieSession
+from db.models import MovieSession, Movie
 
 
 def create_movie_session(
@@ -27,7 +27,7 @@ def get_movies_sessions(
 
 def get_movie_session_by_id(
         movie_session_id: int
-) -> QuerySet:
+) -> Movie:
     return MovieSession.objects.get(id=movie_session_id)
 
 
