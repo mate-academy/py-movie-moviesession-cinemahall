@@ -33,7 +33,7 @@ class CinemaHall(models.Model):
     genres = models.ManyToManyField(Genre)
 
     def __str__(self) -> str:
-        return f"{self.name}"
+        return self.name
 
     @property
     def capacity(self) -> int:
