@@ -21,13 +21,8 @@ def get_movies_sessions(session_date: str = None) -> QuerySet:
     movie_session = MovieSession.objects.all()
 
     if session_date:
-        year, month, day = session_date.split("-")
         movie_session = movie_session.filter(
-            show_time__date=datetime.date(
-                year=int(year),
-                month=int(month),
-                day=int(day)
-            )
+            show_time__date=session_date
         )
 
     return movie_session
