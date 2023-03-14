@@ -1,33 +1,23 @@
 from typing import List
 
-from db.models import Genre, Movie, Actor
+from db.models import Movie
 
 
 def get_movies(
-        genres_ids: List[Genre] = None,
-        actors_ids: List[Actor] = None
+        genres_ids: List[int] = None,
+        actors_ids: List[int] = None
 ) -> List[Movie]:
     queryset = Movie.objects.all()
-
-    if genres_ids and actors_ids:
-        queryset = queryset.filter(
-            genres__id__in=genres_ids
-        ).filter(
-            actors__id__in=actors_ids
-        )
-        return queryset
 
     if genres_ids:
         queryset = queryset.filter(
             genres__id__in=genres_ids
         )
-        return queryset
 
     if actors_ids:
         queryset = queryset.filter(
             actors__id__in=actors_ids
         )
-        return queryset
     return queryset
 
 

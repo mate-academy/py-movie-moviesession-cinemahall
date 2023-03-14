@@ -1,5 +1,8 @@
 from typing import List
 
+from django.http import Http404
+from django.shortcuts import get_object_or_404
+
 from db.models import MovieSession, Movie, CinemaHall
 
 
@@ -34,30 +37,22 @@ def update_movie_session(
         movie_id: int = None,
         cinema_hall_id: int = None
 ) -> None:
-    try:
-        movie = Movie.objects.get(id=movie_id)
-    except Movie.DoesNotExist:
-        movie = None
-
-    if movie is not None:
-        MovieSession.objects.filter(id=session_id).update(
-            movie=movie
-        )
+    queryset = MovieSession.objects.filter(id=session_id)
 
     try:
-        cinema_hall = CinemaHall.objects.get(id=cinema_hall_id)
-    except CinemaHall.DoesNotExist:
-        cinema_hall = None
+        movie = get_object_or_404(Movie, pk=movie_id)
+        queryset.update(movie=movie)
+    except Http404:
+        pass
 
-    if cinema_hall is not None:
-        MovieSession.objects.filter(id=session_id).update(
-            cinema_hall=cinema_hall
-        )
+    try:
+        cinema_hall = get_object_or_404(CinemaHall, pk=cinema_hall_id)
+        queryset.update(cinema_hall=cinema_hall)
+    except Http404:
+        pass
 
     if show_time is not None:
-        MovieSession.objects.filter(id=session_id).update(
-            show_time=show_time
-        )
+        queryset.update(show_time=show_time)
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
