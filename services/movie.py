@@ -8,8 +8,6 @@ def get_movies(
         actors_ids: List[Actor] = None
 ) -> List[Movie]:
     queryset = Movie.objects.all()
-    if not genres_ids and not actors_ids:
-        return queryset
 
     if genres_ids and actors_ids:
         queryset = queryset.filter(
@@ -30,9 +28,10 @@ def get_movies(
             actors__id__in=actors_ids
         )
         return queryset
+    return queryset
 
 
-def get_movie_by_id(movie_id: int) -> List[Movie]:
+def get_movie_by_id(movie_id: int) -> Movie:
     return Movie.objects.get(id=movie_id)
 
 
