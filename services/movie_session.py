@@ -1,4 +1,4 @@
-from django.db.models import QuerySet, F
+from django.db.models import QuerySet
 
 from db.models import MovieSession
 
@@ -32,15 +32,16 @@ def update_movie_session(
     movie_id: int = None,
     cinema_hall_id: int = None,
 ) -> None:
-    movie_session_to_update = MovieSession.objects.filter(id=session_id)
+    movie_session_to_update = MovieSession.objects.get(id=session_id)
 
-    movie_session_to_update.update(
-        show_time=F("show_time") if not show_time else show_time,
-        cinema_hall_id=F("cinema_hall_id")
-        if not cinema_hall_id
-        else cinema_hall_id,
-        movie_id=F("movie_id") if not movie_id else movie_id,
-    )
+    if cinema_hall_id:
+        movie_session_to_update.cinema_hall_id = cinema_hall_id
+    if show_time:
+        movie_session_to_update.show_time = show_time
+    if movie_id:
+        movie_session_to_update.movie_id = movie_id
+
+    movie_session_to_update.save()
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
