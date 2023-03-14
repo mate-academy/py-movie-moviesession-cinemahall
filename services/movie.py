@@ -17,7 +17,7 @@ def get_movies(
             actors__id__in=actors_ids
         )
 
-    return queryset.distinct()
+    return queryset
 
 
 def get_movie_by_id(movie_id: int) -> Movie:
@@ -38,4 +38,3 @@ def create_movie(
         new_movie.genres.set(genres_ids)
     if actors_ids:
         new_movie.actors.set(actors_ids)
-    print(f"Movie: '{new_movie.title}' was created!")
