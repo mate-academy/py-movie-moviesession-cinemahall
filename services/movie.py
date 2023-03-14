@@ -1,4 +1,3 @@
-from django.db.models import Q
 from django.db.models.query import QuerySet
 
 from db.models import Movie
@@ -7,16 +6,11 @@ from db.models import Movie
 def get_movies(genres_ids: list[int] = None,
                actors_ids: list[int] = None) -> QuerySet[Movie]:
     movies = Movie.objects.all()
-    filter_kwargs = {}
 
     if genres_ids:
-        filter_kwargs["genres__id__in"] = genres_ids
+        movies = movies.filter(genres__id__in=genres_ids)
     if actors_ids:
-        filter_kwargs["actors__id__in"] = actors_ids
-
-    if filter_kwargs:
-        filter_q = Q(**filter_kwargs)
-        movies = movies.filter(filter_q).distinct()
+        movies = movies.filter(actors__id__in=actors_ids)
 
     return movies
 
