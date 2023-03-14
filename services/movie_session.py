@@ -36,18 +36,18 @@ def update_movie_session(
         movie_id: int = None,
         cinema_hall_id: int = None
 ) -> None:
-    queryset = MovieSession.objects.get(id=session_id)
+    move_session = MovieSession.objects.get(id=session_id)
 
     if show_time:
-        queryset.show_time = show_time
+        move_session.show_time = show_time
 
     if movie_id:
-        queryset.movie_id = movie_id
+        move_session.movie_id = movie_id
 
     if cinema_hall_id:
-        queryset.cinema_hall_id = cinema_hall_id
+        move_session.cinema_hall_id = cinema_hall_id
 
-    queryset.save()
+    move_session.save()
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
