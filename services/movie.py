@@ -12,10 +12,6 @@ def get_movies(
 ) -> QuerySet:
 
     movies = Movie.objects.all()
-
-    if genres_ids is None and actors_ids is None:
-        return movies
-
     if genres_ids:
         movies = movies.filter(genres__id__in=genres_ids)
 
