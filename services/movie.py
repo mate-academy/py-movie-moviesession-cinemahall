@@ -23,12 +23,8 @@ def create_movie(movie_title: str,
                  actors_ids: list[int] = None) -> Movie | bool:
     new_movie = Movie.objects.create(title=movie_title,
                                      description=movie_description)
-    try:
-        if genres_ids:
-            new_movie.genres.set(genres_ids)
-        if actors_ids:
-            new_movie.actors.set(actors_ids)
-    except Exception:
-        new_movie.delete()
-        return False
+    if genres_ids:
+        new_movie.genres.set(genres_ids)
+    if actors_ids:
+        new_movie.actors.set(actors_ids)
     return new_movie
