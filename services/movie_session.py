@@ -8,13 +8,11 @@ def create_movie_session(
         cinema_hall_id: int
 ) -> MovieSession:
 
-    new_session = MovieSession.objects.create(
+    return MovieSession.objects.create(
         show_time=movie_show_time,
         movie_id=movie_id,
         cinema_hall_id=cinema_hall_id
     )
-
-    return new_session
 
 
 def get_movies_sessions(session_date: str = None) -> QuerySet:
