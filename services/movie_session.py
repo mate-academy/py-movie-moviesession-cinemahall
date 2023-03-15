@@ -37,22 +37,23 @@ def update_movie_session(
         movie_id: int = None,
         cinema_hall_id: int = None
 ) -> None:
-    queryset = MovieSession.objects.filter(id=session_id)
+    movie_session = get_movie_session_by_id(session_id)
 
     try:
         movie = get_object_or_404(Movie, pk=movie_id)
-        queryset.update(movie=movie)
+        movie_session.movie = movie
     except Http404:
         pass
 
     try:
         cinema_hall = get_object_or_404(CinemaHall, pk=cinema_hall_id)
-        queryset.update(cinema_hall=cinema_hall)
+        movie_session.cinema_hall = cinema_hall
     except Http404:
         pass
 
     if show_time is not None:
-        queryset.update(show_time=show_time)
+        movie_session.show_time = show_time
+    movie_session.save()
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
