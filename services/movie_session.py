@@ -3,7 +3,7 @@ from typing import Optional
 from db.models import MovieSession
 from django.db.models import QuerySet
 
-import datetime
+from datetime import datetime
 
 
 def create_movie_session(
@@ -38,7 +38,7 @@ def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
 
 def update_movie_session(
         session_id: int,
-        show_time: Optional[datetime.datetime] = None,
+        show_time: Optional[datetime] = None,
         movie_id: Optional[int] = None,
         cinema_hall_id: Optional[int] = None
 ) -> MovieSession:
