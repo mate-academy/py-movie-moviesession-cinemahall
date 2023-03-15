@@ -5,14 +5,17 @@ from db.models import Movie
 
 def get_movies(genres_ids: list = None, actors_ids: list = None) -> QuerySet:
     movie_to_watch = Movie.objects.all()
+
     if actors_ids is not None:
         movie_to_watch = movie_to_watch.filter(
             actors__id__in=actors_ids
         )
+
     if genres_ids is not None:
         movie_to_watch = movie_to_watch.filter(
             genres__id__in=genres_ids
         )
+
     return movie_to_watch
 
 
