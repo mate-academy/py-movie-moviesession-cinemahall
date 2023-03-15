@@ -9,12 +9,12 @@ def create_movie_session(
         movie_id: int,
         cinema_hall_id: int
 ) -> MovieSession:
-    new_session = MovieSession.objects.create(
+
+    return MovieSession.objects.create(
         show_time=movie_show_time,
         cinema_hall_id=cinema_hall_id,
         movie_id=movie_id
     )
-    return new_session
 
 
 def get_movies_sessions(session_date: str = None) -> QuerySet:
@@ -51,7 +51,4 @@ def update_movie_session(
 
 
 def delete_movie_session_by_id(section_id: int) -> MovieSession:
-    session_to_delete = MovieSession.objects.get(id=section_id)
-    session_to_delete.delete()
-
-    return session_to_delete
+    return MovieSession.objects.get(id=section_id).delete()
