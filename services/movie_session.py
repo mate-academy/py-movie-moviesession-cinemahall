@@ -8,8 +8,8 @@ from db.models import MovieSession, Movie, CinemaHall
 def create_movie_session(
     movie_show_time: datetime, movie_id: int, cinema_hall_id: int
 ) -> None:
-    movie = Movie.objects.get(id=movie_id)
-    cinema_hall = CinemaHall.objects.get(id=cinema_hall_id)
+    movie = Movie.objects.get(pk=movie_id)
+    cinema_hall = CinemaHall.objects.get(pk=cinema_hall_id)
     movie_session = MovieSession.objects.create(
         show_time=movie_show_time, movie=movie, cinema_hall=cinema_hall
     )
