@@ -1,8 +1,5 @@
 from typing import List
 
-from django.http import Http404
-from django.shortcuts import get_object_or_404
-
 from db.models import MovieSession, Movie, CinemaHall
 
 
