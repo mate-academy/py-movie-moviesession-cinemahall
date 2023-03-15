@@ -29,7 +29,7 @@ def create_movie(
         movie_description: str,
         genres_ids: Optional[list[int]] = None,
         actors_ids: Optional[list[int]] = None
-) -> None:
+) -> QuerySet:
     movie = Movie.objects.create(
         title=movie_title,
         description=movie_description

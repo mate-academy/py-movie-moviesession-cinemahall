@@ -49,4 +49,4 @@ class MovieSession(models.Model):
     )
 
     def __str__(self) -> str:
-        return f"{self.movie} {str(self.show_time)}"
+        return f"{self.movie} {self.show_time}"
