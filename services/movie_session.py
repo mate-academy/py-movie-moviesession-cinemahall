@@ -8,12 +8,10 @@ from db.models import MovieSession, CinemaHall, Movie
 def create_movie_session(
     movie_show_time: datetime, movie_id: int, cinema_hall_id: int
 ) -> None:
-    cinema_hall = CinemaHall.objects.get(id=cinema_hall_id)
-    movie = Movie.objects.get(id=movie_id)
     MovieSession.objects.create(
         show_time=movie_show_time,
-        cinema_hall=cinema_hall,
-        movie=movie
+        cinema_hall_id=cinema_hall_id,
+        movie_id=movie_id
     )
 
 
@@ -38,19 +36,18 @@ def update_movie_session(
     movie_id: int = None,
     cinema_hall_id: int = None,
 ) -> None:
-    movie_session = MovieSession.objects.all()
-    movie_session = movie_session.filter(id=session_id)
+    movie_session = MovieSession.objects.filter(id=session_id)
 
-    if show_time is not None:
+    if show_time:
         movie_session.update(show_time=show_time)
 
-    if movie_id is not None:
+    if movie_id:
         movie_session.update(movie=movie_id)
 
-    if cinema_hall_id is not None:
+    if cinema_hall_id:
         movie_session.update(cinema_hall=cinema_hall_id)
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
-    movie_session = MovieSession.objects.all()
-    movie_session.get(id=session_id).delete()
+    MovieSession.objects.filter(id=session_id).delete()
+
