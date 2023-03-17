@@ -1,5 +1,7 @@
 from db.models import MovieSession
 
+import datetime
+
 
 def create_movie_session(movie_show_time: int,
                          movie_id: int,
