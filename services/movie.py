@@ -1,5 +1,3 @@
-from typing import Optional
-
 from db.models import Movie
 
 
