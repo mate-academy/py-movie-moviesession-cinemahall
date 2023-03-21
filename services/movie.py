@@ -18,8 +18,8 @@ def get_movies(genres_ids: Optional[list[int]] = None,
 
 
 def get_movie_by_id(movie_id: int) -> Movie:
-    queryset = Movie.objects.get(id=movie_id)
-    return queryset
+    movie = Movie.objects.get(id=movie_id)
+    return movie
 
 
 def create_movie(movie_title: str,
