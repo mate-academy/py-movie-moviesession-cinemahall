@@ -2,14 +2,13 @@ from db.models import MovieSession
 
 from django.db.models import QuerySet
 
-from typing import Optional
-import datetime
+from datetime import datetime
 
 
 def create_movie_session(
-        movie_show_time: Optional,
-        movie_id: Optional,
-        cinema_hall_id: Optional
+        movie_show_time: int,
+        movie_id: int,
+        cinema_hall_id: int
 ) -> MovieSession:
     return MovieSession.objects.create(
         show_time=movie_show_time,
