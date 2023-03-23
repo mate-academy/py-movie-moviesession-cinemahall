@@ -1,6 +1,5 @@
 from django.db.models import QuerySet
-
-import init_django_orm # noqa: F401
+import init_django_orm  # noqa: F401
 from db.models import Movie
 
 
