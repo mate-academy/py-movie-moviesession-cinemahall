@@ -1,12 +1,12 @@
 from db.models import Movie
 
 from django.db.models import QuerySet
-from typing import List
+from typing import Optional
 
 
 def get_movies(
-        genres_ids: List[int] = None,
-        actors_ids: List[int] = None
+        genres_ids: Optional[int] = None,
+        actors_ids: Optional[int] = None
 ) -> QuerySet:
 
     movies = Movie.objects.all()
@@ -24,8 +24,8 @@ def get_movie_by_id(movie_id: int) -> Movie:
 def create_movie(
         movie_title: str,
         movie_description: str,
-        genres_ids: List[int] = None,
-        actors_ids: List[int] = None
+        genres_ids: Optional[int] = None,
+        actors_ids: Optional[int] = None
 ) -> Movie:
     movie = Movie.objects.create(
         title=movie_title,
