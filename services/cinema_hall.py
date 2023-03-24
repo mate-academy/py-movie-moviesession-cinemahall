@@ -3,7 +3,7 @@ import init_django_orm  # noqa: F401
 from db.models import CinemaHall
 
 
-def get_cinema_halls() -> QuerySet:
+def get_cinema_halls() -> QuerySet[CinemaHall]:
     return CinemaHall.objects.all()
 
 
