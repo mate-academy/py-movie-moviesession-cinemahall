@@ -1,4 +1,6 @@
 from typing import Optional
+
+from django.shortcuts import get_object_or_404
 import init_django_orm  # noqa: F401
 import datetime
 from db.models import MovieSession
@@ -21,11 +23,8 @@ def get_movies_sessions(session_date: str = None) -> MovieSession:
     queryset = MovieSession.objects.all()
     if session_date is not None:
         queryset = queryset.filter(
-            show_time__year=session_date.split("-")[0],
-            show_time__month=session_date.split("-")[1],
-            show_time__day=session_date.split("-")[2]
+            show_time__date=session_date
         )
-
     return queryset
 
 
@@ -39,26 +38,18 @@ def update_movie_session(
         movie_id: Optional[int] = None,
         cinema_hall_id: Optional[int] = None
 ) -> MovieSession:
-    queryset_session_for_update = MovieSession.objects.filter(
+    queryset_session = MovieSession.objects.get(
         id=session_id
     )
-
     if show_time is not None:
-        queryset_session_for_update.update(
-            show_time=show_time
-        )
+        queryset_session.show_time = show_time
     if movie_id is not None:
-        queryset_session_for_update.update(
-            movie_id=movie_id
-        )
+        queryset_session.movie_id = movie_id
     if cinema_hall_id is not None:
-        queryset_session_for_update.update(
-            cinema_hall_id=cinema_hall_id
-        )
-
-    return queryset_session_for_update
+        queryset_session.cinema_hall_id = cinema_hall_id
+    return queryset_session.save()
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
-    movie_session = MovieSession.objects.filter(id=session_id).first()
+    movie_session = get_object_or_404(MovieSession, id=session_id)
     movie_session.delete()
