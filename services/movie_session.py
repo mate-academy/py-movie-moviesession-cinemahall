@@ -14,7 +14,7 @@ def create_movie_session(
     MovieSession.objects.create(
         show_time=movie_show_time,
         cinema_hall_id=cinema_hall_id,
-        movie=get_movie_by_id(movie_id)
+        movie_id=movie_id
     )
 
 
