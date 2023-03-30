@@ -1,6 +1,7 @@
 from typing import Optional
 
 from django.db.models import QuerySet
+from django.shortcuts import get_object_or_404
 
 from db.models import MovieSession
 
@@ -22,12 +23,12 @@ def get_movies_sessions(session_date: str = None) -> QuerySet[MovieSession]:
     movie_session = MovieSession.objects.all()
     if session_date is not None:
         return movie_session.filter(show_time__date=session_date)
-    else:
-        return movie_session
+    return movie_session
 
 
 def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
-    return MovieSession.objects.get(id=movie_session_id)
+    movie_session_by_id = get_object_or_404(MovieSession, id=movie_session_id)
+    return movie_session_by_id
 
 
 def update_movie_session(
@@ -47,4 +48,5 @@ def update_movie_session(
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
-    MovieSession.objects.filter(id=session_id).delete()
+    movie_session = get_movie_session_by_id(session_id)
+    movie_session.delete()
