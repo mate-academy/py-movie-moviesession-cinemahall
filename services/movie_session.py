@@ -1,6 +1,7 @@
 from db.models import MovieSession
-from typing import Optional
 from django.db.models import QuerySet
+from django.shortcuts import get_object_or_404
+from typing import Optional
 
 
 def create_movie_session(
@@ -19,14 +20,14 @@ def create_movie_session(
 def get_movies_sessions(session_date: Optional[str] = None) -> QuerySet:
     scheduled_movies = MovieSession.objects.all()
     if session_date is not None:
-        scheduled_movies = MovieSession.objects.filter(
+        scheduled_movies = scheduled_movies.filter(
             show_time__date=session_date
         )
     return scheduled_movies
 
 
 def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
-    movies_by_session = MovieSession.objects.get(id=movie_session_id)
+    movies_by_session = get_object_or_404(MovieSession, id=movie_session_id)
     return movies_by_session
 
 
