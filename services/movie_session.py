@@ -1,6 +1,7 @@
 from typing import Optional
 
 from django.db.models import QuerySet
+from django.shortcuts import get_object_or_404
 
 from db.models import MovieSession
 
@@ -33,7 +34,8 @@ def get_movies_sessions(
 def get_movie_session_by_id(
         movie_session_id: int
 ) -> MovieSession:
-    return MovieSession.objects.get(
+    return get_object_or_404(
+        MovieSession,
         id=movie_session_id
     )
 
@@ -43,23 +45,27 @@ def update_movie_session(
         show_time: Optional[str] = None,
         movie_id: Optional[int] = None,
         cinema_hall_id: Optional[int] = None
-) -> int:
-    queryset = MovieSession.objects.filter(id=session_id)
-    updated_entries_number = 0
+) -> MovieSession:
+    movie_session_to_update = get_object_or_404(
+        MovieSession,
+        id=session_id
+    )
 
-    if queryset:
-        if show_time:
-            updated_entries_number += queryset.update(show_time=show_time)
+    if show_time:
+        movie_session_to_update.show_time = show_time
 
-        if movie_id:
-            updated_entries_number += queryset.update(movie_id=movie_id)
+    if movie_id:
+        movie_session_to_update.movie_id = movie_id
 
-        if cinema_hall_id:
-            updated_entries_number\
-                += queryset.update(cinema_hall_id=cinema_hall_id)
+    if cinema_hall_id:
+        movie_session_to_update.cinema_hall_id = cinema_hall_id
 
-    return updated_entries_number
+    movie_session_to_update.save()
+
+    return movie_session_to_update
 
 
 def delete_movie_session_by_id(session_id: int) -> int:
-    return MovieSession.objects.filter(id=session_id).delete()
+    movie_session_to_delete = get_movie_session_by_id(session_id)
+
+    return movie_session_to_delete.delete()
