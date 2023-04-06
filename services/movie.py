@@ -1,10 +1,10 @@
 from typing import List
-from db.models import Movie, Genre, Actor
+from db.models import Movie
 
 
 def get_movies(
-        genres_ids: List[Genre] = None,
-        actors_ids: List[Actor] = None
+        genres_ids: list = None,
+        actors_ids: list = None
 ) -> List[Movie]:
     queryset = Movie.objects.all()
     if (genres_ids is not None) and (actors_ids is not None):
@@ -30,8 +30,8 @@ def get_movie_by_id(movie_id: int) -> str:
 def create_movie(
         movie_title: str,
         movie_description: str,
-        genres_ids: List[Genre] = None,
-        actors_ids: List[Actor] = None
+        genres_ids: list = None,
+        actors_ids: list = None
 ) -> None:
     new_movie = Movie.objects.create(
         title=movie_title,
@@ -43,17 +43,3 @@ def create_movie(
 
     if actors_ids:
         new_movie.actors.set(actors_ids)
-
-
-"""
-new_book = Book.objects.create(
-        title=title,
-        price=price,
-        format_id=format_id
-    )
-
-    if authors_ids:
-        new_book.authors.set(authors_ids)
-
-    return new_book
-"""

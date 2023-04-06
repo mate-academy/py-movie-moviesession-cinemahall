@@ -18,8 +18,7 @@ def create_movie_session(
 def get_movies_sessions(session_date: str = None) -> List[MovieSession]:
     if session_date is not None:
         return MovieSession.objects.filter(show_time__date=session_date)
-    else:
-        return MovieSession.objects.all()
+    return MovieSession.objects.all()
 
 
 def get_movie_session_by_id(movie_session_id: int) -> str:
@@ -44,4 +43,4 @@ def update_movie_session(
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
-    MovieSession.objects.filter(id=session_id).delete()
+    MovieSession.objects.get(id=session_id).delete()
