@@ -28,7 +28,7 @@ def get_movies_sessions(
 def get_movie_session_by_id(
     movie_session_id: int
 ) -> MovieSession:
-    return MovieSession.objects.filter(
+    return MovieSession.objects.get(
         movie__id=movie_session_id
     )
 
