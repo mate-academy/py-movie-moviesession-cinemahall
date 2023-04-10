@@ -1,4 +1,5 @@
 from db.models import MovieSession
+from db.models import Movie
 
 
 def create_movie_session(
@@ -15,7 +16,7 @@ def create_movie_session(
 
 def get_movies_sessions(
         session_date: str = None
-) -> MovieSession:
+) -> None:
     movie_sessions_in_this_date = MovieSession.objects.all()
     if session_date is not None:
         movie_sessions_in_this_date = movie_sessions_in_this_date.filter(
@@ -27,10 +28,8 @@ def get_movies_sessions(
 
 def get_movie_session_by_id(
     movie_session_id: int
-) -> MovieSession:
-    return MovieSession.objects.get(
-        movie__id=movie_session_id
-    )
+) -> Movie:
+    return MovieSession.objects.get(pk=movie_session_id)
 
 
 def update_movie_session(
@@ -39,7 +38,7 @@ def update_movie_session(
         movie_id: int = None,
         cinema_hall_id: int = None
 ) -> None:
-    movie_sessions = MovieSession.objects.filter(id=session_id)
+    movie_sessions = MovieSession.objects.filter(pk=session_id)
     print(movie_sessions)
     if show_time is not None:
         movie_sessions.update(show_time=show_time)
