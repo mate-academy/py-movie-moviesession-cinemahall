@@ -41,8 +41,8 @@ class CinemaHall(models.Model):
 
 class MovieSession(models.Model):
     show_time = models.DateTimeField()
-    cinema_hall = models.ForeignKey(CinemaHall, on_delete=models.DO_NOTHING)
-    movie = models.ForeignKey(Movie, on_delete=models.DO_NOTHING)
+    cinema_hall = models.ForeignKey(CinemaHall, on_delete=models.PROTECT)
+    movie = models.ForeignKey(Movie, on_delete=models.PROTECT)
 
     def __str__(self) -> str:
         date_time = self.show_time.strftime("%Y-%m-%d %H:%M:%S")
