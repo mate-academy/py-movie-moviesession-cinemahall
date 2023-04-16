@@ -3,8 +3,6 @@ from typing import Optional
 from django.db.models import QuerySet
 
 from db.models import Movie
-from db.models import Genre
-from db.models import Actor
 
 
 def get_movies(
