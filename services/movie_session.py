@@ -1,3 +1,5 @@
+from typing import Optional
+
 from django.db.models import QuerySet
 from db.models import MovieSession
 from db.models import Movie
@@ -36,8 +38,8 @@ def get_movie_session_by_id(
 def update_movie_session(
         session_id: int,
         show_time: str = None,
-        movie_id: int = None,
-        cinema_hall_id: int = None
+        movie_id: Optional[list[int]] = None,
+        cinema_hall_id: Optional[list[int]] = None
 ) -> None:
     movie_sessions = MovieSession.objects.filter(pk=session_id)
     print(movie_sessions)
@@ -50,4 +52,4 @@ def update_movie_session(
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
-    MovieSession.objects.get(id=session_id).delete()
+    MovieSession.objects.get(pk=session_id).delete()
