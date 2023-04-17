@@ -31,7 +31,7 @@ def create_movie(
         movie_description: str,
         genres_ids: list[int] = None,
         actors_ids: list[int] = None
-) -> Movie:
+) -> None:
 
     new_movie = Movie.objects.create(
         title=movie_title,
@@ -43,5 +43,3 @@ def create_movie(
 
     if actors_ids:
         new_movie.actors.set(actors_ids)
-
-    return new_movie
