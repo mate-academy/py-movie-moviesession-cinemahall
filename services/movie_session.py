@@ -37,7 +37,7 @@ def get_movie_session_by_id(
 
 def update_movie_session(
         session_id: int,
-        show_time: str = None,
+        show_time: Optional[str] = None,
         movie_id: Optional[list[int]] = None,
         cinema_hall_id: Optional[list[int]] = None
 ) -> None:
