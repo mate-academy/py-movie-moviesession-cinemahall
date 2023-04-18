@@ -25,7 +25,6 @@ def get_movies_sessions(
         movie_sessions_in_this_date = movie_sessions_in_this_date.filter(
             show_time__date=session_date
         )
-    print(session_date)
     return movie_sessions_in_this_date
 
 
@@ -41,15 +40,15 @@ def update_movie_session(
         movie_id: Optional[list[int]] = None,
         cinema_hall_id: Optional[list[int]] = None
 ) -> None:
-    movie_sessions = MovieSession.objects.filter(pk=session_id)
-    print(movie_sessions)
+    movie_sessions = get_movie_session_by_id(session_id)
     if show_time is not None:
-        movie_sessions.update(show_time=show_time)
+        movie_sessions.show_time = show_time
     if movie_id is not None:
-        movie_sessions.update(movie_id=movie_id)
+        movie_sessions.movie_id = movie_id
     if cinema_hall_id is not None:
-        movie_sessions.update(cinema_hall_id=cinema_hall_id)
+        movie_sessions.cinema_hall_id = cinema_hall_id
+    movie_sessions.save()
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
-    MovieSession.objects.get(pk=session_id).delete()
+    get_movie_session_by_id(session_id).delete()
