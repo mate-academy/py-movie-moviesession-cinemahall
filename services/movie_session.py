@@ -1,6 +1,8 @@
 from typing import Optional
 
 from django.db.models import QuerySet
+from django.shortcuts import get_object_or_404
+
 from db.models import MovieSession
 from db.models import Movie
 
@@ -30,8 +32,9 @@ def get_movies_sessions(
 
 def get_movie_session_by_id(
     movie_session_id: int
-) -> Movie | None:
-    return MovieSession.objects.get(pk=movie_session_id)
+) -> Movie:
+    return get_object_or_404(MovieSession, pk=movie_session_id)
+#    return MovieSession.objects.get(pk=movie_session_id)
 
 
 def update_movie_session(

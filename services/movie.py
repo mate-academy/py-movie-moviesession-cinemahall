@@ -1,6 +1,7 @@
 from typing import Optional
 
 from django.db.models import QuerySet
+from django.shortcuts import get_object_or_404
 
 from db.models import Movie
 
@@ -17,8 +18,8 @@ def get_movies(
     return queryset.distinct()
 
 
-def get_movie_by_id(movie_id: int) -> Movie | None:
-    return Movie.objects.get(pk=movie_id)
+def get_movie_by_id(movie_id: int) -> Movie:
+    return get_object_or_404(Movie, pk=movie_id)
 
 
 def create_movie(
