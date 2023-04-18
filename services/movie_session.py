@@ -28,7 +28,7 @@ def get_movie_session_by_id(movie_session_id: int) -> QuerySet:
 
 def update_movie_session(
         session_id: int,
-        show_time: Optional[datetime] = None,
+        show_time: Optional[datetime.datetime] = None,
         movie_id: Optional[int] = None,
         cinema_hall_id: Optional[int] = None
 ) -> None:
