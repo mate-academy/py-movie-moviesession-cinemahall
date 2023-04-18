@@ -34,7 +34,6 @@ def get_movie_session_by_id(
     movie_session_id: int
 ) -> Movie:
     return get_object_or_404(MovieSession, pk=movie_session_id)
-#    return MovieSession.objects.get(pk=movie_session_id)
 
 
 def update_movie_session(
