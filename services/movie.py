@@ -2,17 +2,12 @@ from db.models import Movie
 
 
 def get_movies(genres_ids: list = None, actors_ids: list = None) -> Movie:
-    if genres_ids is None and actors_ids is None:
-        return Movie.objects.all()
-    if actors_ids is not None and genres_ids is not None:
-        return Movie.objects.filter(
-            genres__id__in=genres_ids,
-            actors__id__in=actors_ids
-        )
-    if genres_ids is not None and actors_ids is None:
-        return Movie.objects.filter(genres__id__in=genres_ids)
-    if actors_ids is not None and genres_ids is None:
-        return Movie.objects.filter(actors__id__in=actors_ids)
+    got_movies = Movie.objects.all()
+    if genres_ids:
+        got_movies = got_movies.filter(genres__id__in=genres_ids)
+    if actors_ids:
+        got_movies = got_movies.filter(actors__id__in=actors_ids)
+    return got_movies
 
 
 def get_movie_by_id(movie_id: int) -> Movie:
