@@ -1,11 +1,11 @@
 from django.db import models
-from django.db.models import CharField
+from django.db.models import QuerySet
 
 
 class Genre(models.Model):
     name = models.CharField(max_length=255, unique=True)
 
-    def __str__(self) -> CharField:
+    def __str__(self) -> QuerySet:
         return self.name
 
 
@@ -23,7 +23,7 @@ class Movie(models.Model):
     actors = models.ManyToManyField(Actor)
     genres = models.ManyToManyField(Genre)
 
-    def __str__(self) -> CharField:
+    def __str__(self) -> QuerySet:
         return self.title
 
 
@@ -32,7 +32,7 @@ class CinemaHall(models.Model):
     rows = models.IntegerField()
     seats_in_row = models.IntegerField()
 
-    def __str__(self) -> CharField:
+    def __str__(self) -> str:
         return self.name
 
     @property
@@ -46,5 +46,7 @@ class MovieSession(models.Model):
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
-        return f"{self.movie.title}" \
-               f" {self.show_time.strftime('%Y-%m-%d %H:%M:%S')}"
+        return (
+            f"{self.movie.title}"
+            f" {self.show_time.strftime('%Y-%m-%d %H:%M:%S')}"
+        )
