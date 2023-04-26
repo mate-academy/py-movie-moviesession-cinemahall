@@ -1,4 +1,4 @@
-from db.models import Movie
+from db.models import Movie, Genre, Actor
 
 
 def get_movies(
@@ -32,7 +32,8 @@ def create_movie(
         description=movie_description
     )
     if genres_ids:
-        new_movie.genres.set(genres_ids)
-    elif actors_ids:
-        new_movie.actors.set(actors_ids)
+        new_movie.genres.add(*Genre.objects.filter(id__in=genres_ids))
+
+    if actors_ids:
+        new_movie.actors.add(*Actor.objects.filter(id__in=actors_ids))
     return new_movie

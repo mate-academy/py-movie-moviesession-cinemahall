@@ -31,14 +31,20 @@ def update_movie_session(
         movie_id: int = None,
         cinema_hall_id: int = None
 ) -> None:
-    movie_session = MovieSession.objects.get(id=session_id)
+    try:
+        movie_session = MovieSession.objects.get(id=session_id)
+    except MovieSession.DoesNotExist:
+        raise ValueError(f"Movie session with id {session_id} does not exist")
+
     if show_time is not None:
         movie_session.show_time = show_time
-    elif movie_id is not None:
+    if movie_id is not None:
         movie_session.movie_id = movie_id
-    elif cinema_hall_id is not None:
+    if cinema_hall_id is not None:
         movie_session.cinema_hall_id = cinema_hall_id
+
     movie_session.save()
+
     return movie_session
 
 
