@@ -1,11 +1,10 @@
 from django.db import models
-from django.db.models import QuerySet
 
 
 class Genre(models.Model):
     name = models.CharField(max_length=255, unique=True)
 
-    def __str__(self) -> QuerySet:
+    def __str__(self) -> str:
         return self.name
 
 
@@ -23,7 +22,7 @@ class Movie(models.Model):
     actors = models.ManyToManyField(Actor)
     genres = models.ManyToManyField(Genre)
 
-    def __str__(self) -> QuerySet:
+    def __str__(self) -> str:
         return self.title
 
 
