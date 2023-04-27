@@ -1,5 +1,5 @@
 from db.models import MovieSession
-from typing import Any
+from typing import Any, Optional
 
 
 def create_movie_session(
@@ -29,9 +29,9 @@ def get_movie_session_by_id(movie_session_id: int) -> Any:
 
 def update_movie_session(
         session_id: int,
-        show_time: Any = None,
-        movie_id: int = None,
-        cinema_hall_id: int = None
+        show_time: Optional[Any] = None,
+        movie_id: Optional[int] = None,
+        cinema_hall_id: Optional[int] = None
 ) -> None:
     update_session = MovieSession.objects.get(id=session_id)
     if show_time:
