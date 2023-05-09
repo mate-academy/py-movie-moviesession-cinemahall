@@ -21,13 +21,11 @@ class Movie(models.Model):
     description = models.TextField()
     actors = models.ManyToManyField(
         Actor,
-        on_delete=models.CASCADE,
-        related_name="actors"
+        related_name="movies"
     )
     genres = models.ManyToManyField(
         Genre,
-        on_delete=models.CASCADE,
-        related_name="genres"
+        related_name="movies"
     )
 
     def __str__(self) -> str:
@@ -41,8 +39,7 @@ class CinemaHall(models.Model):
 
     @property
     def capacity(self) -> int:
-        total_seats = self.rows * self.seats_in_row
-        return total_seats
+        return self.rows * self.seats_in_row
 
     def __str__(self) -> str:
         return self.name
@@ -50,8 +47,16 @@ class CinemaHall(models.Model):
 
 class MovieSession(models.Model):
     show_time = models.DateTimeField()
-    cinema_hall = models.ForeignKey(CinemaHall, on_delete=models.CASCADE)
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    cinema_hall = models.ForeignKey(
+        CinemaHall,
+        on_delete=models.SET_NULL,
+        null=True
+    )
+    movie = models.ForeignKey(
+        Movie,
+        on_delete=models.SET_NULL,
+        null=True
+    )
 
     def __str__(self) -> str:
-        return f"{self.movie} {self.show_time}"
+        return f"{self.movie.title} {self.show_time}"
