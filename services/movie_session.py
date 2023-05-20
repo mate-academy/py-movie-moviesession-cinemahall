@@ -4,10 +4,14 @@ from django.db.models import QuerySet
 
 from db.models import MovieSession
 
+from typing import Optional
 
-def create_movie_session(movie_show_time: datetime,
-                         movie_id: int,
-                         cinema_hall_id: int) -> None:
+
+def create_movie_session(
+        movie_show_time: datetime,
+        movie_id: int,
+        cinema_hall_id: int
+) -> None:
     MovieSession.objects.create(
         show_time=movie_show_time,
         cinema_hall_id=cinema_hall_id,
@@ -27,9 +31,9 @@ def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
 
 def update_movie_session(
     session_id: int,
-    show_time: datetime = None,
-    movie_id: int = None,
-    cinema_hall_id: int = None,
+    show_time: Optional[datetime] = None,
+    movie_id: Optional[int] = None,
+    cinema_hall_id: Optional[int] = None,
 ) -> None:
     session = MovieSession.objects.get(pk=session_id)
     fields = {
