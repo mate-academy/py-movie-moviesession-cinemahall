@@ -3,9 +3,10 @@ from db.models import Movie
 from typing import Optional
 
 
-def get_movies(genres_ids: list[int] = None,
-               actors_ids: list[int] = None
-               ) -> QuerySet:
+def get_movies(
+        genres_ids: Optional[list[int]] = None,
+        actors_ids: Optional[list[int]] = None
+) -> QuerySet:
     match (genres_ids, actors_ids):
         case (None, None):
             return Movie.objects.all()
