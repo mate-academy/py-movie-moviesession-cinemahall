@@ -1,5 +1,6 @@
 import init_django_orm  # noqa: F401
 
+from typing import Optional
 from db.models import Movie
 from django.db.models import QuerySet
 
@@ -9,16 +10,11 @@ def get_movies(
         actors_ids: list[int] = None
 ) -> QuerySet:
     queryset = Movie.objects.all()
-    if not genres_ids and not actors_ids:
-        return queryset
-    if genres_ids and not actors_ids:
-        return Movie.objects.filter(genres__id__in=genres_ids)
-    if not genres_ids and actors_ids:
-        return Movie.objects.filter(actors__id__in=actors_ids)
-    if genres_ids and actors_ids:
+    if genres_ids is not None:
         queryset = queryset.filter(genres__id__in=genres_ids)
+    if actors_ids is not None:
         queryset = queryset.filter(actors__id__in=actors_ids)
-        return queryset
+    return queryset
 
 
 def get_movie_by_id(movie_id: int) -> QuerySet:
@@ -28,8 +24,8 @@ def get_movie_by_id(movie_id: int) -> QuerySet:
 def create_movie(
         movie_title: str,
         movie_description: str,
-        genres_ids: list[int] = None,
-        actors_ids: list[int] = None,
+        genres_ids: Optional[list[int]] = None,
+        actors_ids: Optional[list[int]] = None,
 ) -> None:
     movie = Movie.objects.create(
         title=movie_title,
