@@ -1,4 +1,6 @@
 from datetime import datetime
+from typing import Optional
+
 from db.models import MovieSession
 
 
@@ -24,18 +26,22 @@ def get_movie_session_by_id(movie_session_id: int, ) -> MovieSession:
     return MovieSession.objects.get(id=movie_session_id)
 
 
-def update_movie_session(session_id: int,
-                         show_time: datetime = None,
-                         movie_id: int = None,
-                         cinema_hall_id: int = None) -> None:
+def update_movie_session(
+        session_id: int,
+        show_time: Optional[str] = None,
+        movie_id: Optional[int] = None,
+        cinema_hall_id: Optional[int] = None
+) -> None:
+    update_data = {}
+    if show_time:
+        update_data["show_time"] = show_time
+    if movie_id:
+        update_data["movie_id"] = movie_id
+    if cinema_hall_id:
+        update_data["cinema_hall_id"] = cinema_hall_id
 
-    update_dict = {"show_time": show_time,
-                   "movie_id": movie_id,
-                   "cinema_hall_id": cinema_hall_id}
-
-    for field, value in update_dict.items():
-        if value is not None:
-            MovieSession.objects.filter(id=session_id).update(**{field: value})
+    if update_data:
+        MovieSession.objects.filter(id=session_id).update(**update_data)
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
