@@ -1,5 +1,6 @@
 from datetime import datetime
 from django.db.models import QuerySet
+from django.shortcuts import get_object_or_404
 
 from db.models import MovieSession
 
@@ -32,22 +33,17 @@ def update_movie_session(
         show_time: datetime = None,
         movie_id: int = None,
         cinema_hall_id: int = None
-) -> None | str:
-    try:
-        movie_session_update = MovieSession.objects.get(id=session_id)
-        if show_time:
-            movie_session_update.show_time = show_time
-        if movie_id:
-            movie_session_update.movie_id = movie_id
-        if cinema_hall_id:
-            movie_session_update.cinema_hall_id = cinema_hall_id
-        movie_session_update.save()
-    except MovieSession.DoesNotExist:
-        return f"Value '{session_id}' does not exist"
+) -> None:
+    movie_session_update = get_object_or_404(MovieSession, id=session_id)
+    if show_time:
+        movie_session_update.show_time = show_time
+    if movie_id:
+        movie_session_update.movie_id = movie_id
+    if cinema_hall_id:
+        movie_session_update.cinema_hall_id = cinema_hall_id
+    movie_session_update.save()
 
 
-def delete_movie_session_by_id(session_id: int) -> None | str:
-    try:
-        MovieSession.objects.get(id=session_id).delete()
-    except MovieSession.DoesNotExist:
-        return f"Value '{session_id}' does not exist"
+def delete_movie_session_by_id(session_id: int) -> None:
+    delete_movie = get_object_or_404(MovieSession, id=session_id)
+    delete_movie.delete()
