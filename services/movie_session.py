@@ -6,8 +6,7 @@ from db.models import MovieSession
 
 def create_movie_session(movie_show_time: datetime,
                          movie_id: int,
-                         cinema_hall_id: int) -> MovieSession:
-
+                         cinema_hall_id: int) -> Optional[MovieSession]:
     return MovieSession.objects.create(
         show_time=movie_show_time,
         movie_id=movie_id,
@@ -23,7 +22,7 @@ def get_movies_sessions(session_date: Optional[datetime] = None
     return queryset
 
 
-def get_movie_session_by_id(movie_session_id: int, ) -> MovieSession:
+def get_movie_session_by_id(movie_session_id: int, ) -> Optional[MovieSession]:
     return MovieSession.objects.get(id=movie_session_id)
 
 
