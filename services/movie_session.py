@@ -5,9 +5,7 @@ from typing import Optional
 
 
 def create_movie_session(
-        movie_show_time: str,
-        movie_id: int,
-        cinema_hall_id: int
+    movie_show_time: str, movie_id: int, cinema_hall_id: int
 ) -> None:
     MovieSession.objects.create(
         show_time=movie_show_time,
@@ -30,10 +28,10 @@ def get_movie_session_by_id(movie_session_id: int) -> QuerySet:
 
 
 def update_movie_session(
-        session_id: int,
-        show_time: Optional[str] = None,
-        movie_id: Optional[int] = None,
-        cinema_hall_id: Optional[int] = None
+    session_id: int,
+    show_time: Optional[str] = None,
+    movie_id: Optional[int] = None,
+    cinema_hall_id: Optional[int] = None,
 ) -> None:
     update_session = MovieSession.objects.get(id=session_id)
     if show_time:
