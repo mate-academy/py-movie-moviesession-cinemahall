@@ -1,4 +1,5 @@
 from django.db.models import QuerySet
+from django.shortcuts import get_object_or_404
 
 from db.models import MovieSession
 
@@ -19,20 +20,13 @@ def create_movie_session(
 def get_movies_sessions(session_date: str = "") -> QuerySet:
     queryset = MovieSession.objects.all()
     if session_date:
-        year, month, day = session_date.split("-")
-        queryset = queryset.filter(
-            show_time__year=year,
-            show_time__month=month,
-            show_time__day=day
-        )
+        queryset = queryset.filter(show_time__date=session_date)
         return queryset
     return queryset
 
 
 def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
-    if MovieSession.objects.filter(id=movie_session_id).exists():
-        return MovieSession.objects.get(id=movie_session_id)
-    return MovieSession.objects.filter(id=movie_session_id)
+    return get_object_or_404(MovieSession, id=movie_session_id)
 
 
 def update_movie_session(
