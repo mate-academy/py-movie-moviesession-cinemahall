@@ -31,11 +31,12 @@ def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
     return MovieSession.objects.get(id=movie_session_id)
 
 
-def update_movie_session(session_id: int,
-                         show_time: Optional[datetime] = None,
-                         movie_id: Optional[int] = None,
-                         cinema_hall_id: Optional[int] = None
-                         ) -> None:
+def update_movie_session(
+        session_id: int,
+        show_time: Optional[datetime] = None,
+        movie_id: Optional[int] = None,
+        cinema_hall_id: Optional[int] = None
+) -> None:
     movie_session = get_movie_session_by_id(session_id)
 
     if show_time:
