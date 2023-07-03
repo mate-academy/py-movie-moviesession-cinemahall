@@ -21,9 +21,7 @@ def get_movies_sessions(
 ) -> QuerySet:
     movies_sessions = MovieSession.objects.all()
     if session_date:
-        return MovieSession.objects.filter(
-            show_time__date=session_date
-        )
+        movies_sessions = movies_sessions.filter(show_time__date=session_date)
     return movies_sessions
 
 
