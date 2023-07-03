@@ -1,5 +1,4 @@
 from db.models import MovieSession, CinemaHall, Movie
-from django.db.models import QuerySet
 
 
 def create_movie_session(
@@ -13,7 +12,7 @@ def create_movie_session(
     )
 
 
-def get_movies_sessions(session_date: str = None) -> QuerySet:
+def get_movies_sessions(session_date: str = None) -> MovieSession:
     sessions = MovieSession.objects.all()
 
     if session_date:
