@@ -36,8 +36,10 @@ class CinemaHall(models.Model):
     def __str__(self):
         return f"{self.name}"
 
+    @property
     def capacity(self):
-        return self.rows * self.seats_in_row
+        all_seats = self.rows * self.seats_in_row
+        return all_seats
 
 
 class MovieSession(models.Model):

@@ -3,9 +3,8 @@ from datetime import datetime
 from db.models import MovieSession, CinemaHall, Movie
 
 
-
 def create_movie_session(movie_show_time: str, movie_id: int, cinema_hall_id: int) -> None:
-    movie_show_time = datetime.strptime(movie_show_time, "%Y-%m-%d %H:%M:%S")
+    # movie_show_time = datetime.strptime(movie_show_time, "%Y-%m-%d %H:%M:%S")
     MovieSession.objects.create(
         show_time=movie_show_time,
         movie_id=movie_id,
@@ -13,7 +12,7 @@ def create_movie_session(movie_show_time: str, movie_id: int, cinema_hall_id: in
     )
 
 
-def get_movie_sessions(session_date: str = None) -> MovieSession:
+def get_movies_sessions(session_date: str = None) -> MovieSession:
     movie_session_set = MovieSession.objects.all()
 
     if session_date is not None:
@@ -31,7 +30,7 @@ def update_movie_session(session_id: int, show_time: str = None, movie_id: int =
     movie_session = get_movie_session_by_id(session_id)
 
     if show_time:
-        show_time = datetime.strptime(show_time, "%Y-%m-%d %H:%M:%S")
+        # show_time = datetime.strptime(show_time, "%Y-%m-%d %H:%M:%S")
         movie_session.show_time = show_time
 
     if movie_id:
