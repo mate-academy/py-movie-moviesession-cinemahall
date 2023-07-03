@@ -4,7 +4,7 @@ from db.models import CinemaHall
 
 
 def get_cinema_halls() -> QuerySet[CinemaHall]:
-    return CinemaHall.objects
+    return CinemaHall.objects.all()
 
 
 def create_cinema_hall(hall_name: str,
