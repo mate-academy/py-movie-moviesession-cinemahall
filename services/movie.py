@@ -8,7 +8,7 @@ from db.models import Movie
 def get_movies(
         genres_ids: Optional[list] = None,
         actors_ids: Optional[list] = None
-        ) -> QuerySet:
+) -> QuerySet:
 
     if genres_ids and actors_ids:
         return Movie.objects.filter(
