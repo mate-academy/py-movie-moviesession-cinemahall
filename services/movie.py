@@ -1,10 +1,11 @@
 from db.models import Movie
+from django.db.models import QuerySet
 
 
 def get_movies(
         genres_ids: list[int] = None,
         actors_ids: list[int] = None
-) -> Movie:
+) -> QuerySet:
 
     queryset_movies = Movie.objects.all()
 
