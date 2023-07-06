@@ -1,4 +1,4 @@
-from db.models import Movie, Genre, Actor
+from db.models import Movie
 from django.db.models.query import QuerySet
 
 
@@ -6,12 +6,9 @@ def get_movies(genres_ids: list[int] = None,
                actors_ids: list[int] = None) -> QuerySet:
     movies = Movie.objects.all()
 
-    if genres_ids and actors_ids:
-        movies = movies.filter(genres__id__in=genres_ids,
-                               actors__id__in=actors_ids)
-    elif genres_ids:
+    if genres_ids:
         movies = movies.filter(genres__id__in=genres_ids)
-    elif actors_ids:
+    if actors_ids:
         movies = movies.filter(actors__id__in=actors_ids)
 
     return movies
@@ -29,9 +26,7 @@ def create_movie(movie_title: str,
                                  description=movie_description)
 
     if genres_ids:
-        genres = Genre.objects.filter(id__in=genres_ids)
-        movie.genres.set(genres)
+        movie.genres.set(genres_ids)
 
     if actors_ids:
-        actors = Actor.objects.filter(id__in=actors_ids)
-        movie.actors.set(actors)
+        movie.actors.set(actors_ids)
