@@ -1,8 +1,7 @@
 import init_django_orm  # noqa: F401
 
-from django.db.models import QuerySet
-
 from typing import List
+from django.db.models import QuerySet
 
 from db.models import Movie
 
