@@ -1,8 +1,10 @@
+from django.db.models import QuerySet
+
 from db.models import Movie
 
 
 def get_movies(genres_ids: list[int] = None,
-               actors_ids: list[int] = None) -> str:
+               actors_ids: list[int] = None) -> QuerySet:
     movie = Movie.objects.all()
     if genres_ids and actors_ids:
         return movie.filter(genres__id__in=genres_ids,
@@ -14,7 +16,7 @@ def get_movies(genres_ids: list[int] = None,
     return movie
 
 
-def get_movie_by_id(movie_id: int) -> str:
+def get_movie_by_id(movie_id: int) -> QuerySet:
     return Movie.objects.get(id=movie_id)
 
 
