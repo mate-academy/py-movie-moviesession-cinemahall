@@ -28,8 +28,8 @@ def create_movie(movie_title: str,
         description=movie_description
     )
 
-    if genres_ids:
+    if genres_ids is not None:
         new_movie.genres.set(genres_ids)
 
-    if actors_ids:
+    if actors_ids is not None:
         new_movie.actors.set(actors_ids)
