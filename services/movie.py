@@ -6,7 +6,7 @@ from db.models import Movie
 def get_movies(
         genres_ids: Optional[list[int]] = None,
         actors_ids: Optional[list[int]] = None
-) -> tuple[Movie]:
+) -> Queryset[Movie]:
     if not genres_ids and not actors_ids:
         return Movie.objects.all()
     if genres_ids and not actors_ids:
