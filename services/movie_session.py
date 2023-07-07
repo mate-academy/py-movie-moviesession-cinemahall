@@ -1,6 +1,8 @@
 from datetime import datetime, timedelta
 from typing import Optional
 
+from django.db.models import QuerySet
+
 from db.models import MovieSession
 
 
@@ -18,7 +20,7 @@ def create_movie_session(
 
 def get_movies_sessions(
         session_date: Optional[str] = None
-) -> MovieSession:
+) -> QuerySet[MovieSession]:
     if not session_date:
         return MovieSession.objects.all()
     start_time = datetime.strptime(session_date, "%Y-%m-%d")
