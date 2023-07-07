@@ -24,8 +24,8 @@ def get_movies_sessions(
     start_time = datetime.strptime(session_date, "%Y-%m-%d")
     end_time = start_time + timedelta(days=1)
     return MovieSession.objects.filter(
-            show_time__range=[start_time, end_time]
-        )
+        show_time__range=[start_time, end_time]
+    )
 
 
 def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
