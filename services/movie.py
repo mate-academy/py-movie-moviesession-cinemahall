@@ -1,5 +1,4 @@
 from django.db.models import QuerySet
-import init_django_orm  # noqa: E402
 
 from db.models import Movie
 
