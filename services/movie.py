@@ -1,4 +1,5 @@
 from django.db.models import QuerySet
+import init_django_orm  # noqa: E402
 
 from db.models import Movie
 
@@ -35,3 +36,7 @@ def create_movie(
         movie.genres.set(genres_ids)
     if actors_ids:
         movie.actors.set(actors_ids)
+
+
+if __name__ == '__main__':
+    print(get_movies())
