@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+from typing import Optional
 
 from db.models import MovieSession
 
@@ -16,14 +17,13 @@ def create_movie_session(
 
 
 def get_movies_sessions(
-        session_date: str = None
+        session_date: Optional[str] = None
 ) -> MovieSession:
     if not session_date:
         return MovieSession.objects.all()
-    else:
-        start_time = datetime.strptime(session_date, "%Y-%m-%d")
-        end_time = start_time + timedelta(days=1)
-        return MovieSession.objects.filter(
+    start_time = datetime.strptime(session_date, "%Y-%m-%d")
+    end_time = start_time + timedelta(days=1)
+    return MovieSession.objects.filter(
             show_time__range=[start_time, end_time]
         )
 
@@ -34,9 +34,9 @@ def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
 
 def update_movie_session(
         session_id: int,
-        show_time: datetime = None,
-        movie_id: int = None,
-        cinema_hall_id: int = None
+        show_time: Optional[datetime] = None,
+        movie_id: Optional[int] = None,
+        cinema_hall_id: Optional[int] = None
 ) -> None:
     updated_movie_session = get_movie_session_by_id(session_id)
     if show_time:
