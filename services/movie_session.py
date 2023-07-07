@@ -18,7 +18,7 @@ def create_movie_session(
 
 def get_movies_sessions(
         session_date: Optional[str] = None
-) -> MovieSession:
+) -> Queryset[MovieSession]:
     if not session_date:
         return MovieSession.objects.all()
     start_time = datetime.strptime(session_date, "%Y-%m-%d")
