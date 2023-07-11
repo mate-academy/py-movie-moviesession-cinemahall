@@ -7,8 +7,8 @@ from django.db.models import QuerySet
 
 def create_movie_session(
     movie_show_time: datetime, movie_id: int, cinema_hall_id: int
-) -> MovieSession:
-    return MovieSession.objects.create(
+) -> None:
+    MovieSession.objects.create(
         show_time=movie_show_time,
         cinema_hall=CinemaHall.objects.get(id=cinema_hall_id),
         movie=Movie.objects.get(id=movie_id),
