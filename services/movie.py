@@ -1,3 +1,4 @@
+from django.db.models import QuerySet
 from db.models import Movie
 from django.db.models import Q
 
@@ -5,7 +6,7 @@ from django.db.models import Q
 def get_movies(
     genres_ids: list[int] = None,
     actors_ids: list[int] = None
-) -> list[Movie]:
+) -> QuerySet[Movie]:
     query = Q()
     if genres_ids:
         query &= Q(genres__in=genres_ids)
