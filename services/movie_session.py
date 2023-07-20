@@ -40,19 +40,19 @@ def update_movie_session(
         cinema_hall_id: int = None
 ) -> None:
     if show_time:
-        MovieSession.objects.filter(id=session_id).update(
-            show_time=show_time
-        )
+        movie_session = MovieSession.objects.get(id=session_id)
+        movie_session.show_time = show_time
+        movie_session.save()
 
     if movie_id:
-        MovieSession.objects.filter(id=session_id).update(
-            movie=movie_id
-        )
+        movie_session = MovieSession.objects.get(id=session_id)
+        movie_session.movie = Movie.objects.get(id=movie_id)
+        movie_session.save()
 
     if cinema_hall_id:
-        MovieSession.objects.filter(id=session_id).update(
-            cinema_hall=cinema_hall_id
-        )
+        movie_session = MovieSession.objects.get(id=session_id)
+        movie_session.cinema_hall = CinemaHall.objects.get(id=cinema_hall_id)
+        movie_session.save()
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
