@@ -20,7 +20,7 @@ def create_movie_session(
 
 
 def get_movies_sessions(
-        session_date: str = None
+        session_date: Optional[str] = None
 ) -> models.QuerySet:
     queryset = MovieSession.objects.all()
     if session_date:
@@ -34,7 +34,7 @@ def get_movie_session_by_id(movie_session_id: int) -> models.QuerySet:
 
 def update_movie_session(
         session_id: int,
-        show_time: datetime.datetime = None,
+        show_time: Optional[datetime.datetime] = None,
         movie_id: Optional[int] = None,
         cinema_hall_id: Optional[int] = None
 ) -> None:
