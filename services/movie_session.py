@@ -20,11 +20,10 @@ def get_movies_sessions(
         session_date: str = None
 ) -> QuerySet:
     if session_date:
-        return MovieSession.objects.all().filter(
+        return MovieSession.objects.filter(
             show_time__date=session_date
         )
-    else:
-        return MovieSession.objects.all()
+    return MovieSession.objects.all()
 
 
 def get_movie_session_by_id(movie_session_id: int) -> str:
