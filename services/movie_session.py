@@ -2,7 +2,7 @@ import datetime
 from typing import Optional
 
 from db.models import models
-from db.models import MovieSession, Movie, CinemaHall
+from db.models import MovieSession
 
 
 def create_movie_session(
