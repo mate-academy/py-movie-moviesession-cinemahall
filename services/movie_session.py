@@ -29,7 +29,7 @@ def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
 def update_movie_session(session_id: int,
                          show_time: Optional[str] = None,
                          movie_id: Optional[int] = None,
-                         cinema_hall_id: Optional[int] = None) -> QuerySet:
+                         cinema_hall_id: Optional[int] = None) -> MovieSession:
     needed_session = MovieSession.objects.get(id=session_id)
     if show_time:
         needed_session.show_time = show_time
