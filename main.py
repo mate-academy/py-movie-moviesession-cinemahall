@@ -52,5 +52,5 @@ def main(*args, **kwargs):
 
 if __name__ == "__main__":
     clear_db()
-    #load_data("cinema_db_data.json")
-    #main()
+    load_data("cinema_db_data.json")
+    main()

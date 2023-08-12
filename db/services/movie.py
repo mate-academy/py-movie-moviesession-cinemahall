@@ -1,5 +1,6 @@
 from typing import List
 
+from django.db import IntegrityError
 from django.db.models.query import QuerySet
 
 # noinspection PyUnresolvedReferences
@@ -26,20 +27,33 @@ def create_movie(
         movie_title: str,
         movie_description: str,
         genres_id: List[int] = None,
-        actors_ids: List[int] = None) -> Movie:
-    new_movie = Movie.objects.create(
+        actors_ids: List[int] = None) -> None:
+    movie, is_created = Movie.objects.get_or_create(
         title=movie_title,
         description=movie_description
     )
+
     if genres_id is not None:
-        new_movie.genres.add(
-            genres_id
-        )
+        try:
+            movie.genres.add(
+                *genres_id
+            )
+        except IntegrityError as e:
+            print(f"Wrong Genre id: {e}")
     if actors_ids is not None:
-        new_movie.actors.add(
-            actors_ids
-        )
+        try:
+            movie.actors.add(
+                *actors_ids
+            )
+        except IntegrityError as e:
+            print(f"Wrong Actor id: {e}")
+
 
 # print(get_movies())
 # print(get_movie_by_id(2))
-create_movie("JoJo's Bizarre Adventure", "JOJO")
+# create_movie(
+#     "JoJo's Bizarre Adventure",
+#     "JOJO",
+#     genres_id=[1, 2, 3, 4, 5, 6, 7, 123123],
+#     actors_ids=[1, 2, 3, 4, 5, 123123]
+# )
