@@ -50,11 +50,10 @@ def create_movie(
         except IntegrityError as e:
             print(f"Wrong Actor id: {e}")
 
-# print(get_movies())
-# print(get_movie_by_id(2))
-# create_movie(
-#     "JoJo's Bizarre Adventure",
-#     "JOJO",
-#     genres_id=[1, 2, 3, 4, 5, 6, 7, 123123],
-#     actors_ids=[1, 2, 3, 4, 5, 123123]
-# )
+
+create_movie(
+    "JoJo's Bizarre Adventure",
+    "JOJO",
+    genres_id=[1, 2, 3, 4, 5, 6, 7, 123123],
+    actors_ids=[1, 2, 3, 4, 5, 123123]
+)

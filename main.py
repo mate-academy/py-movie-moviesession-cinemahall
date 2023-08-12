@@ -23,7 +23,6 @@ def load_data(json_file_path):
 
 
 def main(*args, **kwargs):
-    print(init_django_orm)
     speed = Movie.objects.create(title="Speed", description="Speed movie")
     print(speed)
 
@@ -51,6 +50,6 @@ def main(*args, **kwargs):
 
 
 if __name__ == "__main__":
-    #clear_db()
+    clear_db()
     load_data("cinema_db_data.json")
-    #main()
+    main()
