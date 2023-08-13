@@ -49,10 +49,8 @@ def update_movie_session(
             id=cinema_hall_id
         )
 
-    movie_session_to_update.save()  # !
+    movie_session_to_update.save()
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
     get_movie_session_by_id(session_id).delete()
-
-

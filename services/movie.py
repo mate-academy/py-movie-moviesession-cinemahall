@@ -1,5 +1,4 @@
 from typing import List
-from django.db import IntegrityError
 from django.db.models.query import QuerySet
 from db.models import Movie
 
@@ -32,16 +31,12 @@ def create_movie(
     )
 
     if genres_ids is not None:
-        try:
-            movie.genres.add(
-                *genres_ids
-            )
-        except IntegrityError as e:
-            print(f"Wrong Genre id: {e}")
+        movie.genres.add(
+            *genres_ids
+        )
+
     if actors_ids is not None:
-        try:
-            movie.actors.add(
-                *actors_ids
-            )
-        except IntegrityError as e:
-            print(f"Wrong Actor id: {e}")
+        movie.actors.add(
+            *actors_ids
+        )
+
