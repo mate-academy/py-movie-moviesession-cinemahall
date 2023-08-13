@@ -8,10 +8,13 @@ def get_movies(
         actors_ids: List[int] = None
 ) -> QuerySet:
     queryset = Movie.objects.all()
+
     if genres_ids is not None:
         queryset = queryset.filter(genres__id__in=genres_ids)
+
     if actors_ids is not None:
         queryset = queryset.filter(actors__id__in=actors_ids)
+
     return queryset.distinct()  # unique values
 
 
@@ -39,4 +42,3 @@ def create_movie(
         movie.actors.add(
             *actors_ids
         )
-
