@@ -26,7 +26,10 @@ def get_movies_sessions(
 
 
 def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
-    return MovieSession.objects.get(id=movie_session_id)
+    try:
+        return MovieSession.objects.get(id=movie_session_id)
+    except ObjectDoesNotExist:
+        print(f"There is no session with id {movie_session_id} in the DB")
 
 
 def update_movie_session(
@@ -41,7 +44,6 @@ def update_movie_session(
         movie_session_to_update.show_time = show_time
     if movie_id:
         movie_session_to_update.movie = Movie.objects.get(id=movie_id)
-
     if cinema_hall_id:
         movie_session_to_update.cinema_hall = CinemaHall.objects.get(
             id=cinema_hall_id
@@ -51,7 +53,6 @@ def update_movie_session(
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
-    try:
-        MovieSession.objects.get(id=session_id).delete()
-    except ObjectDoesNotExist:
-        print(f"There is no session with id {session_id} in the DB")
+    get_movie_session_by_id(session_id).delete()
+
+
