@@ -1,10 +1,7 @@
-# noinspection PyUnresolvedReferences
 import datetime
 from django.core.exceptions import ObjectDoesNotExist
-
-# noinspection PyUnresolvedReferences
-import init_django_orm
 from db.models import MovieSession, CinemaHall, Movie
+from django.db.models.query import QuerySet
 
 
 def create_movie_session(
@@ -18,7 +15,9 @@ def create_movie_session(
     )
 
 
-def get_movies_sessions(session_date: str = None):
+def get_movies_sessions(
+        session_date: str = None
+) -> QuerySet[MovieSession]:
     if session_date:
         return MovieSession.objects.filter(
             show_time__date=session_date)
@@ -56,15 +55,3 @@ def delete_movie_session_by_id(session_id: int) -> None:
         MovieSession.objects.get(id=session_id).delete()
     except ObjectDoesNotExist:
         print(f"There is no session with id {session_id} in the DB")
-
-
-# create_movie_session(
-#     "2024-10-11T07:01:15Z",
-#     15, cinema_hall_id=12
-# )
-# print(get_movies_sessions("2024-10-11"))
-# print(get_movie_session_by_id(40))
-# update_movie_session(
-#     session_id=43, show_time="2012-09-13 13:13:13", movie_id=4
-# )
-# delete_movie_session_by_id(1)

@@ -1,12 +1,9 @@
 from django.db import IntegrityError
 from django.db.models.query import QuerySet
-
-# noinspection PyUnresolvedReferences
-import init_django_orm
 from db.models import CinemaHall
 
 
-def get_cinema_halls() -> QuerySet:
+def get_cinema_halls() -> QuerySet[CinemaHall]:
     return CinemaHall.objects.all()
 
 
@@ -24,7 +21,3 @@ def create_cinema_hall(
     except IntegrityError as e:
         print(f"{CinemaHall.objects.get(name=hall_name)} cinema hall "
               f"already exists: {e}")
-
-print(get_cinema_halls())
-create_cinema_hall("JOJO FAN HALL", 492, 216)
-print(CinemaHall.objects.get(name="JOJO FAN HALL").capacity)
