@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 from django.core.exceptions import ObjectDoesNotExist
 from db.models import MovieSession, CinemaHall, Movie
 from django.db.models.query import QuerySet
@@ -6,7 +6,7 @@ from typing import Optional
 
 
 def create_movie_session(
-        movie_show_time: datetime.datetime,
+        movie_show_time: datetime,
         movie_id: int,
         cinema_hall_id: int
 ) -> None:
@@ -36,7 +36,7 @@ def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
 
 def update_movie_session(
         session_id: int,
-        show_time: Optional[datetime.datetime] = None,
+        show_time: Optional[datetime] = None,
         movie_id: Optional[int] = None,
         cinema_hall_id: Optional[int] = None
 ) -> None:
