@@ -1,8 +1,6 @@
 from typing import List
 from typing import Optional
-
 from django.db.models.query import QuerySet
-
 from db.models import Movie
 
 

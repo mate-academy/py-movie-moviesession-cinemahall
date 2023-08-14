@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Genre(models.Model):
-    name = models.CharField(max_length=255, unique=True)
+    name = models.CharField(max_length=255)
 
     def __str__(self) -> str:
         return self.name
@@ -17,7 +17,7 @@ class Actor(models.Model):
 
 
 class Movie(models.Model):
-    title = models.CharField(max_length=255, unique=True)
+    title = models.CharField(max_length=255)
     description = models.TextField(default="")
     actors = models.ManyToManyField(
         Actor,

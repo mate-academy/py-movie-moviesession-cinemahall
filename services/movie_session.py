@@ -4,7 +4,7 @@ from typing import Optional, Union
 from django.db.models.query import QuerySet
 from django.shortcuts import get_object_or_404
 
-from db.models import MovieSession, CinemaHall, Movie
+from db.models import MovieSession
 
 
 def create_movie_session(
