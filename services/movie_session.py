@@ -1,8 +1,10 @@
 from datetime import datetime
-from django.core.exceptions import ObjectDoesNotExist
-from db.models import MovieSession, CinemaHall, Movie
+from typing import Optional, Union
+
 from django.db.models.query import QuerySet
-from typing import Optional
+from django.shortcuts import get_object_or_404
+
+from db.models import MovieSession, CinemaHall, Movie
 
 
 def create_movie_session(
@@ -20,18 +22,17 @@ def create_movie_session(
 def get_movies_sessions(
         session_date: Optional[str] = None
 ) -> QuerySet[MovieSession]:
+    queryset = MovieSession.objects.all()
     if session_date:
-        return MovieSession.objects.filter(
+        queryset = queryset.filter(
             show_time__date=session_date)
-    else:
-        return MovieSession.objects.all()
+    return queryset
 
 
-def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
-    try:
-        return MovieSession.objects.get(id=movie_session_id)
-    except ObjectDoesNotExist:
-        print(f"There is no session with id {movie_session_id} in the DB")
+def get_movie_session_by_id(
+        movie_session_id: int
+) -> Union[MovieSession, None]:
+    return get_object_or_404(MovieSession, pk=movie_session_id)
 
 
 def update_movie_session(
