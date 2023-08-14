@@ -2,12 +2,14 @@ import datetime
 from django.core.exceptions import ObjectDoesNotExist
 from db.models import MovieSession, CinemaHall, Movie
 from django.db.models.query import QuerySet
+from typing import Optional
 
 
 def create_movie_session(
-        movie_show_time: datetime,
+        movie_show_time: datetime.datetime,
         movie_id: int,
-        cinema_hall_id: int) -> None:
+        cinema_hall_id: int
+) -> None:
     MovieSession.objects.get_or_create(
         show_time=movie_show_time,
         movie_id=movie_id,
@@ -16,7 +18,7 @@ def create_movie_session(
 
 
 def get_movies_sessions(
-        session_date: str = None
+        session_date: Optional[str] = None
 ) -> QuerySet[MovieSession]:
     if session_date:
         return MovieSession.objects.filter(
@@ -34,9 +36,9 @@ def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
 
 def update_movie_session(
         session_id: int,
-        show_time: datetime = None,
-        movie_id: int = None,
-        cinema_hall_id: int = None
+        show_time: Optional[datetime.datetime] = None,
+        movie_id: Optional[int] = None,
+        cinema_hall_id: Optional[int] = None
 ) -> None:
     movie_session_to_update = MovieSession.objects.get(id=session_id)
 
