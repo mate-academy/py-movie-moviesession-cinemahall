@@ -1,5 +1,6 @@
 from db.models import MovieSession
 from datetime import datetime, date
+from typing import Optional
 
 
 def create_movie_session(movie_show_time: date,
@@ -11,12 +12,11 @@ def create_movie_session(movie_show_time: date,
         cinema_hall_id=cinema_hall_id)
 
 
-def get_movies_sessions(session_date: str = None) -> MovieSession:
+def get_movies_sessions(session_date: Optional[str] = None) -> MovieSession:
     if session_date:
         date_session = datetime.strptime(session_date, "%Y-%m-%d")
         return MovieSession.objects.filter(show_time__date=date_session)
-    else:
-        return MovieSession.objects.all()
+    return MovieSession.objects.all()
 
 
 def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
@@ -24,9 +24,9 @@ def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
 
 
 def update_movie_session(session_id: int,
-                         show_time: str = None,
-                         movie_id: int = None,
-                         cinema_hall_id: int = None) -> MovieSession:
+                         show_time: Optional[str] = None,
+                         movie_id: Optional[int] = None,
+                         cinema_hall_id: Optional[int] = None) -> MovieSession:
     session = MovieSession.objects.get(id=session_id)
     if show_time:
         session.show_time = show_time
