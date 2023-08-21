@@ -32,13 +32,13 @@ class CinemaHall(models.Model):
     rows = models.IntegerField()
     seats_in_row = models.IntegerField()
 
+    def __str__(self) -> str:
+        return f"{self.name}"
+
     @property
     def capacity(self) -> int:
         capacity = self.rows * self.seats_in_row
         return capacity
-
-    def __str__(self) -> str:
-        return f"{self.name}"
 
 
 class MovieSession(models.Model):
