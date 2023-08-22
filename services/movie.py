@@ -4,20 +4,14 @@ from typing import Optional
 
 
 def get_movies(
-        genres_ids: Optional[list[int]] = None,
+    genres_ids: Optional[list[int]] = None,
         actors_ids: Optional[list[int]] = None
-) -> QuerySet:
-
+) -> QuerySet[Movie]:
     queryset = Movie.objects.all()
-    if None not in (genres_ids, actors_ids):
-        queryset = queryset.filter(
-            genres__id__in=genres_ids
-        ).filter(actors__id__in=actors_ids)
-
-    elif genres_ids:
+    if genres_ids:
         queryset = queryset.filter(genres__id__in=genres_ids)
 
-    elif actors_ids:
+    if actors_ids:
         queryset = queryset.filter(actors__id__in=actors_ids)
 
     return queryset
@@ -28,10 +22,10 @@ def get_movie_by_id(movie_id: int) -> Movie:
 
 
 def create_movie(
-        movie_title: str,
-        movie_description: str,
-        genres_ids: Optional[list[int]] = None,
-        actors_ids: Optional[list[int]] = None
+    movie_title: str,
+    movie_description: str,
+    genres_ids: Optional[list[int]] = None,
+    actors_ids: Optional[list[int]] = None,
 ) -> None:
     movie = Movie.objects.create(
         title=movie_title,

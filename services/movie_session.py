@@ -5,10 +5,9 @@ from typing import Optional
 
 
 def create_movie_session(
-        movie_show_time: datetime,
-        movie_id: int,
-        cinema_hall_id: int,
-
+    movie_show_time: datetime,
+    movie_id: int,
+    cinema_hall_id: int,
 ) -> None:
     MovieSession.objects.create(
         show_time=movie_show_time,
@@ -19,7 +18,7 @@ def create_movie_session(
 
 def get_movies_sessions(
         session_date: Optional[str] = None
-) -> QuerySet:
+) -> QuerySet[MovieSession]:
     queryset = MovieSession.objects.all()
 
     if session_date:
@@ -29,10 +28,10 @@ def get_movies_sessions(
 
 
 def update_movie_session(
-        session_id: int,
-        show_time: Optional[str] = None,
-        movie_id: Optional[int] = None,
-        cinema_hall_id: Optional[int] = None
+    session_id: int,
+    show_time: Optional[str] = None,
+    movie_id: Optional[int] = None,
+    cinema_hall_id: Optional[int] = None,
 ) -> None:
     movie_session = MovieSession.objects.filter(id=session_id)
     update_fields = {}
@@ -47,14 +46,10 @@ def update_movie_session(
     movie_session.update(**update_fields)
 
 
-def get_movie_session_by_id(
-        movie_session_id: int
-) -> MovieSession:
+def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
     return MovieSession.objects.get(id=movie_session_id)
 
 
-def delete_movie_session_by_id(
-        session_id: int
-) -> None:
+def delete_movie_session_by_id(session_id: int) -> None:
     movie_session = get_movie_session_by_id(session_id)
     movie_session.delete()
