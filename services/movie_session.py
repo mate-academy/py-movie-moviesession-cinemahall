@@ -3,7 +3,7 @@ from typing import Optional
 
 from django.db.models import QuerySet
 
-from db.models import MovieSession
+from db.models import CinemaHall, Movie, MovieSession
 
 
 def create_movie_session(
@@ -39,16 +39,18 @@ def update_movie_session(
         movie_id: Optional[int] = None,
         cinema_hall_id: Optional[int] = None
 ) -> None:
-    updated_session = MovieSession.objects.filter(id=session_id)
+    update_session = MovieSession.objects.get(id=session_id)
 
     if show_time:
-        updated_session.update(show_time=show_time)
+        update_session.show_time = show_time
 
     if movie_id:
-        updated_session.update(movie_id=movie_id)
+        update_session.movie = Movie.objects.get(id=movie_id)
 
     if cinema_hall_id:
-        updated_session.update(cinema_hall_id=cinema_hall_id)
+        update_session.cinema_hall = CinemaHall.objects.get(id=cinema_hall_id)
+
+    update_session.save()
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
