@@ -1,6 +1,6 @@
-from db.models import CinemaHall
-
 from django.db.models import QuerySet
+
+from db.models import CinemaHall
 
 
 def create_cinema_hall(

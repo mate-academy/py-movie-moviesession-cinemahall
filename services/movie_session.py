@@ -1,7 +1,7 @@
-from db.models import MovieSession
-
-from django.db.models import QuerySet
 from datetime import datetime
+from django.db.models import QuerySet
+
+from db.models import MovieSession
 
 
 def create_movie_session(
