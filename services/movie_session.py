@@ -5,7 +5,7 @@ import datetime
 
 
 def create_movie_session(
-        movie_show_time: datetime,
+        movie_show_time: datetime.datetime,
         movie_id: int,
         cinema_hall_id: int,
 ) -> MovieSession:
@@ -46,4 +46,6 @@ def update_movie_session(
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
-    MovieSession.objects.get(id=session_id).delete()
+    movie_session = get_movie_session_by_id(session_id)
+    if movie_session is not None:
+        movie_session.delete()
