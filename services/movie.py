@@ -10,14 +10,9 @@ def get_movies(
 
     movies = Movie.objects.all()
 
-    if genres_ids is not None and actors_ids is not None:
-        movies = movies.filter(
-            genres__id__in=genres_ids,
-            actors__id__in=actors_ids
-        )
-    elif genres_ids is not None:
+    if genres_ids is not None:
         movies = movies.filter(genres__id__in=genres_ids)
-    elif actors_ids is not None:
+    if actors_ids is not None:
         movies = movies.filter(actors__id__in=actors_ids)
     return movies
 
