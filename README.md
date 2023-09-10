@@ -40,7 +40,7 @@ print(blue.capacity)
 3. `MovieSession`, with such field:
     - date time field `show_time`, the date and the time of the movie session
 performance
-    - foreign key `cinema_hall`, the hall where the movie session is performed,
+      - foreign key `cinema_hall`, the hall where the movie session is performed,
 references to the table `CinemaHall`
     - foreign key `movie`, the movie to be shown, references 
 to the table `Movie`
@@ -88,8 +88,8 @@ returns movie with the provided id.
 optional `genres_ids` and optional `actors_ids`, `genres_ids`
 and `actors_ids` are the list of genres ids and the list of actors
 ids respectively, method
-creates movie with provided title and description, add him genres if
-`genres_ids` is provided, add him actors if `actors_ids` is provided.
+creates movie with provided title and description, add his genres if
+`genres_ids` is provided, add his actors if `actors_ids` is provided.
 
 **Note**: You can use suffix `__id` to get access to the field `id`
 of related table inside `.filter()` method. You also can 
