@@ -7,7 +7,7 @@ from db.models import MovieSession
 
 def create_movie_session(
     movie_show_time: datetime.datetime, movie_id: int, cinema_hall_id: int
-) -> QuerySet[MovieSession]:
+) -> MovieSession:
     movie_session = MovieSession.objects.create(
         show_time=movie_show_time,
         movie_id=movie_id,
