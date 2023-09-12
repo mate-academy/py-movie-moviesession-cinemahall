@@ -6,7 +6,7 @@ from db.models import MovieSession
 
 def create_movie_session(
     movie_show_time: str, movie_id: int, cinema_hall_id: int
-) -> QuerySet[MovieSession]:
+) -> MovieSession:
     movie_session = MovieSession.objects.create(
         show_time=movie_show_time,
         cinema_hall_id=cinema_hall_id,
@@ -25,10 +25,8 @@ def get_movies_sessions(session_date: str = None) -> QuerySet[MovieSession]:
     return queryset
 
 
-def get_movie_session_by_id(movie_session_id: int) -> QuerySet[MovieSession]:
-    movie_session = MovieSession.objects.get(id=movie_session_id)
-
-    return movie_session
+def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
+    return MovieSession.objects.get(id=movie_session_id)
 
 
 def update_movie_session(
@@ -36,25 +34,17 @@ def update_movie_session(
     show_time: str = None,
     movie_id: int = None,
     cinema_hall_id: int = None,
-) -> QuerySet[MovieSession]:
-    updated = []
-
+) -> MovieSession:
     session = MovieSession.objects.get(id=session_id)
 
     if show_time:
         session.show_time = show_time
-        updated.append(f"Updated show time: {show_time}")
 
     if movie_id:
         session.movie_id = movie_id
-        updated.append(f"Updated movie id: {movie_id}")
 
     if cinema_hall_id:
         session.cinema_hall_id = cinema_hall_id
-        updated.append(f"Updated cinema hall: {cinema_hall_id}")
-
-    for update in updated:
-        print(update)
 
     session.save()
 
@@ -63,4 +53,3 @@ def update_movie_session(
 
 def delete_movie_session_by_id(session_id: int) -> None:
     MovieSession.objects.get(id=session_id).delete()
-    print("Movie session was deleted!")
