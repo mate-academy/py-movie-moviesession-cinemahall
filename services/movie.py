@@ -1,7 +1,7 @@
-import init_django_orm  # noqa
 from django.db.models import QuerySet
-
 from db.models import Movie
+
+import init_django_orm  # noqa
 
 
 def get_movies(

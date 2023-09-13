@@ -1,7 +1,7 @@
-import init_django_orm  # noqa
 from django.db.models import QuerySet
-
 from db.models import MovieSession
+
+import init_django_orm  # noqa
 
 
 def create_movie_session(
