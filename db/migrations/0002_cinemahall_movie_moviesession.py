@@ -62,13 +62,15 @@ class Migration(migrations.Migration):
                 (
                     "cinema_hall",
                     models.ForeignKey(
-                        on_delete=django.db.models.deletion.CASCADE, to="db.cinemahall"
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="db.cinemahall",
                     ),
                 ),
                 (
                     "movie",
                     models.ForeignKey(
-                        on_delete=django.db.models.deletion.CASCADE, to="db.movie"
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="db.movie",
                     ),
                 ),
             ],
