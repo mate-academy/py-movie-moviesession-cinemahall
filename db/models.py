@@ -44,14 +44,12 @@ class MovieSession(models.Model):
     cinema_hall = models.ForeignKey(
         CinemaHall,
         related_name="movie_sessions",
-        on_delete=models.SET_NULL,
-        null=True
+        on_delete=models.PROTECT,
     )
     movie = models.ForeignKey(
         Movie,
         related_name="movie_sessions",
-        on_delete=models.SET_NULL,
-        null=True
+        on_delete=models.PROTECT,
     )
 
     def __str__(self) -> str:
