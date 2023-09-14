@@ -30,24 +30,24 @@ def get_movie_session_by_id(movie_id: int) -> MovieSession:
 
 
 def update_movie_session(
-        session_id: int,
-        show_time: datetime = None,
-        movie_id: int = None,
-        cinema_hall_id: int = None
+    session_id: int,
+    show_time: datetime = None,
+    movie_id: int = None,
+    cinema_hall_id: int = None
 ) -> None:
-    update_movie_session_ = MovieSession.objects.get(id=session_id)
+    session_to_update = MovieSession.objects.get(id=session_id)
 
     if show_time:
-        update_movie_session_.show_time = show_time
+        session_to_update.show_time = show_time
 
     if movie_id:
-        update_movie_session_.movie_id = movie_id
+        session_to_update.movie_id = movie_id
 
     if cinema_hall_id:
-        update_movie_session_.cinema_hall_id = cinema_hall_id
+        session_to_update.cinema_hall_id = cinema_hall_id
 
-    update_movie_session_.save()
+    session_to_update.save()
 
 
-def delete_movie_session_by_id(session_id: int) -> MovieSession:
+def delete_movie_session_by_id(session_id: int) -> None:
     MovieSession.objects.get(id=session_id).delete()
