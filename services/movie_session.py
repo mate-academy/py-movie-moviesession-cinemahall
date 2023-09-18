@@ -1,7 +1,8 @@
 import datetime
-from db.models import CinemaHall, Movie, MovieSession
+
 from django.db.models import QuerySet
 
+from db.models import CinemaHall, Movie, MovieSession
 from services.movie import get_movie_by_id
 
 
@@ -10,8 +11,8 @@ def create_movie_session(
 ) -> MovieSession:
     return MovieSession.objects.create(
         show_time=movie_show_time,
-        cinema_hall=CinemaHall.objects.get(id=cinema_hall_id),
-        movie=Movie.objects.get(id=movie_id),
+        cinema_hall_id=cinema_hall_id,
+        movie_id=movie_id,
     )
 
 
@@ -38,8 +39,7 @@ def update_movie_session(
         movie = get_movie_by_id(movie_id)
         movie_session.movie = movie
     if cinema_hall_id:
-        cinema_hall = CinemaHall.objects.get(id=cinema_hall_id)
-        movie_session.cinema_hall = cinema_hall
+        movie_session.cinema_hall_id = cinema_hall_id
     movie_session.save()
 
 
