@@ -29,22 +29,12 @@ def get_movie_session_by_id(movie_id: int) -> MovieSession:
     return MovieSession.objects.get(id=movie_id)
 
 
-def update_movie_session(
-    session_id: int,
-    show_time: datetime = None,
-    movie_id: int = None,
-    cinema_hall_id: int = None
-) -> None:
+def update_movie_session(session_id: int, **kwargs: dict) -> None:
     session_to_update = MovieSession.objects.get(id=session_id)
 
-    if show_time:
-        session_to_update.show_time = show_time
-
-    if movie_id:
-        session_to_update.movie_id = movie_id
-
-    if cinema_hall_id:
-        session_to_update.cinema_hall_id = cinema_hall_id
+    for attr, value in kwargs.items():
+        if value is not None:
+            setattr(session_to_update, attr, value)
 
     session_to_update.save()
 
