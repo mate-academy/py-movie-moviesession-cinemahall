@@ -3,7 +3,6 @@ import datetime
 from django.db.models import QuerySet
 
 from db.models import MovieSession
-from services.movie import get_movie_by_id
 
 
 def create_movie_session(
