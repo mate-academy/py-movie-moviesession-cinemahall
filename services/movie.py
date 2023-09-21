@@ -4,18 +4,17 @@ from db.models import Movie
 
 
 def get_movies(
-        genres_ids: list[int] = None,
-        actors_ids: list[int] = None
+    genres_ids: list[int] | None = None, actors_ids: list[int] | None = None
 ) -> QuerySet[Movie]:
-    movies_querryset = Movie.objects.all()
+    movies: QuerySet = Movie.objects.all()
 
-    if genres_ids is not None:
-        movies_querryset = movies_querryset.filter(genres__id__in=genres_ids)
+    if genres_ids:
+        movies = movies.filter(genres__id__in=genres_ids)
 
-    if actors_ids is not None:
-        movies_querryset = movies_querryset.filter(actors__id__in=actors_ids)
+    if actors_ids:
+        movies = movies.filter(actors__id__in=actors_ids)
 
-    return movies_querryset
+    return movies
 
 
 def get_movie_by_id(movie_id: int) -> Movie:
@@ -23,18 +22,19 @@ def get_movie_by_id(movie_id: int) -> Movie:
 
 
 def create_movie(
-        movie_title: str,
-        movie_description: str,
-        genres_ids: list[int] = None,
-        actors_ids: list[int] = None
-) -> None:
-    new_movie = Movie.objects.create(
-        title=movie_title,
-        description=movie_description
+    movie_title: str,
+    movie_description: str,
+    genres_ids: list[int] | None = None,
+    actors_ids: list[int] | None = None,
+) -> Movie:
+    movie: Movie = Movie.objects.create(
+        title=movie_title, description=movie_description
     )
 
-    if genres_ids is not None:
-        new_movie.genres.set(genres_ids)
+    if genres_ids:
+        movie.genres.set(genres_ids)
 
-    if actors_ids is not None:
-        new_movie.actors.set(actors_ids)
+    if actors_ids:
+        movie.actors.set(actors_ids)
+
+    return movie
