@@ -30,7 +30,7 @@ def get_movie_session_by_id(movie_id: int) -> MovieSession:
 
 
 def update_movie_session(session_id: int, **kwargs: dict) -> None:
-    session_to_update = MovieSession.objects.get(id=session_id)
+    session_to_update = get_movie_session_by_id(session_id)
 
     for attr, value in kwargs.items():
         if value is not None:
