@@ -1,8 +1,10 @@
+from typing import Optional
 from db.models import Movie
+from db.models import models
 
 
-def get_movies(genres_ids: list[int] = None,
-               actors_ids: list[int] = None) -> Movie:
+def get_movies(genres_ids: Optional[list[int]] = None,
+               actors_ids: Optional[list[int]] = None) -> models.QuerySet:
     all_movies = Movie.objects.all()
 
     if genres_ids:
@@ -14,15 +16,15 @@ def get_movies(genres_ids: list[int] = None,
     return all_movies
 
 
-def get_movie_by_id(movie_id: int) -> Movie:
+def get_movie_by_id(movie_id: int) -> models.QuerySet:
     return Movie.objects.get(id=movie_id)
 
 
 def create_movie(movie_title: str,
                  movie_description: str,
-                 genres_ids: list[int] = None,
-                 actors_ids: list[int] = None,
-                 ) -> Movie:
+                 genres_ids: Optional[list[int]] = None,
+                 actors_ids: Optional[list[int]] = None,
+                 ) -> models.QuerySet:
     movie = Movie.objects.create(
         title=movie_title,
         description=movie_description
