@@ -1,7 +1,7 @@
-from typing import List
+from typing import List, Optional
 
 from db.models import Movie, CinemaHall, MovieSession
-import datetime
+from datetime import datetime
 
 
 def create_movie_session(
@@ -19,11 +19,13 @@ def create_movie_session(
     return new_movie_session
 
 
-def get_movies_sessions(session_date: str = None) -> List[MovieSession]:
+def get_movies_sessions(
+        session_date: Optional[str] = None
+) -> List[MovieSession]:
     queryset = MovieSession.objects.all()
     if session_date is not None:
         date_format = "%Y-%m-%d"
-        work_date = datetime.datetime.strptime(session_date, date_format)
+        work_date = datetime.strptime(session_date, date_format)
         queryset = queryset.filter(show_time__date=work_date)
 
     return queryset
@@ -35,9 +37,9 @@ def get_movie_session_by_id(movie_session_id: MovieSession) -> Movie:
 
 def update_movie_session(
         session_id: int,
-        show_time: datetime = None,
-        movie_id: int = None,
-        cinema_hall_id: int = None
+        show_time: Optional[datetime] = None,
+        movie_id: Optional[int] = None,
+        cinema_hall_id: Optional[int] = None
 ) -> None:
     update_movies_session = MovieSession.objects.filter(id=session_id)
     if show_time:
