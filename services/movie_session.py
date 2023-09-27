@@ -31,7 +31,8 @@ def get_movie_session_by_id(movie_session_id: int) -> models.QuerySet:
     return MovieSession.objects.get(id=movie_session_id)
 
 
-def update_movie_session(session_id: Optional[int] = None,
+def update_movie_session(
+                         session_id: Optional[int] = None,
                          show_time: Optional[datetime] = None,
                          movie_id: Optional[int] = None,
                          cinema_hall_id: Optional[int] = None

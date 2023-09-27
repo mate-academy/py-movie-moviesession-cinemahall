@@ -20,7 +20,8 @@ def get_movie_by_id(movie_id: int) -> models.QuerySet:
     return Movie.objects.get(id=movie_id)
 
 
-def create_movie(movie_title: str,
+def create_movie(
+                 movie_title: str,
                  movie_description: str,
                  genres_ids: Optional[list[int]] = None,
                  actors_ids: Optional[list[int]] = None,
