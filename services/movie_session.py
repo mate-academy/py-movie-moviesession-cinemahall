@@ -1,3 +1,5 @@
+from typing import Optional
+
 from django.db.models import QuerySet
 
 from db.models import MovieSession, Movie, CinemaHall
@@ -19,7 +21,7 @@ def create_movie_session(
     )
 
 
-def get_movies_sessions(session_date: str = None) -> QuerySet:
+def get_movies_sessions(session_date: Optional[str] = None) -> QuerySet:
     if session_date is not None:
         return MovieSession.objects.filter(
             show_time__date=session_date
@@ -33,9 +35,9 @@ def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
 
 def update_movie_session(
     session_id: int,
-    show_time: str = None,
-    movie_id: id = None,
-    cinema_hall_id: id = None
+    show_time: Optional[str] = None,
+    movie_id: Optional[id] = None,
+    cinema_hall_id: Optional[id] = None
 ) -> None:
 
     if show_time:
