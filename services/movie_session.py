@@ -38,17 +38,17 @@ def update_movie_session(
     cinema_hall_id: id = None
 ) -> None:
 
-    if show_time is not None:
+    if show_time:
         MovieSession.objects.filter(
             id=session_id
         ).update(show_time=show_time)
 
-    if movie_id is not None:
+    if movie_id:
         MovieSession.objects.filter(
             id=session_id
         ).update(movie_id=movie_id)
 
-    if cinema_hall_id is not None:
+    if cinema_hall_id:
         MovieSession.objects.update(
             cinema_hall_id=cinema_hall_id
         )
