@@ -1,3 +1,4 @@
+import logging
 from datetime import datetime
 from typing import Optional
 
@@ -6,11 +7,13 @@ from django.shortcuts import get_object_or_404
 
 from db.models import MovieSession
 
+logger = logging.getLogger(__name__)
+
 
 def create_movie_session(
-        movie_show_time: datetime,
-        movie_id: int,
-        cinema_hall_id: int
+    movie_show_time: datetime,
+    movie_id: int,
+    cinema_hall_id: int
 ) -> MovieSession:
     try:
         movie_session = MovieSession.objects.create(
@@ -20,7 +23,8 @@ def create_movie_session(
         )
         return movie_session
     except Exception as e:
-        return e
+        logger.error(f"Error creating movie session: {e}")
+        raise
 
 
 def get_movies_sessions(session_date: Optional[str] = None) -> QuerySet:
@@ -35,10 +39,10 @@ def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
 
 
 def update_movie_session(
-        session_id: int,
-        show_time: datetime = None,
-        movie_id: int = None,
-        cinema_hall_id: int = None
+    session_id: int,
+    show_time: Optional[datetime] = None,
+    movie_id: Optional[int] = None,
+    cinema_hall_id: Optional[int] = None
 ) -> None:
     try:
         movie_session = MovieSession.objects.get(pk=session_id)
@@ -52,10 +56,17 @@ def update_movie_session(
 
         movie_session.save()
     except MovieSession.DoesNotExist:
-        pass
+        logger.error(f"Movie session with ID {session_id} does not exist.")
+    except Exception as e:
+        logger.error(f"Error updating movie session: {e}")
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
-    movie_session = get_movie_session_by_id(session_id)
-    if movie_session is not None:
-        movie_session.delete()
+    try:
+        movie_session = get_movie_session_by_id(session_id)
+        if movie_session is not None:
+            movie_session.delete()
+    except MovieSession.DoesNotExist:
+        logger.error(f"Movie session with ID {session_id} does not exist.")
+    except Exception as e:
+        logger.error(f"Error deleting movie session: {e}")
