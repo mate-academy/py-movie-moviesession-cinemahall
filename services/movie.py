@@ -1,6 +1,6 @@
 from django.db.models import QuerySet
-from db.models import Movie
 
+from db.models import Movie
 from services.serv_support import all_ints
 
 
@@ -14,7 +14,7 @@ def get_movies(genres_ids: list[int] | None = None,
     return query
 
 
-def get_movie_by_id(movie_id=int) -> Movie:
+def get_movie_by_id(movie_id: int) -> Movie:
     return Movie.objects.get(id=movie_id)
 
 

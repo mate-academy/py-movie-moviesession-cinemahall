@@ -1,5 +1,5 @@
-from typing import Type
 import re
+from typing import Type
 
 
 def all_ints(ls: list | None) -> bool:
@@ -15,11 +15,10 @@ def all_ints(ls: list | None) -> bool:
 def is_date_correct(date: str | None) -> bool:
     if not isinstance(date, str):
         return False
-    date_regex = re.compile(
-        r"^(?:19|20\d\d)-" 
-        r"(\d|0[1-9]|1[0-2])-"
-        r"(\d|0[1-9]|[1-2]\d|3[0-1])$"
-    )
+    date_regex = re.compile(r"^(?:19|20\d\d)-"
+                            r"(\d|0[1-9]|1[0-2])-"
+                            r"(\d|0[1-9]|[1-2]\d|3[0-1])$"
+                            )
     date_match = date_regex.search(date)
     return bool(date_match)
 
