@@ -16,8 +16,8 @@ def create_movie_session(movie_show_time: datetime,
             and is_table_item_exist(CinemaHall, cinema_hall_id)):
         return MovieSession.objects.create(
             show_time=movie_show_time,
-            cinema_hall=CinemaHall.objects.get(id=cinema_hall_id),
-            movie=Movie.objects.get(id=movie_id)
+            cinema_hall_id=cinema_hall_id,
+            movie_id=movie_id
         )
 
 
@@ -41,9 +41,9 @@ def update_movie_session(session_id: int,
         if isinstance(show_time, datetime):
             session.show_time = show_time
         if is_table_item_exist(Movie, movie_id):
-            session.movie = Movie.objects.get(id=movie_id)
+            session.movie_id = movie_id
         if is_table_item_exist(CinemaHall, cinema_hall_id):
-            session.cinema_hall = CinemaHall.objects.get(id=cinema_hall_id)
+            session.cinema_hall_id = cinema_hall_id
         session.save()
         return session
 

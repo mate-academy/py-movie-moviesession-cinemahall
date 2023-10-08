@@ -1,15 +1,15 @@
 from django.db.models import QuerySet
 
-from db.models import Movie
-from services.serv_support import all_ints
+from db.models import Movie, Actor, Genre
+from services.serv_support import (ids_are_corrects_and_exist)
 
 
 def get_movies(genres_ids: list[int] | None = None,
                actors_ids: list[int] | None = None) -> QuerySet:
     query = Movie.objects.all()
-    if all_ints(genres_ids):
+    if ids_are_corrects_and_exist(genres_ids, Genre):
         query = query.filter(genres__id__in=genres_ids)
-    if all_ints(actors_ids):
+    if ids_are_corrects_and_exist(actors_ids, Actor):
         query = query.filter(actors__id__in=actors_ids)
     return query
 
@@ -25,9 +25,8 @@ def create_movie(movie_title: str, movie_description: str,
         title=movie_title,
         description=movie_description
     )
-    if all_ints(actors_ids):
+    if ids_are_corrects_and_exist(actors_ids, Actor):
         new_movie.actors.set(actors_ids)
-
-    if all_ints(genres_ids):
+    if ids_are_corrects_and_exist(genres_ids, Genre):
         new_movie.genres.set(genres_ids)
     return new_movie
