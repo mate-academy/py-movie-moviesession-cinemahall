@@ -5,7 +5,7 @@ from services.serv_support import (ids_are_corrects_and_exist)
 
 
 def get_movies(genres_ids: list[int] | None = None,
-               actors_ids: list[int] | None = None) -> QuerySet:
+               actors_ids: list[int] | None = None) -> QuerySet[Movie]:
     query = Movie.objects.all()
     if ids_are_corrects_and_exist(genres_ids, Genre):
         query = query.filter(genres__id__in=genres_ids)
