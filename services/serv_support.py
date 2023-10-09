@@ -28,6 +28,5 @@ def is_table_item_exist(table: Type, item_id: int) -> bool:
 
 
 def ids_are_corrects_and_exist(ids: list | None, table: Type) -> bool:
-    return all_ints(ids) and all(is_table_item_exist(table, id_)
-                             for id_ in ids)
-
+    return (all_ints(ids)
+            and all(is_table_item_exist(table, id_) for id_ in ids))
