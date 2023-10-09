@@ -1,11 +1,15 @@
 import re
-from typing import Type
+from typing import Type, Any
+
+
+def is_value_int(value: Any) -> bool:
+    return isinstance(value, int) and value >= 1
 
 
 def all_ints(ids_ls: list[int] | None) -> bool:
-    if ids_ls is not None:
+    if ids_ls is not None and isinstance(ids_ls, list):
         values = [
-            isinstance(value, int) and value >= 1
+            is_value_int(value)
             for value in ids_ls
         ]
         return all(values)
