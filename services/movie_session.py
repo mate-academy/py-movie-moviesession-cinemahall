@@ -53,6 +53,6 @@ def update_movie_session(session_id: int,
 
 def delete_movie_session_by_id(session_id: int) -> None:
     if is_value_int(session_id):
-        obj = get_movie_session_by_id(session_id)
-        if isinstance(obj, MovieSession):
-            obj.delete()
+        movie_session = get_movie_session_by_id(session_id)
+        if isinstance(movie_session, MovieSession):
+            movie_session.delete()
