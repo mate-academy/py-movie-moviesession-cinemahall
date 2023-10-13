@@ -16,16 +16,16 @@ def create_movie_session(
 
 
 def get_movies_sessions(session_date: str = None) -> QuerySet[MovieSession]:
-    result = MovieSession.objects.all()
+    movie_sessions = MovieSession.objects.all()
     if session_date:
         try:
             date_obj = datetime.strptime(session_date, "%Y-%m-%d")
-            result = result.filter(show_time__date=date_obj)
+            movie_sessions = movie_sessions.filter(show_time__date=date_obj)
         except ValueError:
             print("You provided incorrect data")
             print("Please, provide data in format 'year-month-day'")
             return QuerySet()
-    return result
+    return movie_sessions
 
 
 def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
@@ -40,7 +40,7 @@ def update_movie_session(
 ) -> None:
 
     try:
-        movie_session = MovieSession.objects.get(id=session_id)
+        movie_session = get_movie_session_by_id(session_id)
     except ObjectDoesNotExist:
         print("You provided incorrect ID")
         return
