@@ -21,7 +21,7 @@ class Movie(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField(max_length=255, null=True)
     actors = models.ManyToManyField(Actor, related_name="movies")
-    genres = models.ManyToManyField(Genre, related_name="movie_genres")
+    genres = models.ManyToManyField(Genre, related_name="movies")
 
     def __str__(self) -> str:
         return self.title
@@ -42,8 +42,10 @@ class CinemaHall(models.Model):
 
 class MovieSession(models.Model):
     show_time = models.DateTimeField(default=django.utils.timezone.now)
-    cinema_hall = models.ForeignKey(CinemaHall, on_delete=models.CASCADE)
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    cinema_hall = models.ForeignKey(CinemaHall, on_delete=models.CASCADE,
+                                    related_name="movie_sessions")
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE,
+                              related_name="movie_sessions")
 
     def __str__(self) -> str:
         return f"{self.movie} {self.show_time}"
