@@ -13,7 +13,7 @@ def create_movie_session(
     )
 
 
-def get_movies_sessions(session_date: MovieSession = None):
+def get_movies_sessions(session_date: MovieSession = None) -> MovieSession:
     if session_date:
         return MovieSession.objects.filter(show_time__date=session_date)
 
@@ -29,7 +29,7 @@ def update_movie_session(
         show_time: MovieSession = None,
         movie_id: int = None,
         cinema_hall_id: int = None
-):
+) -> MovieSession:
     get_session = MovieSession.objects.get(id=session_id)
     if show_time:
         get_session.show_time = show_time
