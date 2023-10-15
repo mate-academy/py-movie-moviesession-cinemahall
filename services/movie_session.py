@@ -1,5 +1,3 @@
-from typing import Any
-
 from django.db.models import QuerySet
 
 from db.models import MovieSession
@@ -8,7 +6,7 @@ from datetime import datetime, date
 
 
 def create_movie_session(
-        movie_show_time: Any,
+        movie_show_time: datetime,
         movie_id: int,
         cinema_hall_id: int
 ) -> MovieSession:
@@ -26,7 +24,7 @@ def create_movie_session(
     return movie_session
 
 
-def get_movies_sessions(session_date: date = None) -> QuerySet:
+def get_movies_sessions(session_date: date = None) -> QuerySet[MovieSession]:
     movie_sessions = MovieSession.objects.all()
 
     if session_date:
