@@ -12,7 +12,7 @@ def create_movie_session(
 ) -> MovieSession:
     show_time = movie_show_time
 
-    if type(movie_show_time) == str:
+    if isinstance(movie_show_time, str):
         show_time = datetime.strptime(movie_show_time, "%Y-%m-%d %H:%M:%S")
 
     movie_session = MovieSession.objects.create(
