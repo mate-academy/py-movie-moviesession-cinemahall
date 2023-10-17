@@ -1,7 +1,9 @@
+from django.db.models import QuerySet
+
 from db.models import Movie, Genre, Actor
 
 
-def get_movies(genres_ids: None = None, actors_ids: None = None) -> str:
+def get_movies(genres_ids: None = None, actors_ids: None = None) -> QuerySet:
     filter_args = {}
     if genres_ids is not None:
         filter_args["genres__id__in"] = genres_ids
