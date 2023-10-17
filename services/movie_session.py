@@ -1,5 +1,6 @@
 from db.models import MovieSession
 from datetime import datetime
+from typing import Optional, List
 
 
 def create_movie_session(
@@ -28,8 +29,8 @@ def get_movie_session_by_id(movie_session_id: int) -> None:
 def update_movie_session(
         session_id: int,
         show_time: datetime = None,
-        movie_id: int = None,
-        cinema_hall_id: int = None
+        movie_id: Optional[List[int]] = None,
+        cinema_hall_id: Optional[List[int]] = None
 ) -> MovieSession:
     updated_fields = {}
     if show_time is not None:
