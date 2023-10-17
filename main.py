@@ -1,6 +1,3 @@
-import init_django_orm  # F401
-
-
 from services import (movie as movie_service,
                       cinema_hall as cinema_service,
                       movie_session)
