@@ -1,7 +1,6 @@
 from datetime import datetime
 
-from db.models import MovieSession
-from services import movie, cinema_hall
+from db.models import MovieSession, CinemaHall, Movie
 
 
 def create_movie_session(
@@ -9,8 +8,8 @@ def create_movie_session(
 ) -> MovieSession:
     new_session = MovieSession.objects.create(
         show_time=movie_show_time,
-        cinema_hall=cinema_hall.get_cinema_halls().get(id=cinema_hall_id),
-        movie=movie.get_movie_by_id(movie_id),
+        cinema_hall=CinemaHall(id=cinema_hall_id),
+        movie=Movie(id=movie_id)
     )
 
     return new_session
