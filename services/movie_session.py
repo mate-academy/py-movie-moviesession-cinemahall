@@ -1,7 +1,6 @@
 from db.models import MovieSession
 from datetime import datetime
 from typing import Optional, List
-from django.core.exceptions import ObjectDoesNotExist
 
 
 def create_movie_session(
