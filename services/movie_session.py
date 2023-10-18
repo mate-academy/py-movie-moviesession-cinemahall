@@ -1,6 +1,7 @@
 from db.models import MovieSession
 from datetime import datetime
 from typing import Optional, List
+from django.core.exceptions import ObjectDoesNotExist
 
 
 def create_movie_session(
@@ -47,4 +48,5 @@ def update_movie_session(
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
-    return MovieSession.objects.get(id=session_id).delete()
+    movie_session = MovieSession.objects.get(id=session_id)
+    movie_session.delete()
