@@ -1,4 +1,5 @@
-from django.core.exceptions import ObjectDoesNotExist, ValidationError
+from django.core.exceptions import ValidationError
+from django.shortcuts import get_object_or_404
 from django.db.models import QuerySet
 
 from db.models import Movie
@@ -10,24 +11,16 @@ def get_movies(
 ) -> QuerySet:
     movies = Movie.objects.all()
 
-    if genres_ids and actors_ids:
-        movies = movies.filter(
-            genres__id__in=genres_ids,
-            actors__id__in=actors_ids
-        ).distinct()
-    elif genres_ids:
+    if genres_ids:
         movies = movies.filter(genres__id__in=genres_ids).distinct()
-    elif actors_ids:
+    if actors_ids:
         movies = movies.filter(actors__id__in=actors_ids).distinct()
 
     return movies
 
 
 def get_movie_by_id(movie_id: int) -> Movie:
-    try:
-        return Movie.objects.get(id=movie_id)
-    except ObjectDoesNotExist:
-        raise ValueError("Movie with the provided ID does not exist.")
+    return get_object_or_404(Movie, id=movie_id)
 
 
 def create_movie(
