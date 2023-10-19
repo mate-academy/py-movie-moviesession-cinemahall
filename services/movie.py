@@ -1,19 +1,18 @@
 from typing import List
 
-from db.models import Genre, Actor, Movie
+from db.models import Movie
 
 
 def get_movies(genres_ids: List[int] | None = None,
                actors_ids: List[int] | None = None) -> List[Movie]:
     if not genres_ids and not actors_ids:
         return Movie.objects.all()
-    if genres_ids and actors_ids:
-        return Movie.objects.filter(actors__id__in=actors_ids,
-                                    genres__id__in=genres_ids)
-    if genres_ids and not actors_ids:
-        return Movie.objects.filter(genres__id__in=genres_ids)
-    if actors_ids and not genres_ids:
-        return Movie.objects.filter(actors__id__in=actors_ids)
+    filter_param = {}
+    if actors_ids:
+        filter_param["actors__id__in"] = actors_ids
+    if genres_ids:
+        filter_param["genres__id__in"] = genres_ids
+    return Movie.objects.filter(**filter_param)
 
 
 def get_movie_by_id(movie_id: int) -> Movie:
@@ -23,8 +22,8 @@ def get_movie_by_id(movie_id: int) -> Movie:
 def create_movie(
         movie_title: str,
         movie_description: str,
-        genres_ids: List[Genre] = None,
-        actors_ids: List[Actor] = None) -> None:
+        genres_ids: List[int] = None,
+        actors_ids: List[int] = None) -> None:
     new_movie = Movie.objects.create(
         title=movie_title,
         description=movie_description,
