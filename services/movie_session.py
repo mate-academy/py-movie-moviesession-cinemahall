@@ -23,8 +23,8 @@ def get_movies_sessions(session_date: str = None) -> MovieSession:
 
     if session_date:
         return MovieSession.objects.filter(show_time__date=session_date)
-    else:
-        return MovieSession.objects.all()
+
+    return MovieSession.objects.all()
 
 
 def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
@@ -48,4 +48,4 @@ def update_movie_session(
 
 
 def delete_movie_session_by_id(session_id: int) -> MovieSession:
-    return MovieSession.objects.filter(id=session_id).delete()
+    return get_movie_session_by_id(session_id).delete()
