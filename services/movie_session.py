@@ -20,8 +20,7 @@ def get_movies_sessions(
 
     if session_date:
         start_date = datetime.strptime(
-            session_date,
-            "%Y-%m-%d")
+            session_date, "%Y-%m-%d")
         end_date = start_date + timedelta(days=1)
         queryset = queryset.filter(
             show_time__gte=start_date,
@@ -52,7 +51,6 @@ def update_movie_session(
 
     movie_session.save()
     return movie_session
-
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
