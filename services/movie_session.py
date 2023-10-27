@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime
 from db.models import MovieSession
 from typing import List, Optional
 
