@@ -16,17 +16,10 @@ def create_movie_session(
 
 def get_movies_sessions(
         session_date: Optional[str] = None) -> List[MovieSession]:
-    queryset = MovieSession.objects.all()
-
+    MovieSession.objects.all()
     if session_date:
-        start_date = datetime.strptime(
-            session_date, "%Y-%m-%d")
-        end_date = start_date + timedelta(days=1)
-        queryset = queryset.filter(
-            show_time__gte=start_date,
-            show_time__lt=end_date)
-
-    return queryset
+        return MovieSession.objects.all().filter(show_time__date=session_date)
+    return MovieSession.objects.all()
 
 
 def get_movie_session_by_id(session_id: int) -> MovieSession:
