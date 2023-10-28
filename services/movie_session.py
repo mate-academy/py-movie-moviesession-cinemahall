@@ -8,7 +8,7 @@ def create_movie_session(
         movie_show_time: datetime.datetime,
         movie_id: int,
         cinema_hall_id: int
-) -> QuerySet[MovieSession]:
+) -> MovieSession:
     return MovieSession.objects.create(
         show_time=movie_show_time,
         cinema_hall_id=cinema_hall_id,
@@ -27,7 +27,7 @@ def get_movies_sessions(
     return queryset
 
 
-def get_movie_session_by_id(movie_session_id: int) -> QuerySet[MovieSession]:
+def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
     return MovieSession.objects.get(id=movie_session_id)
 
 
