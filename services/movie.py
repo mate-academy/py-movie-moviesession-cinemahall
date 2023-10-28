@@ -4,7 +4,7 @@ from typing import List, Optional
 
 def get_movies(
         genres_ids: Optional[List[int]] = None,
-        actors_ids: Optional[List[int]] = None) -> List[Movie]:
+        actors_ids: Optional[List[int]] = None) -> Movie:
     queryset = Movie.objects.all()
 
     if genres_ids:
