@@ -3,8 +3,7 @@ from __future__ import annotations
 from datetime import datetime
 from typing import List
 
-from db.models import MovieSession, CinemaHall
-from services.movie import get_movie_by_id
+from db.models import MovieSession
 
 
 def create_movie_session(
@@ -14,8 +13,8 @@ def create_movie_session(
 ) -> MovieSession:
     return MovieSession.objects.create(
         show_time=movie_show_time,
-        cinema_hall=CinemaHall.objects.get(id=cinema_hall_id),
-        movie=get_movie_by_id(movie_id)
+        cinema_hall_id=cinema_hall_id,
+        movie_id=movie_id
     )
 
 
@@ -48,9 +47,9 @@ def update_movie_session(
     if show_time:
         movie_session.show_time = show_time
     if movie_id:
-        movie_session.movie = get_movie_by_id(movie_id)
+        movie_session.movie_id = movie_id
     if cinema_hall_id:
-        movie_session.cinema_hall = CinemaHall.objects.get(id=cinema_hall_id)
+        movie_session.cinema_hall_id = cinema_hall_id
     movie_session.save()
     return movie_session
 
