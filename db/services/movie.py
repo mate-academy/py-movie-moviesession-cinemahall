@@ -1,4 +1,4 @@
-from django.db.models import QuerySet
+from django.db.models import QuerySet, Q
 
 from db.models import Movie, Genre, Actor
 
@@ -9,14 +9,14 @@ def get_movies(
 ) -> QuerySet:
     if not genres_ids and not actors_ids:
         return Movie.objects.all()
-    elif genres_ids and actors_ids:
-        return Movie.objects.filter(
-            genres__id__in=genres_ids, actors__id__in=actors_ids
-        )
-    elif genres_ids:
-        return Movie.objects.filter(genres__id__in=genres_ids)
-    elif actors_ids:
-        return Movie.objects.filter(actors__id__in=actors_ids)
+
+    query = Q()
+    if genres_ids:
+        query &= Q(genres__id__in=genres_ids)
+    if actors_ids:
+        query &= Q(actors__id__in=actors_ids)
+
+    return Movie.objects.filter(query)
 
 
 def get_movie_by_id(movie_id: int) -> Movie:
