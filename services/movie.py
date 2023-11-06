@@ -33,11 +33,9 @@ def create_movie(
         description=movie_description
     )
     if genres_ids:
-        genres = Genre.objects.filter(id__in=genres_ids)
-        new_movie.genres.add(*genres)
+        new_movie.genres.set(genres_ids)
 
     if actors_ids:
-        actors = Actor.objects.filter(id__in=actors_ids)
-        new_movie.actors.add(*actors)
+        new_movie.actors.set(actors_ids)
 
     return new_movie
