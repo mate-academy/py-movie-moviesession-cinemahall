@@ -1,6 +1,6 @@
 from django.db.models import Q, QuerySet
 
-from db.models import Movie, Genre, Actor
+from db.models import Movie
 
 
 def get_movies(genres_ids: list = None, actors_ids: list = None) -> QuerySet:

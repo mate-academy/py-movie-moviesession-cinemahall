@@ -39,7 +39,9 @@ def update_movie_session(
         if movie_id:
             movie_session.movie = Movie.objects.get(pk=movie_id)
         if cinema_hall_id:
-            movie_session.cinema_hall = CinemaHall.objects.get(pk=cinema_hall_id)
+            movie_session.cinema_hall = CinemaHall.objects.get(
+                pk=cinema_hall_id
+            )
         movie_session.save()
     except MovieSession.DoesNotExist:
         return "Session with this id doesn't exist"
