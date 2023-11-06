@@ -4,15 +4,13 @@ from db.models import MovieSession
 
 def create_movie_session(movie_show_time: str,
                          movie_id: int,
-                         cinema_hall_id: int) -> MovieSession:
+                         cinema_hall_id: int) -> None:
 
-    new_movie_session = MovieSession.objects.create(
+    MovieSession.objects.create(
         show_time=movie_show_time,
         movie_id=movie_id,
         cinema_hall_id=cinema_hall_id
     )
-
-    return new_movie_session
 
 
 def get_movies_sessions(session_date: str = None) -> QuerySet:
@@ -29,7 +27,7 @@ def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
 def update_movie_session(session_id: int,
                          show_time: str = None,
                          movie_id: int = None,
-                         cinema_hall_id: int = None) -> MovieSession:
+                         cinema_hall_id: int = None) -> None:
 
     updated_movie_session = MovieSession.objects.get(
         pk=session_id
@@ -44,11 +42,6 @@ def update_movie_session(session_id: int,
 
     updated_movie_session.save()
 
-    return updated_movie_session
 
-
-def delete_movie_session_by_id(session_id: int) -> MovieSession:
-    movie_session_record = MovieSession.objects.get(
-        pk=session_id
-    )
-    return movie_session_record.delete()
+def delete_movie_session_by_id(session_id: int) -> None:
+    MovieSession.objects.get(pk=session_id).delete()
