@@ -1,18 +1,16 @@
 from db.models import MovieSession
-from datetime import datetime
 
 
 def create_movie_session(
         movie_show_time: str,
         movie_id: int,
         cinema_hall_id: int,
-
 ) -> MovieSession:
-    show_time = datetime.strptime(movie_show_time, "%Y-%m-%d %H:%M:%S")
+
     new_movie_session = MovieSession.objects.create(
-        show_time=show_time,
-        cinema_hall=cinema_hall_id,
-        movie=movie_id,
+        show_time=movie_show_time,
+        cinema_hall_id=cinema_hall_id,
+        movie_id=movie_id,
     )
     return new_movie_session
 
