@@ -1,5 +1,5 @@
 import datetime
-from db.models import MovieSession, Movie, CinemaHall
+from db.models import MovieSession, Movie, CinemaHall, models
 
 
 def create_movie_session(movie_show_time: datetime,
@@ -12,7 +12,7 @@ def create_movie_session(movie_show_time: datetime,
     )
 
 
-def get_movies_sessions(session_date: str = None) -> list[MovieSession]:
+def get_movies_sessions(session_date: str = None) -> models.QuerySet:
     if session_date:
         date = datetime.datetime.strptime(session_date, "%Y-%m-%d")
         return MovieSession.objects.filter(show_time__date=date)
@@ -27,7 +27,7 @@ def update_movie_session(session_id: int,
                          show_time: datetime = None,
                          movie_id: int = None,
                          cinema_hall_id: int = None) -> None:
-    session = MovieSession.objects.filter(pk=session_id).first()
+    session = MovieSession.objects.get(pk=session_id)
     if show_time:
         session.show_time = show_time
     if movie_id:
