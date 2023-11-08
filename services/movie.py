@@ -17,7 +17,7 @@ def get_movies(
     return movies
 
 
-def get_movie_by_id(movie_id: int) -> QuerySet:
+def get_movie_by_id(movie_id: int) -> str:
     return Movie.objects.get(id=movie_id)
 
 
