@@ -36,7 +36,7 @@ class CinemaHall(models.Model):
         return self.rows * self.seats_in_row
 
     def __str__(self) -> str:
-        return f"{self.name}"
+        return self.name
 
 
 class MovieSession(models.Model):
