@@ -18,23 +18,3 @@ def create_cinema_hall(
     )
 
     return cinema_hall
-
-
-def create_movie(
-        movie_title: str,
-        movie_description: str,
-        genres_ids: list = None,
-        actors_ids: list = None
-) -> Movie:
-
-    film = Movie.objects.create(
-        title=movie_title,
-        description=movie_description,
-    )
-
-    if genres_ids:
-        film.genres.set(genres_ids)
-    if actors_ids:
-        film.actors.set(actors_ids)
-
-    return film
