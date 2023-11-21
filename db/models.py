@@ -1,5 +1,5 @@
 from django.db import models
-from datetime import datetime
+
 
 class Actor(models.Model):
     first_name = models.CharField(max_length=255)
