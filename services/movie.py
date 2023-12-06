@@ -32,7 +32,7 @@ def create_movie(
     )
 
     if genres_ids:
-        new_movie.objects.set(genres_ids)
+        new_movie.genres.set(genres_ids)
 
     if actors_ids:
-        new_movie.objects.set(actors_ids)
+        new_movie.actors.set(actors_ids)
