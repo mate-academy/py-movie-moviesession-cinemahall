@@ -1,7 +1,8 @@
 from db.models import CinemaHall
+from django.db.models import QuerySet
 
 
-def get_cinema_halls() -> list:
+def get_cinema_halls() -> QuerySet:
     return CinemaHall.object.all()
 
 
@@ -15,5 +16,3 @@ def create_cinema_hall(
         hall_rows=hall_rows,
         hall_seats_in_row=hall_seats_in_row
     )
-
-    return new_cinema_hall
