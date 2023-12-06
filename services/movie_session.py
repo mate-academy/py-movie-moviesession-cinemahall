@@ -40,9 +40,9 @@ def update_movie_session(
     if show_time:
         queryset = queryset.update(show_time=show_time)
     if movie_id:
-        queryset = queryset.update(movie_id=movie_id)
+        queryset = queryset.update(id=movie_id)
     if cinema_hall_id:
-        queryset = queryset.update(cinema_hall_id=cinema_hall_id)
+        queryset = queryset.update(id=cinema_hall_id)
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
