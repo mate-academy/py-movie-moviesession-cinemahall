@@ -7,7 +7,7 @@ def create_movie_session(
         movie_show_time: float,
         movie_id: int,
         cinema_hall_id: int
-    ) -> MovieSession:
+) -> MovieSession:
 
     new_movie_session = MovieSession.objects.create(
         movie_show_time=movie_show_time,
@@ -37,7 +37,7 @@ def update_movie_session(
         show_time: float = None,
         movie_id: int = None,
         cinema_hall_id: int = None
-    ) -> None:
+) -> None:
 
     queryset = MovieSession.objects.filter(id=session_id)
     if show_time:
