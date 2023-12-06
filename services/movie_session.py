@@ -10,7 +10,7 @@ def create_movie_session(
         cinema_hall_id: int
 ) -> None:
 
-    new_movie_session = MovieSession.objects.create(
+    MovieSession.objects.create(
         movie_show_time=movie_show_time,
         movie_id=movie_id,
         cinema_hall_id=cinema_hall_id
