@@ -1,4 +1,5 @@
 from db.models import MovieSession
+from django.db.models import QuerySet
 
 
 def create_movie_session(movie_show_time: str,
@@ -18,7 +19,7 @@ def get_movies_sessions(session_date: str = None) -> QuerySet:
     return MovieSession.objects.all()
 
 
-def get_movie_session_by_id(movie_session_id: int):
+def get_movie_session_by_id(movie_session_id: int) -> QuerySet:
     return MovieSession.objects.filter(id=movie_session_id)
 
 
