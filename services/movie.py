@@ -8,12 +8,12 @@ def get_movies(genres_ids: list[int] | None = None,
     movies = Movie.objects.all()
 
     if actors_ids:
-        movies = Movie.objects.filter(
+        movies = movies.filter(
             actors__id__in=actors_ids
         )
 
     if genres_ids:
-        movies = Movie.objects.filter(
+        movies = movies.filter(
             genres__id__in=genres_ids,
         )
 
