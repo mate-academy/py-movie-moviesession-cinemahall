@@ -24,8 +24,10 @@ def get_movie_session_by_id(movie_session_id: int) -> QuerySet:
     return MovieSession.objects.get(id=movie_session_id)
 
 
-def update_movie_session(session_id: int, show_time: Optional[datetime] = None,
-                         movie_id: Optional[int] = None, cinema_hall_id: Optional[int] = None
+def update_movie_session(session_id: int,
+                         show_time: Optional[datetime] = None,
+                         movie_id: Optional[int] = None,
+                         cinema_hall_id: Optional[int] = None
                          ) -> QuerySet:
     queryset = MovieSession.objects.filter(id=session_id)
     if show_time is not None:
