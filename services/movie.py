@@ -31,7 +31,8 @@ def create_movie(
         actors_ids: Optional[list[int]] = None
 ) -> Movie:
     new_movie = Movie.objects.create(
-        title=movie_title, description=movie_description
+        title=movie_title,
+        description=movie_description
     )
 
     if genres_ids:
