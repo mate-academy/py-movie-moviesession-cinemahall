@@ -26,8 +26,7 @@ def get_movies_sessions(
     if session_date:
         date = datetime.strptime(session_date, "%Y-%m-%d").date()
         return MovieSession.objects.filter(show_time__date=date)
-    else:
-        return MovieSession.objects.all()
+    return MovieSession.objects.all()
 
 
 def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
