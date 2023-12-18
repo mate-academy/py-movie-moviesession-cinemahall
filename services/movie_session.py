@@ -37,10 +37,10 @@ def get_movie_session_by_id(movie_session_id: int) -> QuerySet:
 
 
 def update_movie_session(
-        session_id: int = None,
+        session_id: int | None = None,
         show_time: datetime = None,
-        movie_id: int = None,
-        cinema_hall_id: str = None
+        movie_id: int | None = None,
+        cinema_hall_id: str | None = None
 ) -> QuerySet:
     movie_session = MovieSession.objects.filter(pk=session_id).first()
     if movie_session:
