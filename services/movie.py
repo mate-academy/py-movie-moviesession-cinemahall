@@ -3,18 +3,16 @@ from typing import Optional
 from db.models import Movie, Genre, Actor
 
 
-def get_movies(genres_ids: str = None, actors_ids: str = None) -> None:
+def get_movies(
+        genres_ids: str | None = None,
+        actors_ids: str | None = None
+) -> None:
     movie = Movie.objects.all()
-    if genres_ids and actors_ids:
-        movie = movie.filter(
-            genres__id__in=genres_ids,
-            actors__id__in=actors_ids
-        ).distinct()
-    elif genres_ids:
+    if genres_ids:
         movie = movie.filter(
             genres__id__in=genres_ids
         ).distinct()
-    elif actors_ids:
+    if actors_ids:
         movie = movie.filter(
             actors__id__in=actors_ids
         )
