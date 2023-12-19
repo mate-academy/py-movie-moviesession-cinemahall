@@ -6,7 +6,7 @@ from db.models import Movie, Genre, Actor
 def get_movies(
         genres_ids: str | None = None,
         actors_ids: str | None = None
-) -> None:
+) -> str:
     movie = Movie.objects.all()
     if genres_ids:
         movie = movie.filter(
