@@ -21,11 +21,11 @@ class Movie(models.Model):
     description = models.TextField()
     actors = models.ManyToManyField(
         Actor,
-        related_name="movie"
+        related_name="movies"
     )
     genres = models.ManyToManyField(
         Genre,
-        related_name="genre"
+        related_name="movies"
     )
 
     def __str__(self) -> str:
@@ -57,7 +57,7 @@ class MovieSession(models.Model):
         Movie,
         on_delete=models.SET_NULL,
         null=True,
-        related_name="movies"
+        related_name="movie_sessions"
     )
 
     def __str__(self) -> str:
