@@ -1,5 +1,8 @@
 from datetime import datetime
-from typing import Optional, List
+from typing import Optional
+
+from django.db.models import QuerySet
+from django.shortcuts import get_object_or_404
 
 from db.models import Movie, CinemaHall, MovieSession
 
@@ -9,19 +12,21 @@ def create_movie_session(
         movie_id: int,
         cinema_hall_id: int
 ) -> None:
-    movie = Movie.objects.get(id=movie_id)
-    cinema_hall = CinemaHall.objects.get(id=cinema_hall_id)
+    movie = get_object_or_404(Movie, id=movie_id)
+    cinema_hall = get_object_or_404(CinemaHall, id=cinema_hall_id)
+
     movie_session = MovieSession.objects.create(
         show_time=movie_show_time,
         movie=movie,
         cinema_hall=cinema_hall
     )
+
     return movie_session
 
 
 def get_movies_sessions(
         session_date: Optional[str] = None
-) -> List[MovieSession]:
+) -> QuerySet:
     movie_sessions = MovieSession.objects.all()
 
     if session_date:
@@ -31,11 +36,7 @@ def get_movies_sessions(
 
 
 def get_movie_session_by_id(movie_session_id: int) -> Optional[MovieSession]:
-    try:
-        movie_session = MovieSession.objects.get(id=movie_session_id)
-        return movie_session
-    except MovieSession.DoesNotExist:
-        return None
+    return get_object_or_404(MovieSession, id=movie_session_id)
 
 
 def update_movie_session(
@@ -62,9 +63,10 @@ def update_movie_session(
 
 
 def delete_movie_session_by_id(session_id: int) -> bool:
-    try:
-        movie_session = MovieSession.objects.get(id=session_id)
+    movie_session = get_movie_session_by_id(session_id)
+
+    if movie_session:
         movie_session.delete()
         return True
-    except MovieSession.DoesNotExist:
+    else:
         return False

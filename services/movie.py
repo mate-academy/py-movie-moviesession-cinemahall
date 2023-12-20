@@ -4,9 +4,9 @@ from db.models import Movie, Genre, Actor
 
 
 def get_movies(
-        genres_ids: str | None = None,
-        actors_ids: str | None = None
-) -> str:
+        genres_ids: int | None = None,
+        actors_ids: int | None = None
+) -> None:
     movie = Movie.objects.all()
     if genres_ids:
         movie = movie.filter(
@@ -19,7 +19,7 @@ def get_movies(
     return movie
 
 
-def get_movie_by_id(movie_id: None) -> Optional[Movie]:
+def get_movie_by_id(movie_id: int) -> Optional[Movie]:
     movie = Movie.objects.get(id=movie_id)
     return movie
 
@@ -29,7 +29,7 @@ def create_movie(
         movie_description: str,
         genres_ids: str = None,
         actors_ids: str = None
-) -> None:
+) -> str:
     movie = Movie.objects.create(
         title=movie_title,
         description=movie_description
