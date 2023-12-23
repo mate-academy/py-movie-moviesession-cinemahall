@@ -1,11 +1,15 @@
+from django.db.models import QuerySet
+
+
 from db.models import CinemaHall
 
 
-from typing import List
-
-
-def get_cinema_halls() -> List[CinemaHall]:
+def get_cinema_halls() -> QuerySet[CinemaHall]:
     return CinemaHall.objects.all()
+
+
+def get_cinema_hall_by_id(hall_id: int) -> QuerySet[CinemaHall]:
+    return CinemaHall.objects.filter(id=hall_id)
 
 
 def create_cinema_hall(
