@@ -1,15 +1,16 @@
 from db.models import Movie
+from django.db.models import QuerySet
 
 
 def get_movies(
         genres_ids: int = None,
         actors_ids: int = None
-):
+) -> QuerySet:
     queryset = Movie.objects.all()
 
     if genres_ids is not None:
         queryset = queryset.filter(
-            geners__id__in=genres_ids
+            genres__id__in=genres_ids
         )
     if actors_ids is not None:
         queryset = queryset.filter(
@@ -21,7 +22,7 @@ def get_movies(
 
 def get_movie_by_id(movie_id: int) -> str:
     movie = Movie.objects.get(id=movie_id)
-    return f"{movie.title} {movie_id}"
+    return movie.title
 
 
 def create_movie(
@@ -29,7 +30,7 @@ def create_movie(
         movie_description: str,
         genres_ids: list[int] = None,
         actors_ids: list[int] = None,
-):
+) -> Movie:
     new_movie = Movie.objects.create(
         title=movie_title,
         description=movie_description
