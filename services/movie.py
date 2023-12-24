@@ -22,7 +22,7 @@ def get_movies(
 
 def get_movie_by_id(movie_id: int) -> str:
     movie = Movie.objects.get(id=movie_id)
-    return movie.title
+    return movie
 
 
 def create_movie(

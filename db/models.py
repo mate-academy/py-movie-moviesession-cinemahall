@@ -51,3 +51,6 @@ class MovieSession(models.Model):
         on_delete=models.SET_NULL,
         null=True
     )
+
+    def __str__(self) -> str:
+        return f"{self.movie} {self.show_time}"

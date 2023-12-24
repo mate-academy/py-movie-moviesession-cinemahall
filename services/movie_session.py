@@ -7,14 +7,22 @@ import datetime
 
 def create_movie_session(
         movie_show_time: datetime,
-        movie_id: int,
-        cinema_hall_id: int
+        movie_id: int = None,
+        cinema_hall_id: int = None
 ) -> MovieSession:
     new_movie_session = MovieSession(
         show_time=movie_show_time,
-        cinema_hall=cinema_hall_id,
-        movie=movie_id
     )
+
+    if cinema_hall_id:
+        new_movie_session.objects.set(
+            cinema_hall=cinema_hall_id
+        )
+
+    if movie_id:
+        new_movie_session.objects.set(
+            movie=movie_id
+        )
 
     return new_movie_session
 
