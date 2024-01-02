@@ -1,5 +1,6 @@
 from typing import List, Optional
 from datetime import datetime
+
 from db.models import MovieSession
 
 
