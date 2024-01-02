@@ -9,7 +9,7 @@ def get_movies(
 ) -> QuerySet[Movie]:
     movies = Movie.objects.all()
 
-    if genres_ids is not None and actors_ids is not None:
+    if genres_ids and actors_ids:
         movies = movies.filter(genres__in=genres_ids, actors__in=actors_ids)
 
     elif genres_ids:
