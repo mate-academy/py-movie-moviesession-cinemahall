@@ -2,6 +2,7 @@ from typing import Optional
 from datetime import datetime
 
 from django.db.models import QuerySet
+
 from db.models import MovieSession
 
 
@@ -28,7 +29,7 @@ def get_movies_sessions(
     return movie_sessions
 
 
-def get_movie_session_by_id(session_id: int) -> MovieSession:
+def get_movie_session(session_id: int) -> MovieSession:
     return MovieSession.objects.get(id=session_id)
 
 
@@ -38,7 +39,7 @@ def update_movie_session(
         movie_id: Optional[int] = None,
         cinema_hall_id: Optional[int] = None
 ) -> None:
-    movie_session = MovieSession.objects.get(id=session_id)
+    movie_session = get_movie_session(session_id)
 
     if show_time:
         movie_session.show_time = show_time
@@ -51,4 +52,4 @@ def update_movie_session(
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
-    get_movie_session_by_id(session_id).delete()
+    get_movie_session(session_id).delete()
