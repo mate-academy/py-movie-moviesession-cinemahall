@@ -2,7 +2,6 @@ from typing import List, Optional
 from db.models import Movie
 
 
-
 def get_movies(
         genres_ids: List[int] = None, actors_ids: List[int] = None
 ) -> List[Movie]:
