@@ -23,13 +23,12 @@ def get_movies_sessions(
             show_time__date=session_date
         )
         return queryset
-    else:
-        return MovieSession.objects.all()
+
+    return MovieSession.objects.all()
 
 
 def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
-    movie = MovieSession.objects.all().get(pk=movie_session_id)
-    return movie
+    return MovieSession.objects.get(pk=movie_session_id)
 
 
 def update_movie_session(
@@ -49,5 +48,5 @@ def update_movie_session(
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
-    movie = MovieSession.objects.all().get(pk=session_id)
+    movie = get_movie_session_by_id(session_id)
     movie.delete()
