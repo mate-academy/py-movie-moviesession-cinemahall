@@ -4,8 +4,8 @@ from db.models import Movie, Genre, Actor
 
 
 def get_movies(
-        genres_ids: int = None,
-        actors_ids: int = None
+        genres_ids: List[int] = None,
+        actors_ids: List[int] = None
 ) -> List[Movie]:
     queryset = Movie.objects.all()
     if genres_ids:

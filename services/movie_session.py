@@ -6,8 +6,8 @@ from db.models import MovieSession, Movie, CinemaHall
 
 def create_movie_session(
         movie_show_time: datetime,
-        movie_id: id,
-        cinema_hall_id: id
+        movie_id: int,
+        cinema_hall_id: int
 ) -> None:
     movie = Movie.objects.get(id=movie_id)
     cinema_hall = CinemaHall.objects.get(id=cinema_hall_id)
@@ -41,9 +41,9 @@ def update_movie_session(
     if show_time:
         movie_session.show_time = show_time
     if movie_id:
-        movie_session.movie = Movie.objects.get(id=movie_id)
+        movie_session.movie_id = movie_id
     if cinema_hall_id:
-        movie_session.cinema_hall = CinemaHall.objects.get(id=cinema_hall_id)
+        movie_session.cinema_hall_id = cinema_hall_id
 
     movie_session.save()
     return movie_session
