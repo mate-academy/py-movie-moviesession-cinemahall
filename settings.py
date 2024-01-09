@@ -21,6 +21,6 @@ TIME_ZONE = "Europe/Kiev"
 
 USE_I18N = True
 
-USE_TZ = False
+USE_TZ = True  # SQLite backend does not support timezone-aware datetimes when USE_TZ is False.
 
 INSTALLED_APPS = ("db",)
