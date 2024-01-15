@@ -1,8 +1,8 @@
 from db.models import Movie
 
 
-def get_movies(genres_ids: list[int] = None,
-               actors_ids: list[int] = None
+def get_movies(genres_ids: list[int] | None = None,
+               actors_ids: list[int] | None = None
                ) -> list[Movie]:
     queryset = Movie.objects.all()
     if genres_ids is not None:
@@ -19,8 +19,8 @@ def get_movie_by_id(movie_id: int) -> Movie:
 
 def create_movie(movie_title: str,
                  movie_description: str,
-                 actors_ids: list[int] = None,
-                 genres_ids: list[int] = None,
+                 actors_ids: list[int] | None = None,
+                 genres_ids: list[int] | None = None,
                  ) -> None:
     new_movie = Movie.objects.create(title=movie_title,
                                      description=movie_description)
