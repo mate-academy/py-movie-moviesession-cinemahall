@@ -1,13 +1,13 @@
 from django.db.models import QuerySet
 
-from db import models
-
 from db.models import Movie
 
 
 def get_movies(
         genres_ids: list[int] = None,
-        actors_ids: list[int] = None) -> QuerySet[models.Movie]:
+        actors_ids: list[int] = None
+) -> QuerySet[Movie]:
+
     queryset = Movie.objects.all()
 
     if genres_ids and actors_ids:
@@ -32,7 +32,8 @@ def create_movie(
         movie_title: str,
         movie_description: str,
         genres_ids: list[int] = None,
-        actors_ids: list[int] = None) -> QuerySet[models.Movie]:
+        actors_ids: list[int] = None
+) -> QuerySet[Movie]:
 
     new_movie = Movie.objects.create(
         title=movie_title,
