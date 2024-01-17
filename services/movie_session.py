@@ -7,7 +7,7 @@ def create_movie_session(
         movie_show_time: str,
         movie_id: int,
         cinema_hall_id: int
-) -> QuerySet[MovieSession]:
+) -> MovieSession:
 
     new_movie_session = MovieSession.objects.create(
         show_time=movie_show_time,
