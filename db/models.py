@@ -28,7 +28,7 @@ class Movie(models.Model):
         related_name="genres"
     )
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.title
 
 
@@ -41,7 +41,7 @@ class CinemaHall(models.Model):
     def capacity(self) -> int:
         return self.rows * self.seats_in_row
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.name
 
 
@@ -58,5 +58,5 @@ class MovieSession(models.Model):
         related_name="movies"
     )
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.movie.title} {self.show_time}"
