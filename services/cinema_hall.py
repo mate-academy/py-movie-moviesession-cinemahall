@@ -2,11 +2,7 @@ from django.db.models import QuerySet
 from db.models import CinemaHall
 
 
-<<<<<<< HEAD
 def get_cinema_halls() -> QuerySet[CinemaHall]:
-=======
-def get_cinema_halls() -> QuerySet:
->>>>>>> origin/develop
     return CinemaHall.objects.all()
 
 

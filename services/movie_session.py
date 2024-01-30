@@ -16,11 +16,8 @@ def create_movie_session(
     return movie_session
 
 
-<<<<<<< HEAD
 def get_movies_sessions(session_date: str = None) -> QuerySet[MovieSession]:
-=======
-def get_movies_sessions(session_date: str = None) -> QuerySet:
->>>>>>> origin/develop
+
     if session_date:
         return MovieSession.objects.filter(show_time__date=session_date)
     return MovieSession.objects.all()
@@ -51,10 +48,7 @@ def update_movie_session(session_id: int = None,
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
-<<<<<<< HEAD
+
     movie_session = get_movie_session_by_id(session_id)
-=======
-    movie_session = MovieSession.objects.filter(id=session_id).first()
->>>>>>> origin/develop
     if movie_session:
         movie_session.delete()

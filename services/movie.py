@@ -24,11 +24,8 @@ def get_movie_by_id(movie_id: int) -> Movie:
 def create_movie(movie_title: str,
                  movie_description: str,
                  genres_ids: list[int] = None,
-<<<<<<< HEAD
                  actors_ids: list[int] = None) -> Movie:
-=======
-                 actors_ids: list[int] = None) -> QuerySet:
->>>>>>> origin/develop
+
     movie = Movie.objects.create(
         title=movie_title,
         description=movie_description
