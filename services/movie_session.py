@@ -31,8 +31,9 @@ def get_movies_sessions(session_date: str = None) -> QuerySet[MovieSession]:
     return movie_sessions
 
 
-def get_movie_session_by_id(movie_id: int) -> MovieSession:
-    return MovieSession.objects.filter(movie_id=movie_id)
+def get_movie_session_by_id(movie_id: int) -> Union[MovieSession, QuerySet]:
+
+    return MovieSession.objects.get(id=movie_id)
 
 
 def update_movie_session(

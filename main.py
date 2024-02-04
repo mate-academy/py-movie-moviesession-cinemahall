@@ -6,7 +6,7 @@ from services import movie, cinema_hall, movie_session
 
 
 def main():
-    return movie_session.update_movie_session(session_id=3, movie_id=2, cinema_hall_id=1)
+    return movie_session.get_movie_session_by_id(movie_id=3)
 
 
 if __name__ == '__main__':
