@@ -1,4 +1,3 @@
-import warnings
 from db.models import MovieSession, Movie, CinemaHall
 from datetime import time
 from django.db.models import QuerySet
