@@ -27,7 +27,7 @@ def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
     if movie_session_id:
         return MovieSession.objects.get(id=movie_session_id)
     else:
-        warnings.warn(f"""No id was provided""")
+        return "No such Id"
 
 
 def update_movie_session(session_id: int,
@@ -35,7 +35,7 @@ def update_movie_session(session_id: int,
                          movie_id: int = None,
                          cinema_hall_id: int = None) -> None:
     if session_id:
-         session = MovieSession.objects.get(id=session_id)
+        session = MovieSession.objects.get(id=session_id)
     if show_time:
         session.show_time = show_time
     if movie_id:
