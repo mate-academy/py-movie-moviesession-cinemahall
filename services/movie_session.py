@@ -23,10 +23,7 @@ def get_movies_sessions(session_date: str = None) -> QuerySet:
 
 
 def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
-    if movie_session_id:
-        return MovieSession.objects.get(id=movie_session_id)
-    else:
-        return "No such Id"
+    return MovieSession.objects.get(id=movie_session_id)
 
 
 def update_movie_session(session_id: int,
