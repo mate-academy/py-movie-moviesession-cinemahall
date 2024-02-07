@@ -7,9 +7,9 @@ def get_cinema_halls() -> QuerySet | CinemaHall:
 
 
 def create_cinema_hall(
-        hall_name: str = None,
-        hall_rows: int = None,
-        hall_seats_in_row: int = None
+        hall_name: str | None = None,
+        hall_rows: int | None = None,
+        hall_seats_in_row: int | None = None
 ) -> CinemaHall:
 
     new_cinema_hall = CinemaHall.objects.create(
