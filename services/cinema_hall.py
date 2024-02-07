@@ -10,7 +10,7 @@ def create_cinema_hall(
         hall_name: str = None,
         hall_rows: int = None,
         hall_seats_in_row: int = None
-        ) -> CinemaHall:
+) -> CinemaHall:
 
     new_cinema_hall = CinemaHall.objects.create(
         name=hall_name,
