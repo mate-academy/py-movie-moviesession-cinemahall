@@ -45,13 +45,11 @@ class MovieSession(models.Model):
         CinemaHall,
         on_delete=models.CASCADE,
         related_name="movie_sessions",
-        null=True
     )
     movie = models.ForeignKey(
         Movie,
         on_delete=models.CASCADE,
         related_name="movie_sessions",
-        null=True
     )
 
     def __str__(self) -> str:
