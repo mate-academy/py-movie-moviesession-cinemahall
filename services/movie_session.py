@@ -22,9 +22,7 @@ def get_movies_sessions(
 ) -> QuerySet:
     if session_date:
         return MovieSession.objects.filter(
-            show_time__date=datetime.strptime(
-                session_date, "%Y-%m-%d"
-            )
+            show_time__date=session_date,
         )
 
     return MovieSession.objects.all()
