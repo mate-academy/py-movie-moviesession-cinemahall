@@ -1,5 +1,4 @@
 from django.db import models
-import datetime
 
 
 class Genre(models.Model):
@@ -20,25 +19,27 @@ class Actor(models.Model):
 class Movie(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
-    actors = models.ManyToManyField(Actor, related_name="Actor")
-    genres = models.ManyToManyField(Genre, related_name="Genre")
+    actors = models.ManyToManyField(Actor, related_name="movies")
+    genres = models.ManyToManyField(Genre, related_name="movies")
 
 
 class CinemaHall(models.Model):
     name = models.CharField(max_length=255)
     rows = models.IntegerField()
     seats_in_row = models.IntegerField()
-    capacity = rows * seats_in_row
+
+    @property
+    def capacity(self):
+        return self.rows * self.seats_in_row
 
     def __str__(self) -> str:
         return self.name
 
 
-class CinemaSession(models.Model):
+class MovieSession(models.Model):
     show_time = models.DateTimeField()
-    cinema_hall = models.ForeignKey(CinemaHall, related_name="CinemaHall", on_delete=models.CASCADE)
-    movie = models.ForeignKey(Movie, related_name="Movie", on_delete=models.CASCADE)
+    cinema_hall = models.ForeignKey(CinemaHall, related_name="movie_sessions", on_delete=models.CASCADE)
+    movie = models.ForeignKey(Movie, related_name="movie_sessions", on_delete=models.CASCADE)
 
     def __str__(self) -> str:
         return f"{self.movie.title} {self.show_time.strftime('%Y-%m-%d %X')}"
-
