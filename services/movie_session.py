@@ -3,6 +3,8 @@ from datetime import datetime
 from django.db.models import QuerySet
 
 from db.models import MovieSession
+from db.models import CinemaHall
+from db.models import Movie
 
 
 def create_movie_session(
@@ -12,17 +14,17 @@ def create_movie_session(
 ) -> None:
     MovieSession.objects.create(
         show_time=movie_show_time,
-        cinema_hall=cinema_hall_id,
-        movie=movie_id
+        cinema_hall=CinemaHall.objects.get(id=cinema_hall_id),
+        movie=Movie.objects.get(id=movie_id)
     )
 
 
 def get_movies_sessions(
         session_date: str | None = None
-) -> MovieSession | QuerySet[MovieSession]:
+) -> QuerySet[MovieSession]:
     if session_date:
         date = datetime.strptime(session_date, "%Y-%m-%d")
-        return MovieSession.objects.get(show_time=date)
+        return MovieSession.objects.filter(show_time__date=date)
     return MovieSession.objects.all()
 
 
