@@ -7,8 +7,10 @@ from db.models import Movie
 def get_movies(genres_ids: list[int] | None = None,
                actors_ids: list[int] | None = None) -> QuerySet:
     all_movies = Movie.objects.all()
+
     if genres_ids:
         all_movies = all_movies.filter(genres__id__in=genres_ids)
+
     if actors_ids:
         all_movies = all_movies.filter(actors__id__in=actors_ids)
 
