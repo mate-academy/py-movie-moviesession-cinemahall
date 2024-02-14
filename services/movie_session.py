@@ -32,7 +32,7 @@ def update_movie_session(session_id: int,
                          show_time: datetime = None,
                          movie_id: int = None,
                          cinema_hall_id: int = None) -> MovieSession:
-    movie_session = get_movie_session_by_id(session_id)
+    movie_session = get_movie_session_by_id(movie_session_id=session_id)
 
     if show_time:
         movie_session.show_time = show_time
