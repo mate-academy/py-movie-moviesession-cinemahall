@@ -5,10 +5,11 @@ from django.db.models import QuerySet
 from db.models import MovieSession
 
 
-def create_movie_session(movie_show_time: datetime,
-                         movie_id: int,
-                         cinema_hall_id: int
-                         ) -> MovieSession:
+def create_movie_session(
+        movie_show_time: datetime,
+        movie_id: int,
+        cinema_hall_id: int
+) -> MovieSession:
     movie_session = MovieSession.objects.create(
         show_time=movie_show_time,
         movie_id=movie_id,
@@ -49,5 +50,4 @@ def update_movie_session(session_id: int,
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
-    movie_session = get_movie_session_by_id(session_id)
-    movie_session.delete()
+    return MovieSession.objects.get(id=session_id).delete()
