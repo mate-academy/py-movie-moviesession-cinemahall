@@ -1,9 +1,7 @@
-from datetime import datetime
-
 from django.db.models import QuerySet
 
 import init_django_orm  # noqa: F401
-from db.models import MovieSession, CinemaHall, Movie
+from db.models import MovieSession
 
 
 def create_movie_session(
@@ -13,17 +11,16 @@ def create_movie_session(
 ) -> None:
     MovieSession.objects.create(
         show_time=movie_show_time,
-        cinema_hall=CinemaHall.objects.get(id=cinema_hall_id),
-        movie=Movie.objects.get(id=movie_id)
+        cinema_hall_id=cinema_hall_id,
+        movie_id=movie_id
     )
 
 
 def get_movies_sessions(
-        session_date: str = None,
+        session_date: str | None = None,
 ) -> QuerySet:
     if session_date:
-        date = datetime.strptime(session_date, "%Y-%m-%d")
-        return MovieSession.objects.filter(show_time__date=date)
+        return MovieSession.objects.filter(show_time__date=session_date)
     return MovieSession.objects.all()
 
 
@@ -35,20 +32,22 @@ def get_movie_session_by_id(
 
 def update_movie_session(
         session_id: int,
-        show_time: str = None,
-        movie_id: int = None,
-        cinema_hall_id: int = None
+        show_time: str | None = None,
+        movie_id: int | None = None,
+        cinema_hall_id: int | None = None
 ) -> None:
-    session_to_update = MovieSession.objects.filter(id=session_id)
+    session_to_update = get_movie_session_by_id(session_id)
 
     if show_time:
-        session_to_update.update(show_time=show_time)
+        session_to_update.show_time = show_time
 
     if movie_id:
-        session_to_update.update(movie=movie_id)
+        session_to_update.movie_id = movie_id
 
     if cinema_hall_id:
-        session_to_update.update(cinema_hall=cinema_hall_id)
+        session_to_update.cinema_hall_id = cinema_hall_id
+
+    session_to_update.save()
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
