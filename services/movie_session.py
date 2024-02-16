@@ -34,11 +34,13 @@ def update_movie_session(
         cinema_hall_id: int | None = None
 ) -> None:
     data_for_update = {
-        key: value for key, value in [
+        key: value for key, value in
+        [
             ("show_time", show_time),
             ("movie_id", movie_id),
             ("cinema_hall_id", cinema_hall_id)
-        ] if value is not None
+        ]
+        if value is not None
     }
 
     MovieSession.objects.filter(id=session_id).update(**data_for_update)
