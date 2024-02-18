@@ -3,7 +3,8 @@ from django.db.models import QuerySet
 from db.models import Actor, Genre, Movie
 
 
-def get_movies(genres_ids: list = None, actors_ids: list = None) -> QuerySet:
+def get_movies(genres_ids: list | None = None,
+               actors_ids: list | None = None) -> QuerySet:
     movies = Movie.objects.all()
 
     if genres_ids:
@@ -14,9 +15,8 @@ def get_movies(genres_ids: list = None, actors_ids: list = None) -> QuerySet:
     return movies
 
 
-def get_movie_by_id(movie_id: int) -> QuerySet:
-    movie = Movie.objects.get(id=movie_id)
-    return movie
+def get_movie_by_id(movie_id: int) -> Movie:
+    return Movie.objects.get(id=movie_id)
 
 
 def create_movie(movie_title: str,
@@ -29,8 +29,6 @@ def create_movie(movie_title: str,
     )
 
     if genres_ids:
-        genres = Genre.objects.filter(id__in=genres_ids)
-        movie.genres.set([*genres])
+        movie.genres.set(Genre.objects.filter(id__in=genres_ids))
     if actors_ids:
-        actors = Actor.objects.filter(id__in=actors_ids)
-        movie.actors.set([*actors])
+        movie.actors.set(Actor.objects.filter(id__in=actors_ids))
