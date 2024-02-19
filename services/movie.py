@@ -9,7 +9,7 @@ def get_movies(
 ) -> QuerySet:
     query = {
         key: value
-        for key, value in[("actors__in", actors_ids), ("genres__in", genres_ids)]
+        for key, value in [("actors__in", actors_ids), ("genres__in", genres_ids)]
         if value is not None
     }
 
