@@ -1,3 +1,4 @@
+from typing import Optional
 from datetime import datetime
 
 from db.models import MovieSession
@@ -16,7 +17,7 @@ def create_movie_session(
 
 
 def get_movies_sessions(
-        session_date: datetime = None
+        session_date: Optional[datetime] = None
 ) -> MovieSession:
     sessions = MovieSession.objects.all()
     if session_date:
@@ -30,8 +31,8 @@ def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
 
 def update_movie_session(
         session_id: int,
-        movie_id: int = None,
-        cinema_hall_id: int = None,
+        movie_id: Optional[int] = None,
+        cinema_hall_id: Optional[int] = None,
         show_time: datetime = None
 ) -> MovieSession:
     session = get_movie_session_by_id(session_id)
