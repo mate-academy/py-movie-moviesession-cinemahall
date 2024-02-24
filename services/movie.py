@@ -8,8 +8,8 @@ def get_movies(id_: int = None,
     if genres_ids is None and actors_ids is None:
         return Movie.objects.all()
     if genres_ids and actors_ids:
-        return Movie.objects.filter(genres_id=genres_ids,
-                                    actors_id=actors_ids)
+        return Movie.objects.filter(genres__in=genres_ids,
+                                    actors__in=actors_ids)
     if genres_ids:
         return Movie.objects.filter(genres__in=genres_ids)
     if actors_ids:
