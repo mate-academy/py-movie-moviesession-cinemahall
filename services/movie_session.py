@@ -4,12 +4,9 @@ from db.models import MovieSession, CinemaHall
 def create_movie_session(movie_show_time: int,
                          movie_id: int,
                          cinema_hall_id: int) -> MovieSession:
-
-    cinema_hall_instance = CinemaHall.objects.get(id=cinema_hall_id)
-
     new_movie_session = MovieSession.objects.create(
         show_time=movie_show_time,
-        cinema_hall=cinema_hall_instance,
+        cinema_hall_id=cinema_hall_id,
         movie_id=movie_id
     )
     return new_movie_session
