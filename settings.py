@@ -15,17 +15,6 @@ DATABASES = {
     }
 }
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": "postgres",
-#         "USER": "postgres",
-#         "PASSWORD": "postgres",
-#         "HOST": "localhost",
-#         "PORT": "5432",
-#     }
-# }
-
 LANGUAGE_CODE = "en-us"
 
 TIME_ZONE = "Europe/Kiev"
