@@ -8,13 +8,6 @@ def get_movies(
     actors_ids: List[Actor] = None
 ) -> QuerySet | Movie:
     movies = Movie.objects.all()
-
-    if not genres_ids and not actors_ids:
-        return movies
-    if genres_ids and actors_ids:
-        movies = movies.filter(
-            genres__in=genres_ids, actors__in=actors_ids
-        )
     if genres_ids:
         movies = movies.filter(genres__in=genres_ids)
     if actors_ids:
@@ -36,11 +29,9 @@ def create_movie(
     )
     if genres_ids:
         for genre_id in genres_ids:
-            genre = Genre.objects.get(id=genre_id)
-            movie.genres.add(genre)
+            movie.genres.set([genre_id])
     if actors_ids:
         for actor_id in actors_ids:
-            actor = Actor.objects.get(id=actor_id)
-            movie.actors.add(actor)
+            movie.actors.set([actor_id])
 
     movie.save()
