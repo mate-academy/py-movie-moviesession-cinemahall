@@ -7,19 +7,15 @@ def get_movies(
         genres_ids: list[int] = None,
         actors_ids: list[int] = None
 ) -> QuerySet[Movie]:
-    if not genres_ids and not actors_ids:
-        return Movie.objects.all()
+    movies = Movie.objects.all()
 
-    if actors_ids and not genres_ids:
-        return Movie.objects.filter(actors__id__in=actors_ids)
+    if actors_ids:
+        movies = movies.filter(actors__id__in=actors_ids)
 
-    if genres_ids and not actors_ids:
-        return Movie.objects.filter(genres__id__in=genres_ids)
+    if genres_ids:
+        movies = movies.filter(genres__id__in=genres_ids)
 
-    return Movie.objects.filter(
-        actors__id__in=actors_ids,
-        genres__id__in=genres_ids
-    )
+    return movies
 
 
 def get_movie_by_id(movie_id: int) -> Movie:
