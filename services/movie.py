@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from db.models import Movie
 
 from django.db.models import QuerySet
