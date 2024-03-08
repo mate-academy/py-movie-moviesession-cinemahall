@@ -48,5 +48,5 @@ def update_movie_session(
         ).update(cinema_hall_id=cinema_hall_id)
 
 
-def delete_movie_session_by_id(session_id: int) -> QuerySet[MovieSession]:
-    return MovieSession.objects.filter(id=session_id).delete()
+def delete_movie_session_by_id(session_id: int) -> tuple:
+    return get_movie_session_by_id(movie_session_id=session_id).delete()
