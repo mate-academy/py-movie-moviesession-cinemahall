@@ -1,9 +1,9 @@
-from datetime import datetime
+from typing import List
 
 from db.models import CinemaHall
 
 
-def get_cinema_halls():
+def get_cinema_halls() -> List[CinemaHall]:
     return CinemaHall.objects.all()
 
 
