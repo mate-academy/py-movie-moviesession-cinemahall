@@ -46,7 +46,10 @@ class MovieSession(models.Model):
         on_delete=models.SET_NULL,
         null=True
     )
-    movie = models.ForeignKey(Movie, on_delete=models.SET_NULL, related_name="sessions", null=True)
+    movie = models.ForeignKey(
+        Movie, on_delete=models.SET_NULL,
+        related_name="sessions", null=True
+    )
 
     def __str__(self) -> str:
         return f"{self.movie} {self.show_time}"
