@@ -44,6 +44,7 @@ class MovieSession(models.Model):
     cinema_hall = models.ForeignKey(
         CinemaHall,
         on_delete=models.SET_NULL,
+        related_name="movie_sessions",
         null=True
     )
     movie = models.ForeignKey(
