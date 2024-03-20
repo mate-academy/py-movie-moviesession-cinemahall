@@ -1,5 +1,5 @@
 from django.db import models
-# import init_django_orm
+import init_django_orm
 
 
 class Genre(models.Model):
@@ -32,14 +32,18 @@ class CinemaHall(models.Model):
     rows = models.IntegerField()
     seats_in_row = models.IntegerField()
 
+    @property
+    def capacity(self):
+        return self.rows * self.seats_in_row
+
     def __str__(self) -> str:
         return self.name
 
 
 class MovieSession(models.Model):
     show_time = models.DateTimeField()
-    cinema_hall = models.ForeignKey(CinemaHall, on_delete=models.DO_NOTHING)
-    movie = models.ForeignKey(Movie, on_delete=models.DO_NOTHING)
+    cinema_hall = models.ForeignKey(CinemaHall, on_delete=models.CASCADE)
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
         return (f""
