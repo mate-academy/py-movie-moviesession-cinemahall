@@ -1,5 +1,4 @@
-from db.models import Genre, Movie, MovieSession, Actor, CinemaHall
-import init_django_orm
+from db.models import Movie
 from django.db.models import QuerySet
 
 
