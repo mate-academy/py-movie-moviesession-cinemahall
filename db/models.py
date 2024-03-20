@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 
 class Genre(models.Model):
@@ -44,6 +45,12 @@ class MovieSession(models.Model):
     cinema_hall = models.ForeignKey(CinemaHall, on_delete=models.DO_NOTHING)
     movie = models.ForeignKey(Movie, on_delete=models.DO_NOTHING)
 
+    def save(self, *args, **kwargs) -> None:
+        if not timezone.is_aware(self.show_time):
+            self.show_time = timezone.make_aware(self.show_time)
+        super().save(*args, **kwargs)
+
     def __str__(self) -> str:
-        return (f"{self.movie.title}"
-                f" {self.show_time.strftime('%Y-%m-%d %H:%M:%S')}")
+        show_time_aware = timezone.localtime(self.show_time)
+        return (f"{self.movie.title} "
+                f"{show_time_aware.strftime('%Y-%m-%d %H:%M:%S')}")
