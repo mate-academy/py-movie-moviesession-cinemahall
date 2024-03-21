@@ -3,22 +3,25 @@ from django.db.models import QuerySet
 from db.models import Movie
 
 
-def get_movies(genres_ids: list = None, actors_ids: list = None) -> QuerySet:
+def get_movies(
+        genres_ids: list = None,
+        actors_ids: list = None
+) -> QuerySet(Movie):
     queryset = Movie.objects.all()
 
     if genres_ids and actors_ids:
         queryset = queryset.filter(
             genres__id__in=genres_ids,
             actors__id__in=actors_ids
-        ).distinct()
+        )
     elif genres_ids:
         queryset = queryset.filter(
             genres__id__in=genres_ids
-        ).distinct()
+        )
     elif actors_ids:
         queryset = queryset.filter(
             actors__id__in=actors_ids
-        ).distinct()
+        )
 
     return queryset
 
