@@ -1,10 +1,11 @@
 from django.db import models
+from django.db.models import CharField
 
 
 class Genre(models.Model):
     name = models.CharField(max_length=255, unique=True)
 
-    def __str__(self) -> str:
+    def __str__(self) -> CharField:
         return self.name
 
 
@@ -22,7 +23,7 @@ class Movie(models.Model):
     actors = models.ManyToManyField(Actor)
     genres = models.ManyToManyField(Genre)
 
-    def __str__(self) -> str:
+    def __str__(self) -> CharField:
         return self.title
 
 
@@ -45,11 +46,29 @@ class MovieSession(models.Model):
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
-        return (f""
-                f"{self.movie.title} "
-                f"{self.show_time.year}-"
-                f"{self.show_time.month}-"
-                f"{self.show_time.day} "
-                f"{self.show_time.hour}:"
-                f"{self.show_time.minute}:"
-                f"{self.show_time.second}")
+
+        t1 = self.movie.title
+        t2 = self.show_time.year
+
+        if int(self.show_time.month) < 10:
+            t3 = "0" + str(self.show_time.month)
+        else:
+            t3 = self.show_time.month
+        if int(self.show_time.day) < 10:
+            t4 = "0" + str(self.show_time.day)
+        else:
+            t4 = self.show_time.day
+        if int(self.show_time.hour) < 10:
+            t5 = "0" + str(self.show_time.hour)
+        else:
+            t5 = self.show_time.hour
+        if int(self.show_time.minute) < 10:
+            t6 = "0" + str(self.show_time.minute)
+        else:
+            t6 = self.show_time.minute
+        if int(self.show_time.second) < 10:
+            t7 = "0" + str(self.show_time.second)
+        else:
+            t7 = self.show_time.second
+
+        return f"{t1} {t2}-{t3}-{t4} {t5}:{t6}:{t7}"

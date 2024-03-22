@@ -2,7 +2,7 @@ from db.models import Movie
 from django.db.models import QuerySet
 
 
-def get_movie(
+def get_movies(
         genres_ids: list | None = None,
         actors_ids: list | None = None
 ) -> QuerySet:
