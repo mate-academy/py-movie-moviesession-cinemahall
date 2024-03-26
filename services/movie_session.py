@@ -1,7 +1,6 @@
-from datetime import datetime
 import datetime
 from datetime import date
-from typing import List, Any
+from typing import List
 
 from db.models import MovieSession, Movie, CinemaHall
 
