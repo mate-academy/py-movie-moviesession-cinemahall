@@ -23,7 +23,7 @@ class Movie(models.Model):
     genres = models.ManyToManyField(Genre, related_name="movies")
 
     def __str__(self) -> str:
-        return f"{self.title}"
+        return self.title
 
 
 class CinemaHall(models.Model):
@@ -40,7 +40,7 @@ class CinemaHall(models.Model):
 
 
 class MovieSession(models.Model):
-    show_time = models.DateTimeField(auto_now_add=True)
+    show_time = models.DateTimeField(default=None, null=True)
     cinema_hall = models.ForeignKey(CinemaHall,
                                     on_delete=models.CASCADE,
                                     related_name="movie_sessions")
@@ -49,4 +49,4 @@ class MovieSession(models.Model):
                               related_name="movie_sessions")
 
     def __str__(self) -> str:
-        return f"{self.cinema_hall.name} {self.show_time}"
+        return f"{self.movie.title} {self.show_time}"
