@@ -1,3 +1,5 @@
+from typing import Optional
+
 from django.db.models import QuerySet
 
 from db.models import CinemaHall
@@ -8,9 +10,9 @@ def get_cinema_halls() -> QuerySet:
 
 
 def create_cinema_hall(
-        hall_name: str = None,
-        hall_rows: int = None,
-        hall_seats_in_row: int = None,
+        hall_name: Optional[str] = None,
+        hall_rows: Optional[int] = None,
+        hall_seats_in_row: Optional[int] = None,
 ) -> CinemaHall:
     new_cinema_hall = CinemaHall.objects.create(
         name=hall_name,
