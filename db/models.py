@@ -1,3 +1,5 @@
+import datetime
+
 from django.db import models
 from django.forms import DateTimeField
 
@@ -41,7 +43,7 @@ class CinemaHall(models.Model):
 
 
 class MovieSession(models.Model):
-    show_time = DateTimeField()
+    show_time = models.DateTimeField(auto_now_add=True)
     cinema_hall = models.ForeignKey(CinemaHall,
                                     on_delete=models.CASCADE,
                                     related_name="movie_sessions")
