@@ -1,7 +1,4 @@
-import datetime
-
 from django.db import models
-from django.forms import DateTimeField
 
 
 class Genre(models.Model):
