@@ -36,9 +36,8 @@ def update_movie_session(session_id: int,
                          show_time: datetime = None,
                          movie_id: int = None,
                          cinema_hall_id: int = None) -> None | MovieSession:
-    try:
-        session = get_movie_session_by_id(session_id)
-    except MovieSession.DoesNotExist:
+    session = get_movie_session_by_id(session_id)
+    if not session:
         return None
     if show_time:
         session.show_time = show_time
