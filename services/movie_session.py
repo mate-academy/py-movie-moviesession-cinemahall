@@ -1,4 +1,3 @@
-from datetime import date
 from typing import List
 
 from db.models import MovieSession, Movie, CinemaHall
@@ -16,11 +15,7 @@ def create_movie_session(movie_show_time: str,
 
 def get_movies_sessions(session_date: str | None = None) -> List[MovieSession]:
     if session_date:
-        pars_date = session_date.split("-")
-        result = MovieSession.objects.filter(
-            show_time__date=date(int(pars_date[0]), int(pars_date[1]),
-                                 int(pars_date[2])))
-
+        result = MovieSession.objects.filter(show_time__date=session_date)
         return result
     return MovieSession.objects.all()
 
