@@ -37,11 +37,7 @@ def update_movie_session(session_id: int,
     session = MovieSession.objects.get(id=session_id)
 
     if show_time:
-        show_time = (str(show_time)[:10])
-        pars_date = str(show_time).split("-")
-        session.show_time = datetime.datetime(year=(int(pars_date[0])),
-                                              month=(int(pars_date[1])),
-                                              day=(int(pars_date[2])))
+        session.show_time = show_time
 
     if movie_id:
         session.movie = Movie.objects.get(id=movie_id)

@@ -46,29 +46,4 @@ class MovieSession(models.Model):
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE, null=True)
 
     def __str__(self) -> str:
-
-        t1 = self.movie.title
-        t2 = self.show_time.year
-
-        if int(self.show_time.month) < 10:
-            t3 = "0" + str(self.show_time.month)
-        else:
-            t3 = self.show_time.month
-        if int(self.show_time.day) < 10:
-            t4 = "0" + str(self.show_time.day)
-        else:
-            t4 = self.show_time.day
-        if int(self.show_time.hour) < 10:
-            t5 = "0" + str(self.show_time.hour)
-        else:
-            t5 = self.show_time.hour
-        if int(self.show_time.minute) < 10:
-            t6 = "0" + str(self.show_time.minute)
-        else:
-            t6 = self.show_time.minute
-        if int(self.show_time.second) < 10:
-            t7 = "0" + str(self.show_time.second)
-        else:
-            t7 = self.show_time.second
-
-        return f"{t1} {t2}-{t3}-{t4} {t5}:{t6}:{t7}"
+        return f"{self.movie.title} {self.show_time}"
