@@ -15,7 +15,8 @@ def create_movie_session(
                                        cinema_hall_id=cinema_hall_id)
 
 
-def get_movies_sessions(session_date: datetime.date = None) -> list[MovieSession]:
+def get_movies_sessions(
+        session_date: datetime.date = None) -> list[MovieSession]:
 
     if session_date:
         return MovieSession.objects.filter(show_time__date=session_date)
