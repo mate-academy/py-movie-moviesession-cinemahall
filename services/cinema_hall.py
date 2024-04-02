@@ -1,5 +1,7 @@
-from db.models import CinemaHall
 from django.db.models.query import QuerySet
+from django.shortcuts import get_object_or_404
+
+from db.models import CinemaHall
 
 
 def get_cinema_halls() -> QuerySet:
@@ -14,8 +16,5 @@ def create_cinema_hall(hall_name: str,
                                      seats_in_row=hall_seats_in_row)
 
 
-def get_cinema_hall_by_id(cinema_hall_id: int) -> CinemaHall | None:
-    try:
-        return CinemaHall.objects.get(id=cinema_hall_id)
-    except CinemaHall.DoesNotExist:
-        return None
+def get_cinema_hall_by_id(cinema_hall_id: int) -> CinemaHall:
+    return get_object_or_404(CinemaHall, pk=cinema_hall_id)
