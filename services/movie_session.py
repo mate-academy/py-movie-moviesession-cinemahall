@@ -3,7 +3,11 @@ import datetime
 from db.models import MovieSession, CinemaHall, Movie
 
 
-def create_movie_session(movie_show_time: datetime, movie_id: int, cinema_hall_id: int) -> MovieSession:
+def create_movie_session(
+        movie_show_time: datetime,
+        movie_id: int,
+        cinema_hall_id: int
+) -> MovieSession:
     return MovieSession.objects.create(
         show_time=movie_show_time,
         cinema_hall=CinemaHall.objects.get(id=cinema_hall_id),
@@ -13,7 +17,10 @@ def create_movie_session(movie_show_time: datetime, movie_id: int, cinema_hall_i
 
 def get_movies_sessions(session_date: str = None) -> MovieSession:
     if session_date:
-        date_object = datetime.datetime.strptime(session_date, "%Y-%m-%d").date()
+        date_object = datetime.datetime.strptime(
+            session_date,
+            "%Y-%m-%d"
+        ).date()
         return MovieSession.objects.get(show_time__date=date_object)
     else:
         return MovieSession.objects.all()

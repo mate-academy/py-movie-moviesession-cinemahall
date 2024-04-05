@@ -1,9 +1,15 @@
 from db.models import Movie, Genre, Actor
 
 
-def get_movies(genres_ids: list[int] = None, actors_ids: list[int] = None) -> Movie:
+def get_movies(
+        genres_ids: list[int] = None,
+        actors_ids: list[int] = None
+) -> Movie:
     if genres_ids and actors_ids:
-        return Movie.objects.filter(genres__id__in=genres_ids, actors__id__in=actors_ids)
+        return Movie.objects.filter(
+            genres__id__in=genres_ids,
+            actors__id__in=actors_ids
+        )
     elif genres_ids:
         return Movie.objects.filter(genres__id__in=genres_ids)
     elif actors_ids:
