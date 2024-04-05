@@ -12,14 +12,6 @@ def get_movies(
     if not genres_ids and not actors_ids:
         return queryset
 
-    if genres_ids and actors_ids:
-        queryset = queryset.filter(
-            genres__id__in=genres_ids,
-        )
-        queryset = queryset.filter(
-            actors__id__in=actors_ids,
-        )
-
     if genres_ids:
         queryset = queryset.filter(
             genres__id__in=genres_ids
