@@ -17,11 +17,7 @@ def create_movie_session(
 
 def get_movies_sessions(session_date: str = None) -> MovieSession:
     if session_date:
-        date_object = datetime.datetime.strptime(
-            session_date,
-            "%Y-%m-%d"
-        ).date()
-        return MovieSession.objects.get(show_time__date=date_object)
+        return MovieSession.objects.filter(show_time__date=session_date)
     else:
         return MovieSession.objects.all()
 
