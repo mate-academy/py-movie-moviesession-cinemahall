@@ -1,7 +1,9 @@
+from typing import List
+
 from db.models import CinemaHall
 
 
-def get_cinema_halls():
+def get_cinema_halls() -> List[CinemaHall]:
     return CinemaHall.objects.all()
 
 
@@ -16,4 +18,3 @@ def create_cinema_hall(
         seats_in_row=hall_seats_in_row
     )
     return new_cinema_hall
-
