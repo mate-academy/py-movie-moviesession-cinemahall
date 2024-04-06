@@ -51,5 +51,4 @@ class MovieSession(models.Model):
         related_name="movies")
 
     def __str__(self) -> str:
-        return (f"{self.movie.title} "
-                f"{self.show_time.strftime("%Y-%m-%d %H:%M:%S")}")
+        return f"{self.movie.title} {self.show_time.strftime("%Y-%m-%d %H:%M:%S")}"
