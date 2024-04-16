@@ -13,7 +13,7 @@ def create_cinema_hall(
         hall_name: str,
         hall_rows: int,
         hall_seats_in_row: int
-) -> None | CinemaHall:
+) -> CinemaHall:
     return CinemaHall.objects.get_or_create(
         name=hall_name,
         rows=hall_rows,
