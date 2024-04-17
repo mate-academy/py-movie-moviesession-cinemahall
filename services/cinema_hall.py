@@ -16,6 +16,6 @@ def create_cinema_hall(
     created_cinema_hall = CinemaHall.objects.create(
         name=hall_name,
         rows=hall_rows,
-        seats=hall_seats_in_row
+        seats_in_row=hall_seats_in_row
     )
     return created_cinema_hall
