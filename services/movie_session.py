@@ -1,5 +1,4 @@
 from django.db.models import QuerySet
-from datetime import datetime
 
 
 from db.models import MovieSession
