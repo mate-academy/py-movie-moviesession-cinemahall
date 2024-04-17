@@ -9,7 +9,9 @@ def get_movies(
 ) -> QuerySet:
     movies = Movie.objects.all()
     if genres_ids is not None and actors_ids is not None:
-        movies = movies.filter(genres__id__in=genres_ids, actors__id__in=actors_ids)
+        movies = movies.filter(
+            genres__id__in=genres_ids,
+            actors__id__in=actors_ids)
     elif genres_ids is not None:
         movies = movies.filter(genres__id__in=genres_ids).distinct()
     elif actors_ids is not None:
@@ -27,7 +29,9 @@ def create_movie(
         genres_ids: list[int] | None = None,
         actors_ids: list[int] | None = None
 ) -> None:
-    movie = Movie.objects.create(title=movie_title, description=movie_description)
+    movie = Movie.objects.create(
+        title=movie_title,
+        description=movie_description)
     if genres_ids is not None:
         movie.genres.add(*genres_ids)
     if actors_ids is not None:
