@@ -20,16 +20,11 @@ def create_movie_session(movie_show_time: datetime,
 def get_movies_sessions(session_date: datetime = None) -> QuerySet:
     if session_date:
         return MovieSession.objects.filter(show_time__date=session_date)
-    else:
-        return MovieSession.objects.all()
+    return MovieSession.objects.all()
 
 
 def get_movie_session_by_id(movie_session_id: int) -> None | MovieSession:
-    try:
-        return MovieSession.objects.get(id=movie_session_id)
-    except MovieSession.DoesNotExist:
-        print(f"There is no such session id: {movie_session_id}")
-        return None
+    return get_object_or_404(MovieSession, id=movie_session_id)
 
 
 def update_movie_session(session_id: int,
@@ -37,8 +32,6 @@ def update_movie_session(session_id: int,
                          movie_id: int = None,
                          cinema_hall_id: int = None) -> None | MovieSession:
     session = get_movie_session_by_id(session_id)
-    if not session:
-        return None
     if show_time:
         session.show_time = show_time
     if movie_id:
