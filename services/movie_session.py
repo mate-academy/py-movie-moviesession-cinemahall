@@ -1,5 +1,6 @@
 import init_django_orm  # noqa: F401
 
+from django.db.models.query import QuerySet
 from db.models import MovieSession
 
 
@@ -10,7 +11,7 @@ def create_movie_session(movie_show_time: str,
                                 cinema_hall_id=cinema_hall_id)
 
 
-def get_movies_sessions(session_date: str = None) -> MovieSession:
+def get_movies_sessions(session_date: str = None) -> QuerySet:
     filters = {}
 
     if session_date:
@@ -19,7 +20,7 @@ def get_movies_sessions(session_date: str = None) -> MovieSession:
     return MovieSession.objects.filter(**filters)
 
 
-def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
+def get_movie_session_by_id(movie_session_id: int) -> QuerySet:
     return MovieSession.objects.get(id=movie_session_id)
 
 
