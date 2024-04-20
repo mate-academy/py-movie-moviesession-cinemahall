@@ -29,7 +29,6 @@ def update_movie_session(session_id: int,
                          show_time: Optional[datetime] = None,
                          movie_id: Optional[int] = None,
                          cinema_hall_id: Optional[int] = None) -> None:
-
     value_dict = {}
     if show_time:
         value_dict["show_time"] = show_time
