@@ -5,8 +5,6 @@ from django.db.models.query import QuerySet
 from django.shortcuts import get_object_or_404
 
 from db.models import MovieSession
-from services.movie import get_movie_by_id
-from services.cinema_hall import get_cinema_hall_by_id
 
 
 def create_movie_session(movie_show_time: datetime,
@@ -31,15 +29,15 @@ def update_movie_session(session_id: int,
                          show_time: Optional[datetime] = None,
                          movie_id: Optional[int] = None,
                          cinema_hall_id: Optional[int] = None) -> None:
-    if show_time or movie_id or cinema_hall_id:
-        session = get_movie_session_by_id(session_id)
-        if show_time:
-            session.show_time = show_time
-        if movie_id:
-            session.movie = get_movie_by_id(movie_id)
-        if cinema_hall_id:
-            session.cinema_hall = get_cinema_hall_by_id(cinema_hall_id)
-        session.save()
+
+    value_dict = {}
+    if show_time:
+        value_dict["show_time"] = show_time
+    if movie_id:
+        value_dict["movie_id"] = movie_id
+    if cinema_hall_id:
+        value_dict["cinema_hall_id"] = cinema_hall_id
+    MovieSession.objects.filter(id=session_id).update(**value_dict)
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
