@@ -40,10 +40,10 @@ def update_movie_session(session_id: int,
         new_session["show_time"] = show_time
 
     if movie_id:
-        new_session["movie"] = Movie.objects.get(id=movie_id)
+        new_session["movie_id"] = movie_id
 
     if cinema_hall_id:
-        new_session["cinema_hall"] = CinemaHall.objects.get(id=cinema_hall_id)
+        new_session["cinema_hall_id"] = cinema_hall_id
 
     if new_session.keys:
         MovieSession.objects.filter(id=session_id).update(**new_session)
