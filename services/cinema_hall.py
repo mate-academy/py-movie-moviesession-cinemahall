@@ -4,7 +4,7 @@ from django.db.models.query import QuerySet
 from db.models import CinemaHall
 
 
-def get_cinema_halls() -> QuerySet:
+def get_cinema_halls() -> QuerySet[CinemaHall]:
     return CinemaHall.objects.all()
 
 
