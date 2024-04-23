@@ -36,7 +36,8 @@ def update_movie_session(session_id: int,
         value_dict["movie_id"] = movie_id
     if cinema_hall_id:
         value_dict["cinema_hall_id"] = cinema_hall_id
-    MovieSession.objects.filter(id=session_id).update(**value_dict)
+    if value_dict:
+        MovieSession.objects.filter(id=session_id).update(**value_dict)
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
