@@ -1,4 +1,3 @@
-from datetime import datetime
 from django.db import models
 
 
@@ -35,12 +34,13 @@ class CinemaHall(models.Model):
     def __str__(self) -> str:
         return self.name
 
+    @property
+    def capacity(self) -> str:
+        return self.rows * self.seats_in_row
+
 
 class MovieSession(models.Model):
-    show_time = models.DateTimeField(
-        default=datetime.strptime
-        ("2021-11-29 16:40:00", "%Y-%m-%d %H:%M:%S")
-    )
+    show_time = models.DateTimeField()
     cinema_hall = models.ForeignKey(CinemaHall, on_delete=models.CASCADE)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
 
