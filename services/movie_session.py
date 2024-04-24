@@ -8,18 +8,20 @@ from datetime import datetime
 def create_movie_session(
         movie_show_time: datetime,
         movie_id: int,
-        cinema_hall_id: int) -> MovieSession:
+        cinema_hall_id: int
+) -> MovieSession:
     return MovieSession.objects.create(
         show_time=movie_show_time,
         movie_id=movie_id,
-        cinema_hall_id=cinema_hall_id)
+        cinema_hall_id=cinema_hall_id
+    )
 
 
 def get_movies_sessions(session_date: datetime.date = None) -> QuerySet:
     queryset = MovieSession.objects.all()
     if session_date:
         date_obj = datetime.strptime(session_date, "%Y-%m-%d")
-        return MovieSession.objects.filter(show_time__date=date_obj.date())
+        queryset = queryset.filter(show_time__date=date_obj.date())
     return queryset
 
 
@@ -31,7 +33,8 @@ def update_movie_session(
         session_id: int,
         show_time: datetime = None,
         movie_id: int = None,
-        cinema_hall_id: int = None) -> MovieSession:
+        cinema_hall_id: int = None
+) -> MovieSession:
     movie_session = MovieSession.objects.get(id=session_id)
     if show_time:
         movie_session.show_time = show_time

@@ -5,15 +5,12 @@ from db.models import Movie
 
 def get_movies(
         genres_ids: [] = None,
-        actors_ids: [] = None) -> QuerySet:
+        actors_ids: [] = None
+) -> QuerySet:
     queryset = Movie.objects.all()
-    if genres_ids and actors_ids:
-        queryset = queryset.filter(
-            genres__id__in=genres_ids,
-            actors__id__in=actors_ids)
-    elif actors_ids:
+    if actors_ids:
         queryset = queryset.filter(actors__id__in=actors_ids)
-    elif genres_ids:
+    if genres_ids:
         queryset = queryset.filter(genres__id__in=genres_ids)
     return queryset
 
@@ -26,10 +23,12 @@ def create_movie(
         movie_title: str,
         movie_description: str,
         genres_ids: [] = None,
-        actors_ids: [] = None) -> Movie:
+        actors_ids: [] = None
+) -> Movie:
     new_movie = Movie.objects.create(
         title=movie_title,
-        description=movie_description)
+        description=movie_description
+    )
     if genres_ids:
         new_movie.genres.add(*genres_ids)
     if actors_ids:
