@@ -1,4 +1,5 @@
 from datetime import datetime
+from typing import Optional
 
 from django.db.models.query import QuerySet
 
@@ -17,7 +18,7 @@ def create_movie_session(
     )
 
 
-def get_movies_sessions(session_date: str = None) -> QuerySet:
+def get_movies_sessions(session_date: Optional[str] = None) -> QuerySet:
     movie_sessions = MovieSession.objects.all()
     if session_date:
         movie_sessions = movie_sessions.filter(show_time__date=session_date)
@@ -30,11 +31,14 @@ def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
 
 def update_movie_session(
         session_id: int,
-        show_time: datetime = None,
-        movie_id: int = None,
-        cinema_hall_id: int = None
-) -> MovieSession:
-    movie_session = MovieSession.objects.get(id=session_id)
+        show_time: Optional[datetime] = None,
+        movie_id: Optional[int] = None,
+        cinema_hall_id: Optional[int] = None
+) -> None:
+    if show_time is None and movie_id is None and cinema_hall_id is None:
+        return
+    else:
+        movie_session = get_movie_session_by_id(session_id)
     if show_time:
         movie_session.show_time = show_time
     if movie_id:
@@ -42,7 +46,6 @@ def update_movie_session(
     if cinema_hall_id:
         movie_session.cinema_hall_id = cinema_hall_id
     movie_session.save()
-    return movie_session
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
