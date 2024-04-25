@@ -38,11 +38,11 @@ def update_movie_session(
     update_dict = {}
 
     if show_time is not None:
-        update_dict['show_time'] = show_time
+        update_dict["show_time"] = show_time
     if movie_id is not None:
-        update_dict['movie_id'] = movie_id
+        update_dict["movie_id"] = movie_id
     if cinema_hall_id is not None:
-        update_dict['cinema_hall_id'] = cinema_hall_id
+        update_dict["cinema_hall_id"] = cinema_hall_id
 
     if update_dict:
         MovieSession.objects.filter(id=session_id).update(**update_dict)
