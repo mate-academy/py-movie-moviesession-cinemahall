@@ -18,7 +18,7 @@ def get_movies(
 
 
 def get_movie_by_id(movie_id: int) -> Movie:
-    return Movie.objects.get(id=movie_id)
+    return Movie.objects.get(pk=movie_id)
 
 
 def create_movie(
