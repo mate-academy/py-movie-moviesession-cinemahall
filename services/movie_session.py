@@ -35,17 +35,17 @@ def update_movie_session(
         movie_id: Optional[int] = None,
         cinema_hall_id: Optional[int] = None
 ) -> None:
-    if show_time is None and movie_id is None and cinema_hall_id is None:
-        return
-    else:
-        movie_session = get_movie_session_by_id(session_id)
-    if show_time:
-        movie_session.show_time = show_time
-    if movie_id:
-        movie_session.movie_id = movie_id
-    if cinema_hall_id:
-        movie_session.cinema_hall_id = cinema_hall_id
-    movie_session.save()
+    update_dict = {}
+
+    if show_time is not None:
+        update_dict['show_time'] = show_time
+    if movie_id is not None:
+        update_dict['movie_id'] = movie_id
+    if cinema_hall_id is not None:
+        update_dict['cinema_hall_id'] = cinema_hall_id
+
+    if update_dict:
+        MovieSession.objects.filter(id=session_id).update(**update_dict)
 
 
 def delete_movie_session_by_id(session_id: int) -> None:

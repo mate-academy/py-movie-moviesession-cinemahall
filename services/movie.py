@@ -1,5 +1,7 @@
-from django.db.models.query import QuerySet
 from typing import Optional
+
+from django.db.models.query import QuerySet
+
 from db.models import Movie
 
 
