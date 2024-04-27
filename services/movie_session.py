@@ -25,7 +25,10 @@ class MovieSessionService:
         movie_id: int | None = None,
         cinema_hall_id: int | None = None
     ) -> None:
-        updated_session = MovieSessionService.get_movie_session_by_id(session_id)
+        updated_session = (
+            MovieSessionService
+            .get_movie_session_by_id(session_id)
+        )
         if show_time:
             updated_session.show_time = show_time
         if movie_id:
@@ -49,5 +52,8 @@ class MovieSessionService:
 
     @staticmethod
     def delete_movie_session_by_id(movie_session_id: int) -> None:
-        session_to_delete = MovieSessionService.get_movie_session_by_id(movie_session_id)
+        session_to_delete = (
+            MovieSessionService
+            .get_movie_session_by_id(movie_session_id)
+        )
         session_to_delete.delete()
