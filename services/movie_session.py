@@ -10,12 +10,11 @@ def create_movie_session(
         movie_id: int,
         cinema_hall_id: int
 ) -> MovieSession:
-
-    new_session = MovieSession(show_time=movie_show_time)
-    if cinema_hall_id and movie_id:
-        new_session.movie_id = movie_id
-        new_session.cinema_hall_id = cinema_hall_id
-        new_session.save()
+    new_session = MovieSession.objects.create(
+        show_time=movie_show_time,
+        movie_id=movie_id,
+        cinema_hall_id=cinema_hall_id
+    )
     return new_session
 
 
@@ -23,7 +22,7 @@ def get_movies_sessions(session_date: str | None = None) -> MovieSession:
     query = MovieSession.objects.all()
     if session_date:
         datetime.strptime(session_date, "%Y-%m-%d")
-        query = MovieSession.objects.filter(
+        query = query.filter(
             show_time__date=session_date
         )
         return query
