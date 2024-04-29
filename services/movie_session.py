@@ -4,7 +4,7 @@ from db.models import MovieSession
 
 def get_movies_sessions(
     session_date: str | None = None,
-) -> QuerySet:
+) -> QuerySet[MovieSession]:
     queryset = MovieSession.objects.all()
     if session_date:
         queryset = queryset.filter(show_time__date=session_date)
