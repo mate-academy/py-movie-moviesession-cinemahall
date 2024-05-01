@@ -22,10 +22,10 @@ def get_movies_sessions(session_date: str | None = None) -> MovieSession:
     query = MovieSession.objects.all()
     if session_date:
         datetime.strptime(session_date, "%Y-%m-%d")
-        query = query.filter(
+        querys = query.filter(
             show_time__date=session_date
         )
-        return query
+        return querys
     return query
 
 
