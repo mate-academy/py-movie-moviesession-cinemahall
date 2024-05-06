@@ -2,26 +2,19 @@ from django.utils import timezone
 
 from django.db.models import QuerySet
 
-from db.models import MovieSession, Movie, CinemaHall
+from db.models import MovieSession
 
 
 def create_movie_session(
         movie_show_time: str,
         movie_id: int,
         cinema_hall_id: int
-) -> MovieSession:
-    new_movie_session = MovieSession(show_time=movie_show_time)
-
-    if movie_id:
-        movie = Movie.objects.get(pk=movie_id)
-        new_movie_session.movie = movie
-
-    if cinema_hall_id:
-        cinema_hall = CinemaHall.objects.get(pk=cinema_hall_id)
-        new_movie_session.cinema_hall = cinema_hall
-
-    new_movie_session.save()
-    return new_movie_session
+) -> None:
+    MovieSession.objects.create(
+        show_time=movie_show_time,
+        movie_id=movie_id,
+        cinema_hall_id=cinema_hall_id
+    )
 
 
 def get_movies_sessions(session_date: str = None) -> QuerySet[MovieSession]:
@@ -44,18 +37,16 @@ def update_movie_session(
         movie_id: int = None,
         cinema_hall_id: int = None
 ) -> MovieSession:
-    movie_session = MovieSession.objects.get(pk=session_id)
+    movie_session = get_movie_session_by_id(session_id)
 
     if show_time:
         movie_session.show_time = show_time
 
     if movie_id:
-        movie = Movie.objects.get(pk=movie_id)
-        movie_session.movie = movie
+        movie_session.movie_id = movie_id
 
     if cinema_hall_id:
-        cinema_hall = CinemaHall.objects.get(pk=cinema_hall_id)
-        movie_session.cinema_hall = cinema_hall
+        movie_session.cinema_hall_id = cinema_hall_id
 
     movie_session.save()
     return movie_session
