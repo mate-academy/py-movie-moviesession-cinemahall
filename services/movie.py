@@ -1,8 +1,11 @@
-from django.db.models import Q
+from typing import List, Optional
+from django.db.models import Q, QuerySet
 from db.models import Movie
 
-def get_movies(genres_ids=None, actors_ids=None):
 
+def get_movies(
+        genres_ids: Optional[List[int]] = None,
+        actors_ids: Optional[List[int]] = None) -> QuerySet:
     query = Q()
     if genres_ids:
         query &= Q(genres__id__in=genres_ids)
@@ -11,15 +14,18 @@ def get_movies(genres_ids=None, actors_ids=None):
 
     return Movie.objects.filter(query).distinct()
 
-def get_movie_by_id(movie_id):
-
+def get_movie_by_id(movie_id: int) -> Optional[Movie]:
     try:
         return Movie.objects.get(id=movie_id)
     except Movie.DoesNotExist:
         return None
 
-def create_movie(movie_title, movie_description, genres_ids=None, actors_ids=None):
-
+def create_movie(
+    movie_title: str,
+    movie_description: str,
+    genres_ids: Optional[List[int]] = None,
+    actors_ids: Optional[List[int]] = None
+) -> Movie:
     movie = Movie(title=movie_title, description=movie_description)
     movie.save()
     if genres_ids:
