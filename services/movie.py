@@ -5,7 +5,7 @@ from db.models import Movie
 
 def get_movies(
         genres_ids: Optional[List[int]] = None,
-        actors_ids: Optional[List[int]] = None) -> QuerySet:
+        actors_ids: Optional[List[int]] = None) -> QuerySet[Movie]:
     query = Q()
     if genres_ids:
         query &= Q(genres__id__in=genres_ids)
