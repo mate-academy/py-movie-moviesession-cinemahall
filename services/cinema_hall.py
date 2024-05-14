@@ -1,9 +1,11 @@
+from django.db.models import QuerySet
+
 import init_django_orm  # noqa: F401
 
 from db.models import CinemaHall
 
 
-def get_cinema_halls() -> object:
+def get_cinema_halls() -> QuerySet[CinemaHall]:
     return CinemaHall.objects.all()
 
 
