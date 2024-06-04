@@ -8,24 +8,20 @@ from db.models import Movie
 def get_movies(
         genres_ids: list[int] = None,
         actors_ids: list[int] = None
-) -> QuerySet | Movie:
+) -> QuerySet[Movie]:
 
     if not genres_ids and not actors_ids:
-        print("inside not (genres and actors)")
         return Movie.objects.all()
 
     if genres_ids and actors_ids:
-        print("inside genres and actors")
         return Movie.objects.filter(
             genres__id__in=genres_ids
         ).filter(actors__id__in=actors_ids)
 
     if genres_ids and not actors_ids:
-        print("inside genres without actors")
         return Movie.objects.filter(genres__id__in=genres_ids)
 
     if actors_ids and not genres_ids:
-        print("actors without genres")
         return Movie.objects.filter(actors__id__in=actors_ids)
 
 
