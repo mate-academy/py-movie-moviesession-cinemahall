@@ -1,11 +1,11 @@
 from datetime import datetime
 from django.db.models import QuerySet
-#import pytz
+# import pytz
 import init_django_orm  # noqa: F401
 
 from db.models import Movie, CinemaHall, MovieSession
 
-#timezone = pytz.timezone("Europe/Kiev")
+# timezone = pytz.timezone("Europe/Kiev")
 
 
 def create_movie_session(
@@ -13,7 +13,7 @@ def create_movie_session(
         movie_id: int,
         cinema_hall_id: int
 ) -> None:
-    #movie_show_time = timezone.localize(movie_show_time)
+    # movie_show_time = timezone.localize(movie_show_time)
     movie_session = MovieSession(
         show_time=movie_show_time,
         movie=Movie.objects.get(id=movie_id),
@@ -26,7 +26,7 @@ def get_movies_sessions(session_date: type(datetime) = None) -> QuerySet:
     movie_sessions = MovieSession.objects.all()
     if session_date:
         session_date = datetime.strptime(session_date, "%Y-%m-%d")
-        #session_date = timezone.localize(session_date)
+        # session_date = timezone.localize(session_date)
         movie_sessions = movie_sessions.filter(show_time__date=session_date)
     return movie_sessions
 
@@ -43,7 +43,7 @@ def update_movie_session(
 ) -> None:
     movie_session = MovieSession.objects.get(id=session_id)
     if show_time:
-        #show_time = timezone.localize(show_time)
+        # show_time = timezone.localize(show_time)
         movie_session.show_time = show_time
     if movie_id:
         movie_session.movie = Movie.objects.get(id=movie_id)
