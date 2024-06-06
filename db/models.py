@@ -1,5 +1,4 @@
 from django.db import models
-from django.db.models import CASCADE
 
 
 class Genre(models.Model):
@@ -44,13 +43,13 @@ class MovieSession(models.Model):
     show_time = models.DateTimeField()
     cinema_hall = models.ForeignKey(
         CinemaHall,
-        related_name="movie_hall",
-        on_delete=CASCADE
+        related_name="movie_sessions",
+        on_delete=models.CASCADE
     )
     movie = models.ForeignKey(
         Movie,
         related_name="movie_session",
-        on_delete=CASCADE
+        on_delete=models.CASCADE
     )
 
     def __str__(self) -> str:
