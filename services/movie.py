@@ -1,5 +1,6 @@
-from db.models import Movie
 from django.db.models.query import QuerySet
+
+from db.models import Movie
 
 
 def get_movies(
