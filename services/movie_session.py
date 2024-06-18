@@ -4,7 +4,9 @@ from db.models import MovieSession, CinemaHall
 from services.movie import get_movie_by_id
 
 
-def create_movie_session(movie_show_time: datetime, movie_id: int, cinema_hall_id: int) -> None:
+def create_movie_session(movie_show_time: datetime,
+                         movie_id: int,
+                         cinema_hall_id: int) -> None:
     MovieSession.objects.create(
         show_time=movie_show_time,
         movie_id=movie_id,
