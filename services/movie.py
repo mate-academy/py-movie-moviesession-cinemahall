@@ -3,7 +3,10 @@ from django.db.models import QuerySet
 from db.models import Movie
 
 
-def get_movies(genres_ids: list[int] = None, actors_ids: list[int] = None) -> QuerySet | Movie:
+def get_movies(
+        genres_ids: list[int] = None,
+        actors_ids: list[int] = None
+) -> QuerySet | Movie:
     if not genres_ids and not actors_ids:
         return Movie.objects.all()
 
@@ -37,4 +40,3 @@ def create_movie(
 
     if actors_ids:
         new_movie.actors.add(*actors_ids)
-
