@@ -44,4 +44,4 @@ def update_movie_session(
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
-    get_movie_session_by_id(session_id).delete()
+    get_movies_sessions().filter(id=session_id).delete()
