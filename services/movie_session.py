@@ -1,5 +1,7 @@
 from datetime import datetime
 
+from django.db.models import QuerySet
+
 from db.models import MovieSession, CinemaHall
 from services.movie import get_movie_by_id
 
@@ -12,7 +14,7 @@ def create_movie_session(movie_show_time: datetime,
                                 cinema_hall_id=cinema_hall_id)
 
 
-def get_movies_sessions(session_date: str = None) -> list[MovieSession]:
+def get_movies_sessions(session_date: str = None) -> QuerySet[MovieSession]:
     if session_date:
         return MovieSession.objects.filter(show_time__date=session_date)
     return MovieSession.objects.all()
