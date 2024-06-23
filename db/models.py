@@ -19,7 +19,7 @@ class Actor(models.Model):
 class Movie(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
-    actors = models.ManyToManyField(Actor, related_name="movies_actors")
+    actors = models.ManyToManyField(Actor, related_name="movie_actors")
     genres = models.ManyToManyField(Genre, related_name="movie_genres")
 
     def __str__(self) -> str:
@@ -45,4 +45,4 @@ class MovieSession(models.Model):
     show_time = models.DateTimeField()
 
     def __str__(self) -> str:
-        return f"{self.movie} {self.show_time}"  # !
+        return f"{self.movie} {self.show_time}"
