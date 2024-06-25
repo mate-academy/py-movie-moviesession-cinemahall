@@ -28,6 +28,6 @@ def create_movie(movie_title: str,
     return movie
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     Genre.objects.all()
     Actor.objects.all()
