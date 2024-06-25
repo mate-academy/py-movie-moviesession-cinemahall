@@ -1,7 +1,8 @@
 from db.models import Movie, Genre, Actor
 
 
-def get_movies(genres_ids: list[int] = None, actors_ids: list[int] = None) -> list[Movie]:
+def get_movies(genres_ids: list[int] = None,
+               actors_ids: list[int] = None) -> list[Movie]:
     movies = Movie.objects.all()
     if genres_ids:
         movies = movies.filter(genres__id__in=genres_ids).distinct()
@@ -25,3 +26,8 @@ def create_movie(movie_title: str,
     if actors_ids:
         movie.actors.set(actors_ids)
     return movie
+
+
+if __name__ == '__main__':
+    Genre.objects.all()
+    Actor.objects.all()
