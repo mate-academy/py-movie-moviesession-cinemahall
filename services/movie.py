@@ -19,6 +19,7 @@ def get_movies(
 def get_movie_by_id(movie_id: int) -> QuerySet:
     return Movie.objects.get(id=movie_id)
 
+
 def create_movie(
         movie_title: str,
         movie_description: str,
