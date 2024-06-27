@@ -26,7 +26,7 @@ def create_movie(movie_title: str,
                  ) -> Movie:
     new_movie = Movie.objects.create(
         title=movie_title,
-        movie_description=movie_description
+        description=movie_description
     )
     if genres_ids:
         new_movie.genres.set(genres_ids)
