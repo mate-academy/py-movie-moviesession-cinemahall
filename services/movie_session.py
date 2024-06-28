@@ -17,7 +17,9 @@ def create_movie_session(
     )
 
 
-def get_movies_sessions(session_date: str | None = None) -> QuerySet[MovieSession]:
+def get_movies_sessions(
+        session_date: str | None = None
+) -> QuerySet[MovieSession]:
     if session_date:
         if len(session_date) == 19:
             date = datetime.strptime(session_date, "%Y-%m-%d %H:%M:%S")
