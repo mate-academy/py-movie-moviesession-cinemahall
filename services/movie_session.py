@@ -33,7 +33,7 @@ def get_movies_sessions(session_date: str = None) -> QuerySet | str:
                 " Use the year-month-day format.")
 
 
-def get_movie_session_by_id(movie_id: int) -> QuerySet:
+def get_movie_session_by_id(movie_id: int) -> MovieSession:
     return MovieSession.objects.get(id=movie_id)
 
 
