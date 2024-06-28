@@ -3,6 +3,7 @@ from django.db.models import QuerySet
 from db.models import MovieSession, Movie, CinemaHall
 from services.movie import get_movie_by_id
 
+
 def create_movie_session(movie_show_time: Movie, movie_id: Movie,
                          cinema_hall_id: CinemaHall) -> None:
     MovieSession.objects.create(
