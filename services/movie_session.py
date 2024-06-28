@@ -1,4 +1,4 @@
-from db.models import MovieSession, Movie, CinemaHall
+from db.models import MovieSession, CinemaHall
 from typing import List, Optional
 import datetime
 
