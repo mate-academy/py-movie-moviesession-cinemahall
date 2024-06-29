@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from django.db.models import QuerySet
 
 from db.models import MovieSession
@@ -20,15 +18,10 @@ def create_movie_session(
 def get_movies_sessions(
         session_date: str | None = None
 ) -> QuerySet[MovieSession]:
+    sessions = MovieSession.objects.all()
     if session_date:
-        if len(session_date) == 19:
-            date = datetime.strptime(session_date, "%Y-%m-%d %H:%M:%S")
-            return MovieSession.objects.filter(show_time=date)
-        else:
-            date = datetime.strptime(session_date, "%Y-%m-%d")
-            return MovieSession.objects.filter(show_time__date=date)
-
-    return MovieSession.objects.all()
+        return sessions.filter(show_time__date=session_date)
+    return sessions
 
 
 def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
@@ -40,16 +33,17 @@ def update_movie_session(
         show_time: str | None = None,
         movie_id: int | None = None,
         cinema_hall_id: int | None = None
-) -> QuerySet:
-    movie_session = MovieSession.objects.filter(id=session_id)
+) -> MovieSession:
+    movie_session = get_movie_session_by_id(movie_session_id=session_id)
 
     if show_time:
-        movie_session.update(show_time=show_time)
+        movie_session.show_time = show_time
     if movie_id:
-        movie_session.update(movie_id=movie_id)
+        movie_session.movie_id = movie_id
     if cinema_hall_id:
-        movie_session.update(cinema_hall_id=cinema_hall_id)
+        movie_session.cinema_hall_id = cinema_hall_id
 
+    movie_session.save()
     return movie_session
 
 
