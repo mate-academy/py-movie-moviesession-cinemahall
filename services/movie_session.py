@@ -6,25 +6,30 @@ from db.models import MovieSession
 def create_movie_session(
         movie_show_time: str,
         movie_id: int,
-        cinematically_id: int
-) -> QuerySet:
+        cinema_hall_id: int
+) -> MovieSession:
+
     return MovieSession.objects.create(
+        show_time=movie_show_time,
         movie_id=movie_id,
-        cinemahall_id=cinematically_id,
-        show_time=movie_show_time
+        cinema_hall_id=cinema_hall_id,
     )
 
 
-def get_movies_sessions(movie_show_time: str | None) -> QuerySet:
-    if movie_show_time:
-        return MovieSession.objects.filter(
-            show_time__date=movie_show_time
+def get_movies_sessions(session_date: str | None = None) -> QuerySet:
+
+    sessions = MovieSession.objects.all()
+
+    if session_date:
+        sessions = sessions.filter(
+            show_time__date=session_date
         )
-    return MovieSession.objects.all()
+
+    return sessions
 
 
-def get_movie_session_by_id(movie_session_id: id) -> QuerySet:
-    return MovieSession.objects.filter(id=movie_session_id)
+def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
+    return MovieSession.objects.get(id=movie_session_id)
 
 
 def update_movie_session(
@@ -32,16 +37,16 @@ def update_movie_session(
         show_time: str | None = None,
         movie_id: int | None = None,
         cinema_hall_id: int | None = None
-) -> QuerySet:
+) -> MovieSession:
 
     movie = get_movie_session_by_id(session_id)
+
     if show_time:
         movie.show_time = show_time
     if movie_id:
         movie.movie_id = movie_id
     if cinema_hall_id:
-        movie.cinematically_id = cinema_hall_id
-
+        movie.cinema_hall_id = cinema_hall_id
     movie.save()
     return movie
 
