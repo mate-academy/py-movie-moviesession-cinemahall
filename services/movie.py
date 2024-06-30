@@ -3,21 +3,16 @@ from db.models import Movie
 
 
 def get_movies(genres_ids: list[int] = None,
-               actors_ids: list[int] = None) -> QuerySet | Movie:
-    if not genres_ids and not actors_ids:
-        return Movie.objects.all()
-
-    if genres_ids and actors_ids:
-        return Movie.objects.filter(
-            genres__id__in=genres_ids, actors__id__in=actors_ids)
-
+               actors_ids: list[int] = None) -> QuerySet:
     queryset = Movie.objects.all()
 
     if genres_ids:
-        return queryset.filter(genres__id__in=genres_ids).distinct()
+        queryset = queryset.filter(genres__id__in=genres_ids)
 
     if actors_ids:
-        return queryset.filter(actors__id__in=actors_ids).distinct()
+        queryset = queryset.filter(actors__id__in=actors_ids)
+
+    return queryset.distinct()
 
 
 def get_movie_by_id(movie_id: int) -> Movie:
@@ -33,11 +28,9 @@ def create_movie(movie_title: str,
                                  description=movie_description)
 
     if genres_ids:
-        for genre_id in genres_ids:
-            movie.genres.add(genre_id)
+        movie.genres.add(*set(genres_ids))
 
     if actors_ids:
-        for actors_id in actors_ids:
-            movie.actors.add(actors_id)
+        movie.actors.add(*set(actors_ids))
 
     return movie
