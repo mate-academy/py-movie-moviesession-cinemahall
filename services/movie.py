@@ -2,7 +2,8 @@ from db.models import Movie, Genre, Actor
 from typing import List, Optional
 
 
-def get_movies(genres_ids: List[int] =None, actors_ids: List[int]=None) -> None:
+def get_movies(genres_ids: Optional[List[int]] = None,
+               actors_ids: Optional[List[int]] = None) -> None:
     movies = Movie.objects.all()
 
     if genres_ids:
@@ -13,14 +14,19 @@ def get_movies(genres_ids: List[int] =None, actors_ids: List[int]=None) -> None:
 
     return movies
 
+
 def get_movie_by_id(movie_id: int) -> Movie:
     movie = Movie.objects.get(id=movie_id)
     return movie
 
-def create_movie(movie_title: str, movie_description: str, actors_ids: Optional[List[int]] = None, genres_ids:  Optional[List[int]] = None ) -> Movie:
+
+def create_movie(movie_title: str,
+                 movie_description: str,
+                 actors_ids: Optional[List[int]] = None,
+                 genres_ids: Optional[List[int]] = None) -> Movie:
     movie = Movie.objects.create(
-    title=movie_title,
-    description = movie_description
+        title=movie_title,
+        description=movie_description
     )
 
     if genres_ids:
@@ -32,5 +38,3 @@ def create_movie(movie_title: str, movie_description: str, actors_ids: Optional[
         movie.actors.set(actors)
 
     return movie
-
-
