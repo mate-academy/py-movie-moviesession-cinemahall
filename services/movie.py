@@ -8,15 +8,15 @@ from db.models import Movie, Actor, Genre
 def get_movies(genres_ids: List[Genre] = None,
                actors_ids: List[Actor] = None) -> QuerySet:
     if genres_ids and actors_ids:
-        return_movie = Movie.objects.filter(genres_ids)
-        return_movie = return_movie.filter(actors_ids)
+        return_movie = Movie.objects.filter(genres__in=genres_ids)
+        return_movie = return_movie.filter(actors__in=actors_ids)
         return return_movie
 
     if genres_ids:
-        return Movie.objects.filter(genres_ids)
+        return Movie.objects.filter(genres__in=genres_ids)
 
     if actors_ids:
-        return Movie.objects.filter(actors_ids)
+        return Movie.objects.filter(actors__in=actors_ids)
 
     return Movie.objects.all()
 
