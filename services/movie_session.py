@@ -2,20 +2,22 @@ import datetime
 
 from django.db.models import QuerySet
 
-from db.models import MovieSession
+from db.models import MovieSession, CinemaHall, Movie
 
 
 def create_movie_session(movie_show_time: datetime.time,
                          movie_id: int,
                          cinema_hall_id: int) -> None:
+    cinema_hall = CinemaHall.objects.get(id=cinema_hall_id)
+    movie = Movie.objects.get(id=movie_id)
     MovieSession.objects.create(show_time=movie_show_time,
-                                cinema_hall=cinema_hall_id,
-                                movie=movie_id)
+                                cinema_hall=cinema_hall,
+                                movie=movie)
 
 
 def get_movies_sessions(session_date: str = None) -> QuerySet:
     if session_date:
-        return MovieSession.objects.filter(session_date)
+        return MovieSession.objects.filter(show_time=session_date)  # Need to update 12-07-2024 0-15
     return MovieSession.objects.all()
 
 
@@ -27,8 +29,14 @@ def update_movie_session(session_id: int,
                          show_time: str = None,
                          movie_id: int = None,
                          cinema_hall_id: int = None) -> None:
-    session = MovieSession.objects.get(session_id)
-    pass
+    session = MovieSession.objects.get(id=session_id)
+    if show_time:
+        session.show_time = show_time
+    if movie_id:
+        session.movie_id = Movie.objects.get(id=movie_id)
+    if cinema_hall_id:
+        session.cinema_hall = CinemaHall.objects.get(id=cinema_hall_id)
+    session.save()
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
