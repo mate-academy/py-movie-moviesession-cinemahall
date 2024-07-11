@@ -1,10 +1,11 @@
 from django.db import models
+from django.db.models import CharField
 
 
 class Genre(models.Model):
     name = models.CharField(max_length=255, unique=True)
 
-    def __str__(self) -> str:
+    def __str__(self) -> CharField:
         return self.name
 
 
@@ -21,6 +22,9 @@ class Movie(models.Model):
     description = models.TextField()
     actors = models.ManyToManyField(Actor, related_name="actors")
     genres = models.ManyToManyField(Genre, related_name="genres")
+
+    def __str__(self):
+        return self.title
 
 
 class CinemaHall(models.Model):
