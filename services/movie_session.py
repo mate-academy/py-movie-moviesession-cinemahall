@@ -17,7 +17,8 @@ def create_movie_session(movie_show_time: datetime.time,
 
 def get_movies_sessions(session_date: str = None) -> QuerySet:
     if session_date:
-        return MovieSession.objects.filter(show_time=session_date)  # Need to update 12-07-2024 0-15
+        return MovieSession.objects.filter(show_time=session_date)
+        # Need to update 12-07-2024 0-15
     return MovieSession.objects.all()
 
 
