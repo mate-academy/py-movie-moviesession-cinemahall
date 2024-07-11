@@ -29,8 +29,10 @@ def create_movie(movie_title: str,
                  movie_description: str,
                  genres_ids: List[int] = None,
                  actors_ids: List[int] = None) -> None:
-    if (movie_title and movie_description) and not (genres_ids and actors_ids):
-        Movie.objects.create(title=movie_title,
-                             description=movie_description)
+    new_movie = Movie.objects.create(title=movie_title,
+                                     description=movie_description)
+    if genres_ids:
+        new_movie.genres.set(genres_ids)
 
-    # Need to create for genres_ids and actors_ids
+    if actors_ids:
+        new_movie.actors.set(actors_ids)
