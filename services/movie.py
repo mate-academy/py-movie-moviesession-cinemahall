@@ -1,8 +1,4 @@
-from db.models import (
-    Genre,
-    Actor,
-    Movie,
-)
+from db.models import Movie
 
 
 def get_movies(
@@ -11,16 +7,10 @@ def get_movies(
 ) -> object:
     movies = Movie.objects.all()
 
-    if genres_ids and actors_ids:
-        movies = movies.filter(
-            genres__id__in=genres_ids,
-            actors__id__in=actors_ids
-        )
-    elif genres_ids:
+    if genres_ids:
         movies = movies.filter(genres__id__in=genres_ids)
-    elif actors_ids:
+    if actors_ids:
         movies = movies.filter(actors__id__in=actors_ids)
-
     return movies.distinct()
 
 
@@ -43,11 +33,9 @@ def create_movie(
     )
 
     if genres_ids:
-        genres = Genre.objects.filter(id__in=genres_ids)
-        movie.genres.set(genres)
+        movie.genres.set(genres_ids)
 
     if actors_ids:
-        actors = Actor.objects.filter(id__in=actors_ids)
-        movie.actors.set(actors)
+        movie.actors.set(actors_ids)
 
     return movie

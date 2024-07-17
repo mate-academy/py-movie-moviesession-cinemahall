@@ -51,9 +51,8 @@ def update_movie_session(
 
 
 def delete_movie_session_by_id(session_id: int) -> bool:
-    try:
-        movie_session = MovieSession.objects.get(id=session_id)
+    movie_session = get_movie_session_by_id(session_id)
+    if movie_session:
         movie_session.delete()
         return True
-    except MovieSession.DoesNotExist:
-        return False
+    return False
