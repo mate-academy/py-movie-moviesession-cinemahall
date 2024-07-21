@@ -14,11 +14,8 @@ def get_movies(
     return movies.distinct()
 
 
-def get_movie_by_id(movie_id: int) -> object | None:
-    try:
-        return Movie.objects.get(id=movie_id)
-    except Movie.DoesNotExist:
-        return None
+def get_movie_by_id(movie_id: int) -> object:
+    return Movie.objects.filter(id=movie_id).first()
 
 
 def create_movie(

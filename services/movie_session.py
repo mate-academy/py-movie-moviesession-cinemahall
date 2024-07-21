@@ -50,9 +50,5 @@ def update_movie_session(
         return None
 
 
-def delete_movie_session_by_id(session_id: int) -> bool:
-    movie_session = get_movie_session_by_id(session_id)
-    if movie_session:
-        movie_session.delete()
-        return True
-    return False
+def delete_movie_session_by_id(session_id) -> None:
+    get_movie_session_by_id(session_id).delete()
