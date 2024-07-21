@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404
-from django.db.models import QuerySet, Q
+from django.db.models import QuerySet
 from db.models import Movie
 
 
