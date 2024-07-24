@@ -52,6 +52,5 @@ def update_movie_session(
 
 
 def delete_movie_session_by_id(session_id: int) -> QuerySet[MovieSession]:
-    movie_session_delete = MovieSession.objects.get(id=session_id)
-    movie_session_delete.delete()
+    movie_session_delete = MovieSession.objects.filter(id=session_id).delete()
     return movie_session_delete
