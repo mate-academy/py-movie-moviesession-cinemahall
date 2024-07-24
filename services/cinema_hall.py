@@ -11,7 +11,7 @@ def create_cinema_hall(
         hall_name: str,
         hall_rows: int,
         hall_seats_in_row: int
-) -> QuerySet[CinemaHall]:
+) -> str | int:
 
     cinema_hall = CinemaHall.objects.create(
         name=hall_name,
