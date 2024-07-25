@@ -1,5 +1,6 @@
-from db.models import MovieSession, Movie, CinemaHall
 from datetime import datetime
+
+from db.models import MovieSession, Movie, CinemaHall
 
 
 def create_movie_session(

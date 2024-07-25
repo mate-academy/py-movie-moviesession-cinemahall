@@ -15,11 +15,6 @@ def get_movies(
         query = query.filter(genres__id__in=genres_ids)
     if actors_ids:
         query = query.filter(actors__id__in=actors_ids)
-    if genres_ids and actors_ids:
-        query = query.filter(
-            genres__id__in=genres_ids,
-            actors__id__in=actors_ids
-        )
     return query.distinct()
 
 
