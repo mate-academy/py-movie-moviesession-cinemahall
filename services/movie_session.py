@@ -5,7 +5,7 @@ def create_movie_session(
         movie_show_time: str,
         movie_id: int,
         cinema_hall_id: int
-) -> object:
+) -> MovieSession:
     movie = Movie.objects.get(id=movie_id)
     cinema_hall = CinemaHall.objects.get(id=cinema_hall_id)
     return MovieSession.objects.create(
@@ -15,13 +15,13 @@ def create_movie_session(
     )
 
 
-def get_movies_sessions(session_date: str = None) -> object:
+def get_movies_sessions(session_date: str = None) -> MovieSession:
     if session_date:
         return MovieSession.objects.filter(show_time__date=session_date)
     return MovieSession.objects.all()
 
 
-def get_movie_session_by_id(movie_session_id: int) -> object:
+def get_movie_session_by_id(movie_session_id: int) -> MovieSession | None:
     try:
         return MovieSession.objects.get(id=movie_session_id)
     except MovieSession.DoesNotExist:
@@ -33,21 +33,20 @@ def update_movie_session(
         show_time: str = None,
         movie_id: int = None,
         cinema_hall_id: int = None
-) -> object | None:
-    try:
-        movie_session = get_movie_session_by_id(session_id)
+) -> MovieSession | None:
+
+    movie_session = get_movie_session_by_id(session_id)
+    if movie_session is not None:
         if show_time:
             movie_session.show_time = show_time
         if movie_id:
-            movie_session.movie = Movie.objects.get(id=movie_id)
+            movie_session.movie_id = movie_id
         if cinema_hall_id:
-            movie_session.cinema_hall = CinemaHall.objects.get(
-                id=cinema_hall_id
-            )
+            movie_session.cinema_hall_id = cinema_hall_id
+
         movie_session.save()
         return movie_session
-    except MovieSession.DoesNotExist:
-        return None
+    return None
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
