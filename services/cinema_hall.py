@@ -1,8 +1,9 @@
 from db.models import CinemaHall
-from django.db.models.query import QuerySet
+
+from django.db.models import QuerySet
 
 
-def get_cinema_halls() -> QuerySet[CinemaHall]:
+def get_cinema_halls() -> QuerySet:
     return CinemaHall.objects.all()
 
 
