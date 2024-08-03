@@ -1,5 +1,6 @@
-from db.models import MovieSession, Movie, CinemaHall
 from django.db.models.query import QuerySet
+
+from db.models import MovieSession, Movie, CinemaHall
 
 
 def create_movie_session(
