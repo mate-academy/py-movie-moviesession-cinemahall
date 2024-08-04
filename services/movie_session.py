@@ -20,7 +20,9 @@ def create_movie_session(
 def get_movies_sessions(session_date: str = None) -> QuerySet:
     queryset = MovieSession.objects.all()
     if session_date:
-        date_to_compare = datetime.datetime.strptime(session_date, "%Y-%m-%d").date()
+        date_to_compare = datetime.datetime.strptime(
+            session_date, "%Y-%m-%d"
+        ).date()
         queryset = queryset.filter(show_time__date=date_to_compare)
     return queryset
 
