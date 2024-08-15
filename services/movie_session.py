@@ -36,7 +36,7 @@ def update_movie_session(
     movie_id: Optional[int] = None,
     cinema_hall_id: Optional[int] = None
 ) -> MovieSession:
-    session = MovieSession.objects.get(id=session_id)
+    session = get_movie_session_by_id(session_id)
     if show_time:
         session.show_time = show_time
     if movie_id:
@@ -48,5 +48,9 @@ def update_movie_session(
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
-    session = MovieSession.objects.get(id=session_id)
-    session.delete()
+    try:
+        session = get_movie_session_by_id(session_id)
+        session.delete()
+    except MovieSession.DoesNotExist:
+        # Handle the case where the session does not exist if needed
+        pass
