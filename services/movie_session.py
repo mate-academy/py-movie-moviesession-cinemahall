@@ -52,5 +52,4 @@ def delete_movie_session_by_id(session_id: int) -> None:
         session = get_movie_session_by_id(session_id)
         session.delete()
     except MovieSession.DoesNotExist:
-        # Handle the case where the session does not exist if needed
         pass
