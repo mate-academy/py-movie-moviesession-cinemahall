@@ -22,14 +22,10 @@ def create_movie_session(
 def get_movies_sessions(
         session_date: datetime = None
 ) -> QuerySet:
-    if not session_date:
-        return MovieSession.objects.all()
-    date = parse_date(session_date)
-    if date:
-        return MovieSession.objects.filter(show_time__date=date)
-    else:
-        raise ValueError("Invalid date format. "
-                         "Use 'year-month-day'.")
+    query_set = MovieSession.objects.all()
+    if session_date:
+        query_set = query_set.filter(show_time__date=session_date)
+    return query_set
 
 
 def get_movie_session_by_id(
@@ -44,20 +40,18 @@ def update_movie_session(
         movie_id: int = None,
         cinema_hall_id: int = None
 ) -> MovieSession:
+    movie_session_to_update = get_movie_session_by_id(session_id)
     if show_time:
-        (MovieSession.objects.filter(id=session_id)
-         .update(show_time=show_time))
+        movie_session_to_update.show_time = show_time
     if movie_id:
-        (MovieSession.objects.filter(id=session_id)
-         .update(movie_id=movie_id))
+        movie_session_to_update.movie_id = movie_id
     if cinema_hall_id:
-        (MovieSession.objects.filter(id=session_id)
-         .update(cinema_hall_id=cinema_hall_id))
-    return MovieSession.objects.filter(id=session_id)
+        movie_session_to_update.cinema_hall_id = cinema_hall_id
+    movie_session_to_update.save()
+    return movie_session_to_update
 
 
 def delete_movie_session_by_id(
         session_id: int
 ) -> MovieSession:
-    del_movie = get_movie_session_by_id(session_id).delete()
-    return del_movie
+    return get_movie_session_by_id(session_id).delete()
