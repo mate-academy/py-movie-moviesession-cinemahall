@@ -1,5 +1,4 @@
 from datetime import datetime
-from django.utils.dateparse import parse_date
 
 import init_django_orm  # noqa: F401
 
