@@ -29,7 +29,7 @@ class Movie(models.Model):
     )
 
     def __str__(self) -> str:
-        return f"{self.title}"
+        return self.title
 
 
 class CinemaHall(models.Model):
@@ -42,7 +42,7 @@ class CinemaHall(models.Model):
         return self.rows * self.seats_in_row
 
     def __str__(self) -> str:
-        return f"{self.name}"
+        return self.name
 
 
 class MovieSession(models.Model):
@@ -55,7 +55,7 @@ class MovieSession(models.Model):
     movie = models.ForeignKey(
         Movie,
         on_delete=models.CASCADE,
-        related_name="movies"
+        related_name="movie_sessions"
     )
 
     def __str__(self) -> str:
