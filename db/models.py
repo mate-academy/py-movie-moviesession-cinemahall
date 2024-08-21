@@ -48,3 +48,4 @@ class MovieSession(models.Model):
         return (
             f"{self.movie.title} "
             f"{self.show_time.strftime("%Y-%m-%d %H:%M:%S")}")
+    # update
