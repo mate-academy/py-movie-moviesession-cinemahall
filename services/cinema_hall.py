@@ -13,4 +13,3 @@ def create_cinema_hall(
                                      rows=hall_rows,
                                      seats_in_row=hall_seats_in_row
                                      )
-# update
