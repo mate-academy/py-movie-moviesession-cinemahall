@@ -42,4 +42,3 @@ def update_movie_session(
 
 def delete_movie_session_by_id(session_id: int) -> MovieSession:
     return get_movie_session_by_id(session_id).delete()
-  # update
