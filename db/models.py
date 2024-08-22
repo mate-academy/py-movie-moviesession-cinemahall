@@ -1,4 +1,8 @@
+import datetime
+
 from django.db import models
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
 
 
 class Genre(models.Model):
@@ -14,3 +18,45 @@ class Actor(models.Model):
 
     def __str__(self) -> str:
         return f"{self.first_name} {self.last_name}"
+
+
+class Movie(models.Model):
+    title = models.CharField(max_length=255, unique=True)
+    description = models.TextField(null=True, blank=True)
+    actors = models.ManyToManyField(Actor)
+    genres = models.ManyToManyField(Genre)
+
+    def __str__(self) -> str:
+        return self.title
+
+
+class CinemaHall(models.Model):
+    name = models.CharField(max_length=255, unique=True)
+    rows = models.IntegerField()
+    seats_in_row = models.IntegerField()
+
+    @property
+    def capacity(self) -> int:
+        return self.rows * self.seats_in_row
+
+    def __str__(self) -> str:
+        return self.name
+
+
+class MovieSession(models.Model):
+    show_time = models.DateTimeField()
+    cinema_hall = models.ForeignKey(CinemaHall, on_delete=models.CASCADE)
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+
+    def __str__(self) -> str:
+        return f"{self.movie.title} {self.show_time}"
+
+
+@receiver(pre_save, sender=MovieSession)
+def trim_microseconds(
+        sender: type[MovieSession],
+        instance: MovieSession,
+        **kwargs
+) -> None:
+    if isinstance(instance.show_time, datetime.datetime):
+        instance.show_time = instance.show_time.replace(microsecond=0)
