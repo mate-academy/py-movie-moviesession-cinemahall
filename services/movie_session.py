@@ -25,9 +25,9 @@ def get_movies_sessions(
         session_date: Optional[str] = None
 ) -> QuerySet[MovieSession]:
     if session_date is not None:
-        datetime_object = datetime.strptime(session_date, "%Y-%m-%d")
+
         return MovieSession.objects.filter(
-            show_time__date=datetime_object.date()
+            show_time__date=session_date
         )
     return MovieSession.objects.all()
 
