@@ -6,11 +6,8 @@ from db.models import Movie
 def get_movies(
         genres_ids: list = None,
         actors_ids: list = None
-) -> QuerySet:
+) -> QuerySet[Movie]:
     query = Movie.objects.all()
-
-    if genres_ids is None and actors_ids is None:
-        return query
 
     if genres_ids and actors_ids:
         query = query.filter(
@@ -27,7 +24,7 @@ def get_movies(
     return query
 
 
-def get_movie_by_id(movie_id: int) -> QuerySet:
+def get_movie_by_id(movie_id: int) -> Movie:
     return Movie.objects.get(id=movie_id)
 
 
