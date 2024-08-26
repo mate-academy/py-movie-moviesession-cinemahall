@@ -36,7 +36,7 @@ def update_movie_session(
 ) -> MovieSession:
     queryset = MovieSession.objects.filter(id=session_id)
 
-    if show_time is not None:
+    if show_time:
         queryset.update(show_time=show_time)
 
     if movie_id is not None:
