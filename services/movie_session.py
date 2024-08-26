@@ -45,7 +45,7 @@ def update_movie_session(
     if cinema_hall_id is not None:
         queryset.update(cinema_hall_id=cinema_hall_id)
 
-    return queryset[0]
+    return queryset.first()
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
