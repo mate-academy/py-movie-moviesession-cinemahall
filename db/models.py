@@ -21,8 +21,8 @@ class Actor(models.Model):
 
 
 class Movie(models.Model):
-    title = models.CharField(max_length=255, unique=True)
-    description = models.TextField(null=True, blank=True)
+    title = models.CharField(max_length=255)
+    description = models.TextField()
     actors = models.ManyToManyField(Actor)
     genres = models.ManyToManyField(Genre)
 
@@ -31,7 +31,7 @@ class Movie(models.Model):
 
 
 class CinemaHall(models.Model):
-    name = models.CharField(max_length=255, unique=True)
+    name = models.CharField(max_length=255)
     rows = models.IntegerField()
     seats_in_row = models.IntegerField()
 
