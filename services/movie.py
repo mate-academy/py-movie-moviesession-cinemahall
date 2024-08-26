@@ -5,8 +5,8 @@ from typing import Optional
 
 
 def get_movies(
-        genres_ids: Optional[list[int]] = None,
-        actors_ids: Optional[list[int]] = None,
+        genres_ids: list[int] | None = None,
+        actors_ids: list[int] | None = None,
 ) -> QuerySet:
     queryset = Movie.objects.all()
 
@@ -15,15 +15,12 @@ def get_movies(
             genres__id__in=genres_ids,
             actors__id__in=actors_ids
         )
-        return queryset
 
     if genres_ids:
         queryset = queryset.filter(genres__id__in=genres_ids)
-        return queryset
 
     if actors_ids:
         queryset = queryset.filter(actors__id__in=actors_ids)
-        return queryset
 
     return queryset
 
