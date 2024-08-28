@@ -13,8 +13,8 @@ def create_cinema_hall(
         hall_seats_in_row: int
 ) -> CinemaHall:
     cinema_hall = CinemaHall.objects.create(
-        hall_name=hall_name,
-        hall_rows=hall_rows,
+        name=hall_name,
+        rows=hall_rows,
         seats_in_row=hall_seats_in_row
     )
     return cinema_hall
