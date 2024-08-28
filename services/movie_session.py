@@ -1,6 +1,7 @@
 from datetime import datetime
 
 from django.db.models import QuerySet
+from django.shortcuts import get_object_or_404
 
 from db.models import MovieSession
 
@@ -20,15 +21,13 @@ def create_movie_session(
 def get_movies_sessions(session_date: str = None) -> QuerySet[MovieSession]:
     movie_sessions = MovieSession.objects.all()
     if session_date:
-        movie_sessions = movie_sessions.filter(
-            show_time__date=datetime.strptime(session_date, "%Y-%m-%d")
-        )
+        movie_sessions = movie_sessions.filter(show_time__date=session_date)
 
     return movie_sessions
 
 
 def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
-    return MovieSession.objects.get(id=movie_session_id)
+    return get_object_or_404(MovieSession, pk=movie_session_id)
 
 
 def update_movie_session(
@@ -42,10 +41,10 @@ def update_movie_session(
     if show_time:
         update_fields["show_time"] = show_time
 
-    if movie_id != 0:
+    if movie_id:
         update_fields["movie_id"] = movie_id
 
-    if cinema_hall_id != 0:
+    if cinema_hall_id:
         update_fields["cinema_hall_id"] = cinema_hall_id
 
     if update_fields:
@@ -53,4 +52,4 @@ def update_movie_session(
 
 
 def delete_movie_session_by_id(movie_session_id: int) -> None:
-    MovieSession.objects.filter(id=movie_session_id).delete()
+    get_movie_session_by_id(movie_session_id).delete()

@@ -10,16 +10,16 @@ def get_movies(
     movies = Movie.objects.all()
 
     if genres_ids:
-        movies = movies.filter(genres__id__in=genres_ids)
+        movies = movies.filter(genres__in=genres_ids)
 
     if actors_ids:
-        movies = movies.filter(actors__id__in=actors_ids)
+        movies = movies.filter(actors__in=actors_ids)
 
     return movies
 
 
 def get_movie_by_id(movie_id: int) -> Movie:
-    return Movie.objects.get(id=movie_id)
+    return Movie.objects.get(pk=movie_id)
 
 
 def create_movie(
