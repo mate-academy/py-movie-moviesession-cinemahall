@@ -9,18 +9,17 @@ def create_movie_session(
         movie_show_time: str,
         movie_id: int,
         cinema_hall_id: int
-) -> MovieSession:
-    return MovieSession.objects.create(
+) -> None:
+    MovieSession.objects.create(
         show_time=movie_show_time,
-        movie=Movie.objects.get(pk=movie_id),
-        cinema_hall=CinemaHall.objects.get(pk=cinema_hall_id)
+        movie_id=movie_id,
+        cinema_hall_id=cinema_hall_id
     )
 
 
 def get_movies_sessions(session_date: Optional[str] = None) -> QuerySet:
-    if session_date:
-        return MovieSession.objects.filter(show_time__date=session_date)
-    return MovieSession.objects.all()
+    return MovieSession.objects.filter(show_time__date=session_date) if\
+        session_date else MovieSession.objects.all()
 
 
 def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
@@ -33,6 +32,9 @@ def update_movie_session(
         movie_id: Optional[int] = None,
         cinema_hall_id: Optional[int] = None
 ) -> MovieSession:
+    if not any([show_time, movie_id, cinema_hall_id]):
+        raise "You need to provide at least one element"
+
     session = MovieSession.objects.get(pk=session_id)
 
     if show_time:
@@ -47,4 +49,4 @@ def update_movie_session(
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
-    MovieSession.objects.filter(id=session_id).delete()
+    get_movie_session_by_id(session_id).delete()
