@@ -1,5 +1,6 @@
-from db.models import Movie
 from typing import Optional, List
+
+from db.models import Movie
 
 
 def get_movies(

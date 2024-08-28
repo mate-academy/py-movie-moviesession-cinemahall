@@ -1,5 +1,6 @@
-from db.models import CinemaHall
 from typing import List
+
+from db.models import CinemaHall
 
 
 def get_cinema_halls() -> List[CinemaHall]:

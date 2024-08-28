@@ -1,6 +1,7 @@
-from db.models import MovieSession, Movie, CinemaHall
 import datetime
 from typing import Optional, List
+
+from db.models import MovieSession, Movie, CinemaHall
 
 
 def create_movie_session(
@@ -15,8 +16,8 @@ def create_movie_session(
     )
 
 
-def get_movie_sessions(
-    session_date: Optional[datetime],
+def get_movies_sessions(
+        session_date: Optional[datetime],
 ) -> List[MovieSession]:
     if session_date:
         return MovieSession.objects.filter(
