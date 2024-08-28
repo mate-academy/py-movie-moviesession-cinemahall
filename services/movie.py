@@ -1,11 +1,11 @@
-from typing import Optional, List
+from typing import List
 
 from db.models import Movie
 
 
 def get_movies(
-        genres_ids: Optional[int],
-        actors_ids: Optional[int]
+        genres_ids: List[int] = None,
+        actors_ids: List[int] = None
 ) -> List[Movie]:
     queryset = Movie.objects.all()
 
@@ -24,8 +24,8 @@ def get_movie_by_id(movie_id: int) -> Movie:
 def create_movie(
         movie_title: str,
         movie_description: str,
-        genres_ids: List[int],
-        actors_ids: List[int]
+        genres_ids: List[int] = None,
+        actors_ids: List[int] = None
 ) -> Movie:
     movie = Movie.objects.create(
         title=movie_title,
