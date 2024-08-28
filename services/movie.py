@@ -37,8 +37,8 @@ def create_movie(
         actors_ids: list | None = None
 ) -> Movie:
     movie = Movie.objects.create(
-        movie_title=movie_title,
-        movie_description=movie_description
+        title=movie_title,
+        description=movie_description
     )
     if genres_ids is not None:
         genres = Genre.objects.filter(id__in=genres_ids)
