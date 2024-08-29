@@ -1,12 +1,11 @@
 from django.db.models import QuerySet
-from typing import Optional, List
 
 from db.models import Movie, Genre, Actor
 
 
 def get_movies(
-        genres_ids: Optional[List[int]] = None,
-        actors_ids: Optional[List[int]] = None
+        genres_ids: list[int] | None = None,
+        actors_ids: list[int] | None = None
 ) -> QuerySet:
     all_movies = Movie.objects.all()
 
@@ -25,8 +24,8 @@ def get_movie_by_id(movie_id: int) -> Movie:
 def create_movie(
         movie_title: str,
         movie_description: str,
-        genres_ids: Optional[List[int] | None] = None,
-        actors_ids: Optional[List[int] | None] = None,
+        genres_ids: list[int] | None = None,
+        actors_ids: list[int] | None = None,
 ) -> None:
     movie = Movie.objects.create(
         title=movie_title,
@@ -34,9 +33,7 @@ def create_movie(
     )
 
     if genres_ids:
-        Genre.objects.filter(id__in=genres_ids)
         movie.genres.set(genres_ids)
 
     if actors_ids:
-        Actor.objects.filter(id__in=actors_ids)
         movie.actors.set(actors_ids)
