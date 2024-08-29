@@ -10,11 +10,12 @@ def create_movie_session(
         movie_id: int,
         cinema_hall_id: int
 ) -> None:
-    MovieSession(
+    movie_session = MovieSession(
         show_time=movie_show_time,
         cinema_hall_id=cinema_hall_id,
         movie_id=movie_id
     )
+    movie_session.save()
 
 
 def get_movies_sessions(session_date: Optional[str | None] = None) -> QuerySet:
