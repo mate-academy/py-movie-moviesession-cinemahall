@@ -1,6 +1,4 @@
 from typing import Optional
-
-
 from datetime import datetime
 
 from django.db.models import QuerySet
@@ -12,15 +10,14 @@ def create_movie_session(
         movie_show_time: datetime,
         movie_id: int,
         cinema_hall_id: int
-) -> MovieSession:
+) -> None:
     movie = Movie.objects.get(id=movie_id)
     cinema_hall = CinemaHall.objects.get(id=cinema_hall_id)
-    movie_session = MovieSession.objects.create(
+    MovieSession.objects.create(
         show_time=movie_show_time,
         movie=movie,
         cinema_hall=cinema_hall
     )
-    return movie_session
 
 
 def get_movies_sessions(
@@ -45,28 +42,27 @@ def update_movie_session(
         cinema_hall_id: Optional[int] = None
 ) -> Optional[MovieSession]:
     try:
-        movie_session = MovieSession.objects.get(id=session_id)
+        movie_session = MovieSession.objects.filter(id=session_id)
 
+        update_data = {}
         if show_time:
-            movie_session.show_time = show_time
+            update_data["show_time"] = show_time
         if movie_id:
-            movie_session.movie = Movie.objects.get(id=movie_id)
+            update_data["movie"] = Movie.objects.get(id=movie_id)
         if cinema_hall_id:
-            movie_session.cinema_hall = CinemaHall.objects.get(
+            update_data["cinema_hall"] = CinemaHall.objects.get(
                 id=cinema_hall_id
             )
 
-        movie_session.save()
-        return movie_session
+        if update_data:
+            movie_session.update(**update_data)
+
+        return movie_session.first()
 
     except MovieSession.DoesNotExist:
         return None
 
 
 def delete_movie_session_by_id(session_id: int) -> bool:
-    try:
-        movie_session = MovieSession.objects.get(id=session_id)
-        movie_session.delete()
-        return True
-    except MovieSession.DoesNotExist:
-        return False
+    deleted, _ = MovieSession.objects.filter(id=session_id).delete()
+    return deleted > 0
