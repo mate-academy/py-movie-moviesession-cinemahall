@@ -9,12 +9,10 @@ def create_movie_session(
         movie_id: int,
         cinema_hall_id: int
 ) -> None:
-    movie = Movie.objects.get(pk=movie_id)
-    hall = CinemaHall.objects.get(pk=cinema_hall_id)
     MovieSession.objects.create(
         show_time=movie_show_time,
-        cinema_hall=hall,
-        movie=movie
+        cinema_hall_id=cinema_hall_id,
+        movie_id=movie_id
     )
 
 
