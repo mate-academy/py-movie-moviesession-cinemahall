@@ -12,8 +12,8 @@ def create_movie_session(
 ) -> None:
     MovieSession.objects.create(
         show_time=movie_show_time,
-        cinema_hall=CinemaHall.objects.get(id=cinema_hall_id),
-        movie=Movie.objects.get(id=movie_id)
+        cinema_hall_id=cinema_hall_id,
+        movie_id=movie_id,
     )
 
 
@@ -22,6 +22,7 @@ def get_movies_sessions(session_date: str = None) -> QuerySet:
     if session_date:
         target_time = datetime.strptime(session_date, "%Y-%m-%d")
         queryset = queryset.filter(show_time__date=target_time)
+
     return queryset
 
 
@@ -41,14 +42,12 @@ def update_movie_session(
         movie_session.update(show_time=show_time)
 
     if cinema_hall_id:
-        cinema_hall_inst = CinemaHall.objects.filter(id=cinema_hall_id)
-        if cinema_hall_inst.exists():
-            movie_session.update(cinema_hall=cinema_hall_inst.first())
+        if CinemaHall.objects.filter(id=cinema_hall_id).exists():
+            movie_session.update(cinema_hall_id=cinema_hall_id)
 
     if movie_id:
-        movie_inst = Movie.objects.filter(id=movie_id)
-        if movie_inst.exists():
-            movie_session.update(movie=movie_inst.first())
+        if Movie.objects.filter(id=movie_id).exists():
+            movie_session.update(movie_id=movie_id)
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
