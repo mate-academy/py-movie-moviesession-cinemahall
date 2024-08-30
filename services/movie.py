@@ -23,11 +23,7 @@ def get_movies(
 
 
 def get_movie_by_id(movie_id: int) -> Movie:
-    try:
-        movie = Movie.objects.get(id=movie_id)
-        return movie
-    except ObjectDoesNotExist:
-        return None
+    return Movie.objects.get(pk=movie_id)
 
 
 def create_movie(
@@ -40,13 +36,10 @@ def create_movie(
         title=movie_title,
         description=movie_description
     )
-    if genres_ids is not None:
-        genres = Genre.objects.filter(id__in=genres_ids)
-        movie.genres.set(genres)
+    if genres_ids:
+        movie.genres.set(genres_ids)
 
-    if actors_ids is not None:
-        actors = Actor.objects.filter(id__in=actors_ids)
-        movie.actors.set(actors)
+    if actors_ids:
+        movie.actors.set(actors_ids)
 
-    movie.save()
     return movie
