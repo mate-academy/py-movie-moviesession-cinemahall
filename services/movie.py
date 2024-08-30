@@ -1,10 +1,8 @@
 from __future__ import annotations
 
-from db.models import Movie, Genre, Actor
+from db.models import Movie
 
 from django.db.models import QuerySet
-
-from django.core.exceptions import ObjectDoesNotExist
 
 
 def get_movies(
