@@ -31,7 +31,7 @@ def update_movie_session(
         show_time: Optional[str] = None,
         movie_id: Optional[int] = None,
         cinema_hall_id: Optional[int] = None
-) -> MovieSession:
+) -> None:
     if not any([show_time, movie_id, cinema_hall_id]):
         raise "You need to provide at least one element"
 
@@ -45,7 +45,6 @@ def update_movie_session(
         session.cinema_hall = CinemaHall.objects.get(pk=cinema_hall_id)
 
     session.save()
-    return session
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
