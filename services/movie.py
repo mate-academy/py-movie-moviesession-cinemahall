@@ -1,6 +1,7 @@
 from typing import Optional
 
 from django.db.models import QuerySet
+
 from db.models import Movie
 
 
@@ -26,8 +27,8 @@ def create_movie(
         genres_ids: Optional[list[int]] = None,
         actors_ids: Optional[list[int]] = None
 ) -> Movie:
-    created_movie = Movie.objects.create(
-        title=movie_title, description=movie_description
+    created_movie = (
+        Movie.objects.create(title=movie_title, description=movie_description)
     )
     if genres_ids:
         created_movie.genres.add(*genres_ids)

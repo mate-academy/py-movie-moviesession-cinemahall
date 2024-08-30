@@ -1,7 +1,9 @@
-from django.core.exceptions import ObjectDoesNotExist
-from db.models import MovieSession, CinemaHall, Movie
 from datetime import date, datetime
 from typing import Optional
+
+from django.core.exceptions import ObjectDoesNotExist
+
+from db.models import MovieSession, CinemaHall, Movie
 
 
 def create_movie_session(
