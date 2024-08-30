@@ -14,11 +14,12 @@ def get_movies(
         movies = movies.filter(genres__in=genres_ids)
     if actors_ids:
         movies = movies.filter(actors__in=actors_ids)
+
     return movies.distinct()
 
 
 def get_movie_by_id(movie_id: int) -> Movie:
-    return Movie.objects.get(id=movie_id)
+    return Movie.objects.get(pk=movie_id)
 
 
 def create_movie(
