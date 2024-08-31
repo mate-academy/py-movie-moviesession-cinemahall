@@ -53,7 +53,7 @@ def update_movie_session(session_id: int,
 
 def delete_movie_session_by_id(session_id: int) -> None:
     try:
-        movie_session = MovieSession.objects.get(id=session_id)
+        movie_session = get_movie_session_by_id(movie_session_id=session_id)
         movie_session.delete()
     except MovieSession.DoesNotExist:
         print(f"Movie Session {session_id} does not exist.")
