@@ -44,7 +44,7 @@ def update_movie_session(
     if cinema_hall_id:
         update_data["cinema_hall_id"] = cinema_hall_id
     if movie_id:
-        update_data ["movie_id"] = movie_id
+        update_data["movie_id"] = movie_id
 
     if update_data:
         try:
