@@ -45,8 +45,9 @@ class MovieSession(models.Model):
         CinemaHall, on_delete=models.CASCADE, related_name="movie_sessions"
     )
     movie = models.ForeignKey(
-        Movie, on_delete=models.SET_NULL,
-        related_name="movie_sessions", null=True
+        Movie,
+        on_delete=models.CASCADE,
+        related_name="movie_sessions",
     )
 
     def __str__(self) -> str:

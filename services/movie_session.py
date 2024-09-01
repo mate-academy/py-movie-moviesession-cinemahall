@@ -38,23 +38,26 @@ def update_movie_session(
         movie_id: int | None = None,
         cinema_hall_id: int | None = None
 ) -> tuple[Any, Any]:
-    if not any([show_time, movie_id, cinema_hall_id]):
-        return
-    try:
-        movie_session = MovieSession.objects.get(pk=session_id)
-    except ObjectDoesNotExist:
-        raise ObjectDoesNotExist(
-            f"Movie Session with ID {session_id} does not exist"
-        )
-    else:
-        if show_time:
-            movie_session.show_time = show_time
-        if cinema_hall_id:
-            movie_session.cinema_hall_id = cinema_hall_id
-        if movie_id:
-            movie_session.movie_id = movie_id
-        movie_session.save()
-        return movie_session.cinema_hall_id, movie_session.movie_id
+    update_data = {}
+    if show_time:
+        update_data["show_time"] = show_time
+    if cinema_hall_id:
+        update_data["cinema_hall_id"] = cinema_hall_id
+    if movie_id:
+        update_data ["movie_id"] = movie_id
+
+    if update_data:
+        try:
+            movie_session = MovieSession.objects.get(pk=session_id)
+        except ObjectDoesNotExist:
+            raise ObjectDoesNotExist(
+                f"Movie Session with ID {session_id} does not exist"
+            )
+        else:
+            for attr, value in update_data.items():
+                setattr(movie_session, attr, value)
+            movie_session.save()
+            return movie_session.cinema_hall_id, movie_session.movie_id
 
 
 def delete_movie_session_by_id(session_id: int) -> MovieSession:
