@@ -1,3 +1,4 @@
+from typing import Type
 from django.db.models import QuerySet
 
 from db.models import Movie
@@ -5,8 +6,7 @@ from db.models import Movie
 
 def get_movies(
         genres_ids: list = None,
-        actors_ids: list = None
-) -> QuerySet:
+        actors_ids: list = None) -> QuerySet[Type[Movie]]:
     movies = Movie.objects.all()
 
     if genres_ids:
@@ -26,8 +26,7 @@ def create_movie(
         movie_title: str,
         movie_description: str,
         genres_ids: list[int] = None,
-        actors_ids: list[int] = None
-) -> Movie:
+        actors_ids: list[int] = None) -> Movie:
     new_movie = Movie.objects.create(title=movie_title,
                                      description=movie_description)
 
