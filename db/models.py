@@ -42,8 +42,16 @@ class CinemaHall(models.Model):
 
 class MovieSession(models.Model):
     show_time = models.DateTimeField()
-    cinema_hall = models.ForeignKey(CinemaHall, on_delete=CASCADE)
-    movie = models.ForeignKey(Movie, on_delete=CASCADE)
+    cinema_hall = models.ForeignKey(
+        CinemaHall,
+        on_delete=CASCADE,
+        related_name="movie_sessions"
+    )
+    movie = models.ForeignKey(
+        Movie,
+        on_delete=CASCADE,
+        related_name="movie_sessions"
+    )
 
     def __str__(self) -> str:
         return f"{self.movie.title} {self.show_time}"
