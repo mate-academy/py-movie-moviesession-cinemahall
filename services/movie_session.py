@@ -1,7 +1,5 @@
 from datetime import datetime
-from typing import Any
 
-from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import QuerySet
 
 from db.models import MovieSession
@@ -37,7 +35,7 @@ def update_movie_session(
         show_time: datetime | None = None,
         movie_id: int | None = None,
         cinema_hall_id: int | None = None
-) -> tuple[Any, Any]:
+) -> None:
     update_data = {}
     if show_time:
         update_data["show_time"] = show_time
@@ -47,17 +45,8 @@ def update_movie_session(
         update_data["movie_id"] = movie_id
 
     if update_data:
-        try:
-            movie_session = MovieSession.objects.get(pk=session_id)
-        except ObjectDoesNotExist:
-            raise ObjectDoesNotExist(
-                f"Movie Session with ID {session_id} does not exist"
-            )
-        else:
-            for attr, value in update_data.items():
-                setattr(movie_session, attr, value)
-            movie_session.save()
-            return movie_session.cinema_hall_id, movie_session.movie_id
+        if update_data:
+            MovieSession.objects.filter(pk=session_id).update(**update_data)
 
 
 def delete_movie_session_by_id(session_id: int) -> MovieSession:
