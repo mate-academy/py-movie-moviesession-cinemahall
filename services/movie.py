@@ -16,7 +16,6 @@ def get_movies(
         movies = movies.filter(genres__id__in=genres_ids)
     if actors_ids:
         movies = movies.filter(actors__id__in=actors_ids)
-
     return movies
 
 

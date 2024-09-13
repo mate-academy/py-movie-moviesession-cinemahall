@@ -41,6 +41,7 @@ class CinemaHall(models.Model):
 
 class MovieSession(models.Model):
     show_time = models.DateTimeField()
+
     cinema_hall = models.ForeignKey(
         CinemaHall,
         related_name="sessions",

@@ -12,7 +12,6 @@ def create_movie_session(
 ) -> None:
     movie = Movie.objects.get(id=movie_id)
     cinema_hall = CinemaHall.objects.get(id=cinema_hall_id)
-
     MovieSession.objects.create(
         show_time=movie_show_time,
         movie=movie,
