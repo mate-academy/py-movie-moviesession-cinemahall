@@ -3,7 +3,7 @@ from __future__ import annotations
 from datetime import datetime
 from typing import Optional
 from django.db.models import QuerySet
-from db.models import MovieSession, Movie, CinemaHall
+from db.models import MovieSession
 
 
 def create_movie_session(
@@ -45,13 +45,13 @@ def update_movie_session(
     update_fields = {}
 
     if show_time:
-        update_fields['show_time'] = show_time
+        update_fields["show_time"] = show_time
 
     if movie_id:
-        update_fields['movie_id'] = movie_id
+        update_fields["movie_id"] = movie_id
 
     if cinema_hall_id:
-        update_fields['cinema_hall_id'] = cinema_hall_id
+        update_fields["cinema_hall_id"] = cinema_hall_id
 
     if update_fields:
         MovieSession.objects.filter(pk=session_id).update(**update_fields)
