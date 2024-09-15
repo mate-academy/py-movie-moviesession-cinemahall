@@ -44,7 +44,6 @@ def update_movie_session(
     movie_session.save()
 
 
-
 def delete_movie_session_by_id(session_id: int) -> None:
     movie_session = MovieSession.objects.get(pk=session_id)
     movie_session.delete()
