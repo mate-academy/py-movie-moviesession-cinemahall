@@ -48,4 +48,3 @@ def update_movie_session(
 
     if update_fields:
         MovieSession.objects.filter(pk=session_id).update(**update_fields)
-
