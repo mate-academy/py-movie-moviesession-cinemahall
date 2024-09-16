@@ -34,14 +34,7 @@ def update_movie_session(
         show_time: Optional[datetime] = None,
         movie_id: Optional[int] = None,
         cinema_hall_id: Optional[int] = None
-) -> Optional[MovieSession]:
-    if not any([show_time, movie_id, cinema_hall_id]):
-        return None
-
-    movie_session = get_movie_session_by_id(session_id)
-    if movie_session is None:
-        return None
-
+) -> None:
     update_fields = {}
 
     if show_time:
@@ -56,8 +49,3 @@ def update_movie_session(
     if update_fields:
         MovieSession.objects.filter(pk=session_id).update(**update_fields)
 
-    return MovieSession.objects.get(pk=session_id)
-
-
-def delete_movie_session_by_id(session_id: int) -> None:
-    get_movie_session_by_id(session_id).delete()
