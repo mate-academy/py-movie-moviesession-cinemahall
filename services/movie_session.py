@@ -48,3 +48,7 @@ def update_movie_session(
 
     if update_fields:
         MovieSession.objects.filter(pk=session_id).update(**update_fields)
+
+
+def delete_movie_session_by_id(session_id: int) -> None:
+    get_movie_session_by_id(session_id).delete()
