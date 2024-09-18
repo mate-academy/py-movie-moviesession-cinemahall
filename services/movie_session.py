@@ -48,7 +48,8 @@ def update_movie_session(
         MovieSession.objects.filter(id=session_id).update(movie=new_movie)
     if cinema_hall_id:
         new_cinema_hall = CinemaHall.objects.get(id=cinema_hall_id)
-        MovieSession.objects.filter(id=session_id).update(cinema_hall=new_cinema_hall)
+        MovieSession.objects.filter(
+            id=session_id).update(cinema_hall=new_cinema_hall)
 
 
 def delete_movie_session_by_id(movie_session_id: int) -> None:
