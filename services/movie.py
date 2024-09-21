@@ -5,15 +5,16 @@ from db.models import Movie
 
 
 def get_movies(genres_ids: list = None, actors_ids: str = None) -> QuerySet:
-    if not genres_ids and not actors_ids:
-        return Movie.objects.all()
-    if genres_ids and not actors_ids:
-        return Movie.objects.filter(genres__id__in=genres_ids)
-    if actors_ids and not genres_ids:
-        return Movie.objects.filter(actors__id__in=actors_ids)
-    if genres_ids and actors_ids:
-        return Movie.objects.filter(
-            genres__id__in=genres_ids).filter(actors__id__in=actors_ids)
+    result_queryset = Movie.objects.all()
+    if genres_ids:
+        result_queryset = result_queryset.filter(
+            genres__id__in=genres_ids
+        )
+    if actors_ids:
+        result_queryset = result_queryset.filter(
+            actors__id__in=actors_ids
+        )
+    return result_queryset
 
 
 def get_movie_by_id(movie_id: int) -> Movie:
