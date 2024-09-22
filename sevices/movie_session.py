@@ -1,5 +1,4 @@
 from db.models import MovieSession, CinemaHall, Movie
-from datetime import datetime
 from django.shortcuts import get_object_or_404
 
 
@@ -14,7 +13,7 @@ def create_movie_session(
     )
 
 
-def get_movies_sessions(session_date:str = None) -> MovieSession:
+def get_movies_sessions(session_date: str = None) -> MovieSession:
     if session_date:
         return MovieSession.objects.filter(show_time__date=session_date)
     return MovieSession.objects.all()
