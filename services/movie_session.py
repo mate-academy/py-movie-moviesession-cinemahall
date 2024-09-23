@@ -78,7 +78,7 @@ def update_movie_session(
             movie_session.show_time = show_time
         else:
             raise ValueError(
-                f"Invalid show time format. Please provide a valid datetime."
+                "Invalid show time format. Please provide a valid datetime."
             )
 
     if movie_id:
