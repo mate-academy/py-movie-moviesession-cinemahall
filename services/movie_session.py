@@ -66,12 +66,7 @@ def update_movie_session(
     movie_id: Optional[int] = None,
     cinema_hall_id: Optional[int] = None
 ) -> None:
-    try:
-        movie_session = MovieSession.objects.get(id=session_id)
-    except MovieSession.DoesNotExist:
-        raise ValueError(
-            f"Movie session with the provided ID {session_id} does not exist."
-        )
+    movie_session = get_movie_session_by_id(session_id)
 
     if show_time:
         if isinstance(show_time, datetime):
@@ -105,7 +100,7 @@ def update_movie_session(
 
 def delete_movie_session_by_id(session_id: int) -> None:
     try:
-        MovieSession.objects.get(id=session_id).delete()
+        get_movie_session_by_id(session_id).delete()
     except MovieSession.DoesNotExist:
         raise ValueError(
             f"Movie session with ID {session_id} does not exist."
