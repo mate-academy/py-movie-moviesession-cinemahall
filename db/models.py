@@ -1,6 +1,7 @@
 from datetime import datetime
 
 from django.db import models
+from django.db.models import DO_NOTHING
 
 
 class Genre(models.Model):
@@ -43,8 +44,8 @@ class CinemaHall(models.Model):
 
 class MovieSession(models.Model):
     show_time = models.DateTimeField(default=datetime.now)
-    cinema_hall = models.ForeignKey(CinemaHall, on_delete=models.CASCADE)
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    cinema_hall = models.ForeignKey(CinemaHall, on_delete=DO_NOTHING)
+    movie = models.ForeignKey(Movie, on_delete=DO_NOTHING)
 
     def __str__(self) -> str:
         return f"{self.movie} {self.show_time}"
