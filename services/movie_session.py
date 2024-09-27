@@ -25,8 +25,8 @@ def get_movies_sessions(session_date: str = None) -> QuerySet:
         if not date_obj:
             raise ValueError("The date must bee format YYYY-MM-DD")
         return MovieSession.objects.filter(show_time__date=date_obj)
-    else:
-        return MovieSession.objects.all()
+
+    return MovieSession.objects.all()
 
 
 def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
@@ -39,7 +39,7 @@ def update_movie_session(
         movie_id: int = None,
         cinema_hall_id: int = None
 ) -> MovieSession:
-    movie_session = MovieSession.objects.get(id=session_id)
+    movie_session = get_movie_session_by_id(session_id)
     if show_time:
         movie_session.show_time = show_time
     if movie_id:
@@ -51,7 +51,6 @@ def update_movie_session(
     return movie_session
 
 
-def delete_movie_session_by_id(session_id: int) -> bool:
+def delete_movie_session_by_id(session_id: int) -> None:
     delete_session_movie = get_movie_session_by_id(session_id)
     delete_session_movie.delete()
-    return True
