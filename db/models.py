@@ -1,5 +1,4 @@
 from django.db import models
-from django.db.models import CharField
 
 
 class Genre(models.Model):
@@ -20,11 +19,11 @@ class Actor(models.Model):
 class Movie(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField(default="There is no description")
-    actors = models.ManyToManyField(Actor)
-    genres = models.ManyToManyField(Genre)
+    actors = models.ManyToManyField(Actor, related_name="movies")
+    genres = models.ManyToManyField(Genre, related_name="movies")
 
-    def __str__(self) -> CharField:
-        return self.title
+    def __str__(self) -> str:
+        return f"{self.title}"
 
 
 class CinemaHall(models.Model):
@@ -32,8 +31,8 @@ class CinemaHall(models.Model):
     rows = models.IntegerField()
     seats_in_row = models.IntegerField()
 
-    def __str__(self) -> CharField:
-        return self.name
+    def __str__(self) -> str:
+        return f"{self.name}"
 
     @property
     def capacity(self) -> int:

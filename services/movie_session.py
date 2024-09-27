@@ -1,10 +1,9 @@
 from datetime import datetime
 
-from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import QuerySet
 from django.utils.dateparse import parse_date
 
-from db.models import MovieSession, Movie, CinemaHall
+from db.models import MovieSession
 
 
 def create_movie_session(
@@ -12,12 +11,10 @@ def create_movie_session(
         movie_id: int,
         cinema_hall_id: int
 ) -> MovieSession:
-    movie = Movie.objects.get(id=movie_id)
-    cinema_hall = CinemaHall.objects.get(id=cinema_hall_id)
     new_movie_session = MovieSession.objects.create(
         show_time=movie_show_time,
-        movie=movie,
-        cinema_hall=cinema_hall
+        movie_id=movie_id,
+        cinema_hall_id=cinema_hall_id
     )
     return new_movie_session
 
@@ -42,25 +39,19 @@ def update_movie_session(
         movie_id: int = None,
         cinema_hall_id: int = None
 ) -> MovieSession:
-    try:
-        movie_session = MovieSession.objects.get(id=session_id)
-        if show_time:
-            movie_session.show_time = show_time
-        if movie_id:
-            movie_session.movie_id = movie_id
-        if cinema_hall_id:
-            movie_session.cinema_hall_id = cinema_hall_id
+    movie_session = MovieSession.objects.get(id=session_id)
+    if show_time:
+        movie_session.show_time = show_time
+    if movie_id:
+        movie_session.movie_id = movie_id
+    if cinema_hall_id:
+        movie_session.cinema_hall_id = cinema_hall_id
 
-        movie_session.save()
-        return movie_session
-    except ObjectDoesNotExist:
-        raise ValueError(f"Movie session with id {session_id} not found")
+    movie_session.save()
+    return movie_session
 
 
 def delete_movie_session_by_id(session_id: int) -> bool:
-    try:
-        delete_session_movie = MovieSession.objects.get(id=session_id)
-        delete_session_movie.delete()
-        return True
-    except ObjectDoesNotExist:
-        return False
+    delete_session_movie = get_movie_session_by_id(session_id)
+    delete_session_movie.delete()
+    return True
