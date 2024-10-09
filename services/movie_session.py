@@ -17,12 +17,12 @@ def get_movies_sessions(session_date: str = None) -> QuerySet[MovieSession]:
     return MovieSession.objects.all()
 
 
-def get_movie_session_by_id(movie_session_id: str) -> MovieSession:
+def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
     return MovieSession.objects.get(id=movie_session_id)
 
 
-def update_movie_session(session_id: str, show_time: str = None,
-                         movie_id: str = None,
+def update_movie_session(session_id: int, show_time: str = None,
+                         movie_id: int = None,
                          cinema_hall_id: str = None) -> MovieSession:
     session = get_movie_session_by_id(session_id)
 
@@ -37,6 +37,6 @@ def update_movie_session(session_id: str, show_time: str = None,
     return session
 
 
-def delete_movie_session_by_id(session_id: str) -> None:
+def delete_movie_session_by_id(session_id: int) -> None:
     session = get_movie_session_by_id(session_id)
     session.delete()
