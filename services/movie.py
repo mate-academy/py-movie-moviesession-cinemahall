@@ -31,8 +31,8 @@ def create_movie(movie_title: str,
                  ) -> None:
     film = Movie.objects.create(title=movie_title, description=movie_description)
     if genres_ids:
-        film.genres.set(*genres_ids)
+        film.genres.set(genres_ids)
         film.save()
     if actors_ids:
-        film.actors.set(*actors_ids)
+        film.actors.set(actors_ids)
         film.save()
