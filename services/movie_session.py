@@ -1,13 +1,15 @@
 # movie_session.py
 
-from typing import Optional, Union
+from typing import Optional
 from datetime import datetime
 from db.models import MovieSession, Movie, CinemaHall
 from django.db.models import QuerySet
 from django.core.exceptions import ObjectDoesNotExist
 
 
-def create_movie_session(movie_show_time: datetime, movie_id: int, cinema_hall_id: int) -> MovieSession:
+def create_movie_session(movie_show_time: datetime,
+                         movie_id: int,
+                         cinema_hall_id: int) -> MovieSession:
     """
     Create a movie session with the provided parameters.
 
@@ -57,9 +59,11 @@ def get_movie_session_by_id(movie_session_id: int) -> Optional[MovieSession]:
 def update_movie_session(session_id: int,
                          show_time: Optional[datetime] = None,
                          movie_id: Optional[int] = None,
-                         cinema_hall_id: Optional[int] = None) -> Optional[MovieSession]:
+                         cinema_hall_id: Optional[int] = None
+                         ) -> Optional[MovieSession]:
     """
-    Update a movie session with the provided parameters if appropriate values are provided.
+    Update a movie session with the provided
+        parameters if appropriate values are provided.
 
     :param session_id: ID of the movie session to update
     :param show_time: Optional new show time of the movie
@@ -77,7 +81,9 @@ def update_movie_session(session_id: int,
             movie_session.movie = Movie.objects.get(id=movie_id)
 
         if cinema_hall_id:
-            movie_session.cinema_hall = CinemaHall.objects.get(id=cinema_hall_id)
+            movie_session.cinema_hall = (
+                CinemaHall.objects.get(id=cinema_hall_id)
+            )
 
         movie_session.save()  # Save the updated fields
         return movie_session
