@@ -21,6 +21,6 @@ TIME_ZONE = "Europe/Kiev"
 
 USE_I18N = True
 
-USE_TZ = "Europe/Kiev"
+USE_TZ = True
 
 INSTALLED_APPS = ("db",)
