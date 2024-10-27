@@ -1,6 +1,5 @@
 from django.db.models import QuerySet
 from datetime import datetime
-from django.shortcuts import get_object_or_404
 
 from db.models import MovieSession, CinemaHall, Movie
 
@@ -12,8 +11,8 @@ def create_movie_session(
 ) -> None:
     MovieSession.objects.create(
         show_time=movie_show_time,
-        cinema_hall=get_object_or_404(CinemaHall, pk=cinema_hall_id),
-        movie=get_object_or_404(Movie, pk=movie_id)
+        cinema_hall_id=cinema_hall_id,
+        movie_id=movie_id
     )
 
 
@@ -25,7 +24,7 @@ def get_movies_sessions(session_time: str = None) -> QuerySet[MovieSession]:
 
 
 def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
-    return get_object_or_404(MovieSession, pk=movie_session_id)
+    return MovieSession.objects.get(pk=movie_session_id)
 
 
 def update_movie_session(
@@ -38,9 +37,9 @@ def update_movie_session(
     if show_time:
         movie_session.show_time = show_time
     if movie_id:
-        movie_session.movie = (Movie.objects.get(pk=movie_id))
+        movie_session.movie = Movie.objects.get(pk=movie_id)
     if cinema_hall_id:
-        movie_session.cinema_hall = (CinemaHall.objects.get(pk=cinema_hall_id))
+        movie_session.cinema_hall = CinemaHall.objects.get(pk=cinema_hall_id),
 
     movie_session.save()
 

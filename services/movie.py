@@ -17,7 +17,7 @@ def get_movies(
 
 
 def get_movie_by_id(movie_id: int) -> Movie:
-    return get_object_or_404(Movie, pk=movie_id)
+    return Movie.objects.get(pk=movie_id)
 
 
 def create_movie(
