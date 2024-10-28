@@ -14,15 +14,11 @@ def create_movie_session(movie_show_time: datetime,
     )
 
 
-def get_movies_sessions(session_date: str = None) -> QuerySet | MovieSession:
+def get_movies_sessions(session_date: str = None) -> QuerySet:
     set_ = MovieSession.objects.all()
     if session_date:
         dat = datetime.datetime.strptime(session_date, "%Y-%m-%d")
-        # set_ = set_.filter(show_time__day=session_date.day)
-        # set_ = set_.filter(show_time__month=session_date.month)
-        # set_ = set_.filter(show_time__year=session_date.year)
         set_ = set_.filter(show_time__date=dat)
-        # set_ = set_.filter(show_time__date=session_date)
     return set_
 
 
