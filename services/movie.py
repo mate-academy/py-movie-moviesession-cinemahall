@@ -19,7 +19,12 @@ def get_movies(
 
 
 def get_movie_by_id(movie_id: str) -> Movie:
-    return Movie.objects.get(id=movie_id)
+    if movie_id:
+        try:
+            return Movie.objects.get(id=movie_id)
+        except Movie.DoesNotExist:
+            raise ValueError(f"Movie with id={movie_id} does not exist.")
+    return Movie.objects.all()
 
 
 def create_movie(
