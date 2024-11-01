@@ -12,7 +12,8 @@ def create_movie_session(
         try:
             cinema_hall = CinemaHall.objects.get(id=cinema_hall_id)
         except CinemaHall.DoesNotExist:
-            raise ValueError(f"CinemaHall with id={cinema_hall_id} does not exist.")
+            raise ValueError(f"CinemaHall with"
+                             f" id={cinema_hall_id} does not exist.")
     if movie_id:
         try:
             movie = Movie.objects.get(id=movie_id)
@@ -39,7 +40,8 @@ def get_movie_session_by_id(
         try:
             return MovieSession.objects.get(id=movie_session_id)
         except MovieSession.DoesNotExist:
-            raise ValueError(f"MovieSession with id={movie_session_id} does not exist.")
+            raise ValueError(f"MovieSession with "
+                             f"id={movie_session_id} does not exist.")
     return MovieSession.objects.all()
 
 
