@@ -19,8 +19,8 @@ class Actor(models.Model):
 class Movie(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True)
-    actors = models.ManyToManyField(Actor, related_name="actor")
-    genres = models.ManyToManyField(Genre, related_name="genre")
+    actors = models.ManyToManyField(Actor, related_name="actors")
+    genres = models.ManyToManyField(Genre, related_name="genres")
 
     def __str__(self) -> str:
         return self.title
