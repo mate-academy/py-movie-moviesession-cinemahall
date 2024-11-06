@@ -34,7 +34,10 @@ def get_movies_sessions(
 def get_movie_session_by_id(
         movie_session_id: int
 ) -> MovieSession:
-    return MovieSession.objects.get(id=movie_session_id)
+    try:
+        return MovieSession.objects.get(id=movie_session_id)
+    except MovieSession.DoesNotExist:
+        print(f'MovieSession with id {movie_session_id} does not exist')
 
 
 def update_movie_session(
@@ -59,4 +62,4 @@ def update_movie_session(
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
-    MovieSession.objects.get(id=session_id).delete()
+    MovieSession.objects.filter(id=session_id).delete()

@@ -1,5 +1,4 @@
 from django.db.models import QuerySet
-from django.utils.datetime_safe import datetime
 
 from db.models import CinemaHall
 
@@ -9,7 +8,7 @@ def get_cinema_halls() -> QuerySet[CinemaHall]:
 
 
 def create_cinema_hall(
-        hall_name: datetime,
+        hall_name: str,
         hall_rows: int,
         hall_seats_in_row: int
 ) -> CinemaHall:
