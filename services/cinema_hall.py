@@ -1,5 +1,4 @@
 from django.db.models import QuerySet
-from django.db.models.sql import Query
 
 from db.models import CinemaHall
 
