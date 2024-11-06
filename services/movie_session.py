@@ -37,7 +37,7 @@ def get_movie_session_by_id(
     try:
         return MovieSession.objects.get(id=movie_session_id)
     except MovieSession.DoesNotExist:
-        print(f'MovieSession with id {movie_session_id} does not exist')
+        print(f"MovieSession with id {movie_session_id} does not exist")
 
 
 def update_movie_session(
