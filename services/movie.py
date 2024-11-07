@@ -5,19 +5,19 @@ def get_movies(genres_ids: list[int] = None,
                actors_ids: list[int] = None) -> list[Movie]:
     movies = Movie.objects.all()
 
-    if genres_ids and actors_ids:
-        movies = movies.filter(genres__id__in=genres_ids,
-                               actors__id__in=actors_ids)
-    elif genres_ids:
+    if genres_ids:
         movies = movies.filter(genres__id__in=genres_ids)
-    elif actors_ids:
+    if actors_ids:
         movies = movies.filter(actors__id__in=actors_ids)
 
     return movies
 
 
 def get_movie_by_id(movie_id: int) -> Movie:
-    return Movie.objects.get(id=movie_id)
+    try:
+        return Movie.objects.get(id=movie_id)
+    except Movie.DoesNotExist:
+        raise ValueError(f"Movie with id {movie_id} does not exist")
 
 
 def create_movie(movie_title: str,
