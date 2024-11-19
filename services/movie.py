@@ -1,10 +1,13 @@
 from typing import List
 
 from django.db.models import QuerySet
-from db.models import Genre, Actor, Movie
+from db.models import Movie
 
 
-def get_movies(genres_ids: List[int] = None, actors_ids: List[int] = None) -> QuerySet:
+def get_movies(
+        genres_ids: List[int] = None,
+        actors_ids: List[int] = None
+) -> QuerySet:
     if genres_ids is None and actors_ids is None:
         return Movie.objects.all()
     if genres_ids is not None and actors_ids is not None:
@@ -17,8 +20,10 @@ def get_movies(genres_ids: List[int] = None, actors_ids: List[int] = None) -> Qu
     if actors_ids is not None:
         return Movie.objects.filter(actors__id__in=actors_ids).distinct()
 
+
 def get_movie_by_id(movie_id: int) -> Movie:
-    return Movie.objects.get(id=movie_id)
+    return Movie.objects.filter(id=movie_id).first()
+
 
 def create_movie(
         movie_title: str,
