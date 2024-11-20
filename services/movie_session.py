@@ -1,4 +1,4 @@
-from db.models import models
+from django.db import models
 
 from db.models import MovieSession
 
@@ -6,13 +6,14 @@ import datetime
 
 
 def create_movie_session(
-        show_time: datetime.datetime,
+        movie_show_time: datetime.datetime,
         movie_id: int,
         cinema_hall_id: int
 ) -> MovieSession:
-    cinema_hall = CinemaHall.objects.get(id=cinema_hall_id)
     return MovieSession.objects.create(
-        show_time=show_time, movie_id=movie_id, cinema_hall_id=cinema_hall_id
+        show_time=movie_show_time,
+        movie_id=movie_id,
+        cinema_hall_id=cinema_hall_id
     )
 
 
