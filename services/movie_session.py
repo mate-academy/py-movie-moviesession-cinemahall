@@ -3,7 +3,6 @@ from datetime import datetime
 from django.db.models import QuerySet
 
 from db.models import MovieSession, Movie, CinemaHall
-from tests.test_main import movie_session_database_data
 
 
 def create_movie_session(
@@ -45,13 +44,13 @@ def update_movie_session(
     movie_session = MovieSession.objects.get(id=session_id)
 
     if show_time:
-        movie_session.show_time=show_time
+        movie_session.show_time = show_time
 
     if movie_id:
-        movie_session.movie_id=movie_id
+        movie_session.movie_id = movie_id
 
     if cinema_hall_id:
-        movie_session.cinema_hall_id=cinema_hall_id
+        movie_session.cinema_hall_id = cinema_hall_id
 
     return movie_session
 
