@@ -5,7 +5,7 @@ from django.db.models import QuerySet
 def get_movies(
         genres_ids: list[int] = None,
         actors_ids: list[int] = None
-) -> QuerySet:
+) -> QuerySet[Movie]:
     queryset = Movie.objects.all()
 
     if genres_ids:
@@ -26,14 +26,14 @@ def create_movie(
         genres_ids: list[Genre] = None,
         actors_ids: list[Actor] = None
 ) -> Movie:
-    create_movie = Movie.objects.create(
+    movie = Movie.objects.create(
         title=movie_title,
         description=movie_description
     )
     if genres_ids:
-        create_movie.genres.set(genres_ids)
+        movie.genres.set(genres_ids)
 
     if actors_ids:
-        create_movie.genres.set(actors_ids)
+        movie.genres.set(actors_ids)
 
-    return create_movie
+    return movie
