@@ -14,7 +14,7 @@ def get_movies(genres_ids: list[Genre] = None, /,
     elif genres_ids:
         query = Movie.objects.filter(genres__id__in=genres_ids)
     elif actors_ids:
-        query = Movie.objects.filter(actors__id__in__=actors_ids)
+        query = Movie.objects.filter(actors__id__in=actors_ids)
     return query
 
 
