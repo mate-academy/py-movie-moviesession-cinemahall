@@ -8,3 +8,5 @@ venv/
 **__pycache__/
 *.pyc
 **db.sqlite3
+/db/migrations/0002_cinemahall_movie_moviesession.py
+/db/migrations/0003_alter_moviesession_cinema_hall_and_more.py

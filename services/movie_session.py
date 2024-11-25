@@ -22,14 +22,20 @@ def get_movies_sessions(session_date: str = None) -> QuerySet:
 
 
 def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
-    return MovieSession.objects.get(id=movie_session_id)
+    try:
+        return MovieSession.objects.get(id=movie_session_id)
+    except MovieSession.DoesNotExist:
+        raise MovieSession.DoesNotExist
 
 
 def update_movie_session(session_id: int,
                          show_time: datetime = None,
                          movie_id: int = None,
                          cinema_hall_id: int = None) -> MovieSession:
-    session_to_update = MovieSession.objects.get(id=session_id)
+    try:
+        session_to_update = MovieSession.objects.get(id=session_id)
+    except MovieSession.DoesNotExist:
+        raise MovieSession.DoesNotExist
     if show_time:
         session_to_update.show_time = show_time
     if movie_id:
@@ -41,4 +47,7 @@ def update_movie_session(session_id: int,
 
 
 def delete_movie_session_by_id(movie_session_id: int) -> None:
-    MovieSession.objects.get(id=movie_session_id).delete()
+    try:
+        MovieSession.objects.get(id=movie_session_id).delete()
+    except MovieSession.DoesNotExist:
+        raise ValueError("MovieSession does not exist")
