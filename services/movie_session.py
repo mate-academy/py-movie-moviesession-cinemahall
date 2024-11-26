@@ -1,11 +1,11 @@
 from django.db.models import QuerySet
-from django.forms import DateTimeField
+import datetime
 
 from db.models import MovieSession
 
 
 def create_movie_session(
-        movie_show_time: DateTimeField,
+        movie_show_time: datetime,
         movie_id: int,
         cinema_hall_id: int
 ) -> None:
@@ -24,7 +24,7 @@ def get_movies_sessions(
 
     query_set = MovieSession.objects.all()
     if session_date:
-        query_set.filter(show_time=session_date)
+        query_set = query_set.filter(show_time=session_date)
 
     return query_set
 
@@ -39,7 +39,7 @@ def get_movie_session_by_id(
 def update_movie_session(
         session_id: int,
         /,
-        show_time: DateTimeField = None,
+        show_time: datetime = None,
         movie_id: int = None,
         cinema_hall_id: int = None,
 ) -> None:
@@ -49,11 +49,11 @@ def update_movie_session(
     if show_time:
         current_session.show_time = show_time
     if movie_id:
-        current_session.cinema_hall_id = movie_id
+        current_session.movie_id = movie_id
     if cinema_hall_id:
         current_session.cinema_hall_id = cinema_hall_id
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
     session = MovieSession.objects.get(id=session_id)
-    MovieSession.delete(session)
+    session.delete()
