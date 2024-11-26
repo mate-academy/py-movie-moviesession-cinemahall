@@ -1,5 +1,5 @@
 from django.db.models import QuerySet
-import datetime
+from datetime import datetime
 
 from db.models import MovieSession
 
@@ -38,7 +38,6 @@ def get_movie_session_by_id(
 
 def update_movie_session(
         session_id: int,
-        /,
         show_time: datetime = None,
         movie_id: int = None,
         cinema_hall_id: int = None,
@@ -52,6 +51,8 @@ def update_movie_session(
         current_session.movie_id = movie_id
     if cinema_hall_id:
         current_session.cinema_hall_id = cinema_hall_id
+
+    current_session.save()
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
