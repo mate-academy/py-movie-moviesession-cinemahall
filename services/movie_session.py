@@ -34,14 +34,15 @@ def update_movie_session(
     movie_id: int = None,
     cinema_hall_id: int = None
 ) -> None:
+    dict_ms = {}
     update_ms = MovieSession.objects.filter(id=session_id)
-    update_ms.update()
     if show_time:
-        update_ms.update(show_time=show_time)
+        dict_ms["show_time"] = show_time
     if movie_id:
-        update_ms.update(movie_id=movie_id)
+        dict_ms["movie_id"] = movie_id
     if cinema_hall_id:
-        update_ms.update(cinema_hall_id=cinema_hall_id)
+        dict_ms["cinema_hall_id"] = cinema_hall_id
+    update_ms.update(**dict_ms)
 
 
 def delete_movie_session_by_id(
