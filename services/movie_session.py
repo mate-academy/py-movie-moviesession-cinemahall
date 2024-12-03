@@ -34,16 +34,20 @@ def create_movie_session(movie_show_time: datetime,
 def update_movie_session(session_id: int,
                          show_time: datetime = None,
                          movie_id: int = None,
-                         cinema_hall_id: int = None) -> QuerySet:
+                         cinema_hall_id: int = None) -> QuerySet[MovieSession]:
     movie_session = MovieSession.objects.filter(id=session_id)
 
     if movie_session:
+        updates = {}
         if show_time:
-            movie_session.update(show_time=show_time)
+            updates['show_time'] = show_time
         if movie_id:
-            movie_session.update(movie_id=movie_id)
+            updates['movie_id'] = movie_id
         if cinema_hall_id:
-            movie_session.update(cinema_hall_id=cinema_hall_id)
+            updates['cinema_hall_id'] = cinema_hall_id
+
+        if updates:  # Only call update if there are fields to update
+            movie_session.update(**updates)
 
     return movie_session
 
