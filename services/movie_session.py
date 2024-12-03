@@ -40,11 +40,11 @@ def update_movie_session(session_id: int,
     if movie_session:
         updates = {}
         if show_time:
-            updates['show_time'] = show_time
+            updates["show_time"] = show_time
         if movie_id:
-            updates['movie_id'] = movie_id
+            updates["movie_id"] = movie_id
         if cinema_hall_id:
-            updates['cinema_hall_id'] = cinema_hall_id
+            updates["cinema_hall_id"] = cinema_hall_id
 
         if updates:  # Only call update if there are fields to update
             movie_session.update(**updates)
