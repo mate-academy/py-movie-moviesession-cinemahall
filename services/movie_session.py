@@ -22,7 +22,7 @@ def get_movies_sessions(session_date: datetime = None) -> MovieSession:
         return MovieSession.objects.filter(
             show_time__date=parse_date(session_date)
         )
-        return MovieSession.objects.all()
+    return MovieSession.objects.all()
 
 
 def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
