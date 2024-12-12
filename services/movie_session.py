@@ -1,12 +1,11 @@
 from datetime import datetime
-from typing import Any
 
 from django.db.models import QuerySet
 
 from db.models import MovieSession, Movie, CinemaHall
 
 
-def create_movie_session(movie_show_time: Any,
+def create_movie_session(movie_show_time: datetime,
                          movie_id: int,
                          cinema_hall_id: int) -> None:
     movie = Movie.objects.get(id=movie_id)
