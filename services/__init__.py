@@ -1,1 +1,1 @@
-#init
+print("hello")
