@@ -26,8 +26,8 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=255)),
                 ('description', models.TextField()),
-                ('actors', models.ManyToManyField(related_name='actors', to='db.Actor')),
-                ('genres', models.ManyToManyField(related_name='genres', to='db.Genre')),
+                ('actors', models.ManyToManyField(related_name='movies_as_actor', to='db.Actor')),
+                ('genres', models.ManyToManyField(related_name='movies_in_genre', to='db.Genre')),
             ],
         ),
         migrations.CreateModel(
