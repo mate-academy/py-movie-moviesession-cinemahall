@@ -3,15 +3,15 @@ from db.models import Movie
 
 def get_movies(genres_ids: list[int] = None,
                actors_ids: list[int] = None) -> list[Movie]:
-    if not genres_ids and not actors_ids:
-        return Movie.objects.all()
-    elif genres_ids and actors_ids:
-        return Movie.objects.filter(genres__id__in=genres_ids,
-                                    actors__id__in=actors_ids)
-    elif genres_ids and not actors_ids:
-        return Movie.objects.filter(genres__id__in=genres_ids)
-    elif not genres_ids and actors_ids:
-        return Movie.objects.filter(actors__id__in=actors_ids)
+    movies = Movie.objects.all()
+
+    if genres_ids:
+        movies = movies.filter(genres__id__in=genres_ids).distinct()
+
+    if actors_ids:
+        movies = movies.filter(actors__id__in=actors_ids).distinct()
+
+    return movies
 
 
 def get_movie_by_id(movie_id: int) -> Movie:
