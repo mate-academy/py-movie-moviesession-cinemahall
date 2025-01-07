@@ -22,11 +22,17 @@ class Movie(models.Model):
     actors = models.ManyToManyField(Actor)
     genres = models.ManyToManyField(Genre)
 
+    def __str__(self) -> str:
+        return self.title
+
 
 class CinemaHall(models.Model):
     name = models.CharField(max_length=255)
     rows = models.IntegerField()
     seats_in_row = models.IntegerField()
+
+    def __str__(self) -> str:
+        return self.name
 
     @property
     def capacity(self) -> int:
