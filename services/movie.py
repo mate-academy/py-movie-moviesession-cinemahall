@@ -1,5 +1,3 @@
-from typing import List
-
 from django.db.models import QuerySet
 
 from db.models import Movie
@@ -34,9 +32,15 @@ def create_movie(
 
 ) -> Movie:
     if not genres_id and not actors_id:
-        return Movie.objects.create(title=movie_title, description=movie_description)
+        return Movie.objects.create(
+            title=movie_title,
+            description=movie_description
+        )
 
-    movie = Movie.objects.create(title=movie_title, description=movie_description)
+    movie = Movie.objects.create(
+        title=movie_title,
+        description=movie_description
+    )
 
     if genres_id:
         movie.genres.add(genres_id)
