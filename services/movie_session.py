@@ -20,8 +20,8 @@ def create_movie_session(movie_show_time: datetime, movie_id: int,
                                 cinema_hall_id=cinema_hall_id)
 
 
-def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
-    return MovieSession.objects.get(id=movie_session_id)
+def get_movie_session_by_id(movie_session_id: int) -> MovieSession | None:
+    return MovieSession.objects.filter(id=movie_session_id).first()
 
 
 def update_movie_session(session_id: int, show_time: Optional[datetime] = None,
