@@ -11,7 +11,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+        "NAME": os.path.join(BASE_DIR, "db.sqlite"),
     }
 }
 
@@ -21,6 +21,6 @@ TIME_ZONE = "Europe/Kiev"
 
 USE_I18N = True
 
-USE_TZ = False
+USE_TZ = True
 
 INSTALLED_APPS = ("db",)
