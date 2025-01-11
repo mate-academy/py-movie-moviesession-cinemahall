@@ -36,7 +36,10 @@ def update_movie_session(
 ) -> str:
     session = MovieSession.objects.get(id=session_id)
     if show_time:
-        session.show_time = show_time
+        if isinstance(show_time, datetime.datetime):
+            session.show_time = show_time
+        elif isinstance(show_time, str):
+            session.show_time = datetime.datetime.fromisoformat(show_time)
     if movie_id:
         session.movie = Movie.objects.get(id=movie_id)
     if cinema_hall_id:
