@@ -1,4 +1,4 @@
-from db.models import Movie
+from db.models import Genre, Actor, Movie
 
 
 def get_movies(genres_ids: list = None, actors_ids: list = None) -> str:
