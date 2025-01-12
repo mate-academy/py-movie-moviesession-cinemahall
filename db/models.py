@@ -23,7 +23,9 @@ class Movie(models.Model):
 
     title = models.CharField(max_length=255)
     description = models.TextField()
-    genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
+    genre = models.ForeignKey(Genre,
+                              on_delete=models.CASCADE,
+                              default=1)
     actors = models.ManyToManyField(Actor)
 
 
