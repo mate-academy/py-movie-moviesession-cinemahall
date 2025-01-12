@@ -18,17 +18,20 @@ def create_movie_session(
         cinema_hall_id=cinema_hall_id
     )
 
+
 def get_movie_sessions(session_date: Optional[str]) -> "List[MovieSession]":
     if session_date:
         date_filter = datetime.strptime(session_date, "%Y-%m-%d").date()
         return list(MovieSession.objects.filter(show_time__date=date_filter))
     return list(MovieSession.objects.all())
 
+
 def get_movie_session_by_id(movie_session_id: int) -> Optional["MovieSession"]:
     try:
         return MovieSession.objects.get(id=movie_session_id)
     except MovieSession.DoesNotExist:
         return None
+
 
 def update_movie_session(
         movie_session_id: int,
@@ -50,6 +53,7 @@ def update_movie_session(
         return session
     except MovieSession.DoesNotExist:
         return None
+
 
 def delete_movie_session_by_id(session_id: int) -> bool:
     try:
