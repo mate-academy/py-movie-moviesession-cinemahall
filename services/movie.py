@@ -6,7 +6,8 @@ from db.models import Movie
 def get_movies(genres_ids: list[int] = None,
                actors_ids: list[int] = None) -> QuerySet:
     if genres_ids and actors_ids:
-        return Movie.objects.filter(Q(genres__in=genres_ids) & Q(actors__in=actors_ids))
+        return Movie.objects.filter(Q(genres__in=genres_ids)
+                                    & Q(actors__in=actors_ids))
     elif genres_ids:
         return Movie.objects.filter(genres__in=genres_ids)
     return Movie.objects.all()
