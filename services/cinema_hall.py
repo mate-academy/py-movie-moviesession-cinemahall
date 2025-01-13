@@ -1,7 +1,7 @@
 from django.db.models import QuerySet
 
 import init_django_orm  # noqa: F401
-from typing import List
+
 from db.models import CinemaHall
 
 

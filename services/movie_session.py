@@ -2,7 +2,7 @@ from django.db.models import QuerySet
 
 import init_django_orm  # noqa: F401
 from datetime import datetime
-from typing import List, Optional
+from typing import Optional
 from db.models import MovieSession
 
 
@@ -40,7 +40,6 @@ def update_movie_session(
 ) -> Optional["MovieSession"]:
     try:
         session = MovieSession.objects.get(id=session_id)
-        date = "%Y-%m-%d %H:%M:%S"
         if show_time:
             session.show_time = show_time
         if movie_id:
