@@ -29,7 +29,7 @@ def get_movies(
 
 
 def get_movie_by_id(movie_id: int) -> Optional[Movie]:
-    return Movie.objects.get(id=movie_id)
+    return Movie.objects.get(id=movie_id).first()
 
 
 def create_movie(movie_title: str,
