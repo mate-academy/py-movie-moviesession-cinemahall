@@ -1,3 +1,5 @@
+from django.db.models import QuerySet
+
 import init_django_orm  # noqa: F401
 from typing import List, Optional
 from db.models import Genre, Actor, Movie
@@ -6,24 +8,24 @@ from db.models import Genre, Actor, Movie
 def get_movies(
         genres_ids: Optional[List[int]] = None,
         actors_ids: Optional[List[int]] = None
-) -> list:
+) -> QuerySet:
     movies = Movie.objects.all()
 
     if genres_ids and actors_ids:
         movies = movies.filter(
             genres__id__in=genres_ids,
             actors__id__in=actors_ids
-        ).distinct()
+        )
     elif genres_ids:
         movies = movies.filter(
             genres__id__in=genres_ids
-        ).distinct()
+        )
     elif actors_ids:
         movies = movies.filter(
             actors__id__in=actors_ids
-        ).distinct()
+        )
 
-    return list(movies)
+    return movies
 
 
 def get_movie_by_id(movie_id: int) -> Optional[Movie]:
