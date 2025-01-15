@@ -31,12 +31,13 @@ class CinemaHall(models.Model):
     rows = models.IntegerField(null=False)
     seats_in_row = models.IntegerField(null=False)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.name
 
     @property
     def capacity(self) -> int:
         return self.rows * self.seats_in_row
+
 
 class MovieSession(models.Model):
     show_time = models.DateTimeField()

@@ -12,7 +12,7 @@ def get_movies(genres_ids: list = None, /,
     return movies
 
 
-def get_movie_by_id(movie_id) -> Movie:
+def get_movie_by_id(movie_id: int) -> Movie:
     return Movie.objects.filter(id=movie_id)
 
 
