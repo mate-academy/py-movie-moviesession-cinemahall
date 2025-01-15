@@ -1,25 +1,26 @@
 from db.models import MovieSession
-from datetime import datetime
 from django.db.models import QuerySet
+from datetime import datetime
 
 
 def create_movie_session(movie_show_time: datetime,
                          movie_id: int,
                          cinema_hall_id: int) -> MovieSession:
     return MovieSession.objects.create(
-        show_time=movie_show_time, movie_id=movie_id,
-        cinema_hall_id=cinema_hall_id)
+        show_time=movie_show_time,
+        cinema_hall_id=cinema_hall_id,
+        movie_id=movie_id
+    )
 
 
 def get_movies_sessions(session_date: datetime.date = None) -> QuerySet:
-    sessions_list = MovieSession.objects.all()
     if session_date:
-        sessions_list.filter(show_time__date=session_date)
-    return sessions_list
+        return MovieSession.objects.filter(show_time__date=session_date)
+    return MovieSession.objects.all()
 
 
-def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
-    return MovieSession.objects.get(id=movie_session_id)
+def get_movie_session_by_id(movie_sesion_id: int) -> MovieSession:
+    return MovieSession.objects.get(id=movie_sesion_id)
 
 
 def update_movie_session(session_id: int,
