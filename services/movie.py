@@ -1,4 +1,5 @@
 from django.db.models import QuerySet
+from django.shortcuts import get_object_or_404
 
 from db.models import Movie
 
@@ -12,7 +13,7 @@ def get_movies(genres_ids: list[int] = None,
 
     elif genres_ids and actors_ids:
         return (queryset.filter(genres__in=genres_ids)
-                .filter(actors__in=actors_ids))
+                .filter(actors__in=actors_ids)).distinct()
 
     elif genres_ids and not actors_ids:
         return queryset.filter(genres__in=genres_ids)
@@ -24,7 +25,7 @@ def get_movies(genres_ids: list[int] = None,
 
 
 def get_movie_by_id(movie_id: int) -> QuerySet | Movie:
-    return Movie.objects.get(id=movie_id)
+    return get_object_or_404(Movie, id=movie_id)
 
 
 def create_movie(movie_title: str, movie_description: str,
