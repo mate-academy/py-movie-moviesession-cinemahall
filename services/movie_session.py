@@ -7,27 +7,20 @@ from db.models import MovieSession, Movie, CinemaHall
 
 def create_movie_session(
         movie_show_time: datetime,
-        movie_id: str,
-        cinema_hall_id: str
-) -> MovieSession:
+        movie_id: int,
+        cinema_hall_id: int
+) -> None:
     if cinema_hall_id:
-        if isinstance(cinema_hall_id, int):
-            cinema_hall_id = CinemaHall.objects.get(id=cinema_hall_id)
-        else:
-            cinema_hall_id = CinemaHall.objects.get(name=cinema_hall_id)
-    if movie_id:
-        if isinstance(movie_id, int):
-            movie_id = Movie.objects.get(id=movie_id)
-        else:
-            movie_id = Movie.objects.get(name=movie_id)
+        cinema_hall_id = CinemaHall.objects.get(id=cinema_hall_id)
 
-    new_movie_session = MovieSession.objects.create(
+    if movie_id:
+        movie_id = Movie.objects.get(id=movie_id)
+
+    MovieSession.objects.create(
         show_time=movie_show_time,
         cinema_hall=cinema_hall_id,
         movie=movie_id,
     )
-
-    return new_movie_session
 
 
 def get_movies_sessions(session_date: datetime = None) -> QuerySet:
@@ -51,21 +44,15 @@ def update_movie_session(
 ) -> MovieSession:
     update_fields = {}
 
-    if show_time is not None:
+    if show_time:
         update_fields["show_time"] = show_time
 
-    if cinema_hall_id is not None:
-        if isinstance(cinema_hall_id, int):
-            cinema_hall = CinemaHall.objects.get(id=cinema_hall_id)
-        else:
-            cinema_hall = CinemaHall.objects.get(name=cinema_hall_id)
+    if cinema_hall_id:
+        cinema_hall = CinemaHall.objects.get(id=cinema_hall_id)
         update_fields["cinema_hall"] = cinema_hall
 
-    if movie_id is not None:
-        if isinstance(movie_id, int):
-            movie = Movie.objects.get(id=movie_id)
-        else:
-            movie = Movie.objects.get(name=movie_id)
+    if movie_id:
+        movie = Movie.objects.get(id=movie_id)
         update_fields["movie"] = movie
 
     MovieSession.objects.filter(id=session_id).update(**update_fields)
