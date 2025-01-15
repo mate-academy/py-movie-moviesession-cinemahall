@@ -110,7 +110,7 @@ date
        - else returns all movies sessions
    - `get_movie_session_by_id`, takes `movie_session_id` - id of the movie 
 session, returns movie session with the provided id
-   - `update_movie_session`, takes `session_id`, optional `show_time`,
+     - `update_movie_session`, takes `session_id`, optional `show_time`,
 optional `movie_id`, optional `cinema_hall_id`. Update movie session with
 provided `session_id` and set fields if appropriate values are provided
    - `delete_movie_session_by_id`, takes `session_id` - id of session,
