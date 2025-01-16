@@ -12,8 +12,8 @@ class Actor(models.Model):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
 
-    def __str__(self) -> str:
-        return f"{self.first_name} {self.last_name}"
+    def __str__(self) -> tuple[str, str]:
+        return self.first_name, self.last_name
 
 
 class Movie(models.Model):
@@ -28,19 +28,18 @@ class Movie(models.Model):
 
 class CinemaHall(models.Model):
     name = models.CharField(max_length=255)
-    row = models.IntegerField()
-    seat_count = models.IntegerField()
+    rows = models.IntegerField()
+    seats_in_row = models.IntegerField()
 
-    def capacity(self):
-        return range(1, self.seat_count + 1)
+    @property
+    def capacity(self) -> int:
+        return self.rows * self.seats_in_row
 
     def __str__(self) -> str:
         return self.name
 
 
 class MovieSession(models.Model):
+    show_time = models.DateTimeField()
+    cinema_hall = models.ForeignKey(CinemaHall, on_delete=models.CASCADE)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
-    date = models.DateField()
-    time = models.TimeField()
-    price = models.DecimalField(max_digits=6, decimal_places=2)
-
