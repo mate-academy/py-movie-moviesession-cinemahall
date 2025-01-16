@@ -1,20 +1,14 @@
-from django.db import transaction
 from django.db.models import QuerySet
 
 from db.models import Genre, Movie, Actor
 
 
-def get_movies(genres_ids: list = None,
-               actors_ids: list = None,
-               title: str = None
-               ) -> QuerySet:
+def get_movies(genres_ids: list = None, actors_ids: list = None) -> QuerySet:
     movies = Movie.objects.all()
     if genres_ids:
         movies = movies.filter(genres__id__in=genres_ids)
     if actors_ids:
         movies = movies.filter(actors__id__in=actors_ids)
-    if title:
-        movies = movies.filter(title__icontains=title)
     return movies.distinct()
 
 
