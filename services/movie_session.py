@@ -41,11 +41,11 @@ def update_movie_session(
         )
     if movie_id:
         models.MovieSession.objects.filter(id=session_id).update(
-            movie=movie_id
+            movie=Movie.objects.get(id=movie_id)
         )
     if cinema_hall_id:
         models.MovieSession.objects.filter(id=session_id).update(
-            cinema_hall=cinema_hall_id
+            cinema_hall=CinemaHall.objects.get(id=cinema_hall_id)
         )
 
 
