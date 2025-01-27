@@ -33,10 +33,10 @@ def get_movies_sessions(
 
 
 def get_movie_session_by_id(
-        movie_id: int
+        movie_session_id : int
 ) -> MovieSession:
 
-    return MovieSession.objects.get(id=movie_id)
+    return MovieSession.objects.get(id=movie_session_id)
 
 
 def update_movie_session(
@@ -52,7 +52,7 @@ def update_movie_session(
         session.show_time = show_time
     if movie_id:
         movie = Movie.objects.get(id=movie_id)
-        session.movie_id = movie
+        session.movie = movie
     if cinema_hall_id:
         cinema_hall = CinemaHall.objects.get(id=cinema_hall_id)
         session.cinema_hall = cinema_hall
