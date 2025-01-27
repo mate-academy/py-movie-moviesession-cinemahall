@@ -1,19 +1,20 @@
 import pytest
 import datetime
-
+from django.utils.timezone import make_aware
 from contextlib import redirect_stdout
 from io import StringIO
-
 from db.models import Actor, Genre, Movie, MovieSession, CinemaHall
 from services.movie import get_movies, get_movie_by_id, create_movie
 from services.cinema_hall import get_cinema_halls, create_cinema_hall
 from services.movie_session import (
     create_movie_session,
-    get_movies_sessions,
-    get_movie_session_by_id,
     update_movie_session,
+    get_movie_sessions,
+    get_movie_session_by_id,
     delete_movie_session_by_id,
 )
+
+
 
 
 @pytest.mark.django_db
@@ -355,34 +356,29 @@ def test_cinema_hall_service_create_cinema_hall():
 
 @pytest.mark.django_db
 def test_movie_session_service_create_movie_session():
-    CinemaHall.objects.create(name="Blue", rows=10, seats_in_row=12)
-    CinemaHall.objects.create(name="VIP", rows=3, seats_in_row=5)
-    Movie.objects.create(title="Matrix", description="Matrix description")
-    Movie.objects.create(title="Batman", description="Batman description")
-    datetime_1 = datetime.datetime(
-        year=2020, month=11, day=30, hour=10, minute=30
-    )
-    datetime_2 = datetime.datetime(
-        year=2021, month=1, day=10, hour=15, minute=15
-    )
-    create_movie_session(
-        movie_show_time=datetime_1, cinema_hall_id=2, movie_id=1
-    )
-    create_movie_session(
-        movie_show_time=datetime_2, cinema_hall_id=1, movie_id=2
-    )
-    create_movie_session(
-        movie_show_time=datetime_1, cinema_hall_id=1, movie_id=2
-    )
+    # Create Cinema Halls
+    vip_hall = CinemaHall.objects.create(name="VIP", rows=3, seats_in_row=5)
+    blue_hall = CinemaHall.objects.create(name="Blue", rows=10, seats_in_row=12)
+
+    # Create Movies
+    matrix = Movie.objects.create(title="Matrix", description="Matrix description")
+    batman = Movie.objects.create(title="Batman", description="Batman description")
+
+    # Define Show Times
+    datetime_1 = make_aware(datetime.datetime(2020, 11, 30, 10, 30))
+    datetime_2 = make_aware(datetime.datetime(2021, 1, 10, 15, 15))
+
+    # Create Sessions
+    create_movie_session(movie_show_time=datetime_1, cinema_hall_id=vip_hall.id, movie_id=matrix.id)
+    create_movie_session(movie_show_time=datetime_2, cinema_hall_id=blue_hall.id, movie_id=batman.id)
+
+    # Check Results
     assert list(
-        MovieSession.objects.all().values_list(
-            "show_time__date", "cinema_hall__name", "movie__title"
-        )
+        get_movie_sessions().values_list("show_time__date", "cinema_hall__name", "movie__title")
     ) == [
-        (datetime.date(2020, 11, 30), "VIP", "Matrix"),
-        (datetime.date(2021, 1, 10), "Blue", "Batman"),
-        (datetime.date(2020, 11, 30), "Blue", "Batman"),
-    ]
+               (datetime_1.date(), "VIP", "Matrix"),
+               (datetime_2.date(), "Blue", "Batman"),
+           ]
 
 
 @pytest.mark.django_db
@@ -451,7 +447,7 @@ def test_movie_session_service_update_movie_session_cinema_hall(database_data):
 @pytest.mark.django_db
 def test_movie_session_service_get_movies_sessions(database_data):
     assert list(
-        get_movies_sessions().values_list(
+        get_movie_sessions().values_list(
             "show_time__date", "cinema_hall__name", "movie__title"
         )
     ) == [
@@ -464,14 +460,14 @@ def test_movie_session_service_get_movies_sessions(database_data):
 
 @pytest.mark.django_db
 def test_movie_session_service_get_movie_session_by_date(database_data):
-    sessions_1 = get_movies_sessions("2019-8-19")
+    sessions_1 = get_movie_sessions("2019-8-19")
     assert list(sessions_1.values_list(
         "movie__title", "cinema_hall__name"
     )) == [
         ("Matrix", "Blue")
     ]
 
-    sessions_2 = get_movies_sessions("2021-4-3")
+    sessions_2 = get_movie_sessions("2021-4-3")
     assert list(sessions_2.values_list(
         "movie__title", "cinema_hall__name"
     )) == [
@@ -499,7 +495,7 @@ def test_movie_session_service_delete_movie_session_by_id(database_data):
     delete_movie_session_by_id(4)
 
     assert list(
-        get_movies_sessions().values_list(
+        get_movie_sessions().values_list(
             "show_time__date", "cinema_hall__name", "movie__title"
         )
     ) == [
