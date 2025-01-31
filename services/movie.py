@@ -1,9 +1,13 @@
+from typing import Optional
+
 from django.db.models import QuerySet
 
 from db.models import Movie
 
 
-def get_movies(genres_ids: int = None, actors_ids: int = None) -> QuerySet:
+def get_movies(
+        genres_ids: Optional[list[int]] = None,
+        actors_ids: Optional[list[int]] = None) -> QuerySet:
     movies = Movie.objects.all()
 
     if genres_ids:
@@ -16,7 +20,7 @@ def get_movies(genres_ids: int = None, actors_ids: int = None) -> QuerySet:
 
 
 def get_movie_by_id(movie_id: int) -> Movie | None:
-    return Movie.objects.filter(id=movie_id).first()
+    return Movie.objects.get(id=movie_id)
 
 
 def create_movie(

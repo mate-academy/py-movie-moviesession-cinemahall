@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.db.models import QuerySet
 from django.db.models.fields import DateField
 
@@ -6,7 +8,7 @@ from django.utils.dateparse import parse_date
 
 
 def create_movie_session(
-        movie_show_time: int,
+        movie_show_time: datetime,
         movie_id: int,
         cinema_hall_id: int) -> MovieSession:
     return MovieSession.objects.create(
