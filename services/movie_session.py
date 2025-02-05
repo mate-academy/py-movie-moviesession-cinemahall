@@ -20,7 +20,7 @@ def create_movie_session(
 
 def get_movies_sessions(
         session_date: str = None
-) -> QuerySet | MovieSession:
+) -> QuerySet:
     movie_sessions = MovieSession.objects.all()
 
     if session_date:
