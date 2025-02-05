@@ -1,9 +1,10 @@
 from django.db.models import QuerySet
 from db.models import MovieSession, CinemaHall, Movie
+from datetime import datetime
 
 
 def create_movie_session(
-    movie_show_time: str,
+    movie_show_time: datetime,
     movie_id: int,
     cinema_hall_id: int
 ) -> None:
