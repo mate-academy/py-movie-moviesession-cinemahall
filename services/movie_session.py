@@ -30,8 +30,8 @@ def create_movie_session(
 
     return MovieSession.objects.create(
         show_time=movie_show_time,
-        movie_id=Movie.objects.get(id=movie_id),
-        cinema_hall_id=CinemaHall.objects.get(id=cinema_hall_id)
+        movie=Movie.objects.get(id=movie_id),
+        cinema_hall=CinemaHall.objects.get(id=cinema_hall_id)
     )
 
 
@@ -55,7 +55,7 @@ def get_movies_sessions(
     try:
         if session_date:
             movie_session = movie_session.filter(
-                show_time__date=datetime.strptime(
+                show_time__date=datetime.datetime.strptime(
                     session_date, "%Y-%m-%d"
                 ).date()
             )
