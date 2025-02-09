@@ -17,10 +17,12 @@ DATABASES = {
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "Europe/Kiev"
+TIME_ZONE = "America/New_York"
 
 USE_I18N = True
 
 USE_TZ = False
+
+ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
 INSTALLED_APPS = ("db",)
