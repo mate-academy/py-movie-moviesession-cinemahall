@@ -15,11 +15,6 @@ def create_movie_session(
         movie_id=movie_id,
         cinema_hall_id=cinema_hall_id
     )
-    # if inst and movie_id:
-    #     inst.movie.set(movie_id)
-    # if inst and cinema_hall_id:
-    #     inst.cinema_hall.set(cinema_hall_id)
-
     return inst
 
 
