@@ -5,8 +5,8 @@ from db.models import Movie
 
 def get_movies(genres_ids: list = None, actors_ids: list = None) -> QuerySet:
     if genres_ids and actors_ids:
-        return (Movie.objects.filter(genres__in=genres_ids)
-                .filter(actors__in=actors_ids))
+        return (Movie.objects.filter(genres__in=genres_ids).values()
+                & Movie.objects.filter(actors__in=actors_ids).values())
     elif genres_ids:
         return Movie.objects.filter(genres__in=genres_ids)
     elif actors_ids:
