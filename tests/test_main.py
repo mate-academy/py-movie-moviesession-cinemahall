@@ -83,9 +83,7 @@ def test_cinema_hall_capacity(name, rows, seats_in_row, capacity):
 def movie_session_database_data():
     movie_sessions = []
     movie = Movie.objects.create(title="Speed", description="None")
-    cinema_hall = CinemaHall.objects.create(name="Blue",
-                                            rows=10,
-                                            seats_in_row=10)
+    cinema_hall = CinemaHall.objects.create(name="Blue", rows=10, seats_in_row=10)
     movie_sessions.append(
         (
             MovieSession.objects.create(
@@ -133,8 +131,7 @@ def database_data():
     western = Genre.objects.create(name="Western")
 
     reeves = Actor.objects.create(first_name="Keanu", last_name="Reeves")
-    johansson = Actor.objects.create(first_name="Scarlett",
-                                     last_name="Johansson")
+    johansson = Actor.objects.create(first_name="Scarlett", last_name="Johansson")
     clooney = Actor.objects.create(first_name="George", last_name="Clooney")
 
     matrix = Movie.objects.create(title="Matrix", description="Matrix movie")
@@ -146,8 +143,7 @@ def database_data():
     batman.genres.add(drama)
     batman.actors.add(clooney)
 
-    titanic = Movie.objects.create(title="Titanic",
-                                   description="Titanic movie")
+    titanic = Movie.objects.create(title="Titanic", description="Titanic movie")
     titanic.genres.add(drama, action)
 
     good_bad = Movie.objects.create(
@@ -161,9 +157,7 @@ def database_data():
     cheap = CinemaHall.objects.create(name="Cheap", rows=15, seats_in_row=27)
 
     MovieSession.objects.create(
-        show_time=datetime.datetime(2019, 8, 19, 20, 30),
-        cinema_hall=blue,
-        movie=matrix
+        show_time=datetime.datetime(2019, 8, 19, 20, 30), cinema_hall=blue, movie=matrix
     )
     MovieSession.objects.create(
         show_time=datetime.datetime(2017, 8, 19, 11, 10),
@@ -171,15 +165,11 @@ def database_data():
         movie=titanic,
     )
     MovieSession.objects.create(
-        show_time=datetime.datetime(2021, 4, 3, 13, 50),
-        cinema_hall=vip,
-        movie=good_bad
+        show_time=datetime.datetime(2021, 4, 3, 13, 50), cinema_hall=vip, movie=good_bad
     )
 
     MovieSession.objects.create(
-        show_time=datetime.datetime(2021, 4, 3, 16, 30),
-        cinema_hall=cheap,
-        movie=matrix
+        show_time=datetime.datetime(2021, 4, 3, 16, 30), cinema_hall=cheap, movie=matrix
     )
 
 
@@ -189,8 +179,7 @@ def test_movie_service_get_movies(database_data):
         ("Matrix", "Matrix movie"),
         ("Batman", "Batman movie"),
         ("Titanic", "Titanic movie"),
-        ("The Good, the Bad and the Ugly",
-         "The Good, the Bad and the Ugly movie"),
+        ("The Good, the Bad and the Ugly", "The Good, the Bad and the Ugly movie"),
     ]
 
 
@@ -219,12 +208,8 @@ def test_movie_service_get_movies_with_genres(database_data):
 
 @pytest.mark.django_db
 def test_movie_service_get_movies_with_actors(database_data):
-    assert list(
-        get_movies(actors_ids=[1]).values_list("title")
-    ) == [("Matrix",)]
-    assert list(
-        get_movies(actors_ids=[2, 3]).values_list("title")
-    ) == [
+    assert list(get_movies(actors_ids=[1]).values_list("title")) == [("Matrix",)]
+    assert list(get_movies(actors_ids=[2, 3]).values_list("title")) == [
         ("Matrix",),
         ("Batman",),
     ]
@@ -253,24 +238,18 @@ def test_movie_service_create_movie_with_genres():
     Genre.objects.create(name="Action")
     Genre.objects.create(name="Drama")
     create_movie(
-        movie_title="Matrix",
-        movie_description="Matrix description",
-        genres_ids=[1]
+        movie_title="Matrix", movie_description="Matrix description", genres_ids=[1]
     )
     create_movie(
-        movie_title="Batman",
-        movie_description="Batman description",
-        genres_ids=[2]
+        movie_title="Batman", movie_description="Batman description", genres_ids=[2]
     )
 
     assert list(
-        Movie.objects.filter(
-            genres__id__in=[1, 2]).values_list("title", "description")
+        Movie.objects.filter(genres__id__in=[1, 2]).values_list("title", "description")
     ) == [("Matrix", "Matrix description"), ("Batman", "Batman description")]
 
     assert list(
-        Movie.objects.filter(
-            genres__id__in=[2]).values_list("title", "description")
+        Movie.objects.filter(genres__id__in=[2]).values_list("title", "description")
     ) == [("Batman", "Batman description")]
 
 
@@ -279,24 +258,18 @@ def test_movie_service_create_movie_with_actors():
     Actor.objects.create(first_name="Keanu", last_name="Reeves")
     Actor.objects.create(first_name="George", last_name="Clooney")
     create_movie(
-        movie_title="Matrix",
-        movie_description="Matrix description",
-        actors_ids=[2]
+        movie_title="Matrix", movie_description="Matrix description", actors_ids=[2]
     )
     create_movie(
-        movie_title="Batman",
-        movie_description="Batman description",
-        actors_ids=[1]
+        movie_title="Batman", movie_description="Batman description", actors_ids=[1]
     )
 
     assert list(
-        Movie.objects.filter(
-            actors__id__in=[1, 2]).values_list("title", "description")
+        Movie.objects.filter(actors__id__in=[1, 2]).values_list("title", "description")
     ) == [("Batman", "Batman description"), ("Matrix", "Matrix description")]
 
     assert list(
-        Movie.objects.filter(
-            actors__id__in=[2]).values_list("title", "description")
+        Movie.objects.filter(actors__id__in=[2]).values_list("title", "description")
     ) == [("Matrix", "Matrix description")]
 
 
@@ -320,23 +293,24 @@ def test_movie_service_create_movie_with_genres_and_actors():
     )
 
     assert list(
-        Movie.objects.filter(
-            genres__id__in=[1, 2],
-            actors__id__in=[1, 2]
-        ).values_list("title", "description")
+        Movie.objects.filter(genres__id__in=[1, 2], actors__id__in=[1, 2]).values_list(
+            "title", "description"
+        )
     ) == [("Batman", "Batman description"), ("Matrix", "Matrix description")]
 
-    assert list(Movie.objects.filter(
-        genres__id__in=[1],
-        actors__id__in=[1]
-    ).values_list("title", "description")) == []
+    assert (
+        list(
+            Movie.objects.filter(genres__id__in=[1], actors__id__in=[1]).values_list(
+                "title", "description"
+            )
+        )
+        == []
+    )
 
 
 @pytest.mark.django_db
 def test_cinema_hall_service_get_cinema_halls(database_data):
-    assert list(get_cinema_halls().values_list(
-        "name", "rows", "seats_in_row"
-    )) == [
+    assert list(get_cinema_halls().values_list("name", "rows", "seats_in_row")) == [
         ("Blue", 10, 12),
         ("VIP", 4, 6),
         ("Cheap", 15, 27),
@@ -359,21 +333,11 @@ def test_movie_session_service_create_movie_session():
     CinemaHall.objects.create(name="VIP", rows=3, seats_in_row=5)
     Movie.objects.create(title="Matrix", description="Matrix description")
     Movie.objects.create(title="Batman", description="Batman description")
-    datetime_1 = datetime.datetime(
-        year=2020, month=11, day=30, hour=10, minute=30
-    )
-    datetime_2 = datetime.datetime(
-        year=2021, month=1, day=10, hour=15, minute=15
-    )
-    create_movie_session(
-        movie_show_time=datetime_1, cinema_hall_id=2, movie_id=1
-    )
-    create_movie_session(
-        movie_show_time=datetime_2, cinema_hall_id=1, movie_id=2
-    )
-    create_movie_session(
-        movie_show_time=datetime_1, cinema_hall_id=1, movie_id=2
-    )
+    datetime_1 = datetime.datetime(year=2020, month=11, day=30, hour=10, minute=30)
+    datetime_2 = datetime.datetime(year=2021, month=1, day=10, hour=15, minute=15)
+    create_movie_session(movie_show_time=datetime_1, cinema_hall_id=2, movie_id=1)
+    create_movie_session(movie_show_time=datetime_2, cinema_hall_id=1, movie_id=2)
+    create_movie_session(movie_show_time=datetime_1, cinema_hall_id=1, movie_id=2)
     assert list(
         MovieSession.objects.all().values_list(
             "show_time__date", "cinema_hall__name", "movie__title"
@@ -388,8 +352,7 @@ def test_movie_session_service_create_movie_session():
 @pytest.mark.django_db
 def test_movie_session_service_update_movie_session(database_data):
     show_time = datetime.datetime(2022, 11, 1, 20, 30)
-    Movie.objects.create(title="Interstellar",
-                         description="Interstellar description")
+    Movie.objects.create(title="Interstellar", description="Interstellar description")
     CinemaHall.objects.create(name="Orange", rows=10, seats_in_row=12)
     update_movie_session(
         session_id=1,
@@ -465,16 +428,12 @@ def test_movie_session_service_get_movies_sessions(database_data):
 @pytest.mark.django_db
 def test_movie_session_service_get_movie_session_by_date(database_data):
     sessions_1 = get_movies_sessions("2019-8-19")
-    assert list(sessions_1.values_list(
-        "movie__title", "cinema_hall__name"
-    )) == [
+    assert list(sessions_1.values_list("movie__title", "cinema_hall__name")) == [
         ("Matrix", "Blue")
     ]
 
     sessions_2 = get_movies_sessions("2021-4-3")
-    assert list(sessions_2.values_list(
-        "movie__title", "cinema_hall__name"
-    )) == [
+    assert list(sessions_2.values_list("movie__title", "cinema_hall__name")) == [
         ("The Good, the Bad and the Ugly", "VIP"),
         ("Matrix", "Cheap"),
     ]
