@@ -14,4 +14,5 @@ def create_cinema_hall(hall_name: str,
         seats_in_row=hall_seats_in_row,
         rows=hall_rows,
     )
+    cinema_hall.save()
     return cinema_hall
