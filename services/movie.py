@@ -7,13 +7,13 @@ def get_movies(
 ) -> list[Movie]:
     query = Movie.objects.all()
     if genres_id and actors_id:
-        query = query.filter(Q(genres_id__in=genres_id)
-                             & Q(actors_id__in=actors_id))
+        query = query.filter(Q(genres__id__in=genres_id)
+                             & Q(actors__id__in=actors_id))
     elif genres_id:
-        query = query.filter(genres_id__in=genres_id)
+        query = query.filter(genres__id__in=genres_id)
 
     elif actors_id:
-        query = query.filter(actors_id__in=actors_id)
+        query = query.filter(actors__id__in=actors_id)
 
     return query.distinct()
 

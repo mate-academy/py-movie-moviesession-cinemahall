@@ -5,7 +5,7 @@ from db.models import MovieSession, Movie, CinemaHall
 
 
 def create_movie_session(
-    movie_show_time: datetime,
+    show_time: datetime,
     movie_id: int,
     cinema_hall_id: int
 ) -> MovieSession:
@@ -13,7 +13,7 @@ def create_movie_session(
     cinema_hall = CinemaHall.objects.get(id=cinema_hall_id)
 
     return MovieSession.objects.create(
-        movie_show_time=movie_show_time, movie=movie, cinema_hall=cinema_hall
+        show_time=show_time, movie=movie, cinema_hall=cinema_hall
     )
 
 
@@ -24,12 +24,15 @@ def get_movies_session(
 
     if session_date:
         try:
-            date_obj = session_date.date() \
-                if isinstance(session_date, datetime) \
-                else datetime.strptime(session_date, "%Y-%m-%d").date()
-            query = query.filter(movie_show_time__date=date_obj)
-        except ValueError:
-            raise ValueError("session_date must be in format YYYY-MM-DD")
+            if isinstance(session_date, datetime):
+                date_obj = session_date.date()
+            elif isinstance(session_date, str):
+                date_obj = datetime.strptime(session_date, "%Y-%m-%d").date()
+            else:
+                raise ValueError("session_date must be in format YYYY-MM-DD or a datetime object.")
+            query = query.filter(show_time__date=date_obj)
+        except ValueError as e:
+            raise ValueError(f"Invalid session_date format: {e}")
 
     return query
 
