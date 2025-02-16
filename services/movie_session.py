@@ -5,7 +5,7 @@ from db.models import MovieSession, Movie, CinemaHall
 
 
 def create_movie_session(
-    show_time: datetime,
+    movie_show_time: datetime,
     movie_id: int,
     cinema_hall_id: int
 ) -> MovieSession:
@@ -13,7 +13,7 @@ def create_movie_session(
     cinema_hall = CinemaHall.objects.get(id=cinema_hall_id)
 
     return MovieSession.objects.create(
-        show_time=show_time, movie=movie, cinema_hall=cinema_hall
+        show_time=movie_show_time, movie=movie, cinema_hall=cinema_hall
     )
 
 
@@ -40,7 +40,7 @@ def get_movies_sessions(
 
 
 def get_movie_session_by_id(movie_session_id: int) -> QuerySet[MovieSession]:
-    query = MovieSession.objects.filter(id=movie_session_id)
+    query = MovieSession.objects.get(id=movie_session_id)
     return query
 
 
@@ -53,7 +53,7 @@ def update_movie_session(
     session = MovieSession.objects.get(id=session_id)
 
     if show_time is not None:
-        session.movie_show_time = show_time
+        session.show_time = show_time
     if movie_id is not None:
         session.movie = Movie.objects.get(id=movie_id)
     if cinema_hall_id is not None:
