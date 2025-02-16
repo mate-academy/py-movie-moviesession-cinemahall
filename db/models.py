@@ -1,5 +1,6 @@
+from datetime import datetime
+
 from django.db import models
-from django.forms import DateTimeField
 
 
 class Genre(models.Model):
@@ -36,14 +37,18 @@ class CinemaHall(models.Model):
         return self.name
 
     @property
-    def capicity(self) -> int:
+    def capacity(self) -> int:
         return self.rows * self.seats_in_row
 
 
 class MovieSession(models.Model):
-    show_time = DateTimeField(year=2020, month=1, day=1, hour=0, minute=0, second=0)
-    cinema_hall = models.ForeignKey(Movie, on_delete=models.CASCADE)
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    show_time = models.DateTimeField(default=datetime(2020, 1, 1, 0, 0, 0))
+    cinema_hall = models.ForeignKey(
+        "CinemaHall", on_delete=models.CASCADE, related_name="movie_sessions"
+    )
+    movie = models.ForeignKey(
+        "Movie", on_delete=models.CASCADE, related_name="sessions"
+    )
 
     def __str__(self) -> str:
         return f"{self.movie} {self.show_time}"

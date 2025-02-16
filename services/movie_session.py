@@ -17,7 +17,7 @@ def create_movie_session(
     )
 
 
-def get_movies_session(
+def get_movies_sessions(
     session_date: Optional[datetime] = None
 ) -> QuerySet[MovieSession]:
     query = MovieSession.objects.all()
@@ -29,7 +29,9 @@ def get_movies_session(
             elif isinstance(session_date, str):
                 date_obj = datetime.strptime(session_date, "%Y-%m-%d").date()
             else:
-                raise ValueError("session_date must be in format YYYY-MM-DD or a datetime object.")
+                raise ValueError(
+                    "must be in format YYYY-MM-DD or a datetime object."
+                )
             query = query.filter(show_time__date=date_obj)
         except ValueError as e:
             raise ValueError(f"Invalid session_date format: {e}")
@@ -61,6 +63,6 @@ def update_movie_session(
     return session
 
 
-def delete_movie_session(session_id: int) -> None:
+def delete_movie_session_by_id(session_id: int) -> None:
     session = MovieSession.objects.get(id=session_id)
     session.delete()
