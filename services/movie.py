@@ -6,10 +6,10 @@ def get_movies(genres_ids: list[int], actor_ids: list[int]) -> QuerySet[Movie] |
     movies = Movie.objects.all()
 
     if genres_ids:
-        movies = movies.filter(genres_id__in=genres_ids)
+        movies = movies.filter(genres__id__in=genres_ids)
 
     if actor_ids:
-        movies = movies.filter(actor_id__in=actor_ids)
+        movies = movies.filter(actor__id__in=actor_ids)
 
     return movies
 
