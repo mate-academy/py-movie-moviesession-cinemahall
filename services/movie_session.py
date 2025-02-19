@@ -1,53 +1,33 @@
-from typing import Optional
-
-from django.db.models import QuerySet
-
 from db.models import MovieSession
-from django.utils.timezone import make_aware
-from datetime import datetime
+from django.utils.dateparse import parse_date
 
-
-def create_movie_session(movie_show_time: datetime,
-                         movie_id: int,
-                         cinema_hall_id: int
-                         ) -> MovieSession:
-    if isinstance(movie_show_time, str):
-        movie_show_time = make_aware(datetime.fromisoformat(movie_show_time))
-
+def create_movie_session(movie_show_time, movie_id, cinema_hall_id):
     return MovieSession.objects.create(
         show_time=movie_show_time,
         movie_id=movie_id,
         cinema_hall_id=cinema_hall_id
     )
 
-
-def get_movies_sessions(session_date: Optional[datetime] = None
-                        ) -> QuerySet[MovieSession]:
+def get_movies_sessions(session_date=None):
+    sessions = MovieSession.objects.all()
     if session_date:
-        return MovieSession.objects.filter(show_time__date=session_date)
-    return MovieSession.objects.all()
+        date_obj = parse_date(session_date)
+        sessions = sessions.filter(show_time__date=date_obj)
+    return sessions
 
-
-def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
+def get_movie_session_by_id(movie_session_id):
     return MovieSession.objects.get(id=movie_session_id)
 
-
-def update_movie_session(session_id: int,
-                         show_time: datetime,
-                         movie_id: int,
-                         cinema_hall_id: int) -> MovieSession:
-    movie_session = MovieSession.objects.get(id=session_id)
+def update_movie_session(session_id, show_time=None, movie_id=None, cinema_hall_id=None):
+    session = MovieSession.objects.get(id=session_id)
     if show_time:
-        if isinstance(show_time, str):
-            show_time = make_aware(datetime.fromisoformat(show_time))
-        movie_session.show_time = show_time
+        session.show_time = show_time
     if movie_id:
-        movie_session.movie_id = movie_id
+        session.movie_id = movie_id
     if cinema_hall_id:
-        movie_session.cinema_hall_id = cinema_hall_id
-    movie_session.save()
-    return movie_session
+        session.cinema_hall_id = cinema_hall_id
+    session.save()
+    return session
 
-
-def delete_movie_session_by_id(session_id: int) -> None:
+def delete_movie_session_by_id(session_id):
     MovieSession.objects.filter(id=session_id).delete()
