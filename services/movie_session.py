@@ -42,7 +42,7 @@ def update_movie_session(session_id: int,
     if cinema_hall_id:
         movie_session.cinema_hall = CinemaHall.objects.get(id=cinema_hall_id)
     if movie_id:
-        movie_session.movie_id = movie_id
+        movie_session.movie_id = Movie.objects.get(id=movie_id)
     movie_session.save()
 
 
