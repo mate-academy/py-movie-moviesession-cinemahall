@@ -1,7 +1,19 @@
-from db.models import Genre, Actor, Movie, MovieSession, CinemaHall
+from db.models import CinemaHall
 from django.db.models import QuerySet
 
 
-def a():
-    pass
+def get_cinema_halls() -> QuerySet[CinemaHall]:
+    hols = CinemaHall.objects.all()
+    return hols
 
+
+def create_cinema_hall(
+        hall_name: str,
+        hall_rows: int,
+        hall_seats_in_row: int,
+) -> None:
+    CinemaHall.objects.create(
+        hall_name=hall_name,
+        hall_rows=hall_rows,
+        hall_seats_in_row=hall_seats_in_row
+    )
