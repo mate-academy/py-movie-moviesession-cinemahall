@@ -40,7 +40,7 @@ def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
 
 def update_movie_session(
         session_id: int,
-        show_time: datetime = None,
+        show_time: datetime.datetime = None,
         movie_id: int = None,
         cinema_hall_id: int = None,
 ) -> None:
@@ -66,4 +66,4 @@ def delete_movie_session_by_id(session_id: int) -> None:
         movie_session = MovieSession.objects.get(id=session_id)
         movie_session.delete()
     except MovieSession.DoesNotExist:
-        raise Exception("Movie session not found.")
+        raise MovieSession.DoesNotExist("Movie session not found.")
