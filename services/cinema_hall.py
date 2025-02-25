@@ -2,7 +2,7 @@ from db.models import CinemaHall
 
 
 def get_cinema_halls() -> [CinemaHall]:
-    return list[CinemaHall.objects.all()]
+    return list(CinemaHall.objects.all())
 
 
 def create_cinema_hall(
