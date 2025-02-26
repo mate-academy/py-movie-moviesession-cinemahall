@@ -11,7 +11,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "movie_db.sqlite3"
+        "NAME": BASE_DIR / "movie_db.sqlite3",
     }
 }
 
@@ -23,6 +23,4 @@ USE_I18N = True
 
 USE_TZ = True
 
-INSTALLED_APPS = (
-    "db",
-)
+INSTALLED_APPS = ("db",)
