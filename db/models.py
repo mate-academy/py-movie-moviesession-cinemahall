@@ -1,14 +1,14 @@
 from django.db import models
 
 
-class Genre(models.Model):
+class Genres(models.Model):
     name = models.CharField(max_length=255, unique=True)
 
     def __str__(self) -> str:
         return self.name
 
 
-class Actor(models.Model):
+class Actors(models.Model):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
 
@@ -19,8 +19,8 @@ class Actor(models.Model):
 class Movie(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
-    actors = models.ManyToManyField(Actor, related_name="Actor")
-    genres = models.ManyToManyField(Genre, related_name="Genre")
+    actors = models.ManyToManyField(Actors, related_name="Actors")
+    genres = models.ManyToManyField(Genres, related_name="Genres")
 
     def __str__(self) -> str:
         return self.title
@@ -35,7 +35,7 @@ class CinemaHall(models.Model):
         return self.name
 
     @property
-    def capacity(self) -> None:
+    def capacity(self) -> int:
         return self.rows * self.seats_in_row
 
 
