@@ -48,7 +48,6 @@ class MovieSession(models.Model):
     )
     movie = models.ForeignKey(
         Movie,
-        related_name="movie",
         on_delete=models.CASCADE
     )
 

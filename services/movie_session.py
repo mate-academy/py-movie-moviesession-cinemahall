@@ -7,7 +7,7 @@ def create_movie_session(
         movie_show_time: datetime,
         movie_id: int,
         cinema_hall_id: int
-) -> None:
+) -> MovieSession:
     movie = Movie.objects.get(id=movie_id)
     cinema_hall = CinemaHall.objects.get(id=cinema_hall_id)
 
@@ -16,6 +16,8 @@ def create_movie_session(
         cinema_hall=cinema_hall,
         movie=movie
     )
+
+    return new_movie_session
 
 
 def get_movies_sessions(session_date: str = None) -> QuerySet:
@@ -29,7 +31,9 @@ def get_movies_sessions(session_date: str = None) -> QuerySet:
                 show_time__date=session_date_obj
             )
         except ValueError:
-            raise ValueError("Invalid date format. Expected format is 'YYYY-MM-DD'.")
+            raise ValueError(
+                "Invalid date format. Expected format is 'YYYY-MM-DD'."
+            )
 
     else:
         movie_sessions = MovieSession.objects.all()
@@ -61,6 +65,7 @@ def update_movie_session(
         updated_session.cinema_hall = cinema_hall
 
     updated_session.save()
+
 
 def delete_movie_session_by_id(session_id: int) -> None:
     try:
