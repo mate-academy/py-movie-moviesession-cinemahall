@@ -1,5 +1,5 @@
 from db.models import MovieSession
-from datetime import datetime
+from django.core.exceptions import ObjectDoesNotExist
 
 
 def create_movie_session(movie_show_time, movie_id, cinema_hall_id):
@@ -17,7 +17,10 @@ def get_movies_sessions(session_date=None):
 
 
 def get_movie_session_by_id(movie_session_id):
-    return MovieSession.objects.get(id=movie_session_id)
+    try:
+        return MovieSession.objects.get(id=movie_session_id)
+    except ObjectDoesNotExist:
+        return None
 
 
 def update_movie_session(session_id, show_time=None, movie_id=None, cinema_hall_id=None):

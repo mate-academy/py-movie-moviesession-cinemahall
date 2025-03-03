@@ -1,4 +1,5 @@
 from db.models import Movie
+from django.core.exceptions import ObjectDoesNotExist
 
 
 def get_movies(genres_ids = None, actors_ids = None):
@@ -11,7 +12,10 @@ def get_movies(genres_ids = None, actors_ids = None):
     return queryset
 
 def get_movie_by_id(movie_id):
-    return Movie.objects.get(id=movie_id)
+    try:
+        return Movie.objects.get(id=movie_id)
+    except ObjectDoesNotExist:
+        return None
 
 def create_movie( movie_title, movie_description, actors_ids=None, genres_ids=None):
     movie = Movie.objects.create(title=movie_title, description=movie_description)
