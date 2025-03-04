@@ -2,18 +2,18 @@ from db.models import Movie
 from typing import List
 
 
-def get_movies(genres_ids: int = None, actors_ids: int = None):
+def get_movies(genres_ids: List[int] = None, actors_ids: List[int] = None):
     if not (genres_ids and actors_ids):
         return Movie.objects.all()
     if genres_ids and actors_ids:
-        return Movie.objects.filter(genre__id__in=genres_ids, actor__id__in=actors_ids)
+        return Movie.objects.filter(genres__id__in=genres_ids, actors__id__in=actors_ids)
     elif genres_ids:
-        return Movie.objects.filter(genre__id__in=genres_ids)
+        return Movie.objects.filter(genres__id__in=genres_ids)
     elif actors_ids:
-        return Movie.objects.filter(actor__id__in=actors_ids)
+        return Movie.objects.filter(actors__id__in=actors_ids)
 
 
-def get_movie_by_id(movie_id):
+def get_movie_by_id(movie_id) -> Movie:
     return Movie.objects.get(id=movie_id)
 
 
