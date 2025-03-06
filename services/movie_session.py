@@ -41,9 +41,8 @@ def update_movie_session(
         cinema_hall_id: int = None,
         movie_id: int = None
 ) -> None:
-    session_to_update = MovieSession.objects.get(
-        id=session_id
-    )
+    session_to_update = get_movie_session_by_id(session_id)
+
     if show_time:
         session_to_update.show_time = show_time
 
@@ -57,4 +56,4 @@ def update_movie_session(
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
-    MovieSession.objects.get(id=session_id).delete()
+    get_movie_session_by_id(session_id).delete()
