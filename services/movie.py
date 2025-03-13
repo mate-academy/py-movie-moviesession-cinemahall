@@ -4,8 +4,8 @@ from db.models import Movie
 
 
 def get_movies(
-        genres_ids=None,
-        actors_ids=None
+        genres_ids: int=None,
+        actors_ids: int=None
 ) -> QuerySet:
     query = Movie.objects.all()
     if genres_ids:
@@ -14,14 +14,16 @@ def get_movies(
         query = query.filter(actors__id__in=actors_ids).distinct()
     return query
 
+
 def get_movie_by_id(movie_id: int) -> Movie:
     return Movie.objects.get(id=movie_id)
+
 
 def create_movie(
         movie_title: str,
         movie_description: str,
-        genres_ids=None,
-        actors_ids=None
+        genres_ids: int=None,
+        actors_ids: int=None
 ) -> Movie:
     movie = Movie.objects.create(
         title=movie_title,
