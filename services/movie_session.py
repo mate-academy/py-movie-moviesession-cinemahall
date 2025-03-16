@@ -5,6 +5,7 @@ from django.db.models import QuerySet
 
 from db.models import MovieSession, Movie, CinemaHall
 
+
 def create_movie_session(
         movie_show_time: datetime,
         movie_id: int,
