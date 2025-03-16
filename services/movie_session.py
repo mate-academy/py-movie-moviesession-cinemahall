@@ -31,13 +31,17 @@ def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
 
 def update_movie_session(
         session_id: int,
-        show_time: str = None,
+        show_time: datetime.datetime | str = None,
         movie_id: int = None,
         cinema_hall_id: int = None
 ) -> None:
     movie_session = get_movie_session_by_id(session_id)
 
     if show_time:
+        if isinstance(show_time, str):
+            show_time = datetime.datetime.strptime(
+                show_time, "%Y-%m-%d %H:%M:%S"
+            )
         movie_session.show_time = show_time
     if movie_id:
         movie_session.movie_id = movie_id
