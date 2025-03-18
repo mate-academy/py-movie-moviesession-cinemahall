@@ -1,6 +1,3 @@
-import init_django_orm
-
-
 from datetime import datetime, timedelta
 
 from db.models import MovieSession
@@ -21,7 +18,7 @@ def create_movie_session(
 def get_movies_sessions(session_date: str = None) -> MovieSession:
     queryset = MovieSession.objects.all()
     if session_date:
-        _date = datetime.strptime(session_date, '%Y-%m-%d').date()
+        _date = datetime.strptime(session_date, "%Y-%m-%d").date()
         queryset = queryset.filter(
             show_time__gt=_date,
             show_time__lt=_date + timedelta(days=1)
@@ -57,6 +54,3 @@ def update_movie_session(
 def delete_movie_session_by_id(session_id: int) -> None:
     movie_session = get_movie_session_by_id(session_id)
     movie_session.delete()
-
-if __name__ == '__main__':
-    pass
