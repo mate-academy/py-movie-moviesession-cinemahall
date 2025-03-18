@@ -5,7 +5,7 @@ def get_cinema_halls() -> list[CinemaHall]:
     return CinemaHall.objects.all()
 
 
-def create_movie_hall(
+def create_cinema_hall(
         hall_name: str,
         hall_rows: int,
         hall_seats_in_row: int
