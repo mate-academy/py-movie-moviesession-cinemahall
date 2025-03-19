@@ -21,7 +21,7 @@ def get_movies(
     return movie
 
 
-def get_movie_bu_id(movie_id: int) -> Movie:
+def get_movie_by_id(movie_id: int) -> Movie:
     return Movie.objects.get(id=movie_id)
 
 
