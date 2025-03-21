@@ -28,8 +28,8 @@ class Movie(models.Model):
 
 class CinemaHall(models.Model):
     name = models.CharField(max_length=255, unique=True)
-    rows = models.IntegerField()
-    seats_in_row = models.IntegerField()
+    rows = models.PositiveIntegerField()
+    seats_in_row = models.PositiveIntegerField()
 
     @property
     def capacity(self) -> int:
@@ -44,9 +44,15 @@ class MovieSession(models.Model):
     cinema_hall = models.ForeignKey(
         CinemaHall,
         on_delete=models.SET_NULL,
-        null=True
+        null=True,
+        related_name="movie_sessions"
     )
-    movie = models.ForeignKey(Movie, on_delete=models.SET_NULL, null=True)
+    movie = models.ForeignKey(
+        Movie,
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name="movie_sessions"
+    )
 
     def __str__(self) -> str:
         return f"{self.movie.title} {self.show_time}"
