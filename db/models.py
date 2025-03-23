@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from django.db import models
 
 
@@ -43,9 +41,12 @@ class CinemaHall(models.Model):
 
 class MovieSession(models.Model):
     show_time = models.DateTimeField(null=False)
-    cinema_hall = models.ForeignKey(CinemaHall, on_delete=models.CASCADE, related_name="session_to_cinema_halls")
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, related_name="session_to_movies")
+    cinema_hall = models.ForeignKey(CinemaHall,
+                                    on_delete=models.CASCADE,
+                                    related_name="session_to_cinema_halls")
+    movie = models.ForeignKey(Movie,
+                              on_delete=models.CASCADE,
+                              related_name="session_to_movies")
 
     def __str__(self) -> str:
         return f"{self.movie} {self.show_time}"
-
