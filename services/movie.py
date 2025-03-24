@@ -3,8 +3,6 @@ from db.models import Genre, Actor, Movie
 
 
 def get_movies(
-        id_: int = None,
-        /,
         genres_ids: list[int] = None,
         actors_ids: list[int] = None
 ) -> QuerySet | Actor | Genre:
