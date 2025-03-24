@@ -4,15 +4,15 @@ from db.models import Movie
 
 def get_movies(genres_ids: int = None,
                actors_ids: int = None) -> QuerySet | Movie:
-    actual_movie = Movie.objects.all()
+    our_movie = Movie.objects.all()
 
     if genres_ids:
-        actual_movie = actual_movie.filter(genres__id__in=genres_ids)
+        our_movie = our_movie.filter(genres__id__in=genres_ids)
 
     if actors_ids:
-        actual_movie = actual_movie.filter(actors__id__in=actors_ids)
+        our_movie = our_movie.filter(actors__id__in=actors_ids)
 
-    return actual_movie.distinct()
+    return our_movie.distinct()
 
 
 def get_movie_by_id(movie_id: int) -> Movie:
@@ -22,15 +22,14 @@ def get_movie_by_id(movie_id: int) -> Movie:
 def create_movie(movie_title: str,
                  movie_description: str,
                  genres_ids: list = None,
-                 actors_ids: list = None) -> Movie:
+                 actors_ids: list = None
+                 ) -> Movie:
     add_movie = Movie.objects.create(
         title=movie_title,
-        description=movie_description,
+        description=movie_description
     )
-
     if genres_ids:
         add_movie.genres.set(genres_ids)
-
     if actors_ids:
         add_movie.actors.set(actors_ids)
 
