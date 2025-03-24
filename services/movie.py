@@ -2,8 +2,8 @@ from django.db.models import QuerySet
 from db.models import Movie
 
 
-def get_movies(genres_ids: int,
-               actors_ids: int) -> QuerySet | Movie:
+def get_movies(genres_ids: int = None,
+               actors_ids: int = None) -> QuerySet | Movie:
     actual_movie = Movie.objects.all()
 
     if genres_ids:
