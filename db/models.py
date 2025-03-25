@@ -31,9 +31,10 @@ class CinemaHall(models.Model):
     rows = models.IntegerField()
     seats_in_row = models.IntegerField()
 
+    @property
     def capacity(self) -> int:
         number_of_seats = self.rows * self.seats_in_row
-        return number_of_seats if number_of_seats > 0 else 0
+        return max(number_of_seats, 0)
 
     def __str__(self) -> str:
         return self.name
