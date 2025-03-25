@@ -3,9 +3,10 @@ from db.models import Movie
 
 
 def get_movies(
-        genres_ids: list[int], actors_ids: list[int]
-        ) -> QuerySet[Movie] | None:
-    if not genres_ids or not actors_ids:
+    genres_ids: list[int] = None,
+    actors_ids: list[int] = None
+) -> QuerySet[Movie] | None:
+    if not genres_ids and not actors_ids:
         return Movie.objects.all()
     if genres_ids and actors_ids:
         return Movie.objects.filter(
@@ -25,12 +26,15 @@ def get_movie_by_id(movie_id: int) -> Movie | None:
 def create_movie(
         movie_title: str,
         movie_description: str,
-        genres_ids: list[int],
-        actors_ids: list[int]
+        genres_ids: list[int] = None,
+        actors_ids: list[int] = None
 ) -> None:
-    Movie.objects.create(
+    movie = Movie.objects.create(
         title=movie_title,
         description=movie_description,
-        genres_id=genres_ids,
-        actors_id=actors_ids
     )
+    if genres_ids and isinstance(genres_ids, list):
+        movie.genres.add(*genres_ids)
+    if actors_ids and isinstance(actors_ids, list):
+        movie.actors.add(*actors_ids)
+    movie.save()
