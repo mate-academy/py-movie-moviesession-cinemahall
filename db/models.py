@@ -13,7 +13,7 @@ class Actor(models.Model):
     last_name = models.CharField(max_length=255)
 
     def __str__(self) -> str:
-        return f"{self.first_name} {self.last_name}"
+        return str(self.first_name) + " " + str(self.last_name)
 
 
 class Movie(models.Model):
@@ -45,4 +45,4 @@ class MovieSession(models.Model):
     show_time = models.DateTimeField()
 
     def __str__(self) -> str:
-        return f"{self.movie} {self.show_time}"
+        return str(self.movie) + " " + str(self.show_time)

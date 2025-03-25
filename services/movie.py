@@ -13,7 +13,7 @@ def get_movies(genres_ids=None, actors_ids=None):
     elif genres_ids and not actors_ids:
         return movies.filter(genre__id__in=genres_ids)
     elif actors_ids and not genres_ids:
-        return movies.filter(genre__id__in=genres_ids)
+        return movies.filter(actor__id__in=genres_ids)
 
 
 def get_movie_by_id(movie_id):
