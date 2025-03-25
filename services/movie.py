@@ -7,8 +7,6 @@ def get_movies(
         genres_ids: list[int] = None,
         actors_ids: list[int] = None
 ) -> QuerySet:
-    qs = Movie.objects.all()
-
     if not genres_ids and not actors_ids:
         return Movie.objects.all()
 
@@ -28,8 +26,10 @@ def get_movies(
 
     return query
 
+
 def get_movie_by_id(movie_id: int) -> Movie:
     return Movie.objects.get(id=movie_id)
+
 
 def create_movie(
         movie_title: str,
