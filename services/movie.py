@@ -28,8 +28,10 @@ def get_movies(
 
     return movies
 
+
 def get_movie_by_id(movie_id: int) -> Movie:
     return Movie.objects.get(pk=movie_id)
+
 
 def create_movie(
         movie_title: str,

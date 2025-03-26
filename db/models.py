@@ -47,9 +47,10 @@ class MovieSession(models.Model):
 
     def __str__(self) -> str:
         if settings.USE_TZ:
-            return (self.movie.title + " " +
-                    localtime(self.show_time).strftime('%Y-%m-%d %H:%M:%S')
+            return (self.movie.title
+                    + " "
+                    + localtime(self.show_time).strftime("%Y-%m-%d %H:%M:%S")
                     )
-        return (self.movie.title + " " +
-                self.show_time.strftime('%Y-%m-%d %H:%M:%S')
+        return (self.movie.title + " "
+                + self.show_time.strftime("%Y-%m-%d %H:%M:%S")
                 )
