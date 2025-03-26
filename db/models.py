@@ -15,7 +15,8 @@ class Actor(models.Model):
     last_name = models.CharField(max_length=255)
 
     def __str__(self) -> str:
-        return f"{self.first_name} {self.last_name}"
+        return self.first_name + " " + self.last_name
+
 
 class Movie(models.Model):
     title = models.CharField(max_length=255)
@@ -23,8 +24,9 @@ class Movie(models.Model):
     actors = models.ManyToManyField(Actor, related_name="movies")
     genres = models.ManyToManyField(Genre, related_name="movies")
 
-    def __str__(self):
-        return f"{self.title}"
+    def __str__(self) -> str:
+        return self.title
+
 
 class CinemaHall(models.Model):
     name = models.CharField(max_length=255)
@@ -32,10 +34,11 @@ class CinemaHall(models.Model):
     seats_in_row = models.IntegerField()
 
     def __str__(self) -> str:
-        return f"{self.name} {self.rows} {self.seats_in_row}"
+        return self.name + " " + str(self.rows) + " " + str(self.seats_in_row)
 
-    def total_seats(self) -> int:
+    def capacity(self) -> int:
         return self.rows * self.seats_in_row
+
 
 class MovieSession(models.Model):
     show_time = models.DateTimeField()
@@ -44,5 +47,9 @@ class MovieSession(models.Model):
 
     def __str__(self) -> str:
         if settings.USE_TZ:
-            return f"{self.movie.title} {localtime(self.show_time).strftime('%Y-%m-%d %H:%M:%S')}"
-        return f"{self.movie.title} {self.show_time.strftime('%Y-%m-%d %H:%M:%S')}"
+            return (self.movie.title + " " +
+                    localtime(self.show_time).strftime('%Y-%m-%d %H:%M:%S')
+                    )
+        return (self.movie.title + " " +
+                self.show_time.strftime('%Y-%m-%d %H:%M:%S')
+                )
