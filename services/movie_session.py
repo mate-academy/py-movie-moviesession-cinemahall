@@ -1,4 +1,5 @@
 import datetime
+from typing import Optional
 
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import QuerySet
@@ -13,12 +14,12 @@ def create_movie_session(
 ) -> None:
     MovieSession.objects.create(
         show_time=movie_show_time,
-        id=movie_id,
-        cinema_hall=cinema_hall_id
+        movie_id=movie_id,
+        cinema_hall_id=cinema_hall_id
     )
 
 
-def get_movies_sessions(session_date: str) -> QuerySet:
+def get_movies_sessions(session_date: Optional[str] = None) -> QuerySet:
     if session_date:
         return MovieSession.objects.filter(show_time__date=session_date)
     else:
