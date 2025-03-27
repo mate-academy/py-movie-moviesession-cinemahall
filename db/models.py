@@ -1,8 +1,5 @@
-import datetime
-
 from django.conf import settings
 from django.db import models
-from django.utils.timezone import localtime
 
 
 class Genre(models.Model):
@@ -37,7 +34,6 @@ class CinemaHall(models.Model):
 
     def __str__(self) -> str:
         return self.name
-
 
     @property
     def capacity(self) -> int:
