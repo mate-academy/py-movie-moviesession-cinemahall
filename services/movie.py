@@ -2,7 +2,7 @@ from typing import List
 
 from django.db.models import QuerySet
 
-from db.models import Movie
+from db.models import Movie, Genre, Actor
 
 
 def get_movies(
@@ -36,12 +36,20 @@ def get_movie_by_id(movie_id: int) -> Movie:
 def create_movie(
         movie_title: str,
         movie_description: str,
-        genres_ids: List[int] = None,
-        actors_ids: List[int] = None
+        genres_ids: List[int],
+        actors_ids: List[int],
 ) -> Movie:
-    return Movie.objects.create(
+    movie = Movie.objects.create(
         title=movie_title,
         description=movie_description,
-        genres__in=genres_ids,
-        actors__in=actors_ids
     )
+
+    if genres_ids:
+        genre = list(Genre.objects.filter(id__in=genres_ids))
+        movie.genres.set(genre)
+
+    if actors_ids:
+        actor = list(Actor.objects.filter(id__in=actors_ids))
+        movie.actors.set(actor)
+
+    return movie

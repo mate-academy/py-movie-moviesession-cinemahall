@@ -1,3 +1,5 @@
+import datetime
+
 from django.conf import settings
 from django.db import models
 from django.utils.timezone import localtime
@@ -30,12 +32,14 @@ class Movie(models.Model):
 
 class CinemaHall(models.Model):
     name = models.CharField(max_length=255)
-    rows = models.IntegerField()
-    seats_in_row = models.IntegerField()
+    rows = models.IntegerField(null=True, blank=True)
+    seats_in_row = models.IntegerField(null=True, blank=True)
 
     def __str__(self) -> str:
-        return self.name + " " + str(self.rows) + " " + str(self.seats_in_row)
+        return self.name
 
+
+    @property
     def capacity(self) -> int:
         return self.rows * self.seats_in_row
 
@@ -49,7 +53,7 @@ class MovieSession(models.Model):
         if settings.USE_TZ:
             return (self.movie.title
                     + " "
-                    + localtime(self.show_time).strftime("%Y-%m-%d %H:%M:%S")
+                    + self.show_time.strftime("%Y-%m-%d %H:%M:%S")
                     )
         return (self.movie.title + " "
                 + self.show_time.strftime("%Y-%m-%d %H:%M:%S")
