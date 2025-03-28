@@ -21,8 +21,9 @@ def get_movies_sessions(session_date: str = None) -> QuerySet:
 def update_movie_session(session_id: int, show_time: str = None,
                          movie_id: int = None,
                          cinema_hall_id: int = None) -> None:
-    movie_session = MovieSession.objects.filter(id=session_id).first()
-    if not movie_session:
+    try:
+        movie_session = MovieSession.objects.get(id=session_id)
+    except MovieSession.DoesNotExist:
         return
 
     if show_time is not None:
