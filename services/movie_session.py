@@ -37,18 +37,15 @@ def update_movie_session(session_id: int,
                          cinema_hall_id: int = None
                          ) -> QuerySet[MovieSession] | MovieSession:
 
-    fields_to_update = {}
+    movie_session = MovieSession.objects.get(id=session_id)
 
     if show_time:
-        fields_to_update["show_time"] = show_time
+        movie_session.show_time = show_time
     if movie_id:
-        fields_to_update["movie_id"] = movie_id
+        movie_session.movie_id = movie_id
     if cinema_hall_id:
-        fields_to_update["cinema_hall_id"] = cinema_hall_id
-    if fields_to_update:
-        return MovieSession.objects.filter(id=session_id).update(
-            **fields_to_update
-        )
+        movie_session.cinema_hall_id = cinema_hall_id
+    movie_session.save()
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
