@@ -15,12 +15,12 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='moviesession',
             name='cinema_hall',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='cinema_hall', to='db.cinemahall'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='cinema_halls', to='db.cinemahall'),
         ),
         migrations.AlterField(
             model_name='moviesession',
             name='movie',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='movie', to='db.movie'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='movies', to='db.movie'),
         ),
         migrations.AlterField(
             model_name='moviesession',
