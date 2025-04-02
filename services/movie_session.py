@@ -1,5 +1,4 @@
 from django.db.models import QuerySet
-from django.db.models.fields import DateTimeField
 
 from db.models import Movie, MovieSession, CinemaHall
 
