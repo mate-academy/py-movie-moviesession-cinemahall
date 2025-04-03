@@ -4,9 +4,9 @@ from db.models import Movie
 
 
 def get_movies(
-        genres_ids: list[int] = None,
-        actors_ids: list[int] = None
-    ) -> QuerySet:
+    genres_ids: list[int] = None,
+    actors_ids: list[int] = None
+) -> QuerySet:
 
     queryset = Movie.objects.all()
 
@@ -30,7 +30,7 @@ def create_movie(
     movie_description: str,
     genres_ids: list[int] = None,
     actors_ids: list[int] = None,
-    ) -> Movie:
+) -> Movie:
 
     new_movie = Movie.objects.create(
         title=movie_title,
