@@ -12,12 +12,13 @@ def get_movies(
 
     if genres_ids is None and actors_ids is None:
         return queryset
-    if genres_ids:
-        queryset = queryset.filter(genres__in=genres_ids)
-    if actors_ids:
-        queryset = queryset.filter(actors__in=actors_ids)
+
     if genres_ids and actors_ids:
         queryset = queryset.filter(genres__in=genres_ids, actors__in=actors_ids)
+    elif genres_ids:
+        queryset = queryset.filter(genres__in=genres_ids)
+    elif actors_ids:
+        queryset = queryset.filter(actors__in=actors_ids)
 
     return queryset
 
