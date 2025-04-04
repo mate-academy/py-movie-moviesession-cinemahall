@@ -25,11 +25,9 @@ def create_movie(
         genres_ids: list[int] = None,
         actors_ids: list[int] = None
 ) -> Movie:
-    Movie.objects.create(title=movie_title, description=movie_description)
-    movie = Movie.objects.get(title=movie_title)
+    movie = Movie.objects.create(title=movie_title, description=movie_description)
     if genres_ids:
         movie.genres.set(genres_ids)
     if actors_ids:
         movie.actors.set(actors_ids)
-    movie.save()
     return movie
