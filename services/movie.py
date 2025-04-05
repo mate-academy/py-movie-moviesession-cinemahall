@@ -1,31 +1,18 @@
 from django.db.models import QuerySet
 
-from db.models import Movie, Genre, Actor
+from db.models import Movie
 
 
 def get_movies(
-        genres_ids: list[int], /,
-        actors_ids: list[int] = None
+        genres_ids: list[int] | None = None,
+        actors_ids: list[int] | None = None,
 ) -> QuerySet:
     queryset = Movie.objects.all()
-
-    if not genres_ids and not actors_ids:
-        return queryset
-
-    elif actors_ids and genres_ids:
-        queryset = queryset.filter(
-            genres__in=genres_ids
-        ).filter(
-            actors__in=actors_ids
-        ).distinct()
-
-    elif genres_ids and not actors_ids:
-        queryset = queryset.filter(genres__in=genres_ids).distinct()
-
-    elif not genres_ids and actors_ids:
-        queryset = queryset.filter(actors__in=actors_ids).distinct()
-
-    return queryset
+    if genres_ids:
+        queryset = queryset.filter(genres__id__in=genres_ids)
+    if actors_ids:
+        queryset = queryset.filter(actors__id__in=actors_ids)
+    return queryset.distinct()
 
 
 def get_movie_by_id(movie_id: int) -> Movie:
@@ -35,19 +22,17 @@ def get_movie_by_id(movie_id: int) -> Movie:
 def create_movie(
         movie_title: str,
         movie_description: str,
-        genres_ids: list[int] = None,
-        actors_ids: list[int] = None
+        genres_ids: list[int] | None = None,
+        actors_ids: list[int] | None = None
 ) -> Movie:
-    movie = Movie.objects.create(
+    new_movie = Movie.objects.create(
         title=movie_title,
         description=movie_description,
     )
 
     if genres_ids:
-        genres = Genre.objects.filter(id__in=genres_ids)
-        movie.genres.set(genres)
-
+        new_movie.genres.set(genres_ids)
     if actors_ids:
-        actors = Actor.objects.filter(id__in=actors_ids)
-        movie.actors.set(actors)
-    return movie
+        new_movie.actors.set(actors_ids)
+
+    return new_movie
