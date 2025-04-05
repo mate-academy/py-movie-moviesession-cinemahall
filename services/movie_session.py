@@ -15,9 +15,9 @@ def create_movie_session(
     )
 
 
-def get_movie_session(session_data: str) -> QuerySet:
+def get_movie_sessions(session_data: str) -> QuerySet:
     if session_data:
-        return MovieSession.objects.filter(show_time=session_data)
+        return MovieSession.objects.filter(show_time__date=session_data)
     return MovieSession.objects.all()
 
 

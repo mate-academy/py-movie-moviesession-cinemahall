@@ -3,7 +3,7 @@ from django.db.models import QuerySet
 from db.models import Movie, Genre, Actor
 
 
-def get_movie_sessions(
+def get_movies(
         genres_ids: list[int], /,
         actors_ids: list[int] = None
 ) -> QuerySet:
