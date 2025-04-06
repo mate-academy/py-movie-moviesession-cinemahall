@@ -2,7 +2,7 @@ from db.models import MovieSession, Movie, CinemaHall
 from datetime import datetime
 
 
-def create_movie_session(movie_show_time: datetime, movie_id: int, cinema_hall_id: id):
+def create_movie_session(movie_show_time: datetime, movie_id: int, cinema_hall_id: int):
     if movie_show_time and movie_id and cinema_hall_id:
         return MovieSession.objects.create(show_time=movie_show_time, movie_id=movie_id, cinema_hall_id=cinema_hall_id)
 
