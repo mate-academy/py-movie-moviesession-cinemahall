@@ -41,7 +41,7 @@ class CinemaHall(models.Model):
 
 class MovieSession(models.Model):
     show_time = models.DateTimeField()
-    price = models.DecimalField(decimal_places=2, max_digits=10, default=0)
+    price = models.DecimalField(decimal_places=2, max_digits=10, default=10)
     cinema_hall = models.ForeignKey(
         CinemaHall,
         on_delete=models.CASCADE,
