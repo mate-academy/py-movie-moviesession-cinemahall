@@ -6,7 +6,7 @@ from db.models import MovieSession
 
 
 def create_movie_session(
-        movie_show_time: str,
+        movie_show_time: datetime.datetime,
         movie_id: int,
         cinema_hall_id: int
 ) -> MovieSession:
@@ -30,7 +30,7 @@ def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
 
 def update_movie_session(
         session_id: int,
-        show_time: datetime = None,
+        show_time: datetime.datetime = None,
         movie_id: int = None,
         cinema_hall_id: int = None
 ) -> MovieSession | None:
@@ -48,5 +48,5 @@ def update_movie_session(
     return session
 
 
-def delete_movie_session_by_id(session_id: int) -> MovieSession:
+def delete_movie_session_by_id(session_id: int) -> tuple[int, dict]:
     return MovieSession.objects.filter(id=session_id).delete()
