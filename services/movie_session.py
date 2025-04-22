@@ -1,3 +1,5 @@
+from django.db.models import QuerySet
+
 from db.models import MovieSession
 import datetime
 
@@ -13,7 +15,7 @@ def create_movie_session(movie_show_time: datetime.datetime,
 
     return new_movie_session
 
-def get_movies_sessions(session_date: str = None):
+def get_movies_sessions(session_date: str = None) -> QuerySet[MovieSession]:
     if session_date:
         try:
             datetime.strptime(session_date, "%Y-%m-%d")
