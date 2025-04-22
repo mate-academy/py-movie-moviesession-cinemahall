@@ -3,17 +3,19 @@ from django.db.models import QuerySet
 from db.models import MovieSession
 import datetime
 
+
 def create_movie_session(movie_show_time: datetime.datetime,
                          movie_id: int,
                          cinema_hall_id: int) -> MovieSession:
 
     new_movie_session = MovieSession.objects.create(
-        show_time = movie_show_time,
-        cinema_hall = cinema_hall_id,
-        movie = movie_id,
+        show_time=movie_show_time,
+        cinema_hall=cinema_hall_id,
+        movie=movie_id,
     )
 
     return new_movie_session
+
 
 def get_movies_sessions(session_date: str = None) -> QuerySet[MovieSession]:
     if session_date:
@@ -24,6 +26,7 @@ def get_movies_sessions(session_date: str = None) -> QuerySet[MovieSession]:
         return MovieSession.objects.get(show_time=session_date)
 
     return MovieSession.objects.all()
+
 
 def update_movie_session(session_id: int,
                          show_time: datetime.datetime = None,
@@ -41,8 +44,6 @@ def update_movie_session(session_id: int,
 
     session_to_update.save()
 
+
 def delete_movie_session(session_id: int) -> None:
     MovieSession.objects.get(id=session_id).delete()
-
-
-

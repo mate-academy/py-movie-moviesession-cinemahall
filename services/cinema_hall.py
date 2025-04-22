@@ -1,7 +1,9 @@
 from db.models import CinemaHall
 
-def get_cinema_halls():
+
+def get_cinema_halls() -> list[CinemaHall]:
     return CinemaHall.objects.all()
+
 
 def create_cinema_hall(hall_name: str,
                        hall_rows: int,
