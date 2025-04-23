@@ -6,15 +6,15 @@ from db.models import Movie
 def get_movies(
         genres_ids: list[int] = None,
         actors_ids: list[int] = None
-) -> QuerySet[Movie] | None:
+) -> QuerySet[Movie]:
     if genres_ids is None and actors_ids is None:
         return Movie.objects.all()
     if genres_ids and actors_ids:
         return Movie.objects.filter(
             actors__in=actors_ids, genres__in=genres_ids)
-    if genres_ids and actors_ids is None:
+    if genres_ids is not None and actors_ids is None:
         return Movie.objects.filter(genres__in=genres_ids)
-    if actors_ids and genres_ids is None:
+    if actors_ids is not None and genres_ids is None:
         return Movie.objects.filter(actors__in=actors_ids)
 
 
