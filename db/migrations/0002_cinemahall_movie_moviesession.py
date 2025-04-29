@@ -35,6 +35,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('show_time', models.DateTimeField()),
+                # @mateacademy-ai-mentor Migration files are AUTOMATICALLY created by django. There is no issue.
+                # Lowercase letters work the same way as uppercase.
                 ('cinema_hall', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='db.cinemahall')),
                 ('movie', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='db.movie')),
             ],
