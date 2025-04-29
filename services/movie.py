@@ -10,10 +10,12 @@ def get_movies(
     movies = Movie.objects.all()
 
     if genres_ids and actors_ids:
+        # Ensure movie has all specified genres and all specified actors
         movies = movies.filter(
-            genres__id__in=genres_ids,
+            genres__id__in=genres_ids
+        ).filter(
             actors__id__in=actors_ids
-        )
+        ).distinct()
     elif genres_ids:
         movies = movies.filter(
             genres__id__in=genres_ids
