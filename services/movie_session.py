@@ -1,5 +1,6 @@
 from datetime import datetime
 from db.models import MovieSession, Movie, CinemaHall
+from django.db.models import QuerySet
 
 
 def create_movie_session(movie_show_time: datetime,
@@ -14,7 +15,8 @@ def create_movie_session(movie_show_time: datetime,
     movie_session.save()
 
 
-def get_movies_sessions(session_date: datetime = None) -> list[MovieSession]:
+def get_movies_sessions(
+        session_date: datetime = None) -> QuerySet[MovieSession]:
     movies_sessions = MovieSession.objects.all()
     if session_date:
         try:
