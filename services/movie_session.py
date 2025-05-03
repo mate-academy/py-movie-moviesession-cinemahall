@@ -5,7 +5,7 @@ from django.db.models import QuerySet
 
 def create_movie_session(movie_show_time: datetime,
                          movie_id: int,
-                         cinema_hall_id: int) -> None:
+                         cinema_hall_id: int) -> MovieSession:
     obj_movie = Movie.objects.get(id=movie_id)
     obj_cinema_hall = CinemaHall.objects.get(id=cinema_hall_id)
 
@@ -13,10 +13,11 @@ def create_movie_session(movie_show_time: datetime,
                                  cinema_hall=obj_cinema_hall,
                                  movie=obj_movie)
     movie_session.save()
+    return MovieSession
 
 
 def get_movies_sessions(
-        session_date: datetime = None) -> QuerySet[MovieSession]:
+        session_date: str = None) -> QuerySet[MovieSession]:
     movies_sessions = MovieSession.objects.all()
     if session_date:
         try:
