@@ -1,5 +1,3 @@
-from curses import has_key
-
 from django.db.models import QuerySet
 
 from db.models import CinemaHall
