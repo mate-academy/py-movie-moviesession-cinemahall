@@ -1,7 +1,4 @@
-import datetime
-
 import django.utils.timezone
-from django.core.validators import MinValueValidator
 from django.db import models
 
 
@@ -9,7 +6,7 @@ class Genre(models.Model):
     name = models.CharField(max_length=255, unique=True)
 
     def __str__(self) -> str:
-        return f"{self.name}"
+        return str(self.name)
 
 
 class Actor(models.Model):
@@ -19,6 +16,7 @@ class Actor(models.Model):
     def __str__(self) -> str:
         return f"{self.first_name} {self.last_name}"
 
+
 class Movie(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
@@ -27,6 +25,7 @@ class Movie(models.Model):
 
     def __str__(self) -> str:
         return str(self.title)
+
 
 class CinemaHall(models.Model):
     name = models.CharField(max_length=255)
