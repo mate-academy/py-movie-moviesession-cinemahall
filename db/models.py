@@ -40,16 +40,24 @@ class CinemaHall(models.Model):
 
 
 class MovieSession(models.Model):
-    show_time = models.DateTimeField(unique=True)
+    show_time = models.DateTimeField()
     cinema_hall = models.ForeignKey(
         CinemaHall,
-        on_delete=models.CASCADE,
-        unique=True
+        on_delete=models.CASCADE
     )
     movie = models.ForeignKey(
-        Movie, on_delete=models.CASCADE,
-        unique=True
+        Movie, on_delete=models.CASCADE
     )
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["movie",
+                        "cinema_hall",
+                        "show_time"],
+                name="unique_movie_session"
+            )
+        ]
 
     def __str__(self) -> str:
         return (
