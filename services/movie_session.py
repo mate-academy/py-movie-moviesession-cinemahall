@@ -20,7 +20,7 @@ def create_movie_session(
 
 def get_movies_sessions(
         session_date: str = None
-) -> QuerySet | MovieSession:
+) -> QuerySet:
     if session_date:
         date_obj = datetime.strptime(
             session_date, "%Y-%m-%d"
