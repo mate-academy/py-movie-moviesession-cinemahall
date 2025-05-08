@@ -26,7 +26,7 @@ def get_movies_sessions(session_date: str = None) -> QuerySet[MovieSession]:
     return queryset
 
 
-def get_movie_session_by_id(movie_session_id: int) -> MovieSession | None:
+def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
     queryset = MovieSession.objects.get(id=movie_session_id)
     return queryset
 
