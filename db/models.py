@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 
 
@@ -32,7 +33,7 @@ class CinemaHall(models.Model):
     seats_in_row = models.IntegerField(verbose_name="Кількість місць у ряду")
 
     def __str__(self):
-        return f"{self_name}"
+        return self.name
 
     @property
     def capacity(self):
@@ -40,12 +41,11 @@ class CinemaHall(models.Model):
 
 
 class MovieSession(models.Model):
-    show_time = models.DateTimeField(verbose_name="Дата та час показу фільму")
-    cinema_hall = models.ForeignKey("CinemaHall", on_delete=models.CASCADE, related_name="MovieSessions", verbose_name="Кінозал")
-    movie = models.ForeignKey("Movie", on_delete=models.CASCADE, related_name="movie_sessions", verbose_name="Фільм")
+    show_time = models.DateTimeField()
+    cinema_hall = models.ForeignKey(CinemaHall, on_delete=models.CASCADE, related_name='movie_sessions')
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
 
-    def __str__(self) -> str:
-        formatted_time=timezone.localtime(timezone.now()).strftime("%Y/%m/%d %H:%M:%S")
-        return f"{self.movie.title}{formatted_time}"
+    def __str__(self):
+        return f"{self.movie.title} {self.show_time}"
 
 
