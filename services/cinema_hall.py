@@ -12,6 +12,7 @@ def create_cinema_hall(hall_name, hall_rows, hall_seats_in_row):
     """
     cinema_hall = CinemaHall.objects.create(
         name=hall_name,
-        capacity=hall_rows * hall_seats_in_row  # Calculate capacity
+        hall_rows=hall_rows,
+        hall_seats_in_row=hall_seats_in_row
     )
     return cinema_hall
