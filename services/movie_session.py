@@ -36,7 +36,7 @@ def update_movie_session(session_id: int, show_time: int = None,
         id=session_id
     )
     if show_time is not None:
-        session.time = show_time
+        session.show_time = show_time
     if movie_id is not None:
         session.movie_id = movie_id
     if cinema_hall_id is not None:
