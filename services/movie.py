@@ -1,5 +1,6 @@
-from db.models import Movie, Genre, Actor
 from typing import Optional
+
+from db.models import Movie, Genre, Actor
 
 
 def get_movies(genres_ids: list = None, actors_ids: list = None) -> None:
