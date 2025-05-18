@@ -2,21 +2,21 @@ from db.models import Movie, Genre, Actor
 from typing import Optional
 
 
-def get_movies(genres_ids: list, actors_ids: list) -> None:
+def get_movies(genres_ids: list = None, actors_ids: list = None) -> None:
     if genres_ids is None and actors_ids is None:
         return Movie.objects.all()
     elif genres_ids is not None and actors_ids is not None:
         return Movie.objects.filter(
-            genre__id__in=genres_ids,
-            actor__id__in=actors_ids
+            genres__id__in=genres_ids,
+            actors__id__in=actors_ids
         )
     elif genres_ids is not None:
         return Movie.objects.filter(
-            genre__id__in=genres_ids
+            genres__id__in=genres_ids
         ).distinct()
     if actors_ids is not None:
         return Movie.objects.filter(
-            actor__id__in=actors_ids
+            actors__id__in=actors_ids
         ).distinct()
 
 
