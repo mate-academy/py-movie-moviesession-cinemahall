@@ -42,6 +42,6 @@ class MovieSession(models.Model):
     cinema_hall = models.ForeignKeyField(CinemaHall, on_delete=models.CASCADE)
     movie = models.ForeignKeyField(Movie, on_delete=models.CASCADE)
 
-    def __str__(self)
+    def __str__(self):
         return f"{self.movie} {self.show_time}"
     
