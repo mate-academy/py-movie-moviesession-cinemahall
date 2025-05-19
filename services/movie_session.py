@@ -9,16 +9,16 @@ def create_movie_session(
   cinema_hall_id: int
 ) -> MovieSession:
   return MovieSession.objects.create(
-    movie_show_time,
-    cinema_hall_id,
-    movie_id
+    show_time=movie_show_time,
+    cinema_hall=cinema_hall_id,
+    movie=movie_id
   )
   
 def get_movies_sessions(session_date: Optional[str] = None) -> QuerySet:
-  queryset = MovieSession.object.all()
+  queryset = MovieSession.objects.all()
   try:
     if session_date:
-      date_obj = datetime.strptime(session_date, "%y-%m-%d").date()
+      date_obj = datetime.strptime(session_date, "%Y-%m-%d").date()
       queryset = queryset.filter(show_time__date=date_obj)
   except ValueError:
     raise ValueError("Invalid date format. Use 'YYYY-MM-DD'.")
@@ -39,9 +39,9 @@ def update_movie_session(
   if movie_id:
     movie_to_update.movie = Movie.objects.get(id=movie_id)
   if cinema_hall_id:
-    movie_to_update.cinema_hall = Movie.objects.get(id=cinema_hall_id)
+    movie_to_update.cinema_hall = CinemaHall.objects.get(id=cinema_hall_id)
   movie_to_update.save()
-  return MovieSession
+  return movie_to_update
 
 def delete_movie_session_by_id(session_id: int) -> None:
   movie_to_delete = MovieSession.objects.get(id=session_id)
