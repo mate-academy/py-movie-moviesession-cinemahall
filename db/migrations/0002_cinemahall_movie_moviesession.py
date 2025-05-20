@@ -26,16 +26,16 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=255)),
                 ('description', models.TextField()),
-                ('actors', models.ManyToManyField(to='db.actor')),
-                ('genres', models.ManyToManyField(to='db.genre')),
+                ('actors', models.ManyToManyField(to='db.Actor')),
+                ('genres', models.ManyToManyField(to='db.Genre')),
             ],
         ),
         migrations.CreateModel(
             name='MovieSession',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('cinema_hall', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='db.cinemahall')),
-                ('movie', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='db.movie')),
+                ('cinema_hall', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='db.CinemaHall')),
+                ('movie', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='db.Movie')),
             ],
         ),
     ]
