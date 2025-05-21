@@ -1,5 +1,3 @@
-from argparse import Action
-
 from db.models import Movie
 from typing import List
 

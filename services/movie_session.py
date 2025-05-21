@@ -3,9 +3,9 @@ from datetime import datetime
 
 def create_movie_session(movie_show_time, movie_id, cinema_hall_id):
      return MovieSession.objects.create(
-        movie=movie_id,
+        movie_id=movie_id,
         show_time=movie_show_time,
-        cinema_hall=cinema_hall_id
+        cinema_hall_id=cinema_hall_id
     )
 
 def get_movies_sessions(session_date=None):
@@ -16,7 +16,7 @@ def get_movies_sessions(session_date=None):
 
 
 def get_movie_session_by_id(movie_id):
-    return MovieSession.objects.get(movie=movie_id)
+    return MovieSession.objects.get(movie_id=movie_id)
 
 
 def update_movie_session(session_id, show_time=None, movie_id=None, cinema_hall_id=None):
@@ -31,4 +31,4 @@ def update_movie_session(session_id, show_time=None, movie_id=None, cinema_hall_
     return session
 
 def delete_movie_session_by_id(session_id):
-    session = MovieSession.objects.get(id=session_id).delete()
+    return MovieSession.objects.get(id=session_id).delete()
