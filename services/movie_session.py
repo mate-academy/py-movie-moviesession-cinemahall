@@ -21,7 +21,7 @@ def get_movies_sessions(session_date: str = None) -> QuerySet:
     queryset = MovieSession.objects.all()
     if session_date:
         date_obj = datetime.datetime.strptime(session_date,
-                                              '%Y-%m-%d').date()
+                                              "%Y-%m-%d").date()
         queryset = queryset.filter(show_time__date=date_obj)
     return queryset
 
