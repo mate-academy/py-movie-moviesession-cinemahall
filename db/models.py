@@ -49,5 +49,5 @@ class MovieSession(models.Model):
 
     def __str__(self) -> str:
         time = datetime.strftime(self.show_time,
-                                 "%Y-%m-%d %H:%M:%S")
+                                 '%Y-%m-%d %H:%M:%S')
         return f"{self.movie.title} {time}"
