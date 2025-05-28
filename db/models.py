@@ -37,14 +37,16 @@ class CinemaHall(models.Model):
         return f"{self.name}"
 
     @property
-    def capacity(self):
+    def capacity(self) -> int:
         return self.rows * self.seats_in_row
 
 
 class MovieSession(models.Model):
     show_time = models.DateTimeField()
-    cinema_hall = models.ForeignKey(CinemaHall, on_delete=models.SET_NULL, null=True)
+    cinema_hall = models.ForeignKey(CinemaHall,
+                                    on_delete=models.SET_NULL, null=True)
     movie = models.ForeignKey(Movie, on_delete=models.SET_NULL, null=True)
 
     def __str__(self) -> str:
-        return f"{self.movie.title} {datetime.strftime(self.show_time, "%Y-%m-%d %H:%M:%S")}"
+        return (f"{self.movie.title} "
+                f"{datetime.strftime(self.show_time, "%Y-%m-%d %H:%M:%S")}")
