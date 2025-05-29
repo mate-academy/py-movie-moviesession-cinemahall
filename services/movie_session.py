@@ -15,25 +15,29 @@ def create_movie_session(movie_show_time: datetime,
     )
 
 
-def get_movies_sessions(session_date: Optional[str] = None) -> QuerySet:
+def get_movies_sessions(session_date: Optional[str] = None
+                        ) -> QuerySet:
     sessions = MovieSession.objects.all()
     if session_date:
         try:
-            parsed_date = datetime.strptime(session_date, "%Y-%m-%d").date()
+            parsed_date = datetime.strptime(session_date,
+                                            "%Y-%m-%d").date()
             sessions = sessions.filter(show_time__date=parsed_date)
         except ValueError:
             return MovieSession.objects.none()
     return sessions
 
 
-def get_movie_session_by_id(movie_session_id: int) -> Optional[MovieSession]:
+def get_movie_session_by_id(movie_session_id: int
+                            ) -> Optional[MovieSession]:
     return MovieSession.objects.filter(id=movie_session_id).first()
 
 
 def update_movie_session(session_id: int,
                          show_time: Optional[datetime] = None,
                          movie_id: Optional[int] = None,
-                         cinema_hall_id: Optional[int] = None) -> Optional[MovieSession]:
+                         cinema_hall_id: Optional[int] = None
+                         ) -> Optional[MovieSession]:
     session = MovieSession.objects.filter(id=session_id).first()
     if not session:
         return None

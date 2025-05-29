@@ -33,10 +33,11 @@ class CinemaHall(models.Model):
     seats_in_row = models.IntegerField()
 
     def __str__(self) -> str:
-        return f"{self.rows} rows and {self.seats_in_row} in row of {self.name}"
+        return (f"{self.rows} rows and {self.seats_in_row} "
+                f"in row of {self.name}")
 
     @property
-    def capacity(self):
+    def capacity(self) -> int:
         return self.rows * self.seats_in_row
 
 
