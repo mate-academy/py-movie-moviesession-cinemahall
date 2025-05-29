@@ -18,8 +18,8 @@ There should be implemented the string representation of the movie:
 speed = Movie.objects.create(title="Speed", description="Speed movie")
 print(speed)
 # Speed
-```[
-2. `CinemaHall`, with su]()ch fields:
+```
+2. `CinemaHall`, with such fields:
     - char field `name`, the name of the cinema hall with the maximum
 length of 255 characters
     - integer field `rows`, the number of rows of seats in the
