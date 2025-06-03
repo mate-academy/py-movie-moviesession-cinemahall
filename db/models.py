@@ -1,6 +1,5 @@
 from django.db import models
 
-#import datetime
 
 class Genre(models.Model):
     name = models.CharField(max_length=255, unique=True)
@@ -35,7 +34,6 @@ class CinemaHall(models.Model):
     def __str__(self) -> str:
         return self.name
 
-
     @property
     def capacity(self) -> int:
         return self.rows * self.seats_in_row
@@ -43,8 +41,17 @@ class CinemaHall(models.Model):
 
 class MovieSession(models.Model):
     show_time = models.DateTimeField()
-    cinema_hall = models.ForeignKey(CinemaHall, related_name="sessions", on_delete=models.CASCADE)
-    movie = models.ForeignKey(Movie, related_name="sessions", on_delete=models.CASCADE)
+    cinema_hall = models.ForeignKey(
+        CinemaHall,
+        related_name="sessions",
+        on_delete=models.CASCADE
+    )
+    movie = models.ForeignKey(
+        Movie,
+        related_name="sessions",
+        on_delete=models.CASCADE
+    )
 
     def __str__(self) -> str:
-        return f"{self.movie.title} {self.show_time.strftime('%Y-%m-%d %H:%M:%S')}" # noqa: E501
+        return (f"{self.movie.title} "
+                f"{self.show_time.strftime('%Y-%m-%d %H:%M:%S')}")  #noqa: E501
