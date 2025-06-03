@@ -70,7 +70,7 @@ class Migration(migrations.Migration):
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.CASCADE,
                         related_name="sessions",
-                        to="db.cinemahall",
+                        to="db.CinemaHall",
                     ),
                 ),
                 (
@@ -78,7 +78,7 @@ class Migration(migrations.Migration):
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.CASCADE,
                         related_name="sessions",
-                        to="db.movie",
+                        to="db.Movie",
                     ),
                 ),
             ],
