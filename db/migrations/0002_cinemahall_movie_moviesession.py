@@ -44,11 +44,11 @@ class Migration(migrations.Migration):
                 ("description", models.TextField()),
                 (
                     "actors",
-                    models.ManyToManyField(related_name="movies", to="db.actor"),
+                    models.ManyToManyField(related_name="movies", to="db.Actor"),
                 ),
                 (
                     "genres",
-                    models.ManyToManyField(related_name="movies", to="db.genre"),
+                    models.ManyToManyField(related_name="movies", to="db.Genre"),
                 ),
             ],
         ),
