@@ -17,6 +17,7 @@ def get_movies_sessions(session_date: datetime.datetime = None) -> QuerySet:
     else:
         return mm
 
+# test commit
 
 def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
     return MovieSession.objects.get(id=movie_session_id)
