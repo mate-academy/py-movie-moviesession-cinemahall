@@ -25,7 +25,6 @@ class Movie(models.Model):
     def __str__(self) -> str:
         return self.title
 
-# test commit
 
 class CinemaHall(models.Model):
     name = models.CharField(max_length=255)
