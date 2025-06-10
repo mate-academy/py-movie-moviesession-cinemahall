@@ -2,8 +2,9 @@ from typing import List
 from db.models import CinemaHall
 
 
-def get_cinema_halls() -> List[CinemaHall]:
-    return list(CinemaHall.objects.all())
+def get_cinema_halls():
+    halls = CinemaHall.objects.all()
+    return halls
 
 
 def create_cinema_hall(
