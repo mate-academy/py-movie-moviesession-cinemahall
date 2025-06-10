@@ -2,6 +2,7 @@ from typing import Optional
 from datetime import datetime
 
 from django.db.models import QuerySet
+from django.core.exceptions import ObjectDoesNotExist
 
 from db.models import MovieSession
 
@@ -47,4 +48,8 @@ def update_movie_session(
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
-    MovieSession.objects.filter(id=session_id).delete()
+    try:
+        session = MovieSession.objects.get(id=session_id)
+        session.delete()
+    except ObjectDoesNotExist:
+        pass
