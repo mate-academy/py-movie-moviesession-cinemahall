@@ -19,7 +19,7 @@ def create_movie_session(
 
 
 def get_movies_sessions(date: Optional[str] = None) -> QuerySet:
-    sessions = MovieSession.objects.select_related('movie', 'cinema_hall')
+    sessions = MovieSession.objects.select_related("movie", "cinema_hall")
     if date:
         sessions = sessions.filter(show_time__date=date)
     return sessions
