@@ -1,4 +1,3 @@
-from typing import List
 from db.models import CinemaHall
 
 
