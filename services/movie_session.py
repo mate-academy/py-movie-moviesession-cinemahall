@@ -7,7 +7,7 @@ def create_movie_session(movie_show_time: str,
                          movie_id: int, cinema_hall_id: int) -> None:
     cinema_hall = CinemaHall.objects.get(id=cinema_hall_id)
     movie = Movie.objects.filter(id=movie_id)
-    new_obj = MovieSession.objects.create(show_time=movie_show_time,
+    MovieSession.objects.create(show_time=movie_show_time,
                                           cinema_hall=cinema_hall, movie=movie)
     return None
 
