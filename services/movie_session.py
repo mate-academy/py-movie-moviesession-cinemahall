@@ -18,9 +18,11 @@ def create_movie_session(
 
 
 def get_movies_sessions(session_date: str = None) -> QuerySet:
+    queryset = MovieSession.objects.all()
     if session_date:
-        return MovieSession.objects.filter(show_time__date=session_date)
-    return MovieSession.objects.all()
+        date_object = datetime.strptime(session_date, "%Y-%m-%d").date()
+        queryset = queryset.filter(show_time__date=date_object)
+    return queryset
 
 
 def get_movie_session_by_id(
