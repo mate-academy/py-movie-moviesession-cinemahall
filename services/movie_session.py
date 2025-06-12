@@ -1,8 +1,7 @@
 from datetime import datetime
 from typing import Optional
-
+from django.db import IntegrityError
 from django.db.models import QuerySet
-
 from db.models import MovieSession, Movie, CinemaHall
 
 
@@ -13,11 +12,17 @@ def create_movie_session(
 ) -> MovieSession:
     movie = Movie.objects.get(id=movie_id)
     hall = CinemaHall.objects.get(id=cinema_hall_id)
-    session = MovieSession.objects.create(
-        show_time=movie_show_time,
-        movie=movie,
-        cinema_hall=hall
-    )
+    try:
+        session = MovieSession.objects.create(
+            show_time=movie_show_time,
+            movie=movie,
+            cinema_hall=hall
+        )
+    except IntegrityError:
+        raise IntegrityError(
+            "Unable to create movie session\n"
+            "Arguments arent unique!"
+        )
     return session
 
 
