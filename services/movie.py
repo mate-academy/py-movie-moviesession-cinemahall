@@ -1,24 +1,37 @@
 import init_django_orm # noqa
 from db.models import Movie # noqa
-from django.db.models import QuerySet
+from django.db.models import QuerySet, Count, Q
 
 
 def get_movies(
-        genres_ids: list[int] = None,
-        actors_ids: list[int] = None
+    genres_ids: list[int] = None,
+    actors_ids: list[int] = None
 ) -> QuerySet:
 
     queryset = Movie.objects.all()
 
-    if genres_ids and actors_ids:
-        queryset = queryset.filter(
-            genres__id__in=genres_ids,
-            actors__id__in=actors_ids
-        )
-    elif genres_ids:
+    if genres_ids:
         queryset = queryset.filter(genres__id__in=genres_ids)
-    elif actors_ids:
+    if actors_ids:
         queryset = queryset.filter(actors__id__in=actors_ids)
+
+    if genres_ids:
+        queryset = queryset.annotate(
+            matched_genres=Count(
+                "genres",
+                filter=Q(genres__id__in=genres_ids),
+                distinct=True
+            )
+        ).filter(matched_genres=len(genres_ids))
+
+    if actors_ids:
+        queryset = queryset.annotate(
+            matched_actors=Count(
+                "actors",
+                filter=Q(actors__id__in=actors_ids),
+                distinct=True
+            )
+        ).filter(matched_actors=len(actors_ids))
 
     return queryset
 

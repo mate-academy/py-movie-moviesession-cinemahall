@@ -1,5 +1,7 @@
 from datetime import datetime
 from typing import Optional
+
+from django.core.exceptions import ValidationError
 from django.db import IntegrityError
 from django.db.models import QuerySet
 from db.models import MovieSession, Movie, CinemaHall
@@ -41,10 +43,10 @@ def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
 
 
 def update_movie_session(
-        session_id: int,
-        show_time: Optional[datetime] = None,
-        movie_id: Optional[int] = None,
-        cinema_hall_id: Optional[int] = None
+    session_id: int,
+    show_time: Optional[datetime] = None,
+    movie_id: Optional[int] = None,
+    cinema_hall_id: Optional[int] = None
 ) -> MovieSession:
 
     session = MovieSession.objects.get(id=session_id)
@@ -55,6 +57,17 @@ def update_movie_session(
         session.movie = Movie.objects.get(id=movie_id)
     if cinema_hall_id is not None:
         session.cinema_hall = CinemaHall.objects.get(id=cinema_hall_id)
+
+    conflict_exists = MovieSession.objects.filter(
+        cinema_hall=session.cinema_hall,
+        movie=session.movie,
+        show_time=session.show_time
+    ).exclude(id=session.id).exists()
+
+    if conflict_exists:
+        raise ValidationError(
+            "A movie session with actually args already exists."
+        )
 
     session.save()
     return session
