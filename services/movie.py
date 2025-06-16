@@ -11,9 +11,9 @@ def get_movies(
         genres_ids = None
     if actors_ids == []:
         actors_ids = None
-        
+
     movies = Movie.objects.all()
-    
+
     if not genres_ids and not actors_ids:
         return movies
     elif genres_ids and actors_ids:
