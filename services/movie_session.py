@@ -28,7 +28,7 @@ def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
 def update_movie_session(session_id: int,
                          show_time: datetime = None,
                          movie_id: int = None,
-                         cinema_hall_id: int = None) -> None:
+                         cinema_hall_id: int = None) -> MovieSession:
     up_movie = MovieSession.objects.filter(id=session_id)
     updated_fields = {}
 
@@ -41,6 +41,7 @@ def update_movie_session(session_id: int,
 
     if updated_fields:
         up_movie.update(**updated_fields)
+    return up_movie
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
