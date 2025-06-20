@@ -6,27 +6,16 @@ from db.models import Movie
 def get_movies(
     genres_ids: list[int] | None = None,
     actors_ids: list[int] | None = None
-) -> QuerySet:
-    if genres_ids is None and actors_ids is None:
-        return Movie.objects.all()
-
-    if genres_ids is not None and actors_ids is not None:
-        return Movie.objects.filter(
-            genres__id__in=genres_ids,
-            actors__id__in=actors_ids
-        ).distinct()
+) -> QuerySet[Movie]:
+    queryset = Movie.objects.all()
 
     if genres_ids is not None:
-        return Movie.objects.filter(
-            genres__id__in=genres_ids
-        ).distinct()
+        queryset = queryset.filter(genres__id__in=genres_ids)
 
     if actors_ids is not None:
-        return Movie.objects.filter(
-            actors__id__in=actors_ids
-        ).distinct()
+        queryset = queryset.filter(actors__id__in=actors_ids)
 
-    return Movie.objects.none()
+    return queryset.distinct()
 
 
 def get_movie_by_id(movie_id: int) -> Movie:
