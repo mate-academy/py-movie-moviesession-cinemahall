@@ -6,7 +6,8 @@ from db.models import Movie, Genre, Actor
 
 def get_movies(genres_ids: list = None, actors_ids: list = None) -> QuerySet:
     """
-    Retorna todos os filmes, opcionalmente filtrados por IDs de gêneros e/ou IDs de atores.
+    Retorna todos os filmes, opcionalmente filtrados por IDs de gêneros
+    e/ou IDs de atores.
 
     :param genres_ids: Lista opcional de IDs de gêneros para filtrar os filmes.
     :param actors_ids: Lista opcional de IDs de atores para filtrar os filmes.
@@ -30,7 +31,8 @@ def get_movie_by_id(movie_id: int) -> Movie:
 
     :param movie_id: O ID do filme.
     :return: O objeto Movie correspondente ao ID.
-    :raises Movie.DoesNotExist: Se nenhum filme com o ID fornecido for encontrado.
+    :raises Movie.DoesNotExist: Se nenhum filme com o ID fornecido for
+                                encontrado.
     """
     return Movie.objects.get(id=movie_id)
 
@@ -47,11 +49,14 @@ def create_movie(
 
     :param movie_title: O título do filme.
     :param movie_description: A descrição do filme.
-    :param genres_ids: Lista opcional de IDs de gêneros a serem associados ao filme.
-    :param actors_ids: Lista opcional de IDs de atores a serem associados ao filme.
+    :param genres_ids: Lista opcional de IDs de gêneros a serem associados
+                       ao filme.
+    :param actors_ids: Lista opcional de IDs de atores a serem associados
+                       ao filme.
     :return: O objeto Movie recém-criado.
     """
-    movie = Movie.objects.create(title=movie_title, description=movie_description)
+    movie = Movie.objects.create(title=movie_title,
+                                 description=movie_description)
 
     if genres_ids:
         # Adiciona gêneros ao filme. Certifica-se de que os gêneros existem.
@@ -63,4 +68,3 @@ def create_movie(
         movie.actors.add(*actors)
 
     return movie
-
