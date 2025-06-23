@@ -83,7 +83,8 @@ def update_movie_session(
     :raises CinemaHall.DoesNotExist: Se a nova sala de cinema com o ID
                                      fornecido não for encontrada.
     """
-    movie_session = Movie.objects.get(id=session_id)
+    # CORREÇÃO: Mudei Movie.objects.get para MovieSession.objects.get
+    movie_session = MovieSession.objects.get(id=session_id)
 
     if show_time is not None:
         movie_session.show_time = show_time
