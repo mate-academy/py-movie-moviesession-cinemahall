@@ -11,13 +11,16 @@ def get_movies(genres_ids: list[int] | None,
         queryset = queryset.filter(actors__id__in=actors_ids)
     return queryset.distinct()
 
+
 def get_movie_by_id(movie_id: int) -> Movie:
     return Movie.objects.get(id=movie_id)
+
 
 def create_movie(movie_title: str, movie_description: str,
                  movie_genres: list[int] | None = None,
                  movie_actors: list[int] | None = None) -> Movie:
-    movie = Movie.objects.create(title=movie_title, description=movie_description)
+    movie = Movie.objects.create(title=movie_title,
+                                 description=movie_description)
     if movie_genres:
         movie.genres.add(*movie_genres)
     if movie_actors:
