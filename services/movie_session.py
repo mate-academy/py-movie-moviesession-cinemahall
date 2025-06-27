@@ -11,7 +11,8 @@ def create_movie_session(movie_show_time: datetime,
                                        cinema_hall_id=cinema_hall_id)
 
 
-def get_movies_sessions(session_date: str | None = None) -> QuerySet[MovieSession]:
+def get_movies_sessions(
+        session_date: str | None = None) -> QuerySet[MovieSession]:
     queryset = MovieSession.objects.all()
     if session_date:
         date_obj = datetime.strptime(session_date, "%Y-%m-%d").date()
