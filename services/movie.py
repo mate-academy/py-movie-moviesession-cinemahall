@@ -17,12 +17,12 @@ def get_movie_by_id(movie_id: int) -> Movie:
 
 
 def create_movie(movie_title: str, movie_description: str,
-                 movie_genres: list[int] | None = None,
-                 movie_actors: list[int] | None = None) -> Movie:
+                 genres_ids: list[int] | None = None,
+                 actors_ids: list[int] | None = None) -> Movie:
     movie = Movie.objects.create(title=movie_title,
                                  description=movie_description)
-    if movie_genres:
-        movie.genres.add(*movie_genres)
-    if movie_actors:
-        movie.actors.add(*movie_actors)
+    if genres_ids:
+        movie.genres.add(*genres_ids)
+    if actors_ids:
+        movie.actors.add(*actors_ids)
     return movie
