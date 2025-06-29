@@ -30,6 +30,6 @@ def create_movie(
         movie_to_create.genres.set(genres_ids)
 
     if actors_ids:
-        movie_to_create.genres.set(actors_ids)
+        movie_to_create.actors.set(actors_ids)
 
         movie_to_create.save()
