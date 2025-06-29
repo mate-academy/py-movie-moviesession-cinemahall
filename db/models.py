@@ -38,6 +38,7 @@ class CinemaHall(models.Model):
     def __str__(self) -> str:
         return self.name
 
+
 class MovieSession(models.Model):
     show_time = models.DateTimeField()
     cinema_hall = models.ForeignKey(
