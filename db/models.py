@@ -32,7 +32,7 @@ class CinemaHall(models.Model):
     seats_in_row = models.IntegerField()
 
     @property
-    def capacity(self)  -> int:
+    def capacity(self) -> int:
         return self.rows * self.seats_in_row
 
     def __str__(self) -> str:
@@ -50,4 +50,4 @@ class MovieSession(models.Model):
 
     def __str__(self) -> str:
         return (f"{self.movie.title} "
-                f"{self.show_time.strftime('%Y-%m-%d %H:%M:%S')}")
+                f"{self.show_time.strftime("%Y-%m-%d %H:%M:%S")}")
