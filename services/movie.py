@@ -14,8 +14,10 @@ def get_movies(
         movies = movies.filter(actors__id__in=actors_ids)
     return movies
 
+
 def get_movie_by_id(movie_id: int) -> Movie:
     return Movie.objects.get(id=movie_id)
+
 
 def create_movie(
         movie_title: str,
