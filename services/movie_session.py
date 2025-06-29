@@ -40,7 +40,7 @@ def update_movie_session(
         movie_to_update.update(movie_id=movie_id)
 
     if cinema_hall_id:
-        movie_to_update.update(cinema_hall=cinema_hall_id)
+        movie_to_update.update(cinema_hall_id=cinema_hall_id)
 
 
 def delete_movie_session_by_id(session_id: int) -> tuple:
