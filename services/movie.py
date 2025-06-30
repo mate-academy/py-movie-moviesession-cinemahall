@@ -20,7 +20,7 @@ def get_movies(
         return Movie.objects.filter(actors__id__in=actors_ids)
 
 
-def get_movie_by_id(movie_id: int) -> QuerySet | Movie:
+def get_movie_by_id(movie_id: int) -> Movie:
     return Movie.objects.get(id=movie_id)
 
 
@@ -29,7 +29,7 @@ def create_movie(
         movie_description: str,
         genres_ids: list[int] | None = None,
         actors_ids: list[int] | None = None,
-) -> None:
+) -> Movie:
     movie = Movie.objects.create(
         title=movie_title,
         description=movie_description,
