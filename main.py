@@ -25,7 +25,7 @@ def main() -> None:
             movie_new = Movie.objects.create(id=row["pk"],
                                              title=row["fields"]["title"],
                                              description=row["fields"]
-                                             ["description"])
+                                             .get("description"))
             for actor_id in row["fields"]["actors"]:
                 actor = Actor.objects.get(id=actor_id)
                 movie_new.actors.add(actor)
