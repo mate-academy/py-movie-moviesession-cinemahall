@@ -4,7 +4,6 @@ from typing import Optional
 from django.db.models import QuerySet
 
 
-
 def create_movie_session(
         movie_show_time: datetime,
         movie_id: int,
