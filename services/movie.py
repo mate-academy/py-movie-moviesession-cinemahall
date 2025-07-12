@@ -41,7 +41,7 @@ def create_movie(
     return movie
 
 
-def update_movie(
+def update_movie_session(
     movie_id: int,
     movie_title: Optional[str] = None,
     movie_description: Optional[str] = None,
@@ -60,5 +60,5 @@ def update_movie(
     movie.save()
 
 
-def delete_movie_by_id(movie_id: int) -> None:
+def delete_movie_session_by_id(movie_id: int) -> None:
     Movie.objects.filter(id=movie_id).delete()
