@@ -1,6 +1,7 @@
 from db.models import Movie
 from typing import Any
 
+
 def get_movies(
         genres_ids: list[int] = None,
         actors_ids: list[int] = None
@@ -17,6 +18,7 @@ def get_movies(
 
 def get_movie_by_id(movie_id: int) -> Any:
     return Movie.objects.get(id=movie_id)
+
 
 def create_movie(
         movie_title: str,
