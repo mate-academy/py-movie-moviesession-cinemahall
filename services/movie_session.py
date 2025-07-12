@@ -1,5 +1,6 @@
 import datetime
 from django.db.models import QuerySet
+from django.utils import timezone
 
 from db.models import MovieSession, Movie, CinemaHall
 
@@ -9,8 +10,9 @@ def create_movie_session(
 ) -> MovieSession:
     movie = Movie.objects.get(id=movie_id)
     cinema_hall = CinemaHall.objects.get(id=cinema_hall_id)
+    aware_show_time = timezone.make_aware(movie_show_time)
     return MovieSession.objects.create(
-        show_time=movie_show_time, movie=movie, cinema_hall=cinema_hall
+        show_time=aware_show_time, movie=movie, cinema_hall=cinema_hall
     )
 
 
@@ -33,7 +35,7 @@ def update_movie_session(
 ) -> None:
     movie_session = MovieSession.objects.get(id=session_id)
     if show_time:
-        movie_session.show_time = show_time
+        movie_session.show_time = timezone.make_aware(show_time)
     if movie_id:
         movie_session.movie = Movie.objects.get(id=movie_id)
     if cinema_hall_id:

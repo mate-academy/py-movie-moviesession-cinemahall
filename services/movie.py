@@ -1,10 +1,29 @@
+from typing import Optional
+
 from django.db.models import QuerySet
 
 from db.models import Movie
 
 
+def create_movie(
+    movie_title: str,
+    movie_description: str,
+    genres_ids: Optional[list[int]] = None,
+    actors_ids: Optional[list[int]] = None,
+) -> Movie:
+    movie = Movie.objects.create(
+        title=movie_title, description=movie_description
+    )
+    if genres_ids:
+        movie.genres.set(genres_ids)
+    if actors_ids:
+        movie.actors.set(actors_ids)
+    return movie
+
+
 def get_movies(
-    genres_ids: list[int] = None, actors_ids: list[int] = None
+    genres_ids: Optional[list[int]] = None,
+    actors_ids: Optional[list[int]] = None,
 ) -> QuerySet[Movie]:
     queryset = Movie.objects.all()
     if genres_ids:
@@ -18,17 +37,24 @@ def get_movie_by_id(movie_id: int) -> Movie:
     return Movie.objects.get(id=movie_id)
 
 
-def create_movie(
-    movie_title: str,
-    movie_description: str,
-    genres_ids: list[int] = None,
-    actors_ids: list[int] = None,
-) -> Movie:
-    movie = Movie.objects.create(
-        title=movie_title,
-        description=movie_description)
+def update_movie(
+    movie_id: int,
+    movie_title: Optional[str] = None,
+    movie_description: Optional[str] = None,
+    genres_ids: Optional[list[int]] = None,
+    actors_ids: Optional[list[int]] = None,
+) -> None:
+    movie = Movie.objects.get(id=movie_id)
+    if movie_title:
+        movie.title = movie_title
+    if movie_description:
+        movie.description = movie_description
     if genres_ids:
         movie.genres.set(genres_ids)
     if actors_ids:
         movie.actors.set(actors_ids)
-    return movie
+    movie.save()
+
+
+def delete_movie_by_id(movie_id: int) -> None:
+    Movie.objects.filter(id=movie_id).delete()
