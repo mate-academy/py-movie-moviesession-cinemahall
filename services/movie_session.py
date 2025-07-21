@@ -9,15 +9,23 @@ def create_movie_session(
         movie_show_time: datetime,
         movie_id: int,
         cinema_hall_id: int
-) -> QuerySet[MovieSession] | None:
-    return MovieSession.objects.create(show_time=movie_show_time, movie=movie_id, cinema_hall=cinema_hall_id)
+) -> MovieSession:
+    movie = Movie.objects.get(id=movie_id)
+    hall = CinemaHall.objects.get(id=cinema_hall_id)
+    session = MovieSession.objects.create(
+        show_time=movie_show_time,
+        movie=movie,
+        cinema_hall=hall
+    )
+
+    return session
 
 
-def get_movie_session(session_date: datetime | None) -> MovieSession:
+def get_movie_session(session_date: datetime | None) -> QuerySet:
     if session_date is None:
         return MovieSession.objects.all()
     else:
-        return MovieSession.objects.filter(show_date__date=session_date)
+        return MovieSession.objects.filter(show_time__date=session_date)
 
 
 def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
