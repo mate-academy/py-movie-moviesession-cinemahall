@@ -20,13 +20,26 @@ def get_movie_by_id(movie_id: int) -> Movie:
     return Movie.objects.get(id=movie_id)
 
 
-def create_movie(movie_title: str, movie_description: str, genres_ids: list | None, actors_ids: list | None) -> Movie:
+def create_movie(
+        movie_title: str,
+        movie_description: str,
+        genres_ids: list | None,
+        actors_ids: list | None
+) -> Movie:
     if genres_ids and actors_ids:
-        return Movie.objects.create(title=movie_title, description=movie_description, genres=genres_ids, actors=actors_ids)
+        return Movie.objects.create(
+            title=movie_title,
+            description=movie_description,
+            genres=genres_ids,
+            actors=actors_ids
+        )
     elif genres_ids and not actors_ids:
-        return Movie.objects.create(title=movie_title, description=movie_description, genres=genres_ids)
+        return Movie.objects.create(
+            title=movie_title,
+            description=movie_description,
+            genres=genres_ids
+        )
     elif not genres_ids and actors_ids:
         return Movie.objects.create(title=movie_title, description=movie_description, actors=actors_ids)
     else:
         return Movie.objects.create(title=movie_title, description=movie_description)
-

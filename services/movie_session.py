@@ -5,7 +5,11 @@ from django.db.models import QuerySet
 from db.models import MovieSession, Movie, CinemaHall
 
 
-def create_movie_session(movie_show_time: datetime, movie_id: int, cinema_hall_id: int) -> QuerySet[MovieSession] | None:
+def create_movie_session(
+        movie_show_time: datetime,
+        movie_id: int,
+        cinema_hall_id: int
+) -> QuerySet[MovieSession] | None:
     return MovieSession.objects.create(show_time=movie_show_time, movie=movie_id, cinema_hall=cinema_hall_id)
 
 
@@ -19,7 +23,13 @@ def get_movie_session(session_date: datetime | None) -> MovieSession:
 def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
     return MovieSession.objects.get(id=movie_session_id)
 
-def update_movie_session(session_id, show_time: datetime | None, movie_id: int | None, cinema_hall_id: int | None) -> None:
+
+def update_movie_session(
+        session_id: int,
+        show_time: datetime | None,
+        movie_id: int | None,
+        cinema_hall_id: int | None
+) -> None:
     session = MovieSession.objects.get(id=session_id)
     if show_time is not None:
         session.show_time = show_time
