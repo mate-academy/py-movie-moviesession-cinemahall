@@ -61,5 +61,7 @@ class MovieSession(models.Model):
     )
 
     def __str__(self) -> str:
-        return (f"""{self.movie.title} """
-                f"""{self.show_time.strftime("%Y-%m-%d %X")}""")
+        if self.movie:
+            return (f"""{self.movie.title} """
+                    f"""{self.show_time.strftime("%Y-%m-%d %X")}""")
+        return "There isn't movies"
