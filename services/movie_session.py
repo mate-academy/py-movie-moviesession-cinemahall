@@ -1,6 +1,6 @@
 from django.db.models import QuerySet
 
-from db.models import MovieSession
+from db.models import MovieSession, Movie, CinemaHall
 
 
 def create_movie_session(
@@ -9,10 +9,13 @@ def create_movie_session(
         cinema_hall_id: int
 ) -> MovieSession:
 
+    movie = Movie.objects.get(id=movie_id)
+    cinema_hall = CinemaHall.objects.get(id=cinema_hall_id)
+
     new_movie_session = MovieSession.objects.create(
         show_time=movie_show_time,
-        movie=movie_id,
-        cinema_hall=cinema_hall_id
+        movie=movie,
+        cinema_hall=cinema_hall
     )
 
     return new_movie_session
