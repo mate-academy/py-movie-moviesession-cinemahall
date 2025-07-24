@@ -17,11 +17,9 @@ def get_movies(
             genres__id__in=genres_ids,
             actors__id__in=actors_ids
         )
-
-    if genres_ids:
+    elif genres_ids:
         queryset = queryset.filter(genres__id__in=genres_ids)
-
-    if actors_ids:
+    elif actors_ids:
         queryset = queryset.filter(actors__id__in=actors_ids)
 
     return queryset
