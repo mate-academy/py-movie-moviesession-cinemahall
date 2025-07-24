@@ -40,15 +40,17 @@ def update_movie_session(
 ) -> MovieSession:
 
     update_movie = MovieSession.objects.get(id=session_id)
+    movie = Movie.objects.get(id=movie_id)
+    cinema_hall = CinemaHall.objects.get(id=cinema_hall_id)
 
     if show_time:
         update_movie.show_time = show_time
 
     if movie_id:
-        update_movie.movie = movie_id
+        update_movie.movie = movie
 
     if cinema_hall_id:
-        update_movie.cinema_hall = cinema_hall_id
+        update_movie.cinema_hall = cinema_hall
 
     update_movie.save()
 
