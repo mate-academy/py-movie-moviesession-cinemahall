@@ -7,18 +7,15 @@ def get_movies(genres_ids: list[int] = None,
                actors_ids: list[int] = None) -> QuerySet:
     queryset = Movie.objects.all()
 
-    if not genres_ids and not actors_ids:
-        return queryset
-
     if genres_ids and actors_ids:
-        queryset = queryset.filter(genres__id__in=genres_ids,
-                                   actors__id__in=actors_ids).distinct()
+        return queryset.filter(genres__id__in=genres_ids,
+                               actors__id__in=actors_ids).distinct()
 
     if genres_ids:
-        queryset = queryset.filter(genres__id__in=genres_ids).distinct()
+        return queryset.filter(genres__id__in=genres_ids).distinct()
 
     if actors_ids:
-        queryset = queryset.filter(actors__id__in=actors_ids).distinct()
+        return queryset.filter(actors__id__in=actors_ids).distinct()
 
     return queryset
 
