@@ -5,8 +5,9 @@ from typing import List
 def get_cinema_halls() -> List[CinemaHall]:
     return list(CinemaHall.objects.all())
 
+
 def create_cinema_hall(
-        hall_name:  str,
+        hall_name: str,
         hall_rows: int,
         hall_seats_in_row: int
 ) -> CinemaHall:

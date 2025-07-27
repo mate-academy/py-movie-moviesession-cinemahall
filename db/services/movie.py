@@ -1,9 +1,10 @@
 from db.models import Movie
 from typing import Optional, List
 
+
 def get_movies(
         genres_ids: Optional[List[int]] = None,
-        actors_ids:Optional[List[int]] = None
+        actors_ids: Optional[List[int]] = None
 ) -> List[Movie]:
     if genres_ids and actors_ids:
         return list(
@@ -30,8 +31,10 @@ def get_movies(
     else:
         return list(Movie.objects.all())
 
+
 def get_movie_by_id(movie_id: int) -> Movie:
     return Movie.objects.get(id=movie_id)
+
 
 def create_movie(
         movie_title: str,
