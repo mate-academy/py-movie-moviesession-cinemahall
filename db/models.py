@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import ManyToManyField
 
 
 class Genre(models.Model):
@@ -14,3 +15,38 @@ class Actor(models.Model):
 
     def __str__(self) -> str:
         return f"{self.first_name} {self.last_name}"
+
+
+class Movie(models.Model):
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    actors = ManyToManyField(Actor, related_name="movies")
+    genres = ManyToManyField(Genre, related_name="movies")
+
+    def __str__(self) -> str:
+        return self.title
+
+
+class CinemaHall(models.Model):
+    name = models.CharField(max_length=255)
+    rows = models.IntegerField()
+    seats_in_row = models.IntegerField()
+
+    def __str__(self) -> str:
+        return self.name
+
+    @property
+    def capacity(self) -> int:
+        return self.rows * self.seats_in_row
+
+
+class MovieSession(models.Model):
+    show_time = models.DateTimeField()
+    cinema_hall = models.ForeignKey(CinemaHall, on_delete=models.DO_NOTHING)
+    movie = models.ForeignKey(Movie, on_delete=models.DO_NOTHING)
+
+    def __str__(self) -> str:
+        return (
+            f'{self.movie.title} '
+            f'{self.show_time.strftime("%Y-%m-%d %H:%M:%S")}'
+        )
