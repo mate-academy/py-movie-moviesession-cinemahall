@@ -1,11 +1,10 @@
 from django.db.models import QuerySet
-from django.utils.datetime_safe import datetime
 
 from db.models import MovieSession
 
 
 def create_movie_session(
-        movie_show_time: datetime,
+        movie_show_time: str,
         movie_id: int,
         cinema_hall_id: int
 ) -> MovieSession:
@@ -16,7 +15,7 @@ def create_movie_session(
     )
 
 
-def get_movies_sessions(session_date: datetime = None) -> QuerySet:
+def get_movies_sessions(session_date: str = None) -> QuerySet:
     if session_date:
         return MovieSession.objects.filter(show_time__date=session_date)
     return MovieSession.objects.all()
@@ -28,7 +27,7 @@ def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
 
 def update_movie_session(
         session_id: int,
-        show_time: datetime = None,
+        show_time: str = None,
         movie_id: int = None,
         cinema_hall_id: int = None
 ) -> MovieSession:
