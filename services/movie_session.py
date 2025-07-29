@@ -4,7 +4,7 @@ from db.models import MovieSession, Movie, CinemaHall
 
 
 def create_movie_session(
-        movie_show_time: int,
+        movie_show_time: str,
         movie_id: int,
         cinema_hall_id: int
 ) -> MovieSession:
@@ -19,7 +19,7 @@ def create_movie_session(
     )
 
 
-def get_movies_sessions(session_date: list[int] = None) -> QuerySet:
+def get_movies_sessions(session_date: str = None) -> QuerySet:
 
     if session_date:
         return MovieSession.objects.filter(
@@ -35,9 +35,9 @@ def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
 
 
 def update_movie_session(session_id: int,
-                         show_time: list[int] = None,
-                         movie_id: list[int] = None,
-                         cinema_hall_id: list[int] = None
+                         show_time: str = None,
+                         movie_id: int = None,
+                         cinema_hall_id: int = None
                          ) -> int:
 
     update = {}
