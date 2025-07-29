@@ -1,9 +1,13 @@
-from typing_extensions import Any
+from django.db.models import QuerySet
 
 from db.models import MovieSession, Movie, CinemaHall
 
 
-def create_movie_session(movie_show_time, movie_id, cinema_hall_id) -> MovieSession:
+def create_movie_session(
+        movie_show_time: int,
+        movie_id: int,
+        cinema_hall_id: int
+) -> MovieSession:
 
     movie = Movie.objects.get(id=movie_id)
     cinema_hall = CinemaHall.objects.get(id=cinema_hall_id)
@@ -14,27 +18,44 @@ def create_movie_session(movie_show_time, movie_id, cinema_hall_id) -> MovieSess
         cinema_hall=cinema_hall
     )
 
-def get_movies_sessions(session_date=None) -> Any:
+
+def get_movies_sessions(session_date: list[int] = None) -> QuerySet:
+
     if session_date:
         return MovieSession.objects.filter(
-            show_time__date = session_date
+            show_time__date=session_date
         )
+
     return MovieSession.objects.all()
 
-def get_movie_session_by_id(movie_session_id) -> MovieSession:
+
+def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
+
     return MovieSession.objects.get(pk=movie_session_id)
 
-def update_movie_session(session_id, show_time=None, movie_id=None, cinema_hall_id=None) -> int:
+
+def update_movie_session(session_id: int,
+                         show_time: list[int] = None,
+                         movie_id: list[int] = None,
+                         cinema_hall_id: list[int] = None
+                         ) -> int:
+
     update = {}
+
     if show_time is not None:
-        update['show_time'] = show_time
+        update["show_time"] = show_time
+
     if movie_id is not None:
         movie = Movie.objects.get(id=movie_id)
-        update['movie'] = movie
+        update["movie"] = movie
+
     if cinema_hall_id is not None:
         cinema_hall = CinemaHall.objects.get(id=cinema_hall_id)
-        update['cinema_hall'] = cinema_hall
+        update["cinema_hall"] = cinema_hall
+
     return MovieSession.objects.filter(id=session_id).update(**update)
 
-def delete_movie_session_by_id(session_id):
+
+def delete_movie_session_by_id(session_id: int) -> None:
+
     MovieSession.objects.get(pk=session_id).delete()

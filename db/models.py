@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Genre(models.Model):
     name = models.CharField(max_length=255, unique=True)
 
@@ -34,8 +35,9 @@ class CinemaHall(models.Model):
         return f"{self.name}"
 
     @property
-    def capacity(self):
+    def capacity(self) -> int:
         return self.rows * self.seats_in_row
+
 
 class MovieSession(models.Model):
     show_time = models.DateTimeField(blank=False)
