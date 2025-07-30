@@ -7,8 +7,9 @@ def get_movies(
         genres_ids: list = None,
         actors_ids: list = None
 ) -> QuerySet[Movie] | None:
-    if genres_ids is None:
+    if genres_ids is None and actors_ids is None:
         genres_ids = []
+        actors_ids = []
     movies = Movie.objects.all()
     if not genres_ids and not actors_ids:
         return Movie.objects.all()
