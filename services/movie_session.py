@@ -25,8 +25,11 @@ def get_movies_sessions(session_date: Optional[str] = None) -> QuerySet:
     return MovieSession.objects.all()
 
 
-def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
-    return MovieSession.objects.get(id=movie_session_id)
+def get_movie_session_by_id(movie_session_id: int) -> MovieSession | None:
+    try:
+        return MovieSession.objects.get(id=movie_session_id)
+    except MovieSession.DoesNotExist:
+        return None
 
 
 def update_movie_session(
