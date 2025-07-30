@@ -6,7 +6,11 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 # SECURITY WARNING: Modify this secret key if using in production!
 SECRET_KEY = "6few3nci_q_o@l1dlbk81%wcxe!*6r29yu629&d97!hiqat9fa"
 
+
+ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+
 DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
+
 
 DATABASES = {
     "default": {
@@ -15,12 +19,6 @@ DATABASES = {
     }
 }
 
-LANGUAGE_CODE = "en-us"
-
-TIME_ZONE = "Europe/Kiev"
-
-USE_I18N = True
-
-USE_TZ = False
+USE_TZ = True
 
 INSTALLED_APPS = ("db",)
