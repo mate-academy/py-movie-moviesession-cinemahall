@@ -15,9 +15,11 @@ def create_movie_session(
 
 
 def get_movies_sessions(
-    session_date: datetime = None
+    session_date: datetime | str = None
 ) -> list:
     if session_date:
+        if isinstance(session_date, str):
+            session_date = datetime.strptime(session_date, "%Y-%m-%d")
         return MovieSession.objects.filter(
             show_time__date=session_date.date()
         )
