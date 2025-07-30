@@ -7,7 +7,7 @@ from db.models import MovieSession, CinemaHall, Movie
 def create_movie_session(
         movie_show_time: str,
         movie_id: int,
-        cinema_hall_id: id
+        cinema_hall_id: int
 ) -> None:
 
     cinema_hall = CinemaHall.objects.get(id=cinema_hall_id)
