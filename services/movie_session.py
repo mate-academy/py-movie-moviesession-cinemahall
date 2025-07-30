@@ -1,7 +1,7 @@
-from typing import Optional, List
+from typing import Optional
 from datetime import datetime
 from django.db.models import QuerySet
-from db.models import MovieSession, Movie, CinemaHall
+from db.models import MovieSession
 
 
 def create_movie_session(
