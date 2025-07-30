@@ -1,6 +1,7 @@
 from datetime import datetime
 from db.models import MovieSession
 
+
 def create_movie_session(
     movie_id: int,
     cinema_hall_id: int,
@@ -12,6 +13,7 @@ def create_movie_session(
         show_time=movie_show_time
     )
 
+
 def get_movies_sessions(
         session_date: datetime = None
 ) -> list:
@@ -21,8 +23,10 @@ def get_movies_sessions(
         )
     return MovieSession.objects.all()
 
+
 def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
     return MovieSession.objects.get(id=movie_session_id)
+
 
 def update_movie_session(
         session_id: int,
@@ -39,6 +43,7 @@ def update_movie_session(
         session.cinema_hall_id = cinema_hall_id
     session.save()
     return session
+
 
 def delete_movie_session_by_id(
         session_id: int,
