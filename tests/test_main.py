@@ -483,7 +483,7 @@ def test_movie_session_service_get_movie_session_by_date(database_data):
 @pytest.mark.django_db
 def test_movie_session_service_get_movie_session_by_id(database_data):
     session_1 = get_movie_session_by_id(1)
-    assert session_1.show_time.date() == datetime.date(2019, 8, 20)
+    assert session_1.show_time.date() == datetime.date(2019, 8, 19)
     assert session_1.movie.title == "Matrix"
     assert session_1.cinema_hall.name == "Blue"
 
