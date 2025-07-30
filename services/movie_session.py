@@ -24,7 +24,7 @@ def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
 
 def update_movie_session(
         session_id: int,
-        show_time: int = None,
+        show_time: datetime = None,
         movie_id: int = None,
         cinema_hall_id: int = None
 ) -> MovieSession:
@@ -45,7 +45,7 @@ def delete_movie_session_by_id(session_id: int) -> None:
     session.delete()
 
 
-def get_movies_sessions(session_date: datetime = None) -> QuerySet:
+def get_movies_sessions(session_date: str = None) -> QuerySet:
     if session_date:
         try:
             date_obj = datetime.strptime(session_date, "%Y-%m-%d").date()
