@@ -1,21 +1,24 @@
-from typing import List, Optional
+from typing import Optional, List
 from db.models import Movie
 
-def get_movies(genres_ids: Optional[List[int]] = None, actors_ids: Optional[List[int]] = None):
-    queryset = Movie.objects.all()
-    if genres_ids is not None and actors_ids is not None:
-        queryset = queryset.filter(
-            genres__id__in=genres_ids,
-            actors__id__in=actors_ids
-        ).distinct()
-    elif genres_ids is not None:
-        queryset = queryset.filter(genres__id__in=genres_ids).distinct()
-    elif actors_ids is not None:
-        queryset = queryset.filter(actors__id__in=actors_ids).distinct()
-    return queryset
+
+def get_movies(
+    genres_ids: Optional[List[int]] = None,
+    actors_ids: Optional[List[int]] = None
+) -> List[Movie]:
+    qs = Movie.objects.all()
+    if genres_ids and actors_ids:
+        qs = qs.filter(genres__id__in=genres_ids, actors__id__in=actors_ids)
+    elif genres_ids:
+        qs = qs.filter(genres__id__in=genres_ids)
+    elif actors_ids:
+        qs = qs.filter(actors__id__in=actors_ids)
+    return list(qs.distinct())
+
 
 def get_movie_by_id(movie_id: int) -> Movie:
     return Movie.objects.get(id=movie_id)
+
 
 def create_movie(
     movie_title: str,
