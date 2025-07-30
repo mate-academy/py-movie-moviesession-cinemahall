@@ -33,7 +33,7 @@ def update_movie_session(
         show_time: str = None,
         movie_id: int = None,
         cinema_hall_id: int = None
-) -> QuerySet[MovieSession]:
+) -> MovieSession:
     query = MovieSession.objects.filter(id=session_id)
 
     if show_time:
@@ -42,9 +42,9 @@ def update_movie_session(
         query.update(movie_id=movie_id)
     if cinema_hall_id:
         query.update(cinema_hall_id=cinema_hall_id)
-    return query
+    return MovieSession.objects.get(id=session_id)
 
 
-def delete_movie_session_by_id(session_id: int) -> int:
-    deleted, _ = MovieSession.objects.get(id=session_id).delete()
-    return deleted
+def delete_movie_session_by_id(session_id: int) -> bool:
+    deleted_count, _ = MovieSession.objects.get(id=session_id).delete()
+    return deleted_count > 0
