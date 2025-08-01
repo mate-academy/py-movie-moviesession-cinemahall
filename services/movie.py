@@ -20,7 +20,7 @@ def get_movies(
     return queryset
 
 
-def get_movie_by_id(movie_id: int) -> QuerySet[Movie] | None:
+def get_movie_by_id(movie_id: int) -> Movie | None:
     return Movie.objects.get(
         pk=movie_id,
     )
