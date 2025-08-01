@@ -24,11 +24,11 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='moviesession',
             name='cinema_hall',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='db.cinemahall'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='db.CinemaHall'),
         ),
         migrations.AlterField(
             model_name='moviesession',
             name='movie',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='db.movie'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='db.Movie'),
         ),
     ]
