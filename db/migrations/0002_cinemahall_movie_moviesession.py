@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=255)),
-                ('rows', models.ImageField(upload_to='')),
+                ('rows', models.IntegerField()),
                 ('seats_in_row', models.IntegerField()),
             ],
         ),
