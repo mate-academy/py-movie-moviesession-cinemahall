@@ -5,7 +5,7 @@ from django.db.models import QuerySet
 def get_movies(
         genres_ids: int = None,
         actors_ids: int = None
-) -> QuerySet[Movie] | None:
+) -> QuerySet[Movie]:
     if genres_ids is None and actors_ids is None:
         return Movie.objects.all()
     elif genres_ids is not None and actors_ids is not None:
