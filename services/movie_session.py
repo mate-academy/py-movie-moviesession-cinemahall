@@ -36,12 +36,13 @@ def update_movie_session(
         cinema_hall_id: int = None
 ) -> None:
     data = {}
-    if show_time is not None:
-        data["show_time"] = show_time
-    if movie_id is not None:
-        data["movie_id"] = movie_id
-    if cinema_hall_id is not None:
-        data["cinema_hall_id"] = cinema_hall_id
+    for key, value in {
+        "show_time": show_time,
+        "movie_id": movie_id,
+        "cinema_hall_id": cinema_hall_id
+    }.items():
+        if value is not None:
+            data[key] = value
     MovieSession.objects.filter(pk=session_id).update(**data)
 
 

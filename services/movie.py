@@ -3,20 +3,19 @@ from django.db.models import QuerySet
 
 
 def get_movies(
-        genres_ids: int = None,
-        actors_ids: int = None
+        genres_ids: list[int] = None,
+        actors_ids: list[int] = None
 ) -> QuerySet[Movie]:
-    if genres_ids is None and actors_ids is None:
-        return Movie.objects.all()
-    elif genres_ids is not None and actors_ids is not None:
-        return Movie.objects.filter(
-            genres__id__in=genres_ids,
+    query = Movie.objects.all()
+    if genres_ids:
+        query = query.filter(
+            genres__id__in=genres_ids
+        )
+    if actors_ids:
+        query = query.filter(
             actors__id__in=actors_ids
         )
-    elif genres_ids is not None:
-        return Movie.objects.filter(genres__id__in=genres_ids)
-    elif actors_ids is not None:
-        return Movie.objects.filter(actors__id__in=actors_ids)
+    return query
 
 
 def get_movie_by_id(movie_id: int) -> Movie:
