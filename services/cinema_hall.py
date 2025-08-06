@@ -22,7 +22,7 @@ def create_cinema_hall(
         hall_name: str,
         hall_rows: int,
         hall_seats_in_row: int
-) -> CinemaHall | None:
+) -> CinemaHall:
     obj, created = CinemaHall.objects.get_or_create(
         name=hall_name,
         defaults={
@@ -30,6 +30,4 @@ def create_cinema_hall(
             "seats_in_row": hall_seats_in_row
         }
     )
-    if created:
-        return obj
-    return None
+    return obj
