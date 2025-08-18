@@ -4,6 +4,7 @@ from db.models import MovieSession
 
 from datetime import datetime
 
+
 def create_movie_session(
         movie_show_time: datetime,
         movie_id: int,
@@ -15,7 +16,10 @@ def create_movie_session(
         cinema_hall_id=cinema_hall_id,
     )
 
-def get_movies_sessions(session_date: datetime | str = None) -> QuerySet:
+
+def get_movies_sessions(
+        session_date: datetime | str = None
+) -> QuerySet:
     if session_date:
         if isinstance(session_date, str):
             session_date = datetime.strptime(session_date, "%Y-%m-%d")
@@ -24,11 +28,13 @@ def get_movies_sessions(session_date: datetime | str = None) -> QuerySet:
         )
     return MovieSession.objects.all()
 
+
 def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
     return MovieSession.objects.get(id=movie_session_id)
 
+
 def update_movie_session(
-        session_id = int,
+        session_id: int,
         show_time: datetime = None,
         movie_id: int = None,
         cinema_hall_id: int = None
@@ -43,5 +49,11 @@ def update_movie_session(
     return session
 
 
-def delete_movie_session_by_id(session_id: int) -> None:
-    session_delete = MovieSession.objects.filter(session_id=session_id).delete()
+def delete_movie_session_by_id(
+        session_id: int,
+        session_date: datetime = None
+) -> None:
+    queryset = MovieSession.objects.filter(id=session_id)
+    if session_date is not None:
+        queryset = queryset.filter(show_time__date=session_date.date())
+        queryset.delete()
