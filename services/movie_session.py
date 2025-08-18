@@ -44,14 +44,11 @@ def update_movie_session(
         session.movie_id = movie_id
     if cinema_hall_id is not None:
         session.cinema_hall_id = cinema_hall_id
+    session.save()
     return session
 
 
 def delete_movie_session_by_id(
-        session_id: int,
-        session_date: datetime = None
-) -> None:
-    queryset = MovieSession.objects.filter(id=session_id)
-    if session_date is not None:
-        queryset = queryset.filter(show_time__date=session_date.date())
-        queryset.delete()
+        session_id: int) -> None:
+    session_delete = MovieSession.objects.get(id=session_id)
+    session_delete.delete()
