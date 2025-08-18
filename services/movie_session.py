@@ -5,7 +5,7 @@ from db.models import MovieSession
 from datetime import datetime
 
 
-def create_movies_session(
+def create_movie_session(
         movie_show_time: datetime,
         movie_id: int,
         cinema_hall_id: int
@@ -17,7 +17,7 @@ def create_movies_session(
     )
 
 
-def get_movie_sessions(
+def get_movies_sessions(
         session_date: datetime | str = None
 ) -> QuerySet:
     if session_date:
