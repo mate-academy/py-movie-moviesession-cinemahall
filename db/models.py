@@ -49,7 +49,7 @@ class MovieSession(models.Model):
     movie = models.ForeignKey(
         "Movie",
         on_delete=models.CASCADE,
-        related_name="movie_sessions",
+        related_name="sessions",
     )
 
     def __str__(self) -> str:
