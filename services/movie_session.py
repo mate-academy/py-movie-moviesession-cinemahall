@@ -1,9 +1,9 @@
 from datetime import datetime
-from typing import Optional
+from typing import Optional, Union
 
 from django.db.models import QuerySet
 
-from db.models import MovieSession, Movie, CinemaHall
+from db.models import MovieSession
 
 
 def create_movie_session(
@@ -23,13 +23,10 @@ def create_movie_session(
     elif not isinstance(movie_show_time, datetime):
         raise TypeError("movie_show_time must be str or datetime")
 
-    movie = Movie.objects.get(id=movie_id)
-    cinema_hall = CinemaHall.objects.get(id=cinema_hall_id)
-
     return MovieSession.objects.create(
         show_time=movie_show_time,
-        cinema_hall=cinema_hall,
-        movie=movie
+        cinema_hall_id=cinema_hall_id,
+        movie_id=movie_id
     )
 
 
@@ -47,23 +44,38 @@ def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
 
 def update_movie_session(
         session_id: int,
-        show_time: Optional[datetime] = None,
+        show_time: Optional[Union[datetime, str]] = None,
         movie_id: Optional[int] = None,
         cinema_hall_id: Optional[int] = None,
 ) -> MovieSession:
 
     session = MovieSession.objects.get(id=session_id)
 
+    update_fields = []
+
     if show_time is not None:
+        if isinstance(show_time, str):
+            try:
+                show_time = datetime.strptime(
+                    show_time,
+                    "%Y-%m-%d %H:%M:%S"
+                )
+            except ValueError:
+                raise TypeError("show_time must be format %Y-%m-%d %H:%M:%S")
         session.show_time = show_time
+        update_fields.append("show_time")
 
     if movie_id is not None:
-        session.movie = Movie.objects.get(id=movie_id)
+        session.movie_id = movie_id
+        update_fields.append("movie_id")
 
     if cinema_hall_id is not None:
-        session.cinema_hall = CinemaHall.objects.get(id=cinema_hall_id)
+        session.cinema_hall_id = cinema_hall_id
+        update_fields.append("cinema_hall_id")
 
-    session.save()
+    if update_fields:
+        session.save(update_fields=update_fields)
+
     return session
 
 
