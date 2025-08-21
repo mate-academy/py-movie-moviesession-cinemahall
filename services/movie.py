@@ -6,22 +6,20 @@ from django.db.models import QuerySet
 def get_movies(
         genres_ids: Optional[List[int]] = None,
         actors_ids: Optional[List[int]] = None,
-) -> QuerySet:
+) -> QuerySet[Movie]:
 
-    if genres_ids is None and actors_ids is None:
-        return Movie.objects.all()
-    elif genres_ids and actors_ids:
-        return Movie.objects.filter(
-            genres__in=genres_ids,
-            actors__in=actors_ids
-        )
-    elif genres_ids:
-        return Movie.objects.filter(genres__in=genres_ids)
-    elif actors_ids:
-        return Movie.objects.filter(actors__in=actors_ids)
+    qs = Movie.objects.all()
+
+    if genres_ids:
+        qs = qs.filter(genres__id__in=genres_ids)
+
+    if actors_ids:
+        qs = qs.filter(actors__id__in=actors_ids)
+
+    return qs.distinct()
 
 
-def get_movie_by_id(movie_id: int) -> QuerySet:
+def get_movie_by_id(movie_id: int) -> Movie:
     return Movie.objects.get(id=movie_id)
 
 
@@ -39,3 +37,5 @@ def create_movie(
         movie.genres.set(genres_ids)
     if actors_ids:
         movie.actors.set(actors_ids)
+
+    return movie
