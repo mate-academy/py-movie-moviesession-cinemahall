@@ -1,5 +1,4 @@
-from db.models import MovieSession, Movie, CinemaHall
-from django.core.exceptions import ObjectDoesNotExist
+from db.models import MovieSession, CinemaHall
 from typing import Optional
 import datetime
 from django.db.models.query import QuerySet

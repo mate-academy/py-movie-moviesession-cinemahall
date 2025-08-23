@@ -1,10 +1,10 @@
 from db.models import Movie, Genre, Actor
 from typing import List, Optional
-from .models import Movie
+
 
 
 def get_movies(genres_ids: Optional[List[int]] = None,
-               actors_ids: Optional[List[int]] = None) -> 'QuerySet[Movie]':
+               actors_ids: Optional[List[int]] = None) -> "QuerySet[Movie]":
     movies_qs = Movie.objects.all()
 
     if genres_ids:
@@ -15,7 +15,7 @@ def get_movies(genres_ids: Optional[List[int]] = None,
     return movies_qs.first()
 
 
-def get_movie_by_id(movie_id) -> Movie:
+def get_movie_by_id(movie_id: int) -> Movie:
     return Movie.objects.get(id=movie_id)
 
 
