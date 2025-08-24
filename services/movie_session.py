@@ -4,13 +4,15 @@ import datetime
 from django.db.models.query import QuerySet
 
 
-def create_movie_session(show_time: datetime,
-                         movie_id: int,
-                         cinema_hall_id: int) -> MovieSession:
+def create_movie_session(
+    movie_show_time,
+    cinema_hall_id: int,
+    movie_id: int,
+) -> MovieSession:
     return MovieSession.objects.create(
-        show_time=show_time,
+        show_time=movie_show_time,
+        cinema_hall_id=cinema_hall_id,
         movie_id=movie_id,
-        cinema_hall_id=cinema_hall_id
     )
 
 
@@ -29,17 +31,22 @@ def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
 
 def update_movie_session(
     session_id: int,
-    show_time: Optional[datetime.datetime] = None,
+    movie_show_time=None,
+    cinema_hall_id: Optional[int] = None,
     movie_id: Optional[int] = None,
-    cinema_hall_id: Optional[int] = None
-) -> MovieSession:
-    session = MovieSession.objects.get(id=session_id)
-    if show_time:
-        session.show_time = show_time
-    if movie_id:
-        session.movie = MovieModel.objects.get(id=movie_id)
-    if cinema_hall_id:
-        session.cinema_hall = CinemaHall.objects.get(id=cinema_hall_id)
+) -> Optional[MovieSession]:
+    try:
+        session = MovieSession.objects.get(id=session_id)
+    except MovieSession.DoesNotExist:
+        return None
+
+    if movie_show_time is not None:
+        session.show_time = movie_show_time
+    if cinema_hall_id is not None:
+        session.cinema_hall_id = cinema_hall_id
+    if movie_id is not None:
+        session.movie_id = movie_id
+
     session.save()
     return session
 
