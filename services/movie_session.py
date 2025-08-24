@@ -4,18 +4,13 @@ import datetime
 from django.db.models.query import QuerySet
 
 
-def create_movie_session(
-        movie_show_time: datetime.datetime,
-        movie_id: int,
-        cinema_hall_id: int
-) -> MovieSession:
-    movie = MovieModel.objects.get(id=movie_id)
-    cinema_hall = CinemaHall.objects.get(id=cinema_hall_id)
-
+def create_movie_session(show_time: datetime,
+                         movie_id: int,
+                         cinema_hall_id: int) -> MovieSession:
     return MovieSession.objects.create(
-        show_time=movie_show_time,
-        movie=movie,
-        cinema_hall=cinema_hall
+        show_time=show_time,
+        movie_id=movie_id,
+        cinema_hall_id=cinema_hall_id
     )
 
 
