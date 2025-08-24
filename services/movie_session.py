@@ -1,18 +1,18 @@
-from db.models import Movie as MovieModel, MovieSession, CinemaHall
+from db.models import MovieSession
 from typing import Optional
-import datetime
 from django.db.models.query import QuerySet
+import datetime
 
 
 def create_movie_session(
-    movie_show_time,
-    cinema_hall_id: int,
+    movie_show_time: datetime.datetime,
     movie_id: int,
+    cinema_hall_id: int,
 ) -> MovieSession:
     return MovieSession.objects.create(
         show_time=movie_show_time,
-        cinema_hall_id=cinema_hall_id,
         movie_id=movie_id,
+        cinema_hall_id=cinema_hall_id,
     )
 
 
@@ -31,7 +31,7 @@ def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
 
 def update_movie_session(
     session_id: int,
-    movie_show_time=None,
+    movie_show_time: datetime.datetime,
     cinema_hall_id: Optional[int] = None,
     movie_id: Optional[int] = None,
 ) -> Optional[MovieSession]:
