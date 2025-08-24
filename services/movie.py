@@ -5,7 +5,7 @@ from django.db.models import QuerySet
 
 def get_movies(
     genres_ids: Optional[List[int]] = None,
-    actors_ids: Optional[List[int]] = None,
+    actors_ids: Optional[List[int]] = None
 ) -> QuerySet[Movie]:
     movies_qs = Movie.objects.all()
 
@@ -13,7 +13,8 @@ def get_movies(
         movies_qs = movies_qs.filter(genres__id__in=genres_ids).distinct()
 
     if actors_ids:
-        movies_qs = movies_qs.filter(actor__id__in=actors_ids).distinct()
+        movies_qs = movies_qs.filter(actors__id__in=actors_ids).distinct()
+
     return movies_qs
 
 
