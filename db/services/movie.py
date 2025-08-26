@@ -1,6 +1,6 @@
 from typing import Optional, List
 from django.db.models import QuerySet
-from db.models import Movie, Genre, Actor  # Dodano Genre i Actor dla typowania
+from db.models import Movie
 
 
 def get_movies(
