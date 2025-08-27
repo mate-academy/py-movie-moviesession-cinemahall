@@ -1,7 +1,7 @@
 from typing import Optional
 import datetime
 
-from db.models import MovieSession, CinemaHall, Movie
+from db.models import MovieSession
 from django.db.models import QuerySet
 
 
@@ -19,12 +19,10 @@ def create_movie_session(
     movie_id: int
 ) -> MovieSession:
     """Tworzy nową sesję filmową."""
-    cinema_hall = CinemaHall.objects.get(pk=cinema_hall_id)
-    movie = Movie.objects.get(pk=movie_id)
     return MovieSession.objects.create(
         show_time=movie_show_time,
-        cinema_hall=cinema_hall,
-        movie=movie,
+        cinema_hall_id=cinema_hall_id,
+        movie_id=movie_id,
     )
 
 
@@ -44,9 +42,9 @@ def update_movie_session(
     if show_time:
         session.show_time = show_time
     if cinema_hall_id:
-        session.cinema_hall = CinemaHall.objects.get(pk=cinema_hall_id)
+        session.cinema_hall_id = cinema_hall_id
     if movie_id:
-        session.movie = Movie.objects.get(pk=movie_id)
+        session.movie_id = movie_id
     session.save()
     return session
 
