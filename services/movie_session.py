@@ -2,7 +2,7 @@ from datetime import datetime
 from typing import Optional
 from django.utils import timezone
 from django.db.models import QuerySet
-from db.models import MovieSession, Movie, CinemaHall
+from db.models import MovieSession
 
 
 def create_movie_session(
@@ -14,8 +14,8 @@ def create_movie_session(
         movie_show_time = timezone.make_aware(movie_show_time)
     return MovieSession.objects.create(
         show_time=movie_show_time,
-        movie=Movie.objects.get(id=movie_id),
-        cinema_hall=CinemaHall.objects.get(id=cinema_hall_id)
+        movie_id=movie_id,
+        cinema_hall_id=cinema_hall_id
     )
 
 
@@ -30,8 +30,8 @@ def get_movies_sessions(
     return qs
 
 
-def get_movie_session_by_id(movie_session_id: int) -> Optional[MovieSession]:
-    return MovieSession.objects.filter(id=movie_session_id).first()
+def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
+    return MovieSession.objects.get(id=movie_session_id)
 
 
 def update_movie_session(
@@ -39,18 +39,16 @@ def update_movie_session(
         show_time: Optional[datetime] = None,
         movie_id: Optional[int] = None,
         cinema_hall_id: Optional[int] = None
-) -> Optional[MovieSession]:
-    session = MovieSession.objects.filter(id=session_id).first()
-    if not session:
-        return None
+) -> MovieSession:
+    session = MovieSession.objects.get(id=session_id)
     if show_time:
         if timezone.is_naive(show_time):
             show_time = timezone.make_aware(show_time)
         session.show_time = show_time
     if movie_id:
-        session.movie = Movie.objects.get(id=movie_id)
+        session.movie_id = movie_id
     if cinema_hall_id:
-        session.cinema_hall = CinemaHall.objects.get(id=cinema_hall_id)
+        session.cinema_hall_id = cinema_hall_id
     session.save()
     return session
 
