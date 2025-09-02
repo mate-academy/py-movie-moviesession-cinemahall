@@ -1,5 +1,5 @@
 from django.db.models import QuerySet
-from db.models import Movie, Genre, Actor
+from db.models import Movie
 from typing import Optional
 
 
