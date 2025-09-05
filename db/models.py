@@ -31,12 +31,15 @@ class CinemaHall(models.Model):
     rows = models.IntegerField()
     seats_in_row = models.IntegerField()
 
+
     def __str__(self) -> str:
         return self.name
 
+
     @property
-    def capacity(self):
+    def capacity(self) -> int:
         return self.rows * self.seats_in_row
+
 
 class MovieSession(models.Model):
     show_time = models.DateTimeField()
@@ -46,6 +49,7 @@ class MovieSession(models.Model):
     movie = models.ForeignKey(
         Movie, on_delete=models.CASCADE, related_name="sessions"
     )
+
 
     def __str__(self) -> str:
         return f"{self.movie.title} {str(self.show_time)}"
