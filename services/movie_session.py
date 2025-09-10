@@ -3,17 +3,17 @@ from django.db.models import QuerySet
 from db.models import MovieSession
 
 
-def create_movie_session(movie_show_time: str, movie_id: int,
+def create_movie_session(show_time: str, movie_id: int,
                          cinema_hall_id: int) -> MovieSession:
     movie_session = MovieSession.objects.create(
-        movie_show_time=movie_show_time,
+        show_time=show_time,
         movie_id=movie_id,
         cinema_hall_id=cinema_hall_id,
     )
     return movie_session
 
 
-def get_movie_session(session_date: str) -> QuerySet:
+def get_movies_session(session_date: str) -> QuerySet:
     if session_date:
         return MovieSession.objects.filter(show_time__date=session_date)
     else:
@@ -39,5 +39,5 @@ def update_movie_session(session_id: int, show_time: None,
     return MovieSession.objects.filter(id=session_id).update(**update_fields)
 
 
-def delete_movie_session(session_id: int) -> None:
+def delete_movie_session_by_id(session_id: int) -> None:
     MovieSession.objects.filter(id=session_id).delete()
