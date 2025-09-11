@@ -4,7 +4,7 @@ from db.models import MovieSession
 from typing import Optional
 
 
-def create_movie_session(movie_show_time: datetime, movie_id: int,
+def create_movie_session(movie_show_time: datetime.datetime, movie_id: int,
                          cinema_hall_id: int) -> MovieSession:
     movie_session = MovieSession.objects.create(
         show_time=movie_show_time,
@@ -28,7 +28,7 @@ def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
 
 def update_movie_session(
     session_id: int,
-    show_time: Optional[datetime] = None,
+    show_time: Optional[datetime.datetime] = None,
     movie_id: Optional[int] = None,
     cinema_hall_id: Optional[int] = None,
 ) -> MovieSession:
