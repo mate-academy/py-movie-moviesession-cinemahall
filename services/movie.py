@@ -9,11 +9,11 @@ def get_movies(genres_ids: List[int] = None,
         return Movie.objects.all()
     elif genres_ids is not None and actors_ids is not None:
         return Movie.objects.filter(genres__id__in=genres_ids,
-                                    actors__id__in=actors_ids)
+                                    actors__id__in=actors_ids).distinct()
     elif genres_ids is None and actors_ids is not None:
-        return Movie.objects.filter(actors__id__in=actors_ids)
+        return Movie.objects.filter(actors__id__in=actors_ids).distinct()
     else:
-        return Movie.objects.filter(genres__id__in=genres_ids)
+        return Movie.objects.filter(genres__id__in=genres_ids).distinct()
 
 
 def get_movie_by_id(movie_id: int) -> Movie:
