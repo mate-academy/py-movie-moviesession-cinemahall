@@ -12,8 +12,8 @@ def create_movie_session(
 ) -> MovieSession:
     new_movie_session = MovieSession.objects.create(
         show_time=movie_show_time,
-        cinema_hall=CinemaHall.objects.get(id=cinema_hall_id),
-        movie=Movie.objects.get(id=movie_id)
+        cinema_hall_id=cinema_hall_id,
+        movie_id=movie_id
     )
 
     return new_movie_session
@@ -38,17 +38,17 @@ def update_movie_session(
         show_time: datetime.datetime = None,
         movie_id: int = None,
         cinema_hall_id: int = None,
-) -> MovieSession:
+) -> None:
     session = get_movie_session_by_id(session_id)
     if show_time:
         session.show_time = show_time
     if movie_id:
-        session.movie = Movie.objects.get(id=movie_id)
+        session.movie_id = movie_id
     if cinema_hall_id:
-        session.cinema_hall = CinemaHall.objects.get(id=cinema_hall_id)
+        session.cinema_hall_id = cinema_hall_id
     session.save()
 
 
-def delete_movie_session_by_id(session_id: int) -> MovieSession:
+def delete_movie_session_by_id(session_id: int) -> None:
     session = get_movie_session_by_id(session_id)
     session.delete()
