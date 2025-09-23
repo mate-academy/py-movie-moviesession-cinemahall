@@ -12,7 +12,7 @@ def get_movies(
     if genres_ids and actors_ids:
         return Movie.objects.filter(
             genres__id__in=genres_ids,
-            actors__in=actors_ids
+            actors__id__in=actors_ids
         )
     if genres_ids:
         return Movie.objects.filter(genres__id__in=genres_ids)
