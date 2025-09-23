@@ -1,14 +1,62 @@
-def create_movie_session(movie_show_time, movie_id, cinema_hall_id):
-    pass
+from datetime import datetime
+from typing import Optional
 
-def get_movies_sessions(session_date):
-    pass
+from django.db.models import QuerySet
 
-def get_movie_session_by_id(movie_session_id):
-    pass
+from db.models import MovieSession, CinemaHall, Movie
 
-def update_movie_session(session_id, show_time, movie_id, cinema_hall_id):
-    pass
 
-def delete_movie_session_by_id(session_id):
-    pass
+def create_movie_session(
+        movie_show_time: datetime,
+        movie_id: int,
+        cinema_hall_id: int
+) -> MovieSession:
+
+    movie = Movie.objects.get(id=movie_id)
+    cinema_hall = CinemaHall.objects.get(id=cinema_hall_id)
+    session = MovieSession.objects.create(
+        movie=movie,
+        show_time=movie_show_time,
+        cinema_hall=cinema_hall
+    )
+    return session
+
+
+def get_movies_sessions(session_date: Optional[str] = None) -> QuerySet:
+    movie_sessions = MovieSession.objects.all()
+    if session_date:
+        session_date_obj = datetime.strptime(session_date, "%Y-%m-%d").date()
+        return movie_sessions.filter(show_time__date=session_date_obj)
+    else:
+        return movie_sessions
+
+
+def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
+    movie = MovieSession.objects.get(id=movie_session_id)
+    return movie
+
+
+def update_movie_session(
+        session_id: int,
+        show_time: Optional[datetime] = None,
+        movie_id: Optional[int] = None,
+        cinema_hall_id: Optional[int] = None
+) -> MovieSession:
+
+    movie_session = MovieSession.objects.get(id=session_id)
+    if show_time:
+        movie_session.show_time = show_time
+
+    if movie_id:
+        movie_session.movie = Movie.objects.get(id=movie_id)
+
+    if cinema_hall_id:
+        movie_session.cinema_hall = CinemaHall.objects.get(id=cinema_hall_id)
+
+    movie_session.save()
+    return movie_session
+
+
+def delete_movie_session_by_id(session_id: int) -> None:
+    movie_session = MovieSession.objects.get(id=session_id)
+    movie_session.delete()
