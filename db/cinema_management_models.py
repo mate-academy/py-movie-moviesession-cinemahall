@@ -29,6 +29,7 @@ class Movie(models.Model):
 
 # ... existing code ...
 
+
 class CinemaHall(models.Model):
     name = models.CharField(max_length=255)
     rows = models.IntegerField()
@@ -42,6 +43,7 @@ class CinemaHall(models.Model):
         return self.name
 
 # ... existing code ...
+
 
 class MovieSession(models.Model):
     show_time = models.DateTimeField()
