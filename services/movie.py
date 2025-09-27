@@ -12,13 +12,17 @@ def get_movies(
         return Movie.objects.filter(
             actors__id__in=actors_ids,
             genres__id__in=genres_ids
-        )
+        ).distinct()
 
     if genres_ids:
-        return Movie.objects.filter(genres__id__in=genres_ids)
+        return Movie.objects.filter(
+            genres__id__in=genres_ids
+        ).distinct()
 
     if actors_ids:
-        return Movie.objects.filter(actors__id__in=actors_ids)
+        return Movie.objects.filter(
+            actors__id__in=actors_ids
+        ).distinct()
 
     return Movie.objects.all()
 
@@ -38,9 +42,8 @@ def create_movie(
         description=movie_description
     )
     if genres_ids:
-        for genre_id in genres_ids:
-            movie.genres.add(genre_id)
+        movie.genres.set(genres_ids)
 
     if actors_ids:
-        for actor_id in actors_ids:
-            movie.actors.add(actor_id)
+        movie.actors.set(actors_ids)
+    return movie
