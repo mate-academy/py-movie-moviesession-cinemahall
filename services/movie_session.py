@@ -36,7 +36,7 @@ def get_movies_sessions(
 
 def get_movie_session_by_id(
         movie_session_id: int
-) -> Optional[MovieSession]:
+) -> MovieSession:
     return MovieSession.objects.get(id=movie_session_id)
 
 
@@ -47,8 +47,6 @@ def update_movie_session(
         cinema_hall_id: Optional[int] = None
 ) -> Optional[MovieSession]:
     session = MovieSession.objects.get(id=session_id)
-    if not session:
-        return None
     if show_time is not None:
         session.show_time = show_time
     if movie_id is not None:
@@ -61,9 +59,6 @@ def update_movie_session(
 
 def delete_movie_session_by_id(
         session_id: int
-) -> bool:
-    session = MovieSession.objects.get(id=session_id)
-    if not session:
-        return False
-    session.delete()
-    return True
+) -> None:
+    MovieSession.objects.get(id=session_id).delete()
+    return None
