@@ -20,10 +20,10 @@ def get_movies_sessions(
         session_date: Optional[str] = None
 ) -> QuerySet:
     sessions = MovieSession.objects.all()
-    if sessions_date:
+    if session_date:
         try:
             parsed_date = datetime.strptime(
-                sessions_date,
+                session_date,
                 "%Y-%m-%d"
             ).date()
             sessions = sessions.filter(
