@@ -18,15 +18,15 @@ def get_movies(
     return movies.distinct()
 
 
-def get_movie_by_id(movie_id: int) -> Movie | None:
+def get_movie_by_id(movie_id: int) -> Movie:
     return Movie.objects.get(id=movie_id)
 
 
 def create_movie(
         movie_title: str,
         movie_description: str,
-        actors_ids: list[int] = None,
-        genres_ids: list[int] = None
+        genres_ids: list[int] = None,
+        actors_ids: list[int] = None
 ) -> Movie:
     movie = Movie.objects.create(
         title=movie_title,
