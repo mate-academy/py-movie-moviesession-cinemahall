@@ -1,12 +1,12 @@
 from django.db.models import QuerySet
 
-from db.models import Genre, Actor, Movie
+from db.models import Movie
 
 
 def get_movies(
         genres_ids: list[int] = None,
         actors_ids: list[int] = None
-) -> QuerySet:
+) -> QuerySet[Movie]:
     movies = Movie.objects.all()
 
     if genres_ids:
@@ -19,11 +19,7 @@ def get_movies(
 
 
 def get_movie_by_id(movie_id: int) -> Movie | None:
-    try:
-        return Movie.objects.get(id=movie_id)
-    except Movie.DoesNotExist:
-        print(f"Movie by id: {movie_id} does not exist!")
-        return None
+    return Movie.objects.get(id=movie_id)
 
 
 def create_movie(
@@ -32,21 +28,15 @@ def create_movie(
         actors_ids: list[int] = None,
         genres_ids: list[int] = None
 ) -> Movie:
-    movie, create = Movie.objects.get_or_create(
+    movie = Movie.objects.create(
         title=movie_title,
-        defaults={
-            "description": movie_description
-        }
+        description=movie_description
     )
+
     if actors_ids:
-        valid_actors = Actor.objects.filter(id__in=actors_ids)
-        movie.actors.set(valid_actors)
+        movie.actors.set(actors_ids)
 
     if genres_ids:
-        valid_genre = Genre.objects.filter(id__in=genres_ids)
-        movie.genres.set(valid_genre)
-
-    if not create:
-        print(f"The movie with name: {movie_title} already exist!")
+        movie.genres.set(genres_ids)
 
     return movie
