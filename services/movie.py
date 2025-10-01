@@ -1,6 +1,6 @@
 from django.db.models import QuerySet
 
-from db.models import Movie, Actor, Genre
+from db.models import Movie
 
 
 def get_movies(
