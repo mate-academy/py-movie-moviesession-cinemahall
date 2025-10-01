@@ -20,9 +20,11 @@ def get_movies_sessions(
     queryset = MovieSession.objects.select_related("movie", "cinema_hall")
     if session_date:
         queryset = queryset.filter(show_time__date=session_date)
-    queryset = queryset.order_by("show_time",
-                                         "cinema_hall__name",
-                                         "movie__title")
+    queryset = queryset.order_by(
+        "show_time",
+        "cinema_hall__name",
+        "movie__title"
+    )
     return queryset
 
 
