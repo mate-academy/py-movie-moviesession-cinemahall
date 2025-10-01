@@ -5,7 +5,7 @@ from django.db.models import QuerySet
 from db.models import MovieSession
 
 
-def create_movie_session(movie_show_time: datetime,
+def create_movie_session(movie_show_time: datetime.date,
                          movie_id: int,
                          cinema_hall_id: int) -> MovieSession:
     session = MovieSession.objects.create(
@@ -17,11 +17,13 @@ def create_movie_session(movie_show_time: datetime,
 
 def get_movies_sessions(
         session_date: str | None = None) -> QuerySet:
-    queryset = MovieSession.objects.all()
+    queryset = MovieSession.objects.select_related("movie", "cinema_hall")
     if session_date:
         queryset = queryset.filter(show_time__date=session_date)
-    return queryset.select_related(
-        "movie", "cinema_hall").order_by("show_time")
+    queryset = queryset.order_by("show_time",
+                                         "cinema_hall__name",
+                                         "movie__title")
+    return queryset
 
 
 def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
