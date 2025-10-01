@@ -21,7 +21,7 @@ def get_movies_sessions(session_date: str | None = None) -> QuerySet:
         "movie",
         "cinema_hall"
     ).annotate(
-        show_date=F('show_time__date')  # додаємо анотацію з тільки датою
+        show_date=F("show_time__date")  # додаємо анотацію з тільки датою
     )
 
     # Фільтруємо по конкретній даті, якщо вказана
