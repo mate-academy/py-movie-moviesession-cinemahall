@@ -13,7 +13,7 @@ def create_movie_session(movie_show_time: datetime,
     )
 
 
-def get_movie_sessions(session_date: str = None) -> QuerySet[MovieSession]:
+def get_movies_sessions(session_date: str = None) -> QuerySet[MovieSession]:
     sessions = MovieSession.objects.all()
     if session_date:
         try:
