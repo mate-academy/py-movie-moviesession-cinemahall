@@ -27,14 +27,14 @@ hall
     - integer field `seats_in_row`, the number of seats in each row
 
 There should be implemented string representation of the hall and
-method `capacity` that returns total number of seats in the hall:
+the `capacity` property that returns total number of seats in the hall:
 ```python
 blue = CinemaHall.objects.create(name="Blue", rows=9, seats_in_row= 13) 
 
 print(blue)
 # Blue
 
-print(blue.capacity())
+print(blue.capacity)
 # 117
 ```
 3. `MovieSession`, with such field:

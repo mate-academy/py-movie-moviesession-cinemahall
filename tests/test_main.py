@@ -76,7 +76,7 @@ def test_cinema_hall_capacity(name, rows, seats_in_row, capacity):
         name=name, rows=rows, seats_in_row=seats_in_row
     )
 
-    assert cinema_hall.capacity() == capacity
+    assert cinema_hall.capacity == capacity
 
 
 @pytest.fixture()
