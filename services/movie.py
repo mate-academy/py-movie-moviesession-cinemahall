@@ -21,10 +21,10 @@ def get_movies(genres_ids: Optional[Iterable[int]] = None,
     that have at least one actor from actors_ids
     """
     queryset = Movie.objects.all()
-    if genres_ids:
+    if genres_ids is not None:
         queryset = queryset.filter(genres__id__in=genres_ids)
 
-    if actors_ids:
+    if actors_ids is not None:
         queryset = queryset.filter(actors__id__in=actors_ids)
 
     return queryset.distinct()
@@ -54,10 +54,10 @@ def create_movie(*, movie_title: str,
         description=movie_description,
     )
 
-    if genres_ids:
+    if genres_ids is not None:
         movie.genres.set(genres_ids)
 
-    if actors_ids:
+    if actors_ids is not None:
         movie.actors.set(actors_ids)
 
     return movie
