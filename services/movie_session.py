@@ -35,8 +35,9 @@ def delete_movie_session_by_id(session_id: int) -> None:
 def update_movie_session(
         session_id: int,
         show_time=None,
-        movie_id=None,
-        cinema_hall_id=None) -> Optional[MovieSession]:
+        movie_id: Optional[int] = None,
+        cinema_hall_id: Optional[int] = None
+) -> Optional[MovieSession]:
     try:
         session = get_movie_session_by_id(session_id)
     except MovieSession.DoesNotExist:
