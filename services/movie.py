@@ -10,7 +10,9 @@ def get_movies(
     qs = Movie.objects.all()
 
     if genres_ids and actors_ids:
-        return qs.filter(genres__id__in=genres_ids, actors__id__in=actors_ids).distinct()
+        return qs.filter(
+            genres__id__in=genres_ids,
+            actors__id__in=actors_ids).distinct()
 
     if genres_ids:
         return qs.filter(genres__id__in=genres_ids).distinct()
