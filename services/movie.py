@@ -1,0 +1,47 @@
+from typing import Optional
+from db.models import Movie, Genre, Actor
+from django.db.models import QuerySet
+
+
+def get_movies(
+    genres_ids: Optional[list[int]] = None,
+    actors_ids: Optional[list[int]] = None,
+) -> QuerySet[Movie]:
+    qs = Movie.objects.all()
+
+    if genres_ids and actors_ids:
+        return qs.filter(genres__id__in=genres_ids, actors__id__in=actors_ids).distinct()
+
+    if genres_ids:
+        return qs.filter(genres__id__in=genres_ids).distinct()
+
+    if actors_ids:
+        return qs.filter(actors__id__in=actors_ids).distinct()
+
+    return qs
+
+
+def get_movie_by_id(movie_id: int) -> Movie:
+    return Movie.objects.get(id=movie_id)
+
+
+def create_movie(
+    movie_title: str,
+    movie_description: str,
+    genres_ids: Optional[list[int]] = None,
+    actors_ids: Optional[list[int]] = None,
+) -> Movie:
+    movie = Movie.objects.create(
+        title=movie_title,
+        description=movie_description,
+    )
+
+    if genres_ids:
+        genres = Genre.objects.filter(id__in=genres_ids)
+        movie.genres.set(genres)
+
+    if actors_ids:
+        actors = Actor.objects.filter(id__in=actors_ids)
+        movie.actors.set(actors)
+
+    return movie
