@@ -28,14 +28,16 @@ def create_movie(
     movie_description: str,
     genres_ids: list = None,
     actors_ids: list = None,
-) -> None:
+) -> Movie:
     movie = Movie.objects.create(
         title=movie_title,
         description=movie_description,
     )
 
     if genres_ids:
-        movie.genres.add(*genres_ids)
+        movie.genres.set(genres_ids)
 
     if actors_ids:
-        movie.actors.add(*actors_ids)
+        movie.actors.set(actors_ids)
+
+    return movie
