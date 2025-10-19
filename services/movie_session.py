@@ -1,5 +1,6 @@
 from datetime import datetime
 from typing import Optional
+from xmlrpc.client import DateTime
 
 from django.db.models import QuerySet
 
@@ -20,7 +21,7 @@ def create_movie_session(
     return movie_session
 
 
-def get_movies_sessions(session_date: Optional[str]) -> QuerySet[MovieSession]:
+def get_movies_sessions(session_date: Optional[str] = None) -> QuerySet[MovieSession]:
     movies_sessions = MovieSession.objects.all()
 
     if session_date:
