@@ -35,7 +35,7 @@ class CinemaHall(models.Model):
         return self.name
 
     @property
-    def capacity(self) -> None:
+    def capacity(self) -> int:
         return self.rows * self.seats_in_row
 
 
