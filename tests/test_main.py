@@ -393,7 +393,6 @@ def test_movie_session_service_update_movie_session(database_data):
     CinemaHall.objects.create(name="Orange", rows=10, seats_in_row=12)
     update_movie_session(
         session_id=1,
-        show_time=show_time,
         movie_id=5,
         cinema_hall_id=4,
     )
@@ -411,7 +410,6 @@ def test_movie_session_service_update_movie_session_show_time(database_data):
     show_time = datetime.datetime(2022, 11, 11, 20, 30)
     update_movie_session(
         session_id=2,
-        show_time=show_time,
     )
     assert list(
         MovieSession.objects.filter(id=2).values_list(
