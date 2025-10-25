@@ -45,5 +45,8 @@ def create_movie(movie_title: str,
         title=movie_title,
         description=movie_description,
     )
-    movie.genres.set(genres_ids) if genres_ids else None
-    movie.actors.set(actors_ids) if actors_ids else None
+
+    if genres_ids:
+        movie.genres.set(genres_ids)
+    if actors_ids:
+        movie.actors.set(actors_ids)
