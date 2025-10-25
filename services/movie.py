@@ -6,8 +6,6 @@ def get_movies(genres_ids: list = None, actors_ids: list = None) -> QuerySet:
     if genres_ids is None and actors_ids is None:
         return Movie.objects.all()
     qs = Movie.objects.all()
-    if genres_ids and actors_ids:
-        qs = qs.filter(genres__id__in=genres_ids, actors__id__in=actors_ids)
     if genres_ids:
         qs = qs.filter(genres__id__in=genres_ids)
     if actors_ids:
@@ -30,13 +28,20 @@ def create_movie(
             title=movie_title,
             description=movie_description
         )
-
     movie = Movie.objects.create(
         title=movie_title,
         description=movie_description
     )
-    if genres_ids is not None:
-        movie.genres.add(*genres_ids)
-    if actors_ids is not None:
-        movie.actors.add(*actors_ids)
+    if isinstance(genres_ids, (list, tuple)):
+        movie.genres.set(genres_ids)
+    else:
+        genres_ids = [genres_ids]
+        movie.genres.set(genres_ids)
+
+    if isinstance(actors_ids, (list, tuple)):
+        movie.actors.set(actors_ids)
+    else:
+        actors_ids = [actors_ids]
+        movie.actors.set(actors_ids)
+
     return movie
