@@ -6,6 +6,17 @@ from django.db.models import QuerySet
 from db.models import MovieSession
 
 
+def _to_naive_utc(
+        dt: Optional[datetime.datetime]
+) -> Optional[datetime.datetime]:
+
+    if dt is None:
+        return None
+    if dt.tzinfo is not None:
+        dt = dt.astimezone(datetime.timezone.utc).replace(tzinfo=None)
+    return dt
+
+
 def create_movie_session(
         movie_show_time: datetime.datetime,
         movie_id: int,
@@ -13,7 +24,7 @@ def create_movie_session(
 ) -> MovieSession:
 
     movie_session = MovieSession.objects.create(
-        show_time=movie_show_time,
+        show_time=_to_naive_utc(movie_show_time),
         movie_id=movie_id,
         cinema_hall_id=cinema_hall_id
     )
@@ -36,15 +47,15 @@ def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
 
 def update_movie_session(
         session_id: int,
-        show_time: Optional[datetime.datetime],
-        movie_id: Optional[int],
-        cinema_hall_id: Optional[int]
+        show_time: Optional[datetime.datetime] = None,
+        movie_id: Optional[int] = None,
+        cinema_hall_id: Optional[int] = None
 ) -> MovieSession:
 
     movie_session = MovieSession.objects.get(id=session_id)
 
     if show_time is not None:
-        movie_session.show_time = show_time
+        movie_session.show_time = _to_naive_utc(show_time)
     if movie_id is not None:
         movie_session.movie_id = movie_id
     if cinema_hall_id is not None:
