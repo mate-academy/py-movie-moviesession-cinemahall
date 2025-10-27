@@ -43,12 +43,6 @@ def update_movie_session(
 
     movie_session = MovieSession.objects.get(id=session_id)
 
-    if show_time is None:
-        if session_id == 1:
-            show_time = datetime.datetime(2022, 11, 1, 20, 30)
-        elif session_id == 2:
-            show_time = datetime.datetime(2022, 11, 11, 20, 30)
-
     if show_time is not None:
         movie_session.show_time = show_time
     if movie_id is not None:
