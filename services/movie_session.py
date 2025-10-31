@@ -14,14 +14,14 @@ def create_movie_session(movie_show_time: datetime,
     )
 
 
-def get_movies_sessions(session_date: date = None) -> QuerySet | MovieSession:
+def get_movies_sessions(session_date: date = None) -> QuerySet:
     queryset = MovieSession.objects.all()
     if session_date:
         queryset = queryset.filter(show_time__date=session_date)
     return queryset
 
 
-def get_movie_session_by_id(movie_session_id: int) -> QuerySet | MovieSession:
+def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
     return MovieSession.objects.get(id=movie_session_id)
 
 
