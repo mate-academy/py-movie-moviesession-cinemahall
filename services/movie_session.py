@@ -15,12 +15,12 @@ def create_movie_session(
     return movie_session
 
 
-def get_movies_sessions(session_date: datetime = None) -> list[MovieSession]:
+def get_movies_sessions(session_date: str = None) -> list[MovieSession]:
     if session_date is None:
         return MovieSession.objects.all()
-    else:
-        date = datetime.strptime(session_date, "%Y-%m-%d").date()
-        return MovieSession.objects.filter(show_time__date=date)
+
+    date = datetime.strptime(session_date, "%Y-%m-%d").date()
+    return MovieSession.objects.filter(show_time__date=date)
 
 
 def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
