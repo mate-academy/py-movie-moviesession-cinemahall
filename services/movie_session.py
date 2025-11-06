@@ -10,6 +10,7 @@ def create_movie_session(movie_show_time, movie_id, cinema_hall_id):
 
     return session
 
+
 def update_movie_session_by_id(session_id, show_time=None, movie_id=None, cinema_hall_id=None):
     session = MovieSession.objects.get(id=session_id)
 
