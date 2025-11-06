@@ -38,4 +38,3 @@ def update_movie_session(session_id, show_time=None, movie_id=None, cinema_hall_
 
     session.save()
     return session
-
