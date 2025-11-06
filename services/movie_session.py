@@ -1,4 +1,4 @@
-from db.models import MovieSession, Movie, CinemaHall
+from db.models import MovieSession
 
 
 def create_movie_session(movie_show_time, movie_id, cinema_hall_id):
@@ -14,6 +14,7 @@ def create_movie_session(movie_show_time, movie_id, cinema_hall_id):
 def get_movie_session(session_id):
     session = session_id
     return session
+
 
 def update_movie_session(session_id, show_time=None, movie_id=None, cinema_hall_id=None):
     session = MovieSession.objects.get(id=session_id)
