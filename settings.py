@@ -25,4 +25,4 @@ USE_I18N = True
 
 USE_TZ = True
 
-INSTALLED_APPS = ("db",)
+INSTALLED_APPS = ("db", "services")
