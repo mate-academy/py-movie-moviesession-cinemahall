@@ -45,6 +45,5 @@ class MovieSession(models.Model):
                                     on_delete=models.CASCADE)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
 
-
     def __str__(self) -> str:
         return f"{self.movie.title} {self.show_time}"
