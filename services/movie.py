@@ -23,7 +23,6 @@ def get_movies(genres_ids: Optional[list[int]] = None,
         return results
 
 
-
 def get_movie_by_id(movie_id: int) -> Movie | None:
     return Movie.objects.get(id=movie_id)
 
