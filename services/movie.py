@@ -18,12 +18,12 @@ def get_movies(genres_ids: list[int] = None,
     if genres_ids:
         return Movie.objects.filter(
             genres__id__in=genres_ids
-        )
+        ).distinct()
 
     if actors_ids:
         return Movie.objects.filter(
             actors__id__in=actors_ids
-        )
+        ).distinct()
 
 
 def get_movie_by_id(movie_id: int) -> Movie:
