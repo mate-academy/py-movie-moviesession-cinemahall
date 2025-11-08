@@ -20,7 +20,7 @@ def create_movie_session(movie_show_time: datetime,
 
 
 def get_movies_sessions(
-        session_date: Optional[Union[datetime, str]] = None)\
+        session_date: Optional[Union[datetime.datetime, str]] = None)\
         -> QuerySet[MovieSession]:
     if not session_date:
         return MovieSession.objects.all()
