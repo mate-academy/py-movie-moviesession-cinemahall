@@ -18,9 +18,13 @@ def create_movie_session(movie_show_time: datetime,
 def get_movies_sessions(session_date: datetime = None
                         ) -> QuerySet:
     if session_date:
-        return MovieSession.objects.filter(
-            show_time__date=session_date,
-        )
+        try:
+            date_obj = datetime.strptime(session_date, "%Y-%m-%d").date()
+        except ValueError:
+            raise ValueError("session_date must be in 'YYYY-MM-DD' format")
+
+        return MovieSession.objects.filter(show_time__date=date_obj)
+
     return MovieSession.objects.all()
 
 
