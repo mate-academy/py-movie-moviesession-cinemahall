@@ -42,23 +42,21 @@ def update_movie_session(
         movie_id: int = None,
         cinema_hall_id: int = None
 ) -> None:
-    movie_session_obj = MovieSession.objects.filter(id=session_id)
+    movie_session_obj = MovieSession.objects.get(id=session_id)
 
-    update_data = {}
+
 
     if show_time is not None:
         naive_datetime = datetime.strptime(show_time, "%Y-%m-%d %H:%M:%S")
         aware_datetime = timezone.make_aware(naive_datetime)
-        update_data["show_time"] = aware_datetime
-
+        movie_session_obj.show_time = aware_datetime
+        movie_session_obj.save()
     if movie_id is not None:
-        update_data["movie_id"] = movie_id
-
+        movie_session_obj.movie_id = movie_id
+        movie_session_obj.save()
     if cinema_hall_id is not None:
-        update_data["cinema_hall_id"] = cinema_hall_id
-
-    if update_data:
-        movie_session_obj.update(**update_data)
+        movie_session_obj.cinema_hall_id = cinema_hall_id
+        movie_session_obj.save()
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
