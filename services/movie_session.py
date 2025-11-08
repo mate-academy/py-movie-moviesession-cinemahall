@@ -27,7 +27,7 @@ def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
     return movie_session_obj
 
 
-def get_movie_sessions(
+def get_movies_sessions(
         session_date: str | None = None
 ) -> QuerySet[MovieSession]:
     queryset = MovieSession.objects.all()
@@ -47,7 +47,7 @@ def update_movie_session(
     update_data = {}
 
     if show_time is not None:
-        naive_datetime = datetime.strptime(show_time, "%Y-%m-%d")
+        naive_datetime = datetime.strptime(show_time, "%Y-%m-%d %H:%M:%S")
         aware_datetime = timezone.make_aware(naive_datetime)
         update_data["show_time"] = aware_datetime
 
@@ -61,5 +61,5 @@ def update_movie_session(
         movie_session_obj.update(**update_data)
 
 
-def delete_movie_session(session_id: int) -> None:
+def delete_movie_session_by_id(session_id: int) -> None:
     MovieSession.objects.filter(id=session_id).delete()
