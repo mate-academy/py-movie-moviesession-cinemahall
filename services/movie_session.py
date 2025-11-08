@@ -15,7 +15,7 @@ def create_movie_session(movie_show_time: datetime,
     )
 
 
-def get_movies_sessions(session_date: datetime = None
+def get_movies_sessions(session_date: str = None
                         ) -> QuerySet:
     if session_date:
         try:
