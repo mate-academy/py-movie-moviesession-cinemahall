@@ -25,6 +25,7 @@ class Movie(models.Model):
     def __str__(self) -> str:
         return self.title
 
+
 class CinemaHall(models.Model):
     name = models.CharField(max_length=255)
     rows = models.IntegerField()
@@ -34,7 +35,7 @@ class CinemaHall(models.Model):
         return f"{self.name} {self.capacity}"
 
     @property
-    def capacity(self):
+    def capacity(self) -> int:
         return self.rows * self.seats_in_row
 
 
