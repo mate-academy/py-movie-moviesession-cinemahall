@@ -1,3 +1,4 @@
+from django.db.models import QuerySet
 from typing import Optional
 from datetime import datetime
 from db.models import Movie, MovieSession, CinemaHall
@@ -16,7 +17,9 @@ def create_movie_session(movie_show_time: datetime,
     return movie_session
 
 
-def get_movies_sessions(session_date: Optional[str] = None):
+def get_movies_sessions(
+        session_date: Optional[str] = None
+) -> QuerySet[MovieSession]:
     sessions = MovieSession.objects.all()
     if session_date:
         date_obj = datetime.strptime(session_date, "%Y-%m-%d").date()
@@ -24,7 +27,9 @@ def get_movies_sessions(session_date: Optional[str] = None):
     return sessions
 
 
-def get_movie_session_by_id(movie_session_id: int) -> Optional[MovieSession]:
+def get_movie_session_by_id(
+        movie_session_id: int
+) -> Optional[MovieSession]:
     try:
         return MovieSession.objects.get(id=movie_session_id)
     except MovieSession.DoesNotExist:
