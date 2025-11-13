@@ -6,7 +6,7 @@ def create_movie_session(movie_show_time, movie_id, cinema_hall_id):
 
 def get_movies_sessions(session_date = None):
     if session_date:
-        return MovieSession.objects.all().filter(show_time=session_date)
+        return MovieSession.objects.filter(show_time__date=session_date)
     return MovieSession.objects.all()
 
 def get_movie_session_by_id(movie_session_id: int):
