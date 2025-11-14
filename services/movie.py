@@ -30,7 +30,7 @@ def create_movie(
         description=movie_description,
     )
     if actors_ids:
-        movie.actors.add(*actors_ids)
+        movie.actors.set(actors_ids)
     if genres_ids:
-        movie.genres.add(*genres_ids)
+        movie.genres.set(genres_ids)
     return movie
