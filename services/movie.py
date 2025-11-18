@@ -1,7 +1,7 @@
 import init_django_orm  # noqa: F401
 
 from django.db.models.query import QuerySet
-from db.models import Movie, Genre, Actor
+from db.models import Movie
 
 
 def get_movies(
