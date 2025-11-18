@@ -1,5 +1,5 @@
 from django.db import models
-from django.db.models.fields import DateTimeField
+
 
 class Genre(models.Model):
     name = models.CharField(max_length=255, unique=True)
@@ -40,7 +40,7 @@ class CinemaHall(models.Model):
 
 
 class MovieSession(models.Model):
-    show_time = DateTimeField()
+    show_time = models.DateTimeField()
     cinema_hall = models.ForeignKey(CinemaHall,
                                     on_delete=models.CASCADE,
                                     related_name="cinema_halls")
