@@ -2,7 +2,7 @@ import init_django_orm  # noqa: F401
 
 from datetime import datetime
 from django.db.models.query import QuerySet
-from db.models import CinemaHall, MovieSession, Movie
+from db.models import MovieSession
 
 
 def create_movie_session(
