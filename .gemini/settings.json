@@ -1,0 +1,11 @@
+{
+  "general": {
+    "previewFeatures": false
+  },
+  "output": {
+    "format": "text"
+  },
+  "ui": {
+    "showMemoryUsage": true
+  }
+}
