@@ -4,7 +4,6 @@ from django.db.models import QuerySet
 
 from db.models import MovieSession
 from services.movie import get_movie_by_id
-from services.cinema_hall import get_cinema_halls
 
 
 def create_movie_session(
@@ -43,9 +42,9 @@ def update_movie_session(
     if show_time:
         session.show_time = show_time
     if movie_id:
-        session.movie_id=movie_id
+        session.movie_id = movie_id
     if cinema_hall_id:
-        session.cinema_hall_id=cinema_hall_id
+        session.cinema_hall_id = cinema_hall_id
 
     session.save()
 
