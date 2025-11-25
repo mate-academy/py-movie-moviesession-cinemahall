@@ -3,7 +3,6 @@ import datetime
 from django.db.models import QuerySet
 
 from db.models import MovieSession
-from services.movie import get_movie_by_id
 
 
 def create_movie_session(
@@ -14,12 +13,12 @@ def create_movie_session(
     return MovieSession.objects.create(
         show_time=movie_show_time,
         cinema_hall_id=cinema_hall_id,
-        movie=get_movie_by_id(movie_id=movie_id)
+        movie_id=movie_id
     )
 
 
 def get_movies_sessions(
-        session_date: datetime.date = None
+        session_date: str = None
 ) -> QuerySet:
     queryset = MovieSession.objects.all()
     if session_date:
