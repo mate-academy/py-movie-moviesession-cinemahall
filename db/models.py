@@ -27,12 +27,12 @@ class Movie(models.Model):
 
 
 class CinemaHall(models.Model):
-    title = models.CharField(max_length=255)
+    name = models.CharField(max_length=255)
     rows = models.IntegerField()
     seats_in_row = models.IntegerField()
 
     def __str__(self) -> str:
-        return self.title
+        return self.name
 
     @property
     def capacity(self) -> int:
