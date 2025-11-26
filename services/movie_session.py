@@ -24,11 +24,17 @@ def get_movie_session_by_id(movie_session_id: int) -> MovieSession | None:
     return MovieSession.objects.get(id=movie_session_id)
 
 
-def update_movie_session(session_id: int, **kwargs) -> None:
-    allowed_fields = {"show_time", "movie_id", "cinema_hall_id"}
-    update_data = {k: v for k, v in kwargs.items() if k in allowed_fields}
-    if update_data:
-        MovieSession.objects.filter(id=session_id).update(**update_data)
+def update_movie_session(session_id: int, show_time: datetime = None,
+                         movie_id: int = None,
+                         cinema_hall_id: int = None) -> None:
+    movie_session = MovieSession.objects.get(id=session_id)
+    if show_time:
+        movie_session.show_time = show_time
+    if movie_id:
+        movie_session.movie_id = movie_id
+    if cinema_hall_id:
+        movie_session.cinema_hall_id = cinema_hall_id
+    movie_session.save()
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
