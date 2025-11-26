@@ -12,11 +12,12 @@ def create_movie_session(movie_show_time: datetime, movie_id: int,
                                 cinema_hall_id=cinema_hall_id)
 
 
-def get_movies_sessions(session_date:str = None) -> QuerySet:
-     movie_sessions=MovieSession.objects.all()
-     if session_date:
-        movie_sessions =MovieSession.objects.filter(show_time__date=session_date)
-     return movie_sessions
+def get_movies_sessions(session_date: str = None) -> QuerySet:
+    movie_sessions = MovieSession.objects.all()
+    if session_date:
+        movie_sessions = MovieSession.objects.filter(
+            show_time__date=session_date)
+    return movie_sessions
 
 
 def get_movie_session_by_id(movie_session_id: int) -> MovieSession | None:
