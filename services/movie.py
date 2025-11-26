@@ -9,12 +9,6 @@ def get_movies(
         actors_ids: list[int] = None
 ) -> QuerySet:
     movies = Movie.objects.all()
-    if genres_ids and actors_ids == "only":
-        return movies.filter(genres__id__in=genres_ids).distinct()
-
-    if actors_ids and genres_ids == "only":
-        return movies.filter(actors__id__in=actors_ids).distinct()
-
     if isinstance(genres_ids, (list, tuple)):
         movies = movies.filter(genres__id__in=genres_ids)
 
@@ -34,7 +28,7 @@ def create_movie(
         movie_description: str,
         genres_ids: list[int] = None,
         actors_ids: list[int] = None
-) -> None:
+) -> Movie:
     movie = Movie.objects.create(
         title=movie_title,
         description=movie_description,
