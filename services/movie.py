@@ -8,15 +8,9 @@ def get_movies(
         actors_ids: list[int] = None
 ) -> QuerySet:
     movies = Movie.objects.all()
-    if genres_ids and actors_ids:
-        movies = movies.filter(
-            genres__id__in=genres_ids
-        ).filter(
-            actors__id__in=actors_ids
-        ).distinct()
-    elif genres_ids is not None:
+    if genres_ids is not None and genres_ids:
         movies = movies.filter(genres__id__in=genres_ids)
-    elif actors_ids is not None:
+    if actors_ids is not None and actors_ids:
         movies = movies.filter(actors__id__in=actors_ids)
     return movies.prefetch_related("genres", "actors")
 
