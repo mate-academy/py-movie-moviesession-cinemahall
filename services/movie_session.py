@@ -4,7 +4,7 @@ from django.db.models import QuerySet
 
 import init_django_orm  # noqa: F401
 
-from db.models import MovieSession, CinemaHall, Movie
+from db.models import MovieSession
 
 
 def create_movie_session(
