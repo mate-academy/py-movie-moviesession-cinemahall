@@ -6,7 +6,7 @@ from db.models import Genre, Actor, Movie
 def get_movies(
         genres_ids: Optional[list[int]] = None,
         actors_ids: Optional[list[int]] = None
-) -> QuerySet[Movie, Movie] | None:
+) -> QuerySet[Movie]:
 
     if genres_ids is None and actors_ids is None:
         return Movie.objects.all()
@@ -16,10 +16,10 @@ def get_movies(
             genres__id__in=genres_ids, actors__id__in=actors_ids).distinct()
 
     if genres_ids:
-        return Movie.objects.filter(genres__id__in=genres_ids)
+        return Movie.objects.filter(genres__id__in=genres_ids).distinct()
 
     if actors_ids:
-        return Movie.objects.filter(actors__id__in=actors_ids)
+        return Movie.objects.filter(actors__id__in=actors_ids).distinct()
 
 
 def get_movie_by_id(movie_id: int) -> Movie:
@@ -31,10 +31,7 @@ def create_movie(
         movie_description: str,
         genres_ids: Optional[list[int]] = None,
         actors_ids: Optional[list[int]] = None) -> None:
-    if genres_ids:
-        Genre.objects.filter(id__in=genres_ids)
-    if actors_ids:
-        Actor.objects.filter(id__in=actors_ids)
+
     movie = Movie.objects.create(
         title=movie_title,
         description=movie_description,
