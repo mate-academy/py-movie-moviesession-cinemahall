@@ -17,10 +17,23 @@ DATABASES = {
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "Europe/Kiev"
+TIME_ZONE = "UTC"
 
 USE_I18N = True
 
 USE_TZ = False
+
+USE_DEPRECATED_PYTZ = False
+
+DATETIME_INPUT_FORMATS = [
+    "%Y-%m-%d %H:%M:%S",
+    "%Y-%m-%d %H:%M:%S.%f",
+    "%Y-%m-%d %H:%M",
+    "%Y-%m-%d",
+    "%Y-%m-%dT%H:%M:%S",
+    "%Y-%m-%dT%H:%M:%SZ",
+]
+
+DATETIME_FORMAT = "Y-m-d H:i:s"
 
 INSTALLED_APPS = ("db",)
