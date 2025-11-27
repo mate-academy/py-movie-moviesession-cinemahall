@@ -19,8 +19,8 @@ class Actor(models.Model):
 class Movie(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
-    actors = models.ManyToManyField(Actor, related_name="actor_movies")
-    genres = models.ManyToManyField(Genre, related_name="genre_movies")
+    actors = models.ManyToManyField(Actor, related_name="movies")
+    genres = models.ManyToManyField(Genre, related_name="movies")
 
     def __str__(self) -> str:
         return self.title
@@ -44,7 +44,7 @@ class MovieSession(models.Model):
     cinema_hall = models.ForeignKey(
         CinemaHall,
         on_delete=models.CASCADE,
-        related_name="cinema_hall_sessions"
+        related_name="movie_sessions"
     )
     movie = models.ForeignKey(
         Movie,
