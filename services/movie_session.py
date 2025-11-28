@@ -26,7 +26,7 @@ def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
 def update_movie_session(session_id: int,
                          show_time: datetime.datetime | None = None,
                          movie_id: int | None = None,
-                         cinema_hall_id: int | None = None) -> QuerySet:
+                         cinema_hall_id: int | None = None) -> None:
     movie_session = MovieSession.objects.filter(id=session_id)
 
     update_data = {}
@@ -42,8 +42,6 @@ def update_movie_session(session_id: int,
 
     if update_data:
         movie_session.update(**update_data)
-
-    return movie_session
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
