@@ -23,8 +23,8 @@ def get_movies_sessions(session_date: str = None) -> QuerySet:
     return queryset
 
 
-def get_movie_session_by_id(movie_id: int) -> MovieSession:
-    return MovieSession.objects.get(id=movie_id)
+def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
+    return MovieSession.objects.get(id=movie_session_id)
 
 
 def update_movie_session(
@@ -45,7 +45,6 @@ def update_movie_session(
 
 
 def delete_movie_session_by_id(session_id: int) -> str:
-    queryset = MovieSession.objects.all()
-    movie_session = queryset.filter(id=session_id)
+    movie_session = MovieSession.objects.get(id=session_id)
     movie_session.delete()
     return "Successfully deleted!"

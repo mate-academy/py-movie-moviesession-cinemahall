@@ -53,6 +53,4 @@ class MovieSession(models.Model):
     )
 
     def __str__(self) -> str:
-        if self.movie:
-            return f"{self.movie.title} {self.show_time}"
-        return "No movies"
+        return f"{self.movie.title} {self.show_time}"
