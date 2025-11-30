@@ -4,9 +4,14 @@ from typing import Optional
 from db.models import MovieSession
 
 
-def create_movie_session(movie_show_time: datetime, movie_id: int, cinema_hall_id: int):
+def create_movie_session(movie_show_time: datetime,
+                         movie_id: int,
+                         cinema_hall_id: int
+                         ):
     return MovieSession.objects.create(movie_show_time=movie_show_time,
-                                       movie_id=movie_id, cinema_hall_id=cinema_hall_id)
+                                       movie_id=movie_id,
+                                       cinema_hall_id=cinema_hall_id)
+
 
 def get_movies_sessions(session_date: Optional[str]):
     if session_date:
@@ -20,11 +25,16 @@ def get_movies_sessions(session_date: Optional[str]):
 
     return MovieSession.objects.all()
 
+
 def get_movie_session_by_id(id: int):
     return MovieSession.objects.get(id=id)
 
-def update_movie_session(session_id: int, show_time: Optional[datetime] = None,
-                         movie_id: Optional[int] = None, cinema_hall_id: Optional[int] = None):
+
+def update_movie_session(session_id: int,
+                         show_time: Optional[datetime] = None,
+                         movie_id: Optional[int] = None,
+                         cinema_hall_id: Optional[int] = None
+                         ):
     update_fields = {}
 
     if show_time is not None:
@@ -36,6 +46,7 @@ def update_movie_session(session_id: int, show_time: Optional[datetime] = None,
 
     if update_fields:
         MovieSession.objects.filter(id=session_id).update(**update_fields)
+
 
 def delete_movie_session_by_id(id: int):
     MovieSession.objects.filter(id=id).delete()
