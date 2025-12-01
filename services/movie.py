@@ -17,8 +17,10 @@ def get_movies(
 
     return queryset.distinct()
 
+
 def get_movie_by_id(movie_id: int) -> Movie:
     return Movie.objects.get(id=movie_id)
+
 
 def create_movie(
     movie_title: str,
@@ -26,7 +28,9 @@ def create_movie(
     genres_ids: Optional[List[int]] = None,
     actors_ids: Optional[List[int]] = None
 ) -> Movie:
-    movie = Movie.objects.create(title=movie_title, description=movie_description)
+    movie = Movie.objects.create(
+        title=movie_title,
+        description=movie_description)
 
     if genres_ids:
         movie.genres.set(genres_ids)
