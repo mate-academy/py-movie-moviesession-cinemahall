@@ -3,7 +3,7 @@ from django.db.models import QuerySet
 from django.core.exceptions import ValidationError
 from datetime import datetime
 from typing import Optional
-from db.models import MovieSession, Movie, CinemaHall
+from db.models import MovieSession, CinemaHall
 
 
 def create_movie_session(
@@ -11,13 +11,6 @@ def create_movie_session(
     movie_id: int,
     cinema_hall_id: int
 ) -> MovieSession:
-    try:
-        movie = Movie.objects.get(id=movie_id)
-    except Movie.DoesNotExist:
-        raise Movie.DoesNotExist(
-            f"Movie with ID {movie_id} does not exist"
-        )
-
     try:
         cinema_hall = CinemaHall.objects.get(id=cinema_hall_id)
     except CinemaHall.DoesNotExist:
@@ -38,7 +31,7 @@ def create_movie_session(
     with transaction.atomic():
         movie_session = MovieSession.objects.create(
             show_time=movie_show_time,
-            movie=movie,
+            movie_id=movie_id,
             cinema_hall=cinema_hall
         )
 
@@ -97,13 +90,7 @@ def update_movie_session(
             movie_session.show_time = show_time
 
         if movie_id is not None:
-            try:
-                movie = Movie.objects.get(id=movie_id)
-                movie_session.movie = movie
-            except Movie.DoesNotExist:
-                raise Movie.DoesNotExist(
-                    f"Movie with ID {movie_id} does not exist"
-                )
+            movie_session.movie_id = movie_id
 
         if cinema_hall_id is not None:
             try:

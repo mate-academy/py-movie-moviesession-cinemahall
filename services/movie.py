@@ -1,7 +1,7 @@
 from django.db.models import QuerySet
 
 from typing import Optional
-from db.models import Movie, Genre, Actor
+from db.models import Movie
 
 
 def get_movies(
@@ -12,10 +12,10 @@ def get_movies(
         return Movie.objects.all()
 
     if not genres_ids:
-        return Movie.objects.filter(actors__in=actors_ids).distinct()
+        return Movie.objects.filter(actors__id__in=actors_ids).distinct()
 
     if not actors_ids:
-        return Movie.objects.filter(genres__in=genres_ids).distinct()
+        return Movie.objects.filter(genres__id__in=genres_ids).distinct()
 
     return Movie.objects.filter(
         genres__id__in=genres_ids
@@ -40,11 +40,9 @@ def create_movie(
     )
 
     if genres_ids:
-        genres = Genre.objects.filter(id__in=genres_ids)
-        movie.genres.add(*genres)
+        movie.genres.set(genres_ids)
 
     if actors_ids:
-        actors = Actor.objects.filter(id__in=actors_ids)
-        movie.actors.add(*actors)
+        movie.actors.set(actors_ids)
 
     return movie
