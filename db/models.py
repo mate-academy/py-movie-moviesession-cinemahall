@@ -1,4 +1,3 @@
-from datetime import datetime
 from django.db import models
 from django.db.models import ManyToManyField
 
@@ -55,5 +54,5 @@ class MovieSession(models.Model):
 
     def __str__(self) -> str:
         new_data = self.show_time.strftime("%Y-%m-%d %H:%M:%S")
-        result = self.movie.title+" "+new_data
+        result = self.movie.title + " " + new_data
         return result
