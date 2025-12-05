@@ -49,16 +49,15 @@ def update_movie_session(
                 timezone.get_current_timezone()
             )
 
-    session = MovieSession.objects.get(id=session_id)
+    update_data = {}
     if show_time:
-        session.show_time = show_time
+        update_data["show_time"] = show_time
     if movie_id:
-        session.movie_id = movie_id
+        update_data["movie_id"] = movie_id
     if cinema_hall_id:
-        session.cinema_hall_id = cinema_hall_id
-    session.save()
+        update_data["cinema_hall_id"] = cinema_hall_id
+    MovieSession.objects.filter(id=session_id).update(**update_data)
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
-    session = MovieSession.objects.get(id=session_id)
-    session.delete()
+    MovieSession.objects.filter(id=session_id).delete()
