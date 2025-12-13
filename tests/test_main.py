@@ -80,6 +80,7 @@ def test_cinema_hall_capacity(name, rows, seats_in_row, capacity):
 
 
 @pytest.fixture()
+# ВИДАЛЕНО: @pytest.mark.django_db
 def movie_session_database_data():
     movie_sessions = []
     movie = Movie.objects.create(title="Speed", description="None")
@@ -127,6 +128,7 @@ def test_movie_session_str(movie_session_database_data):
 
 
 @pytest.fixture()
+# ВИДАЛЕНО: @pytest.mark.django_db
 def database_data():
     action = Genre.objects.create(name="Action")
     drama = Genre.objects.create(name="Drama")
