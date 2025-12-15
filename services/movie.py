@@ -25,7 +25,7 @@ def get_movies(
             actors__id__in=actors_ids
         )
 
-    return movies_query_set
+    return movies_query_set.distinct()
 
 
 def get_movie_by_id(movie_id: int) -> Movie:
