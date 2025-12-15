@@ -26,7 +26,10 @@ def get_movies_sessions(
             year, month, day = session_date.split("-")
             session_day = date(int(year), int(month), int(day))
         except (ValueError, TypeError):
-            raise ValueError('session_date must be in format "YYYY-M-D" or "YYYY-MM-DD"')
+            raise ValueError(
+                "session_date must be in format "
+                "'YYYY-M-D' or 'YYYY-MM-DD'"
+            )
         movies_sessions_qs = movies_sessions_qs.filter(
             show_time__date=session_day
         )
