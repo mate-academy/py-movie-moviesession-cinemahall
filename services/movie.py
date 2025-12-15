@@ -11,7 +11,7 @@ def get_movies(
         return Movie.objects.filter(
             actors__id__in=actors_ids,
             genres__id__in=genres_ids
-        )
+        ).distinct()
 
     movies_query_set = Movie.objects.all()
 
