@@ -225,9 +225,9 @@ def test_movie_service_get_movies_with_actors(database_data):
     assert list(
         get_movies(actors_ids=[2, 3]).values_list("title")
     ) == [
-        ("Matrix",),
-        ("Batman",),
-    ]
+               ("Matrix",),
+               ("Batman",),
+           ]
 
 
 @pytest.mark.django_db
@@ -337,10 +337,10 @@ def test_cinema_hall_service_get_cinema_halls(database_data):
     assert list(get_cinema_halls().values_list(
         "name", "rows", "seats_in_row"
     )) == [
-        ("Blue", 10, 12),
-        ("VIP", 4, 6),
-        ("Cheap", 15, 27),
-    ]
+               ("Blue", 10, 12),
+               ("VIP", 4, 6),
+               ("Cheap", 15, 27),
+           ]
 
 
 @pytest.mark.django_db
@@ -379,10 +379,10 @@ def test_movie_session_service_create_movie_session():
             "show_time__date", "cinema_hall__name", "movie__title"
         )
     ) == [
-        (datetime.date(2020, 11, 30), "VIP", "Matrix"),
-        (datetime.date(2021, 1, 10), "Blue", "Batman"),
-        (datetime.date(2020, 11, 30), "Blue", "Batman"),
-    ]
+               (datetime.date(2020, 11, 30), "VIP", "Matrix"),
+               (datetime.date(2021, 1, 10), "Blue", "Batman"),
+               (datetime.date(2020, 11, 30), "Blue", "Batman"),
+           ]
 
 
 @pytest.mark.django_db
@@ -402,8 +402,8 @@ def test_movie_session_service_update_movie_session(database_data):
             "show_time__date", "cinema_hall__name", "movie__title"
         )
     ) == [
-        (datetime.date(2022, 11, 1), "Orange", "Interstellar"),
-    ]
+               (datetime.date(2022, 11, 1), "Orange", "Interstellar"),
+           ]
 
 
 @pytest.mark.django_db
@@ -418,8 +418,8 @@ def test_movie_session_service_update_movie_session_show_time(database_data):
             "show_time__date", "cinema_hall__name", "movie__title"
         )
     ) == [
-        (datetime.date(2022, 11, 11), "Cheap", "Titanic"),
-    ]
+               (datetime.date(2022, 11, 11), "Cheap", "Titanic"),
+           ]
 
 
 @pytest.mark.django_db
@@ -431,8 +431,8 @@ def test_movie_session_service_update_movie_session_movie(database_data):
             "show_time__date", "cinema_hall__name", "movie__title"
         )
     ) == [
-        (datetime.date(2021, 4, 3), "VIP", "Madagascar"),
-    ]
+               (datetime.date(2021, 4, 3), "VIP", "Madagascar"),
+           ]
 
 
 @pytest.mark.django_db
@@ -444,8 +444,8 @@ def test_movie_session_service_update_movie_session_cinema_hall(database_data):
             "show_time__date", "cinema_hall__name", "movie__title"
         )
     ) == [
-        (datetime.date(2021, 4, 3), "Green", "Matrix"),
-    ]
+               (datetime.date(2021, 4, 3), "Green", "Matrix"),
+           ]
 
 
 @pytest.mark.django_db
@@ -455,11 +455,11 @@ def test_movie_session_service_get_movies_sessions(database_data):
             "show_time__date", "cinema_hall__name", "movie__title"
         )
     ) == [
-        (datetime.date(2019, 8, 19), "Blue", "Matrix"),
-        (datetime.date(2017, 8, 19), "Cheap", "Titanic"),
-        (datetime.date(2021, 4, 3), "VIP", "The Good, the Bad and the Ugly"),
-        (datetime.date(2021, 4, 3), "Cheap", "Matrix"),
-    ]
+               (datetime.date(2019, 8, 19), "Blue", "Matrix"),
+               (datetime.date(2017, 8, 19), "Cheap", "Titanic"),
+               (datetime.date(2021, 4, 3), "VIP", "The Good, the Bad and the Ugly"),
+               (datetime.date(2021, 4, 3), "Cheap", "Matrix"),
+           ]
 
 
 @pytest.mark.django_db
@@ -468,16 +468,16 @@ def test_movie_session_service_get_movie_session_by_date(database_data):
     assert list(sessions_1.values_list(
         "movie__title", "cinema_hall__name"
     )) == [
-        ("Matrix", "Blue")
-    ]
+               ("Matrix", "Blue")
+           ]
 
     sessions_2 = get_movies_sessions("2021-4-3")
     assert list(sessions_2.values_list(
         "movie__title", "cinema_hall__name"
     )) == [
-        ("The Good, the Bad and the Ugly", "VIP"),
-        ("Matrix", "Cheap"),
-    ]
+               ("The Good, the Bad and the Ugly", "VIP"),
+               ("Matrix", "Cheap"),
+           ]
 
 
 @pytest.mark.django_db
@@ -503,6 +503,6 @@ def test_movie_session_service_delete_movie_session_by_id(database_data):
             "show_time__date", "cinema_hall__name", "movie__title"
         )
     ) == [
-        (datetime.date(2017, 8, 19), "Cheap", "Titanic"),
-        (datetime.date(2021, 4, 3), "VIP", "The Good, the Bad and the Ugly"),
-    ]
+               (datetime.date(2017, 8, 19), "Cheap", "Titanic"),
+               (datetime.date(2021, 4, 3), "VIP", "The Good, the Bad and the Ugly"),
+           ]
