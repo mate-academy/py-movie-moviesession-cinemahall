@@ -1,8 +1,10 @@
 import pytest
 import datetime
 
+
 from contextlib import redirect_stdout
 from io import StringIO
+
 
 from db.models import Actor, Genre, Movie, MovieSession, CinemaHall
 from services.movie import get_movies, get_movie_by_id, create_movie
