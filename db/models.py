@@ -1,16 +1,35 @@
-from django.db import models
+# services/movie.py
+from typing import Iterable, Optional
+from db.models import Movie
 
 
-class Genre(models.Model):
-    name = models.CharField(max_length=255, unique=True)
+def get_movies(
+    genres_ids: Optional[Iterable[int]] = None,
+    actors_ids: Optional[Iterable[int]] = None,
+):
+    qs = Movie.objects.all()
+    if genres_ids is not None:
+        qs = qs.filter(genres__id__in=genres_ids)
+    if actors_ids is not None:
+        qs = qs.filter(actors__id__in=actors_ids)
+    return qs.distinct()
 
-    def __str__(self) -> str:
-        return self.name
+
+def get_movie_by_id(movie_id: int) -> Movie:
+    return Movie.objects.get(id=movie_id)
 
 
-class Actor(models.Model):
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
-
-    def __str__(self) -> str:
-        return f"{self.first_name} {self.last_name}"
+def create_movie(
+    movie_title: str,
+    movie_description: str,
+    genres_ids: Optional[Iterable[int]] = None,
+    actors_ids: Optional[Iterable[int]] = None,
+) -> Movie:
+    movie = Movie.objects.create(
+        title=movie_title, description=movie_description
+    )
+    if genres_ids:
+        movie.genres.add(*genres_ids)
+    if actors_ids:
+        movie.actors.add(*actors_ids)
+    return movie
