@@ -14,3 +14,40 @@ class Actor(models.Model):
 
     def __str__(self) -> str:
         return f"{self.first_name} {self.last_name}"
+
+
+class Movie(models.Model):
+    title = models.CharField(max_length=255)
+    description = models.TextField(null=False)
+    actors = models.ManyToManyField(Actor)
+    genres = models.ManyToManyField(Genre)
+
+    def __str__(self) -> str:
+        return self.title
+
+
+class CinemaHall(models.Model):
+    name = models.CharField(max_length=255)
+    rows = models.IntegerField(null=False)
+    seats_in_row = models.IntegerField(null=False)
+
+    def __str__(self) -> str:
+        return self.name
+
+    @property
+    def capacity(self) -> int:
+        if not self.rows:
+            return self.seats_in_row
+        if not self.seats_in_row:
+            return self.rows
+        return self.rows * self.seats_in_row
+
+
+class MovieSession(models.Model):
+    show_time = models.DateTimeField(null=False)
+    cinema_hall = models.ForeignKey(CinemaHall, on_delete=models.CASCADE)
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+
+    def __str__(self) -> str:
+        movie_session = f"{self.movie.title} {self.show_time}"
+        return movie_session
