@@ -7,7 +7,7 @@ from io import StringIO
 from db.models import Actor, Genre, Movie, MovieSession, CinemaHall
 from services.movie import get_movies, get_movie_by_id, create_movie
 from services.cinema_hall import get_cinema_halls, create_cinema_hall
-from services.movie_session import (
+from services.create_movie_session import (
     create_movie_session,
     get_movies_sessions,
     get_movie_session_by_id,
