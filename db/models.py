@@ -1,35 +1,34 @@
-# services/movie.py
-from typing import Iterable, Optional
-from db.models import Movie
+# db/models.py
+from django.db import models
 
 
-def get_movies(
-    genres_ids: Optional[Iterable[int]] = None,
-    actors_ids: Optional[Iterable[int]] = None,
-):
-    qs = Movie.objects.all()
-    if genres_ids is not None:
-        qs = qs.filter(genres__id__in=genres_ids)
-    if actors_ids is not None:
-        qs = qs.filter(actors__id__in=actors_ids)
-    return qs.distinct()
+class Movie(models.Model):
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    actors = models.ManyToManyField("Actor", related_name="movies")
+    genres = models.ManyToManyField("Genre", related_name="movies")
+
+    def __str__(self) -> str:
+        return self.title
 
 
-def get_movie_by_id(movie_id: int) -> Movie:
-    return Movie.objects.get(id=movie_id)
+class CinemaHall(models.Model):
+    name = models.CharField(max_length=255)
+    rows = models.IntegerField()
+    seats_in_row = models.IntegerField()
+
+    def __str__(self) -> str:
+        return self.name
+
+    @property
+    def capacity(self) -> int:
+        return self.rows * self.seats_in_row
 
 
-def create_movie(
-    movie_title: str,
-    movie_description: str,
-    genres_ids: Optional[Iterable[int]] = None,
-    actors_ids: Optional[Iterable[int]] = None,
-) -> Movie:
-    movie = Movie.objects.create(
-        title=movie_title, description=movie_description
-    )
-    if genres_ids:
-        movie.genres.add(*genres_ids)
-    if actors_ids:
-        movie.actors.add(*actors_ids)
-    return movie
+class MovieSession(models.Model):
+    show_time = models.DateTimeField()
+    cinema_hall = models.ForeignKey(CinemaHall, on_delete=models.CASCADE)
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+
+    def __str__(self) -> str:
+        return f"{self.movie.title} {self.show_time}"
