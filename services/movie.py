@@ -10,13 +10,11 @@ def get_movies(genres_ids: List[int] | None = None,
 
     if genres_ids:
         queryset = queryset.filter(genres__id__in=genres_ids)
-        # movies, that have at least one genre from genres_ids
 
     if actors_ids:
         queryset = queryset.filter(actors__id__in=actors_ids)
-        # movies, that have at least one genre from genres_ids
 
-    return queryset
+    return queryset.distinct()
 
 
 def get_movie_by_id(movie_id: int) -> Movie:
