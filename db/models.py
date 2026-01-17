@@ -16,6 +16,8 @@ class Movie(models.Model):
     actors = models.ManyToManyField("Actor")
     genres = models.ManyToManyField("Genre")
 
+    def __str__(self) -> str:
+        return  self.title
 
 class Actor(models.Model):
     first_name = models.CharField(max_length=255)
@@ -37,7 +39,6 @@ class CinemaHall(models.Model):
     def __str__(self) -> str:
         return f"{self.name}"
 
-
 class MovieSession(models.Model):
     show_time = models.DateTimeField()
     cinema_hall = models.ForeignKey(
@@ -48,10 +49,6 @@ class MovieSession(models.Model):
         Movie,
         on_delete=models.CASCADE
     )
-
-    def __init__(self, *args: Any, **kwargs: Any) -> None:
-        super().__init__(args, kwargs)
-        self.update = None
 
     def __str__(self) -> str:
         return f"{self.movie.title} {self.show_time}"
