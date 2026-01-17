@@ -1,5 +1,3 @@
-from typing import Any
-
 from django.db import models
 
 
@@ -17,7 +15,8 @@ class Movie(models.Model):
     genres = models.ManyToManyField("Genre")
 
     def __str__(self) -> str:
-        return  self.title
+        return self.title
+
 
 class Actor(models.Model):
     first_name = models.CharField(max_length=255)
@@ -38,6 +37,7 @@ class CinemaHall(models.Model):
 
     def __str__(self) -> str:
         return f"{self.name}"
+
 
 class MovieSession(models.Model):
     show_time = models.DateTimeField()
