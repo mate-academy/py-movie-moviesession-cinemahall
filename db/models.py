@@ -9,11 +9,13 @@ class Genre(models.Model):
     def __str__(self) -> str:
         return self.name
 
+
 class Movie(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
     actors = models.ManyToManyField("Actor")
     genres = models.ManyToManyField("Genre")
+
 
 class Actor(models.Model):
     first_name = models.CharField(max_length=255)
@@ -47,7 +49,7 @@ class MovieSession(models.Model):
         on_delete=models.CASCADE
     )
 
-    def __init__(self, *args: Any, **kwargs: Any):
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(args, kwargs)
         self.update = None
 
