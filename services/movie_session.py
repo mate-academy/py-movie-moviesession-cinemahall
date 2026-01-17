@@ -30,7 +30,7 @@ def get_movie_session_by_id(
     return MovieSession.objects.get(id=movie_session_id)
 
 
-def update_movie_session_by_id(
+def update_movie_session(
         session_id: int,
         show_time: int = None,
         movie_id: int = None,
