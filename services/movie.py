@@ -14,7 +14,7 @@ def get_movies(
     if actors_ids:
         movies = movies.filter(actors__id__in=actors_ids)
 
-    return movies
+    return movies.distinct()
 
 
 def get_movie_by_id(movie_id: int) -> Movie:
