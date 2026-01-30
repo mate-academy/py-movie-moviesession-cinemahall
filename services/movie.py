@@ -27,7 +27,6 @@ def get_movie_by_id(id_: int) -> Movie:
 def create_movie(
     movie_title: str,
     movie_description: str,
-    /,
     genres_ids: list[int] | None = None,
     actors_ids: list[int] | None = None,
 ) -> Movie:
