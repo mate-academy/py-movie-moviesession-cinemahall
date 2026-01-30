@@ -9,11 +9,11 @@ def get_movies(
 ) -> QuerySet:
     query = Movie.objects.all()
     if genres_ids:
-        query.filter(
+        query = query.filter(
             genres__id__in=genres_ids
         )
     if actors_ids:
-        query.filter(
+        query = query.filter(
             actors__id__in=actors_ids
         )
 
@@ -21,7 +21,7 @@ def get_movies(
 
 
 def get_movie_by_id(id_: int) -> Movie:
-    return Movie.objects.get(id_)
+    return Movie.objects.get(id=id_)
 
 
 def create_movie(
@@ -36,14 +36,11 @@ def create_movie(
         description=movie_description
     )
 
+    
     if genres_ids:
-        for genre_id in genres_ids:
-            genre = Genre.objects.get(genre_id)
-            movie.genres.add(genre)
+        movie.genres.set(Genre.objects.filter(id__in=genres_ids))
 
     if actors_ids:
-        for actor_id in actors_ids:
-            actor = Actor.objects.get(actor_id)
-            movie.actors.add(actor)
+        movie.actors.set(Actor.objects.filter(id__in=actors_ids))
 
     return movie

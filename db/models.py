@@ -28,7 +28,7 @@ class Movie(models.Model):
         related_name="movies"
     )
 
-    def __repr__(self) -> str:
+    def __str__(self) -> str:
         return f"{self.title}"
 
 
@@ -37,7 +37,7 @@ class CinemaHall(models.Model):
     rows = models.IntegerField()
     seats_in_row = models.IntegerField()
 
-    def __repr__(self) -> str:
+    def __str__(self) -> str:
         return f"{self.name}"
 
     @property
@@ -58,6 +58,6 @@ class MovieSession(models.Model):
         on_delete=models.CASCADE
     )
 
-    def __repr__(self) -> str:
+    def __str__(self) -> str:
         time = self.show_time.strftime("%Y-%m-%d %H:%M:%S")
         return f"{self.movie.title} {time}"
