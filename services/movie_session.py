@@ -2,7 +2,7 @@ from datetime import datetime
 
 from django.db.models import QuerySet
 
-from db.models import MovieSession, CinemaHall, Movie
+from db.models import MovieSession
 
 
 def create_movie_session(
@@ -44,12 +44,10 @@ def update_movie_session(
         session.show_time = show_time
 
     if movie_id:
-        movie = Movie.objects.get(id=movie_id)
-        session.movie = movie
+        session.movie_id = movie_id
 
     if cinema_hall_id:
-        cinema_hall = CinemaHall.objects.get(id=cinema_hall_id)
-        session.cinema_hall = cinema_hall
+        session.cinema_hall_id = cinema_hall_id
 
     session.save()
 
