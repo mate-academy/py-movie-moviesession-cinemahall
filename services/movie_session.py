@@ -1,5 +1,4 @@
 from django.db.models import QuerySet
-
 from db.models import MovieSession
 
 
@@ -34,20 +33,17 @@ def update_movie_session(
         movie_id: int = None,
         cinema_hall_id: int = None
 ) -> None:
-    updated_movie_session = get_movie_session_by_id(session_id)
-
+    updates = {}
     if show_time:
-        updated_movie_session.show_time = show_time
+        updates["show_time"] = show_time
     if movie_id:
-        updated_movie_session.movie_id = movie_id
+        updates["movie_id"] = movie_id
     if cinema_hall_id:
-        updated_movie_session.cinema_hall_id = cinema_hall_id
+        updates["cinema_hall_id"] = cinema_hall_id
 
-    updated_movie_session.save()
+    if updates:
+        MovieSession.objects.filter(id=session_id).update(**updates)
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
-    movie_session_to_delete = get_movie_session_by_id(session_id)
-
-    if movie_session_to_delete:
-        movie_session_to_delete.delete()
+    MovieSession.objects.filter(id=session_id).delete()
