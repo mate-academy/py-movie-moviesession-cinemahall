@@ -5,6 +5,10 @@ max-line-length = 79
 max-complexity = 18
 select = B,C,E,F,W,T4,B9,ANN,Q0,N8,VNE
 exclude =
-    **migrations
+    **/migrations/*
     venv
+    .venv
+    env
+    .env
+    __pycache__
     tests
