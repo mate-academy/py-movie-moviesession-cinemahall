@@ -9,7 +9,7 @@ from services.movie import get_movies, get_movie_by_id, create_movie
 from services.cinema_hall import get_cinema_halls, create_cinema_hall
 from services.movie_session import (
     create_movie_session,
-    get_movies_sessions,
+    get_movie_sessions,
     get_movie_session_by_id,
     update_movie_session,
     delete_movie_session_by_id,
@@ -449,9 +449,9 @@ def test_movie_session_service_update_movie_session_cinema_hall(database_data):
 
 
 @pytest.mark.django_db
-def test_movie_session_service_get_movies_sessions(database_data):
+def test_movie_session_service_get_movie_sessions(database_data):
     assert list(
-        get_movies_sessions().values_list(
+        get_movie_sessions().values_list(
             "show_time__date", "cinema_hall__name", "movie__title"
         )
     ) == [
@@ -464,14 +464,14 @@ def test_movie_session_service_get_movies_sessions(database_data):
 
 @pytest.mark.django_db
 def test_movie_session_service_get_movie_session_by_date(database_data):
-    sessions_1 = get_movies_sessions("2019-8-19")
+    sessions_1 = get_movie_sessions("2019-8-19")
     assert list(sessions_1.values_list(
         "movie__title", "cinema_hall__name"
     )) == [
         ("Matrix", "Blue")
     ]
 
-    sessions_2 = get_movies_sessions("2021-4-3")
+    sessions_2 = get_movie_sessions("2021-4-3")
     assert list(sessions_2.values_list(
         "movie__title", "cinema_hall__name"
     )) == [
@@ -499,7 +499,7 @@ def test_movie_session_service_delete_movie_session_by_id(database_data):
     delete_movie_session_by_id(4)
 
     assert list(
-        get_movies_sessions().values_list(
+        get_movie_sessions().values_list(
             "show_time__date", "cinema_hall__name", "movie__title"
         )
     ) == [

@@ -1,10 +1,19 @@
+# IDE and environment
 .idea/
 .vscode/
 *.iml
 .env
 .DS_Store
 venv/
-.pytest_cache/
-**__pycache__/
+
+# Python
+__pycache__/
 *.pyc
-**db.sqlite3
+.pytest_cache/
+
+# DB
+*.sqlite
+*.sqlite3
+*.db
+*.db3
+db.sqlite3
