@@ -1,4 +1,4 @@
-from db.models import Movie, Genre, Actor
+from db.models import Movie
 
 
 def get_movies(
@@ -34,11 +34,7 @@ def create_movie(
     )
 
     if genres_ids is not None:
-        genres = Genre.objects.filter(id__in=genres_ids)
-        for gen in genres:
-            movie.genres.add(gen)
+        movie.genres.set(genres_ids)
 
     if actors_ids is not None:
-        actors = Actor.objects.filter(id__in=actors_ids)
-        for act in actors:
-            movie.actors.add(act)
+        movie.actors.set(actors_ids)
