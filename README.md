@@ -118,5 +118,5 @@ deletes movie session with the provided id
 
 **Note**: You can use suffix `__date` to get access to date of the 
 `DateTimeField`
-
+1
 ### Note: Check your code using this [checklist](checklist.md) before pushing your solution.
