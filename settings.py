@@ -23,4 +23,5 @@ USE_I18N = True
 
 USE_TZ = False
 
+
 INSTALLED_APPS = ("db",)

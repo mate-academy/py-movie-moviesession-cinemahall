@@ -185,7 +185,7 @@ def database_data():
 
 @pytest.mark.django_db
 def test_movie_service_get_movies(database_data):
-    assert list(get_movies().values_list("title", "description")) == [
+    assert list(get_movies(None).values_list("title", "description")) == [
         ("Matrix", "Matrix movie"),
         ("Batman", "Batman movie"),
         ("Titanic", "Titanic movie"),
@@ -220,10 +220,10 @@ def test_movie_service_get_movies_with_genres(database_data):
 @pytest.mark.django_db
 def test_movie_service_get_movies_with_actors(database_data):
     assert list(
-        get_movies(actors_ids=[1]).values_list("title")
+        get_movies(None, actors_ids=[1]).values_list("title")
     ) == [("Matrix",)]
     assert list(
-        get_movies(actors_ids=[2, 3]).values_list("title")
+        get_movies(None, actors_ids=[2, 3]).values_list("title")
     ) == [
         ("Matrix",),
         ("Batman",),
