@@ -232,7 +232,7 @@
     "model": "db.moviesession",
     "pk": 1,
     "fields": {
-      "show_time": "2024-10-08T13:00:00Z",
+      "show_time": "2024-10-08T13:00:00",
       "movie": 1,
       "cinema_hall": 1
     }
@@ -241,7 +241,7 @@
     "model": "db.moviesession",
     "pk": 2,
     "fields": {
-      "show_time": "2024-10-09T13:00:00Z",
+      "show_time": "2024-10-09T13:00:00",
       "movie": 2,
       "cinema_hall": 2
     }
@@ -250,7 +250,7 @@
     "model": "db.moviesession",
     "pk": 3,
     "fields": {
-      "show_time": "2024-10-10T13:00:00Z",
+      "show_time": "2024-10-10T13:00:00",
       "movie": 3,
       "cinema_hall": 3
     }
@@ -259,7 +259,7 @@
     "model": "db.moviesession",
     "pk": 4,
     "fields": {
-      "show_time": "2024-10-11T13:00:00Z",
+      "show_time": "2024-10-11T13:00:00",
       "movie": 4,
       "cinema_hall": 4
     }
