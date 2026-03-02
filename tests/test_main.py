@@ -365,15 +365,9 @@ def test_movie_session_service_create_movie_session():
     datetime_2 = datetime.datetime(
         year=2021, month=1, day=10, hour=15, minute=15
     )
-    create_movie_session(
-        movie_show_time=datetime_1, cinema_hall_id=2, movie_id=1
-    )
-    create_movie_session(
-        movie_show_time=datetime_2, cinema_hall_id=1, movie_id=2
-    )
-    create_movie_session(
-        movie_show_time=datetime_1, cinema_hall_id=1, movie_id=2
-    )
+    create_movie_session(movie_id=1, movie_show_time=datetime_1, cinema_hall_id=2)
+    create_movie_session(movie_id=2, movie_show_time=datetime_2, cinema_hall_id=1)
+    create_movie_session(movie_id=2, movie_show_time=datetime_1, cinema_hall_id=1)
     assert list(
         MovieSession.objects.all().values_list(
             "show_time__date", "cinema_hall__name", "movie__title"
