@@ -34,18 +34,22 @@ def update_movie_session(
         show_time: datetime.datetime = None,
         movie_id: int = None,
         cinema_hall_id: int = None
-) -> int:
-    keys = {}
+) -> MovieSession:
+
+    session = MovieSession.objects.get(id=session_id)
+
     if show_time:
-        keys["show_time"] = show_time
+        session.show_time = show_time
 
     if movie_id:
-        keys["movie_id"] = movie_id
+        session.movie_id = movie_id
 
     if cinema_hall_id:
-        keys["cinema_hall_id"] = cinema_hall_id
+        session.cinema_hall_id = cinema_hall_id
 
-    return MovieSession.objects.filter(id=session_id).update(**keys)
+    session.save()
+
+    return session
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
