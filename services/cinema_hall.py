@@ -1,6 +1,6 @@
 from db.models import CinemaHall
 from django.db.models.query import QuerySet
-
+from typing import Optional
 
 def get_cinema_halls() -> QuerySet[CinemaHall]:
     return CinemaHall.objects.all()
