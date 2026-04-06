@@ -15,12 +15,12 @@ DATABASES = {
     }
 }
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "pt-br"
 
 TIME_ZONE = "Europe/Kiev"
 
 USE_I18N = True
 
-USE_TZ = False
+USE_TZ = True
 
 INSTALLED_APPS = ("db",)
