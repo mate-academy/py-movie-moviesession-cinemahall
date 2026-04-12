@@ -3,7 +3,7 @@ from django.db.models.query import QuerySet
 from db.models import CinemaHall
 
 
-def get_cinema_halls() -> QuerySet:
+def get_cinema_halls() -> CinemaHall:
     return CinemaHall.objects.all()
 
 
