@@ -47,7 +47,8 @@ def update_movie_session(
     if cinema_hall_id:
         update_data["cinema_hall_id"] = cinema_hall_id
 
-    MovieSession.objects.filter(id=session_id).update(**update_data)
+    if update_data:
+        MovieSession.objects.filter(id=session_id).update(**update_data)
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
