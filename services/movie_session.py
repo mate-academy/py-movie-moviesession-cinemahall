@@ -24,9 +24,9 @@ def get_movies_sessions(
     queryset = MovieSession.objects.all()
 
     if session_date is not None:
-        queryset = queryset.filter(
-            show_time__date=date.fromisoformat(session_date)
-        )
+        year, month, day = map(int, session_date.split("-"))
+        parsed_date = date(year, month, day)
+        queryset = queryset.filter(show_time__date=parsed_date)
 
     return queryset
 
@@ -55,4 +55,4 @@ def update_movie_session(
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
-    MovieSession.objects.filter(id=session_id).delete()
+    MovieSession.objects.get(id=session_id).delete()
