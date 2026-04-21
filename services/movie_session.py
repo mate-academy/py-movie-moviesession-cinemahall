@@ -24,7 +24,9 @@ def get_movies_sessions(
     queryset = MovieSession.objects.all()
 
     if session_date is not None:
-        queryset = queryset.filter(show_time__date=date.fromisoformat(session_date))
+        queryset = queryset.filter(
+            show_time__date=date.fromisoformat(session_date)
+        )
 
     return queryset
 
