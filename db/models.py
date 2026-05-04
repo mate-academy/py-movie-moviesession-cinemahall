@@ -29,11 +29,28 @@ class Movie(models.Model):
 class CinemaHall(models.Model):
     name = models.CharField(max_length=255)
     rows = models.PositiveIntegerField()
-    seats_in_rows = models.PositiveIntegerField()
+    seats_in_row = models.PositiveIntegerField()
 
     @property
-    def capacity(self):
-        return self.rows * self.seats_in_rows
+    def capacity(self) -> int:
+        return self.rows * self.seats_in_row
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.name
+
+
+class MovieSession(models.Model):
+    show_time = models.DateTimeField()
+    cinema_hall = models.ForeignKey(
+        CinemaHall,
+        verbose_name="sessions",
+        on_delete=models.CASCADE
+    )
+    movie = models.ForeignKey(
+        Movie,
+        verbose_name="sessions",
+        on_delete=models.CASCADE
+    )
+
+    def __str__(self) -> str:
+        return f"{self.movie} {self.show_time}"
