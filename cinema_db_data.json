@@ -1,0 +1,267 @@
+[
+  {
+    "model": "db.cinemahall",
+    "pk": 1,
+    "fields": {
+      "name": "Ricciotto Canudo",
+      "rows": 25,
+      "seats_in_row": 30
+    }
+  },
+  {
+    "model": "db.cinemahall",
+    "pk": 2,
+    "fields": {
+      "name": "Robin Wood",
+      "rows": 24,
+      "seats_in_row": 18
+    }
+  },
+  {
+    "model": "db.cinemahall",
+    "pk": 3,
+    "fields": {
+      "name": "Peter Wollen",
+      "rows": 30,
+      "seats_in_row": 20
+    }
+  },
+  {
+    "model": "db.cinemahall",
+    "pk": 4,
+    "fields": {
+      "name": "Jean Mitry",
+      "rows": 14,
+      "seats_in_row": 8
+    }
+  },
+  {
+    "model": "db.genre",
+    "pk": 1,
+    "fields": {
+      "name": "Crime"
+    }
+  },
+  {
+    "model": "db.genre",
+    "pk": 2,
+    "fields": {
+      "name": "Drama"
+    }
+  },
+  {
+    "model": "db.genre",
+    "pk": 3,
+    "fields": {
+      "name": "Thriller"
+    }
+  },
+  {
+    "model": "db.genre",
+    "pk": 4,
+    "fields": {
+      "name": "Action"
+    }
+  },
+  {
+    "model": "db.genre",
+    "pk": 5,
+    "fields": {
+      "name": "Adventure"
+    }
+  },
+  {
+    "model": "db.genre",
+    "pk": 6,
+    "fields": {
+      "name": "Sci-Fi"
+    }
+  },
+  {
+    "model": "db.genre",
+    "pk": 7,
+    "fields": {
+      "name": "Mystery"
+    }
+  },
+  {
+    "model": "db.actor",
+    "pk": 1,
+    "fields": {
+      "first_name": "Jack",
+      "last_name": "Nicholson"
+    }
+  },
+  {
+    "model": "db.actor",
+    "pk": 2,
+    "fields": {
+      "first_name": "Leonardo",
+      "last_name": "DiCaprio"
+    }
+  },
+  {
+    "model": "db.actor",
+    "pk": 3,
+    "fields": {
+      "first_name": "Matt",
+      "last_name": "Damon"
+    }
+  },
+  {
+    "model": "db.actor",
+    "pk": 4,
+    "fields": {
+      "first_name": "Joseph",
+      "last_name": "Gordon-Levitt"
+    }
+  },
+  {
+    "model": "db.actor",
+    "pk": 5,
+    "fields": {
+      "first_name": "Elliot",
+      "last_name": "Page"
+    }
+  },
+  {
+    "model": "db.actor",
+    "pk": 6,
+    "fields": {
+      "first_name": "Bruce",
+      "last_name": "Willis"
+    }
+  },
+  {
+    "model": "db.actor",
+    "pk": 7,
+    "fields": {
+      "first_name": "Emily",
+      "last_name": "Blunt"
+    }
+  },
+  {
+    "model": "db.actor",
+    "pk": 8,
+    "fields": {
+      "first_name": "Samuel",
+      "last_name": "Jackson"
+    }
+  },
+  {
+    "model": "db.actor",
+    "pk": 9,
+    "fields": {
+      "first_name": "Robin",
+      "last_name": "Wright"
+    }
+  },
+  {
+    "model": "db.movie",
+    "pk": 1,
+    "fields": {
+      "title": "The Departed",
+      "description": "An undercover cop and a mole in the police attempt to identify each other while infiltrating an Irishgang in South Boston.",
+      "genres": [
+        1,
+        2,
+        3
+      ],
+      "actors": [
+        1,
+        2,
+        3
+      ]
+    }
+  },
+  {
+    "model": "db.movie",
+    "pk": 2,
+    "fields": {
+      "title": "Inception",
+      "description": "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.",
+      "genres": [
+        4,
+        5,
+        6
+      ],
+      "actors": [
+        2,
+        4,
+        5
+      ]
+    }
+  },
+  {
+    "model": "db.movie",
+    "pk": 3,
+    "fields": {
+      "title": "Looper",
+      "description": "In 2074, when the mob wants to get rid of someone, the target is sent into the past, where a hired gun awaits - someone like Joe - who one day learns the mob wants to 'close the loop' by sending back Joe's future self for assassination.",
+      "genres": [
+        2,
+        4,
+        6
+      ],
+      "actors": [
+        4,
+        6,
+        7
+      ]
+    }
+  },
+  {
+    "model": "db.movie",
+    "pk": 4,
+    "fields": {
+      "title": "Unbreakable",
+      "description": "A man learns something extraordinary about himself after a devastating accident.",
+      "genres": [
+        2,
+        6,
+        7
+      ],
+      "actors": [
+        6,
+        8,
+        9
+      ]
+    }
+  },
+  {
+    "model": "db.moviesession",
+    "pk": 1,
+    "fields": {
+      "show_time": "2024-10-08T13:00:00Z",
+      "movie": 1,
+      "cinema_hall": 1
+    }
+  },
+  {
+    "model": "db.moviesession",
+    "pk": 2,
+    "fields": {
+      "show_time": "2024-10-09T13:00:00Z",
+      "movie": 2,
+      "cinema_hall": 2
+    }
+  },
+  {
+    "model": "db.moviesession",
+    "pk": 3,
+    "fields": {
+      "show_time": "2024-10-10T13:00:00Z",
+      "movie": 3,
+      "cinema_hall": 3
+    }
+  },
+  {
+    "model": "db.moviesession",
+    "pk": 4,
+    "fields": {
+      "show_time": "2024-10-11T13:00:00Z",
+      "movie": 4,
+      "cinema_hall": 4
+    }
+  }
+]
