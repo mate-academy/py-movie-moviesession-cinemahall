@@ -15,7 +15,7 @@ the table `Genre`
 
 There should be implemented the string representation of the movie:
 ```python
-speed = Movie.objects.create(title="Speed", description="Speed movie")
+speed = Movie.objects.create(title="Speed", description="Speed movie.py")
 print(speed)
 # Speed
 ```
