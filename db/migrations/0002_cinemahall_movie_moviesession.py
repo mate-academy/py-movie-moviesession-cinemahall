@@ -27,7 +27,7 @@ class Migration(migrations.Migration):
                 ('title', models.CharField(max_length=255)),
                 ('description', models.TextField()),
                 ('actors', models.ManyToManyField(related_name='movies', to='db.actor')),
-                ('genres', models.ManyToManyField(related_name='mowies', to='db.genre')),
+                ('genres', models.ManyToManyField(related_name='movies', to='db.genre')),
             ],
         ),
         migrations.CreateModel(
