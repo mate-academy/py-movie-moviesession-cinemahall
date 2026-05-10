@@ -20,9 +20,9 @@ from services.movie_session import (
 @pytest.mark.parametrize(
     "title,description,out",
     [
-        ("Speed", "Action movie", "Speed\n"),
-        ("Harry Potter", "Magic movie", "Harry Potter\n"),
-        ("Batman", "Superhero movie", "Batman\n"),
+        ("Speed", "Action movie.py", "Speed\n"),
+        ("Harry Potter", "Magic movie.py", "Harry Potter\n"),
+        ("Batman", "Superhero movie.py", "Batman\n"),
     ],
 )
 def test_movie_str(title, description, out):
@@ -137,22 +137,22 @@ def database_data():
                                      last_name="Johansson")
     clooney = Actor.objects.create(first_name="George", last_name="Clooney")
 
-    matrix = Movie.objects.create(title="Matrix", description="Matrix movie")
+    matrix = Movie.objects.create(title="Matrix", description="Matrix movie.py")
     matrix.actors.add(reeves)
     matrix.actors.add(johansson)
     matrix.genres.add(action)
 
-    batman = Movie.objects.create(title="Batman", description="Batman movie")
+    batman = Movie.objects.create(title="Batman", description="Batman movie.py")
     batman.genres.add(drama)
     batman.actors.add(clooney)
 
     titanic = Movie.objects.create(title="Titanic",
-                                   description="Titanic movie")
+                                   description="Titanic movie.py")
     titanic.genres.add(drama, action)
 
     good_bad = Movie.objects.create(
         title="The Good, the Bad and the Ugly",
-        description="The Good, the Bad and the Ugly movie",
+        description="The Good, the Bad and the Ugly movie.py",
     )
     good_bad.genres.add(western)
 
@@ -186,11 +186,11 @@ def database_data():
 @pytest.mark.django_db
 def test_movie_service_get_movies(database_data):
     assert list(get_movies().values_list("title", "description")) == [
-        ("Matrix", "Matrix movie"),
-        ("Batman", "Batman movie"),
-        ("Titanic", "Titanic movie"),
+        ("Matrix", "Matrix movie.py"),
+        ("Batman", "Batman movie.py"),
+        ("Titanic", "Titanic movie.py"),
         ("The Good, the Bad and the Ugly",
-         "The Good, the Bad and the Ugly movie"),
+         "The Good, the Bad and the Ugly movie.py"),
     ]
 
 
@@ -233,9 +233,9 @@ def test_movie_service_get_movies_with_actors(database_data):
 @pytest.mark.django_db
 def test_movie_service_get_movie_by_id(database_data):
     assert get_movie_by_id(1).title == "Matrix"
-    assert get_movie_by_id(1).description == "Matrix movie"
+    assert get_movie_by_id(1).description == "Matrix movie.py"
     assert get_movie_by_id(3).title == "Titanic"
-    assert get_movie_by_id(3).description == "Titanic movie"
+    assert get_movie_by_id(3).description == "Titanic movie.py"
 
 
 @pytest.mark.django_db
@@ -424,7 +424,7 @@ def test_movie_session_service_update_movie_session_show_time(database_data):
 
 @pytest.mark.django_db
 def test_movie_session_service_update_movie_session_movie(database_data):
-    Movie.objects.create(title="Madagascar", description="Madagascar movie")
+    Movie.objects.create(title="Madagascar", description="Madagascar movie.py")
     update_movie_session(session_id=3, movie_id=5)
     assert list(
         MovieSession.objects.filter(id=3).values_list(
