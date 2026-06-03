@@ -1,12 +1,8 @@
-import pytest
 import datetime
-
 from contextlib import redirect_stdout
 from io import StringIO
 
-from db.models import Actor, Genre, Movie, MovieSession, CinemaHall
-from services.movie import get_movies, get_movie_by_id, create_movie
-from services.cinema_hall import get_cinema_halls, create_cinema_hall
+import pytest
 from services.movie_session import (
     create_movie_session,
     get_movies_sessions,
@@ -14,6 +10,10 @@ from services.movie_session import (
     update_movie_session,
     delete_movie_session_by_id,
 )
+
+from db.models import Actor, Genre, Movie, MovieSession, CinemaHall
+from services.cinema_hall import get_cinema_halls, create_cinema_hall
+from services.movie import get_movies, get_movie_by_id, create_movie
 
 
 @pytest.mark.django_db
