@@ -13,6 +13,6 @@ def create_cinema_hall(hall_name: str,
                        ) -> None:
     CinemaHall.objects.create(
         name=hall_name,
-        raws=hall_rows,
+        rows=hall_rows,
         seats_in_row=hall_seats_in_row
     )

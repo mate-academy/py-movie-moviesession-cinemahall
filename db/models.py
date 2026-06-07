@@ -21,7 +21,7 @@ class CinemaHall(models.Model):
 
     @property
     def capacity(self) -> int:
-        return self.rows * self.seat_in_row
+        return self.rows * self.seats_in_row
 
 
 class MovieSession(models.Model):
@@ -31,7 +31,7 @@ class MovieSession(models.Model):
 
     def __str__(self) -> str:
         return (f"{self.movie.title} "
-                f"{self.show_time:%d/%m/%Y} {self.show_time:%H:%M}:00")
+                f"{self.show_time:%Y-%m-%d} {self.show_time:%H:%M}:00")
 
 
 class Genre(models.Model):
