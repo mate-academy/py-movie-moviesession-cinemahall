@@ -1,5 +1,3 @@
-# services/movie_session.py
-
 from datetime import datetime
 from django.db.models import QuerySet
 from db.models import MovieSession
@@ -36,15 +34,23 @@ def update_movie_session(
         cinema_hall_id: int | None = None
 ) -> MovieSession:
     session = MovieSession.objects.get(id=session_id)
+    update_fields = []
 
     if show_time is not None:
         session.show_time = show_time
+        update_fields.append("show_time")
+
     if movie_id is not None:
         session.movie_id = movie_id
+        update_fields.append("movie_id")
+
     if cinema_hall_id is not None:
         session.cinema_hall_id = cinema_hall_id
+        update_fields.append("cinema_hall_id")
 
-    session.save()
+    if update_fields:
+        session.save(update_fields=update_fields)
+
     return session
 
 
