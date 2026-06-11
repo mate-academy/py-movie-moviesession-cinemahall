@@ -3,13 +3,14 @@ from db.models import Movie
 
 
 def get_movies(
-        genres_ids: list[int] | None= None,
-        actors_ids: list[int] | None= None
+        genres_ids: list[int] | None = None,
+        actors_ids: list[int] | None = None
 ) -> QuerySet:
     queryset = Movie.objects.all()
 
     if genres_ids and actors_ids:
-        queryset = queryset.filter(genres__id__in=genres_ids, actors__id__in=actors_ids)
+        queryset = queryset.filter(
+            genres__id__in=genres_ids, actors__id__in=actors_ids)
     elif genres_ids:
         queryset = queryset.filter(genres__id__in=genres_ids)
     elif actors_ids:
@@ -28,7 +29,8 @@ def create_movie(
         genres_ids: list[int] | None = None,
         actors_ids: list[int] | None = None
 ) -> Movie:
-    movie = Movie.objects.create(title=movie_title, description=movie_description)
+    movie = Movie.objects.create(
+        title=movie_title, description=movie_description)
 
     if genres_ids:
         movie.genres.set(genres_ids)
