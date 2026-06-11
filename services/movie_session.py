@@ -20,7 +20,6 @@ def create_movie_session(
 def get_movies_sessions(session_date: str | None = None) -> QuerySet:
     queryset = MovieSession.objects.all()
     if session_date:
-        # Convierte de forma segura la string "YYYY-MM-DD" a un objeto datetime.date
         date_obj = datetime.strptime(session_date, "%Y-%m-%d").date()
         queryset = queryset.filter(show_time__date=date_obj)
     return queryset
