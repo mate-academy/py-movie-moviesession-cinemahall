@@ -42,3 +42,4 @@ class MovieSession(models.Model):
         related_name="movie_sessions")
     def __str__(self) -> str:
         return f"{self.movie} {self.show_time}"
+
