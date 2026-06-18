@@ -10,7 +10,7 @@ class Actor(models.Model):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     def __str__(self) -> str:
-        return f"{self.first_name} {self.last_name}"
+        return self.first_name + " " + self.last_name
 
 class Movie(models.Model):
     title = models.CharField(max_length=255)
@@ -18,7 +18,7 @@ class Movie(models.Model):
     actors = models.ManyToManyField(Actor, related_name="movies")
     genres = models.ManyToManyField(Genre, related_name="movies")
     def __str__(self) -> str:
-        return self.title
+        return str(self.movie) + " " + str(self.show_time)
 
 class CinemaHall(models.Model):
     name = models.CharField(max_length=255)
