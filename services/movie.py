@@ -7,7 +7,8 @@ def get_movie_by_id(movie_id: int) -> Movie:
     return Movie.objects.get(id=movie_id)
 
 
-def get_movies(genres_ids: list[int] = None, actors_ids: list[int] = None) -> QuerySet[Movie]:
+def get_movies(genres_ids: list[int] = None,
+               actors_ids: list[int] = None) -> QuerySet[Movie]:
     movies = Movie.objects.all()
 
     if genres_ids:
