@@ -13,7 +13,7 @@ class Actor(models.Model):
     last_name = models.CharField(max_length=255)
 
     def __str__(self) -> str:
-        return f"{self.first_name} {self.last_name}"
+        return " ".join([self.first_name, self.last_name])
 
 
 class Movie(models.Model):
@@ -35,7 +35,7 @@ class CinemaHall(models.Model):
         return self.name
 
     @property
-    def capacity(self) -> None:
+    def capacity(self) -> int:
         return self.rows * self.seats_in_row
 
 
@@ -43,10 +43,10 @@ class MovieSession(models.Model):
     show_time = models.DateTimeField()
     cinema_hall = models.ForeignKey(CinemaHall,
                                     on_delete=models.CASCADE,
-                                    related_name="movies_sessions")
+                                    related_name="movie_sessions")
     movie = models.ForeignKey(Movie,
                               on_delete=models.CASCADE,
-                              related_name="movies_sessions")
+                              related_name="movie_sessions")
 
     def __str__(self) -> str:
         return f"{self.movie} {self.show_time}"
