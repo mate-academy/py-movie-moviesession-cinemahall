@@ -1,6 +1,6 @@
 from django.db.models import QuerySet
 
-from db.models import Movie, Actor
+from db.models import Movie
 
 
 def get_movies(
@@ -20,10 +20,6 @@ def get_movies(
 
 def get_movie_by_id(movie_id: int) -> Movie:
     return Movie.objects.get(id=movie_id)
-
-
-def get_actor_by_id(actor_id: int) -> Actor:
-    return Actor.objects.get(id=actor_id)
 
 
 def create_movie(
