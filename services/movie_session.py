@@ -14,7 +14,7 @@ def create_movie_session(
 ) -> MovieSession:
     return MovieSession.objects.create(
         show_time=movie_show_time,
-        hall_id=cinema_hall_id,
+        cinema_hall_id=cinema_hall_id,
         movie_id=movie_id
     )
 
@@ -25,7 +25,9 @@ def get_movies_sessions(
     new_movie_session = MovieSession.objects.all()
 
     if session_date:
-        new_movie_session = new_movie_session.filter(show_time__=session_date)
+        new_movie_session = (
+            new_movie_session.filter(show_time__date=session_date)
+        )
 
     return new_movie_session
 
