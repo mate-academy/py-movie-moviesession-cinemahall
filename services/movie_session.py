@@ -19,7 +19,7 @@ def create_movie_session(
     )
 
 
-def get_movie_sessions(
+def get_movies_sessions(
         session_date: datetime = None
 ) -> QuerySet | MovieSession:
     new_movie_session = MovieSession.objects.all()
