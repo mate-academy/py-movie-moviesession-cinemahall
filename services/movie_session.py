@@ -1,6 +1,8 @@
-from django.db.models import QuerySet
-from django.db.models.functions import datetime
+import datetime
 
+
+from django.db.models import QuerySet
+# from django.db.models.functions import datetime
 from db.models import MovieSession, Movie, CinemaHall
 
 
@@ -10,17 +12,17 @@ def create_movie_session(
         cinema_hall_id: int
 ) -> MovieSession:
     movie = Movie.objects.get(id=movie_id)
-    cinema_hall_id = CinemaHall.objects.get(id=cinema_hall_id)
+    cinema_hall = CinemaHall.objects.get(id=cinema_hall_id)
 
     return MovieSession.objects.create(
         show_time=movie_show_time,
         movie=movie,
-        cinema_hall=cinema_hall_id
+        cinema_hall=cinema_hall
     )
 
 
 def get_movies_sessions(
-        session_date: datetime = None
+        session_date: str = None
 ) -> QuerySet[MovieSession]:
     queryset = MovieSession.objects.all()
 
