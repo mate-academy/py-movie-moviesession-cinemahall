@@ -2,7 +2,6 @@ import datetime
 
 
 from django.db.models import QuerySet
-# from django.db.models.functions import datetime
 from db.models import MovieSession, Movie, CinemaHall
 
 
