@@ -29,7 +29,7 @@ class Movie(models.Model):
     )
 
     def __str__(self) -> str:
-        return f"{self.title}"
+        return self.title
 
 
 class CinemaHall(models.Model):
