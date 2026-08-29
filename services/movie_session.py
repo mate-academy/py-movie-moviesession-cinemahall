@@ -1,10 +1,9 @@
 from django.db import models
-
 from db.models import MovieSession
 
 
 def create_movie_session(
-        movie_show_time: str,
+        movie_show_time,
         movie_id: int,
         cinema_hall_id: int
 ) -> MovieSession:
@@ -47,5 +46,5 @@ def update_movie_session(
     return session
 
 
-def delete_movie_session_by_id(movie_session_id: int):
-    return MovieSession.objects.get(pk=movie_session_id).delete()
+def delete_movie_session_by_id(movie_session_id: int) -> None:
+    MovieSession.objects.get(pk=movie_session_id).delete()
