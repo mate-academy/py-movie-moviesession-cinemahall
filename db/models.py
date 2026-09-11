@@ -1,6 +1,4 @@
 from django.db import models
-from django.db.models import ForeignKey
-from django.db.models.fields import DateTimeField
 
 
 class Genre(models.Model):
@@ -42,13 +40,13 @@ class CinemaHall(models.Model):
 
 
 class MovieSession(models.Model):
-    show_time = DateTimeField()
-    cinema_hall = ForeignKey(
+    show_time = models.DateTimeField()
+    cinema_hall = models.ForeignKey(
         CinemaHall,
         on_delete=models.CASCADE,
         related_name="halls"
     )
-    movie = ForeignKey(
+    movie = models.ForeignKey(
         Movie,
         on_delete=models.CASCADE,
         related_name="movie_sessions"
