@@ -13,8 +13,10 @@ def get_movies(
         queryset = queryset.filter(actors__id__in=actors_ids)
     return queryset.distinct()
 
+
 def get_movie_by_id(movie_id: int) -> Movie:
     return Movie.objects.get(id=movie_id)
+
 
 def create_movie(
         movie_title: str,
