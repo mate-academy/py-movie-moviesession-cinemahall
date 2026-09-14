@@ -1,20 +1,20 @@
 from django.db.models import QuerySet
-from db.models import Movie, Actor, Genre
+from db.models import Movie
 
 
 def get_movies(
-    genres_ids: list[int] | None = None, actors_ids: list[int] | None = None
+    genres_ids: list[int] | None = None,
+    actors_ids: list[int] | None = None,
 ) -> QuerySet:
-    if genres_ids and actors_ids:
-        return Movie.objects.filter(
-            genres__id__in=genres_ids, actors__id__in=actors_ids
-        )
-    elif genres_ids:
-        return Movie.objects.filter(genres__id__in=genres_ids)
-    elif actors_ids:
-        return Movie.objects.filter(actors__id__in=actors_ids)
-    else:
-        return Movie.objects.all()
+    filters = {}
+
+    if genres_ids:
+        filters["genres__id__in"] = genres_ids
+
+    if actors_ids:
+        filters["actors__id__in"] = actors_ids
+
+    return Movie.objects.filter(**filters)
 
 
 def get_movie_by_id(movie_id: int) -> Movie:
@@ -27,14 +27,13 @@ def create_movie(
     genres_ids: list[int] | None = None,
     actors_ids: list[int] | None = None,
 ) -> Movie:
-    movick = Movie.objects.create(
+    film = Movie.objects.create(
         title=movie_title,
         description=movie_description,
     )
     if genres_ids:
-        genres = Genre.objects.filter(id__in=genres_ids)
-        movick.genres.add(*genres)
+        film.genres.set(genres_ids)
+
     if actors_ids:
-        actors = Actor.objects.filter(id__in=actors_ids)
-        movick.actors.add(*actors)
-    return movick
+        film.actors.set(actors_ids)
+    return film

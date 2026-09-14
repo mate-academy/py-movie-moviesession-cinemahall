@@ -14,10 +14,12 @@ def create_movie_session(
 
 
 def get_movies_sessions(session_date: str | None = None) -> QuerySet:
+    filters = {}
+
     if session_date:
-        return MovieSession.objects.filter(show_time__date=session_date)
-    else:
-        return MovieSession.objects.all()
+        filters["show_time__date"] = session_date
+
+    return MovieSession.objects.filter(**filters)
 
 
 def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
@@ -30,17 +32,17 @@ def update_movie_session(
     movie_id: int | None = None,
     cinema_hall_id: int | None = None,
 ) -> MovieSession:
-    pipi = MovieSession.objects.get(id=session_id)
+    new_session = MovieSession.objects.get(id=session_id)
     if show_time:
-        pipi.show_time = show_time
+        new_session.show_time = show_time
     if movie_id:
-        pipi.movie_id = movie_id
+        new_session.movie_id = movie_id
     if cinema_hall_id:
-        pipi.cinema_hall_id = cinema_hall_id
-    pipi.save()
-    return pipi
+        new_session.cinema_hall_id = cinema_hall_id
+    new_session.save()
+    return new_session
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
-    grateful_dead = MovieSession.objects.get(id=session_id)
-    grateful_dead.delete()
+    deleting_movie = MovieSession.objects.get(id=session_id)
+    deleting_movie.delete()
