@@ -1,25 +1,29 @@
-from django.db.models import Q
+from django.db.models import Q, QuerySet
 from db.models import Movie
 
-def get_movies(genres_ids=None, actors_ids=None):
+
+def get_movies(genres_ids=None, actors_ids=None) -> QuerySet:
     query = Movie.objects.all()
-    
     if genres_ids and actors_ids:
         query = query.filter(
-            Q(genres__id__in=genres_ids) & 
-            Q(actors__id__in=actors_ids)
+            Q(genres__id__in=genres_ids)
+            & Q(actors__id__in=actors_ids)
         )
     elif genres_ids:
         query = query.filter(genres__id__in=genres_ids)
     elif actors_ids:
         query = query.filter(actors__id__in=actors_ids)
-    
     return query.distinct()
 
-def get_movie_by_id(movie_id):
+def get_movie_by_id(movie_id: int) -> Movie:
     return Movie.objects.get(id=movie_id)
 
-def create_movie(movie_title, movie_description, genres_ids=None, actors_ids=None):
+def create_movie(
+        movie_title: str,
+        movie_description: str,
+        genres_ids=None,
+        actors_ids=None
+) -> Movie:
     movie = Movie.objects.create(
         title=movie_title,
         description=movie_description
