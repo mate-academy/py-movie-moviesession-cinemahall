@@ -16,8 +16,6 @@ def create_movie_session(movie_show_time: datetime.datetime,
 def get_movies_sessions(
     session_date: Optional[datetime.date] = None,
 ) -> QuerySet:
-
-
     if session_date:
         return MovieSession.objects.filter(show_time__date=session_date)
     return MovieSession.objects.all()
