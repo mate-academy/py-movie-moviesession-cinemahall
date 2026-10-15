@@ -49,6 +49,7 @@ python manage.py loaddata cinema_db_data.json
 python manage.py shell
 
 
+
 ### manage.py
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings")
 Define qual arquivo de configurações o Django deve usar — neste caso, settings.py.
