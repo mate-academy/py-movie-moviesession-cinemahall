@@ -21,7 +21,6 @@ class Movie(models.Model):
     description = models.TextField()
     actors = models.ManyToManyField(Actor)
     genres = models.ManyToManyField(Genre)
-    release_date = models.DateField()
 
     def __str__(self) -> str:
         return self.title
@@ -46,4 +45,7 @@ class MovieSession(models.Model):
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
-        return f"{self.movie.title} {self.show_time}"
+        return (
+                f"{self.movie.title}"  
+                f"{self.show_time.strftime('%Y-%m-%d %H:%M:%S')}"
+               )
