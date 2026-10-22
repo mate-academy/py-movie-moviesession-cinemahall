@@ -16,6 +16,7 @@ def create_movie_session(
         cinema_hall_id=cinema_hall_id,
     )
 
+
 def get_movies_sessions(
         session_date: str | None = None,
 ) -> QuerySet:
