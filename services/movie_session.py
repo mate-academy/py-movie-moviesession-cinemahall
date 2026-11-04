@@ -13,7 +13,7 @@ def create_movie_session(movie_show_time: datetime.datetime,
 
 
 def get_movies_sessions(
-        session_date: datetime.datetime | None = None) -> QuerySet:
+        session_date: str | None = None) -> QuerySet:
     queryset = MovieSession.objects.all()
 
     if session_date is not None:
