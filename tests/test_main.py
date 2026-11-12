@@ -1,18 +1,18 @@
-import pytest
 import datetime
-
 from contextlib import redirect_stdout
 from io import StringIO
 
-from db.models import Actor, Genre, Movie, MovieSession, CinemaHall
-from services.movie import get_movies, get_movie_by_id, create_movie
-from services.cinema_hall import get_cinema_halls, create_cinema_hall
+import pytest
+
+from db.models import Actor, CinemaHall, Genre, Movie, MovieSession
+from services.cinema_hall import create_cinema_hall, get_cinema_halls
+from services.movie import create_movie, get_movie_by_id, get_movies
 from services.movie_session import (
     create_movie_session,
-    get_movies_sessions,
-    get_movie_session_by_id,
-    update_movie_session,
     delete_movie_session_by_id,
+    get_movie_session_by_id,
+    get_movies_sessions,
+    update_movie_session,
 )
 
 
