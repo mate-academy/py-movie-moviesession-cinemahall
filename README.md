@@ -1,7 +1,7 @@
 # Movie, CinemaHall, and MovieSession
 
 Read [the guideline](https://github.com/mate-academy/py-task-guideline/blob/main/README.md) before starting.
-
+\
 In `db/models.py` you already have tables you created earlier. Now
 you have to create tables:
 1. `Movie`, with such fields:
