@@ -32,15 +32,16 @@ def update_movie_session(
         movie_id: int = None,
         cinema_hall_id: int = None
 ) -> None:
-    if any((show_time, movie_id, cinema_hall_id)) is not None:
-        movie_session = get_movie_session_by_id(session_id)
-        if show_time is not None:
-            movie_session.show_time = show_time
-        if movie_id is not None:
-            movie_session.movie_id = movie_id
-        if cinema_hall_id is not None:
-            movie_session.cinema_hall_id = cinema_hall_id
-        movie_session.save()
+    if all((show_time is None, movie_id is None, cinema_hall_id is None)):
+        return
+    movie_session = get_movie_session_by_id(session_id)
+    if show_time is not None:
+        movie_session.show_time = show_time
+    if movie_id is not None:
+        movie_session.movie_id = movie_id
+    if cinema_hall_id is not None:
+        movie_session.cinema_hall_id = cinema_hall_id
+    movie_session.save()
 
 
 def delete_movie_session_by_id(session_id: int) -> None:
