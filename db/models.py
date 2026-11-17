@@ -33,6 +33,10 @@ class CinemaHall(models.Model):
 
     def __str__(self) -> str:
         return str(self.rows)
+    
+    @property
+    def capacity(self) -> int:
+        return self.rows * self.seats_in_row
 
 
 class MovieSession(models.Model):
