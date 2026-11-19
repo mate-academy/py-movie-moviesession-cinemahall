@@ -1,4 +1,4 @@
-from db.models import Actor, Genre, Movie
+from db.models import Movie
 from django.db.models import QuerySet
 
 
