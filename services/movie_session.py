@@ -18,8 +18,10 @@ def create_movie_session(
     )
 
 
-def get_movies_sessions():
-    pass
+def get_movies_sessions(session_date: str = None):
+    if session_date is not None:
+        return MovieSession.objects.filter(show_time=session_date)
+    return MovieSession.objects.all()
 
 
 def get_movie_session_by_id():
