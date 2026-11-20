@@ -29,11 +29,11 @@ class Movie(models.Model):
 class CinemaHall(models.Model):
     name = models.CharField(max_length=255)
     rows = models.PositiveIntegerField()
-    seats_in_rows = models.PositiveIntegerField()
+    seats_in_row = models.PositiveIntegerField()
 
     @property
     def capacity(self) -> int:
-        return self.rows * self.seats_in_rows
+        return self.rows * self.seats_in_row
 
     def __str__(self) -> str:
         return self.name
