@@ -29,7 +29,8 @@ def get_movie_session_by_id(movie_session_id: int) -> MovieSession:
 def if_is_not_none_update_attr(
     session: MovieSession,
     attribute: str,
-    value: int | datetime) -> MovieSession:
+    value: int | datetime
+) -> MovieSession:
     if value is not None:
         setattr(session, attribute, value)
     return session
@@ -49,5 +50,6 @@ def update_movie_session(
     )
     movie_session.save()
 
-def delete_movie_session_by_id():
-    pass
+
+def delete_movie_session_by_id(session_id: int) -> None:
+    MovieSession.objects.get(id=session_id).delete()
