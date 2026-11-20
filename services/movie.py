@@ -11,3 +11,10 @@ def get_movies(
     if actors_ids:
         movies = movies.filter(actors__id__in=actors_ids)
     return movies.distinct()
+
+def get_movie_by_id():
+    pass
+
+
+def create_movie():
+    pass
