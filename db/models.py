@@ -25,9 +25,18 @@ class Movie(models.Model):
     def __str__(self) -> str:
         return self.title
 
-class MovieSession(models.Model):
-    pass
-
-
 class CinemaHall(models.Model):
+    name = models.CharField(max_length=255)
+    rows = models.PositiveIntegerField()
+    seats_in_row = models.PositiveIntegerField()
+
+    def __str__(self) -> str:
+        return self.name
+
+    @property
+    def capacity(self) -> int:
+        return self.rows * self.seats_in_row
+
+
+class MovieSession(models.Model):
     pass
